@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Linq;
+using System.Windows.Forms;
 using XrmToolBox.Extensibility;
 
 namespace Rappen.XTB.CAT
@@ -44,16 +45,6 @@ namespace Rappen.XTB.CAT
             ExecuteCA();
         }
 
-        private void btnSaveInputParamValue_Click(object sender, EventArgs e)
-        {
-            if (gridInputParams.SelectedCellRecords.FirstOrDefault() is Entity input)
-            {
-                input["value"] = txtInputParamValue.Text;
-                gridInputParams.Refresh();
-                gridInputParams.AutoResizeColumns();
-            }
-        }
-
         private void cmbCustomActions_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtUniqueName.Entity = cmbCustomActions.SelectedEntity;
@@ -65,12 +56,6 @@ namespace Rappen.XTB.CAT
         private void CustomActionTester_Load(object sender, EventArgs e)
         {
             LogUse("Load");
-        }
-
-        private void gridInputParams_RecordEnter(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
-        {
-            e.Entity.TryGetAttributeValue("value", out string value);
-            txtInputParamValue.Text = value;
         }
 
         private void gridOutputParams_RecordClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
@@ -89,5 +74,14 @@ namespace Rappen.XTB.CAT
         }
 
         #endregion Private Methods
+
+        private void gridInputParams_RecordDoubleClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
+        {
+            if (InputValue.ShowDialog(e.Entity, Service, this) == DialogResult.OK)
+            {
+                gridInputParams.Refresh();
+                gridInputParams.AutoResizeColumns();
+            }
+        }
     }
 }

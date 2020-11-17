@@ -188,6 +188,12 @@
     <Compile Include="CAT.designer.cs">
       <DependentUpon>CAT.cs</DependentUpon>
     </Compile>
+    <Compile Include="InputValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputValue.Designer.cs">
+      <DependentUpon>InputValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CAT.resx">
       <DependentUpon>CAT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputValue.resx">
+      <DependentUpon>InputValue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

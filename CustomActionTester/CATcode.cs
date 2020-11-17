@@ -60,10 +60,17 @@ namespace Rappen.XTB.CAT
             var request = new OrganizationRequest(txtMessageName.Text);
             foreach (var input in gridInputParams.DataSource as IEnumerable<Entity>)
             {
-                if (input.TryGetAttributeValue("name", out string name) &&
-                    input.TryGetAttributeValue("value", out string value))
+                if (input.TryGetAttributeValue("name", out string name))
                 {
-                    request[name] = value;
+                    if (input.TryGetAttributeValue("rawvalue", out object value))
+                    {
+                        request[name] = value;
+                    }
+                    else if (input.TryGetAttributeValue("optional", out bool optional) && !optional)
+                    {
+                        MessageBox.Show($"Missing value for required parameter: {name}", "Execute Custom Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
             }
             WorkAsync(new WorkAsyncInfo

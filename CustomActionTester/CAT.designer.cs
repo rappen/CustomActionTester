@@ -47,31 +47,29 @@
             this.txtCreatedBy = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.gridInputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
+            this.index = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.option = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.splitFullForm = new System.Windows.Forms.SplitContainer();
             this.splitLeft = new System.Windows.Forms.SplitContainer();
             this.gbCustomAction = new System.Windows.Forms.GroupBox();
-            this.btnSaveInputParamValue = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtInputParamValue = new System.Windows.Forms.TextBox();
             this.grResults = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.gridOutputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbResultDetails = new System.Windows.Forms.GroupBox();
             this.txtResultDetail = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rbFormatXML = new System.Windows.Forms.RadioButton();
             this.rbFormatJSON = new System.Windows.Forms.RadioButton();
             this.rbFormatText = new System.Windows.Forms.RadioButton();
-            this.index = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.option = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label8 = new System.Windows.Forms.Label();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
@@ -271,9 +269,57 @@
             this.gridInputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(372, 169);
+            this.gridInputParams.Size = new System.Drawing.Size(372, 194);
             this.gridInputParams.TabIndex = 13;
-            this.gridInputParams.RecordEnter += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordEnter);
+            this.gridInputParams.RecordDoubleClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordDoubleClick);
+            // 
+            // index
+            // 
+            this.index.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.index.DataPropertyName = "position";
+            this.index.HeaderText = "#";
+            this.index.MinimumWidth = 24;
+            this.index.Name = "index";
+            this.index.ReadOnly = true;
+            this.index.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.index.Width = 24;
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "Name";
+            this.name.MinimumWidth = 50;
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // option
+            // 
+            this.option.DataPropertyName = "optional";
+            this.option.HeaderText = "Optional";
+            this.option.MinimumWidth = 50;
+            this.option.Name = "option";
+            this.option.ReadOnly = true;
+            this.option.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.option.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // type
+            // 
+            this.type.DataPropertyName = "type";
+            this.type.HeaderText = "Type";
+            this.type.MinimumWidth = 50;
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // value
+            // 
+            this.value.DataPropertyName = "value";
+            this.value.HeaderText = "Value";
+            this.value.MinimumWidth = 50;
+            this.value.Name = "value";
+            this.value.ReadOnly = true;
+            this.value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // label5
             // 
@@ -323,11 +369,9 @@
             // 
             // gbCustomAction
             // 
-            this.gbCustomAction.Controls.Add(this.btnSaveInputParamValue);
+            this.gbCustomAction.Controls.Add(this.label8);
             this.gbCustomAction.Controls.Add(this.cmbCustomActions);
-            this.gbCustomAction.Controls.Add(this.label7);
             this.gbCustomAction.Controls.Add(this.txtCreatedBy);
-            this.gbCustomAction.Controls.Add(this.txtInputParamValue);
             this.gbCustomAction.Controls.Add(this.label2);
             this.gbCustomAction.Controls.Add(this.label1);
             this.gbCustomAction.Controls.Add(this.txtUniqueName);
@@ -343,36 +387,6 @@
             this.gbCustomAction.TabIndex = 0;
             this.gbCustomAction.TabStop = false;
             this.gbCustomAction.Text = "Custom Action";
-            // 
-            // btnSaveInputParamValue
-            // 
-            this.btnSaveInputParamValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveInputParamValue.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveInputParamValue.Image")));
-            this.btnSaveInputParamValue.Location = new System.Drawing.Point(459, 306);
-            this.btnSaveInputParamValue.Name = "btnSaveInputParamValue";
-            this.btnSaveInputParamValue.Size = new System.Drawing.Size(27, 23);
-            this.btnSaveInputParamValue.TabIndex = 19;
-            this.btnSaveInputParamValue.UseVisualStyleBackColor = true;
-            this.btnSaveInputParamValue.Click += new System.EventHandler(this.btnSaveInputParamValue_Click);
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 311);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 13);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Set Value";
-            // 
-            // txtInputParamValue
-            // 
-            this.txtInputParamValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInputParamValue.Location = new System.Drawing.Point(114, 308);
-            this.txtInputParamValue.Name = "txtInputParamValue";
-            this.txtInputParamValue.Size = new System.Drawing.Size(339, 20);
-            this.txtInputParamValue.TabIndex = 17;
             // 
             // grResults
             // 
@@ -451,6 +465,42 @@
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.RecordClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridOutputParams_RecordClick);
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "position";
+            this.Column1.HeaderText = "#";
+            this.Column1.MinimumWidth = 24;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "name";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 50;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "type";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Type";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 50;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "value";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Value";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 50;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // gbResultDetails
             // 
             this.gbResultDetails.Controls.Add(this.txtResultDetail);
@@ -520,89 +570,13 @@
             this.rbFormatText.UseVisualStyleBackColor = true;
             this.rbFormatText.CheckedChanged += new System.EventHandler(this.rbFormatResult_CheckedChanged);
             // 
-            // index
+            // label8
             // 
-            this.index.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.index.DataPropertyName = "position";
-            this.index.HeaderText = "#";
-            this.index.MinimumWidth = 24;
-            this.index.Name = "index";
-            this.index.ReadOnly = true;
-            this.index.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.index.Width = 24;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Name";
-            this.name.MinimumWidth = 50;
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // option
-            // 
-            this.option.DataPropertyName = "optional";
-            this.option.HeaderText = "Optional";
-            this.option.MinimumWidth = 50;
-            this.option.Name = "option";
-            this.option.ReadOnly = true;
-            this.option.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.option.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // type
-            // 
-            this.type.DataPropertyName = "type";
-            this.type.HeaderText = "Type";
-            this.type.MinimumWidth = 50;
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // value
-            // 
-            this.value.DataPropertyName = "value";
-            this.value.HeaderText = "Value";
-            this.value.MinimumWidth = 50;
-            this.value.Name = "value";
-            this.value.ReadOnly = true;
-            this.value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "position";
-            this.Column1.HeaderText = "#";
-            this.Column1.MinimumWidth = 24;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "name";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 50;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "type";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Type";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 50;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "value";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Value";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 50;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.label8.Location = new System.Drawing.Point(38, 172);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 63);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Double click row to set parameter value!";
             // 
             // CustomActionTester
             // 
@@ -654,9 +628,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.SplitContainer splitFullForm;
         private System.Windows.Forms.SplitContainer splitLeft;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtInputParamValue;
-        private System.Windows.Forms.Button btnSaveInputParamValue;
         private System.Windows.Forms.Label label6;
         private xrmtb.XrmToolBox.Controls.CRMGridView gridOutputParams;
         private System.Windows.Forms.ToolStripButton btnExecute;
@@ -678,5 +649,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.Label label8;
     }
 }
