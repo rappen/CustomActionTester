@@ -143,7 +143,7 @@ namespace Rappen.XTB.CAT
                     {
                         ExtractTypeInfo(inputs, "parser");
                         gridInputParams.DataSource = inputs;
-                        gridInputParams.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                        gridInputParams.AutoResizeColumns();
                         GetOutputParams();
                     }
                 }
@@ -179,7 +179,7 @@ namespace Rappen.XTB.CAT
                     {
                         ExtractTypeInfo(outputs, "formatter");
                         gridOutputParams.DataSource = outputs;
-                        gridOutputParams.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                        gridOutputParams.AutoResizeColumns();
                     }
                 }
             });
@@ -213,7 +213,7 @@ namespace Rappen.XTB.CAT
             {
                 input["value"] = txtInputParamValue.Text;
                 gridInputParams.Refresh();
-                gridInputParams.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                gridInputParams.AutoResizeColumns();
             }
         }
 
@@ -258,7 +258,7 @@ namespace Rappen.XTB.CAT
                             }
                         }
                         gridOutputParams.Refresh();
-                        gridOutputParams.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                        gridOutputParams.AutoResizeColumns();
                         FormatResultDetailDefault();
                     }
                 }
