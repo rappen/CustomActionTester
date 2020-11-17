@@ -178,6 +178,9 @@
     <Compile Include="About.designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="CATcode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CATPlugin.cs" />
     <Compile Include="CAT.cs">
       <SubType>UserControl</SubType>
