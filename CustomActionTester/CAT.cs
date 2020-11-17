@@ -1,24 +1,60 @@
 ﻿using McTools.Xrm.Connection;
-using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using XrmToolBox.Extensibility;
+using XrmToolBox.Extensibility.Interfaces;
 
 namespace Rappen.XTB.CAT
 {
-    public partial class CustomActionTester : PluginControlBase
+    public partial class CustomActionTester : PluginControlBase, IGitHubPlugin, IAboutPlugin
     {
+        private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
+        private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
+        private AppInsights ai = new AppInsights(aiEndpoint, aiKey, Assembly.GetExecutingAssembly(), "Custom Action Tester");
+
+        public string RepositoryName => "CustomActionTester";
+
+        public string UserName => "rappen";
+
+        public void ShowAboutDialog()
+        {
+            var about = new About(this)
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
+            about.lblVersion.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            about.ShowDialog();
+        }
+
         public CustomActionTester()
         {
             InitializeComponent();
+        }
+
+        internal void LogUse(string action, double? count = null, double? duration = null)
+        {
+            ai.WriteEvent(action, count, duration, HandleAIResult);
+        }
+
+        private void HandleAIResult(string result)
+        {
+            if (!string.IsNullOrEmpty(result))
+            {
+                LogError("Failed to write to Application Insights:\n{0}", result);
+            }
+        }
+
+        private void CustomActionTester_Load(object sender, EventArgs e)
+        {
+            LogUse("Load");
         }
 
         private void GetCustomActions()
@@ -286,6 +322,11 @@ namespace Rappen.XTB.CAT
         private void rbFormatResult_CheckedChanged(object sender, EventArgs e)
         {
             FormatResultDetail();
+        }
+
+        private void tslAbout_Click(object sender, EventArgs e)
+        {
+            ShowAboutDialog();
         }
     }
 }
