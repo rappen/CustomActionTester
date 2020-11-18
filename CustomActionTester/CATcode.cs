@@ -121,7 +121,7 @@ namespace Rappen.XTB.CAT
             }
         }
 
-        private string FormatResultDetail()
+        private void FormatResultDetail()
         {
             var value = GetResultDetailValue();
             if (!string.IsNullOrEmpty(value))
@@ -139,7 +139,7 @@ namespace Rappen.XTB.CAT
                     value = string_writer.ToString();
                 }
             }
-            return value;
+            txtResultDetail.Text = value;
         }
 
         private void FormatResultDetailDefault()
@@ -266,7 +266,7 @@ namespace Rappen.XTB.CAT
         private string GetResultDetailValue()
         {
             var record = gridOutputParams.SelectedCellRecords.FirstOrDefault();
-            if (record?.Contains("value") != true)
+            if (record?.Contains("value") != true || record["value"] == null)
             {
                 txtResultDetail.Text = string.Empty;
                 return null;

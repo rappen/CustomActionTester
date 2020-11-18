@@ -60,12 +60,12 @@ namespace Rappen.XTB.CAT
 
         private void gridOutputParams_RecordClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
         {
-            txtResultDetail.Text = FormatResultDetail();
+            FormatResultDetail();
         }
 
         private void rbFormatResult_CheckedChanged(object sender, EventArgs e)
         {
-            txtResultDetail.Text = FormatResultDetail();
+            FormatResultDetail();
         }
 
         private void tslAbout_Click(object sender, EventArgs e)

@@ -56,6 +56,7 @@
             this.splitFullForm = new System.Windows.Forms.SplitContainer();
             this.splitLeft = new System.Windows.Forms.SplitContainer();
             this.gbCustomAction = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.grResults = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.gridOutputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
@@ -69,7 +70,6 @@
             this.rbFormatXML = new System.Windows.Forms.RadioButton();
             this.rbFormatJSON = new System.Windows.Forms.RadioButton();
             this.rbFormatText = new System.Windows.Forms.RadioButton();
-            this.label8 = new System.Windows.Forms.Label();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
@@ -268,6 +268,7 @@
             this.gridInputParams.RowHeadersWidth = 16;
             this.gridInputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridInputParams.ShowEditingIcon = false;
+            this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
             this.gridInputParams.Size = new System.Drawing.Size(372, 194);
             this.gridInputParams.TabIndex = 13;
@@ -388,6 +389,14 @@
             this.gbCustomAction.TabStop = false;
             this.gbCustomAction.Text = "Custom Action";
             // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(38, 172);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 63);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Double click row to set parameter value!";
+            // 
             // grResults
             // 
             this.grResults.Controls.Add(this.label6);
@@ -460,6 +469,7 @@
             this.gridOutputParams.RowHeadersWidth = 16;
             this.gridOutputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridOutputParams.ShowEditingIcon = false;
+            this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
             this.gridOutputParams.Size = new System.Drawing.Size(372, 237);
             this.gridOutputParams.TabIndex = 15;
@@ -569,14 +579,6 @@
             this.rbFormatText.Text = "Text";
             this.rbFormatText.UseVisualStyleBackColor = true;
             this.rbFormatText.CheckedChanged += new System.EventHandler(this.rbFormatResult_CheckedChanged);
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(38, 172);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 63);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "Double click row to set parameter value!";
             // 
             // CustomActionTester
             // 
