@@ -1,14 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Markup;
 using xrmtb.XrmToolBox.Controls.Controls;
 
 namespace Rappen.XTB.CAT
@@ -24,6 +16,8 @@ namespace Rappen.XTB.CAT
         {
             var form = new InputValue();
             var type = GetType(input);
+            form.lblName.Text = input["name"].ToString();
+            form.lblType.Text = type.ToString();
             var currentvalue = input.Contains("rawvalue") ? input["rawvalue"] : null;
             switch (type)
             {
@@ -32,7 +26,6 @@ namespace Rappen.XTB.CAT
                 case ParamType.Int32:
                 case ParamType.Int64:
                     form.panString.Visible = true;
-                    form.lblText.Text = type.ToString();
                     form.txtString.Text = currentvalue?.ToString();
                     break;
                 case ParamType.EntityReference:
@@ -43,6 +36,10 @@ namespace Rappen.XTB.CAT
                     {
                         form.txtRecord.EntityReference = entref;
                     }
+                    break;
+                case ParamType.Boolean:
+                    form.panBoolean.Visible = true;
+                    form.chkBoolean.Checked = currentvalue is bool boolval && boolval;
                     break;
                 default:
                     return DialogResult.Cancel;
@@ -89,6 +86,10 @@ namespace Rappen.XTB.CAT
                         input["rawvalue"] = form.txtRecord.Entity.ToEntityReference();
                         input["value"] = form.txtRecord.Text;
                         break;
+                    case ParamType.Boolean:
+                        input["rawvalue"] = form.chkBoolean.Checked;
+                        input["value"] = form.chkBoolean.Checked;
+                        break;
                 }
             }
             return result;
@@ -124,6 +125,7 @@ namespace Rappen.XTB.CAT
         Int,
         Int32,
         Int64,
-        EntityReference
+        EntityReference,
+        Boolean
     }
 }
