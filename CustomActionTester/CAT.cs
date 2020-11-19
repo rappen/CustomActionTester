@@ -9,6 +9,7 @@ namespace Rappen.XTB.CAT
 {
     public partial class CustomActionTester : PluginControlBase
     {
+        private InputValue inputdlg;
         #region Public Constructors
 
         public CustomActionTester()
@@ -23,6 +24,11 @@ namespace Rappen.XTB.CAT
         public override void UpdateConnection(IOrganizationService newService, ConnectionDetail detail, string actionName, object parameter)
         {
             base.UpdateConnection(newService, detail, actionName, parameter);
+            inputdlg = null;
+            cmbCustomActions.OrganizationService = null;
+            cmbCustomActions.SelectedIndex = -1;
+            gridInputParams.DataSource = null;
+            gridOutputParams.DataSource = null;
             cmbCustomActions.OrganizationService = newService;
             txtUniqueName.OrganizationService = newService;
             txtUniqueName.OrganizationService = newService;
@@ -77,7 +83,11 @@ namespace Rappen.XTB.CAT
 
         private void gridInputParams_RecordDoubleClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
         {
-            if (InputValue.ShowDialog(e.Entity, Service, this) == DialogResult.OK)
+            if (inputdlg == null)
+            {
+                inputdlg = new InputValue(Service);
+            }
+            if (inputdlg.ShowDialog(e.Entity, this) == DialogResult.OK)
             {
                 gridInputParams.Refresh();
                 gridInputParams.AutoResizeColumns();

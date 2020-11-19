@@ -195,6 +195,11 @@ namespace Rappen.XTB.CAT
 
         private void GetInputParams()
         {
+            if (!(cmbCustomActions.SelectedEntity is Entity ca))
+            {
+                gridInputParams.DataSource = null;
+                return;
+            }
             var qx = new QueryExpression("sdkmessagerequestfield");
             qx.Distinct = true;
             qx.ColumnSet.AddColumns("name", "position", "optional", "parser", "fieldmask");
@@ -203,7 +208,7 @@ namespace Rappen.XTB.CAT
             var pair = req.AddLink("sdkmessagepair", "sdkmessagepairid", "sdkmessagepairid");
             var msg = pair.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid");
             var wf = msg.AddLink("workflow", "sdkmessageid", "sdkmessageid");
-            wf.LinkCriteria.AddCondition("workflowid", ConditionOperator.Equal, cmbCustomActions.SelectedEntity.Id);
+            wf.LinkCriteria.AddCondition("workflowid", ConditionOperator.Equal, ca.Id);
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Loading Input Parameters",
@@ -230,6 +235,11 @@ namespace Rappen.XTB.CAT
 
         private void GetOutputParams()
         {
+            if (!(cmbCustomActions.SelectedEntity is Entity ca))
+            {
+                gridOutputParams.DataSource = null;
+                return;
+            }
             var qx = new QueryExpression("sdkmessageresponsefield");
             qx.Distinct = true;
             qx.ColumnSet.AddColumns("name", "position", "parameterbindinginformation", "formatter", "publicname");
@@ -239,7 +249,7 @@ namespace Rappen.XTB.CAT
             var pair = req.AddLink("sdkmessagepair", "sdkmessagepairid", "sdkmessagepairid");
             var msg = pair.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid");
             var wf = msg.AddLink("workflow", "sdkmessageid", "sdkmessageid");
-            wf.LinkCriteria.AddCondition("workflowid", ConditionOperator.Equal, cmbCustomActions.SelectedEntity.Id);
+            wf.LinkCriteria.AddCondition("workflowid", ConditionOperator.Equal, ca.Id);
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Loading Output Parameters",
