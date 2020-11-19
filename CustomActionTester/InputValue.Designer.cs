@@ -41,17 +41,20 @@
             this.panBoolean = new System.Windows.Forms.Panel();
             this.chkBoolean = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblName = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.dtDateTime = new System.Windows.Forms.DateTimePicker();
+            this.panDateTime = new System.Windows.Forms.Panel();
             this.panEntityReference.SuspendLayout();
             this.panString.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panBoolean.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panDateTime.SuspendLayout();
             this.SuspendLayout();
             // 
             // panEntityReference
@@ -131,7 +134,7 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnOk);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(40, 153);
+            this.panel1.Location = new System.Drawing.Point(40, 152);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(336, 52);
             this.panel1.TabIndex = 3;
@@ -189,25 +192,6 @@
             this.panel2.Size = new System.Drawing.Size(416, 77);
             this.panel2.TabIndex = 5;
             // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(118, 23);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(52, 13);
-            this.lblName.TabIndex = 0;
-            this.lblName.Text = "variable";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(43, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Variable:";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -227,12 +211,31 @@
             this.lblType.TabIndex = 2;
             this.lblType.Text = "type";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(43, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Variable:";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(118, 23);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(52, 13);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "variable";
+            // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 77);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(40, 128);
+            this.panel3.Size = new System.Drawing.Size(40, 127);
             this.panel3.TabIndex = 6;
             // 
             // panel4
@@ -240,8 +243,27 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(376, 77);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(40, 128);
+            this.panel4.Size = new System.Drawing.Size(40, 127);
             this.panel4.TabIndex = 7;
+            // 
+            // dtDateTime
+            // 
+            this.dtDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dtDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDateTime.Location = new System.Drawing.Point(81, 4);
+            this.dtDateTime.Name = "dtDateTime";
+            this.dtDateTime.Size = new System.Drawing.Size(159, 20);
+            this.dtDateTime.TabIndex = 5;
+            // 
+            // panDateTime
+            // 
+            this.panDateTime.Controls.Add(this.dtDateTime);
+            this.panDateTime.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panDateTime.Location = new System.Drawing.Point(40, 212);
+            this.panDateTime.Name = "panDateTime";
+            this.panDateTime.Size = new System.Drawing.Size(336, 27);
+            this.panDateTime.TabIndex = 8;
+            this.panDateTime.Visible = false;
             // 
             // InputValue
             // 
@@ -250,7 +272,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(416, 205);
+            this.ClientSize = new System.Drawing.Size(416, 204);
+            this.Controls.Add(this.panDateTime);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panBoolean);
             this.Controls.Add(this.panString);
@@ -275,6 +298,7 @@
             this.panBoolean.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panDateTime.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -299,5 +323,7 @@
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.DateTimePicker dtDateTime;
+        private System.Windows.Forms.Panel panDateTime;
     }
 }
