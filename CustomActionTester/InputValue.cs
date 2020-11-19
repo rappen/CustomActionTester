@@ -8,35 +8,40 @@ namespace Rappen.XTB.CAT
 {
     public partial class InputValue : Form
     {
-        public InputValue()
+        IOrganizationService service;
+
+        public InputValue(IOrganizationService service)
         {
             InitializeComponent();
+            this.service = service;
         }
 
-        public static DialogResult ShowDialog(Entity input, IOrganizationService service, IWin32Window owner)
+        public DialogResult ShowDialog(Entity input, IWin32Window owner)
         {
-            var form = new InputValue();
             var type = GetType(input);
-            form.lblName.Text = input["name"].ToString();
-            form.lblType.Text = type.ToString();
+            lblName.Text = input["name"].ToString();
+            lblType.Text = type.ToString();
             var currentvalue = input.Contains("rawvalue") ? input["rawvalue"] : null;
-            form.cmbEntities.Service = service;
-            form.txtRecord.OrganizationService = service;
-            if (!ParseInput(form, type, currentvalue))
+            txtRecord.OrganizationService = service;
+            if (!ParseInput(type, currentvalue))
             {
                 MessageBox.Show($"Type {type} is not yet supported by CAT.", "Input Parameter", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return DialogResult.Cancel;
             }
-            var result = form.ShowDialog(owner);
+            var result = ShowDialog(owner);
             if (result == DialogResult.OK)
             {
-                result = HandleInput(input, service, owner, form, type);
+                result = HandleInput(input, owner, type);
             }
             return result;
         }
 
-        private static bool ParseInput(InputValue form, ParamType type, object currentvalue)
+        private bool ParseInput(ParamType type, object currentvalue)
         {
+            panString.Visible = false;
+            panEntity.Visible = false;
+            panBoolean.Visible = false;
+            panDateTime.Visible = false;
             switch (type)
             {
                 case ParamType.String:
@@ -48,26 +53,31 @@ namespace Rappen.XTB.CAT
                 case ParamType.Double:
                 case ParamType.Float:
                 case ParamType.Money:
-                    form.panString.Visible = true;
-                    form.txtString.Text = currentvalue?.ToString();
+                    panString.Visible = true;
+                    txtString.Text = currentvalue?.ToString();
                     break;
                 case ParamType.Entity:
                 case ParamType.EntityReference:
-                    form.panEntityReference.Visible = true;
-                    if (currentvalue is EntityReference entref)
+                    panEntity.Visible = true;
+                    if (currentvalue is Entity entity)
                     {
-                        form.txtRecord.EntityReference = entref;
+                        txtRecord.Entity = entity;
                     }
+                    else if (currentvalue is EntityReference entref)
+                    {
+                        txtRecord.EntityReference = entref;
+                    }
+                    //PopulateEntities();
                     break;
                 case ParamType.Boolean:
-                    form.panBoolean.Visible = true;
-                    form.chkBoolean.Checked = currentvalue is bool boolval && boolval;
+                    panBoolean.Visible = true;
+                    chkBoolean.Checked = currentvalue is bool boolval && boolval;
                     break;
                 case ParamType.DateTime:
-                    form.panDateTime.Visible = true;
+                    panDateTime.Visible = true;
                     if (currentvalue is DateTime dtvalue)
                     {
-                        form.dtDateTime.Value = dtvalue;
+                        dtDateTime.Value = dtvalue;
                     }
                     break;
                 default:
@@ -76,21 +86,21 @@ namespace Rappen.XTB.CAT
             return true;
         }
 
-        private static DialogResult HandleInput(Entity input, IOrganizationService service, IWin32Window owner, InputValue form, ParamType type)
+        private DialogResult HandleInput(Entity input, IWin32Window owner, ParamType type)
         {
             var invalidstr = false;
             input["value"] = null;
             switch (type)
             {
                 case ParamType.String:
-                    var strvalue = form.txtString.Text;
+                    var strvalue = txtString.Text;
                     input["rawvalue"] = strvalue;
                     break;
                 case ParamType.Integer:
                 case ParamType.Int:
                 case ParamType.Int32:
                 case ParamType.Int64:
-                    if (!int.TryParse(form.txtString.Text, out int intvalue))
+                    if (!int.TryParse(txtString.Text, out int intvalue))
                     {
                         invalidstr = true;
                         break;
@@ -99,7 +109,7 @@ namespace Rappen.XTB.CAT
                     break;
                 case ParamType.Decimal:
                 case ParamType.Money:
-                    if (!decimal.TryParse(form.txtString.Text, out decimal decvalue))
+                    if (!decimal.TryParse(txtString.Text, out decimal decvalue))
                     {
                         invalidstr = true;
                         break;
@@ -115,7 +125,7 @@ namespace Rappen.XTB.CAT
                     break;
                 case ParamType.Double:
                 case ParamType.Float:
-                    if (!double.TryParse(form.txtString.Text, out double douvalue))
+                    if (!double.TryParse(txtString.Text, out double douvalue))
                     {
                         invalidstr = true;
                         break;
@@ -124,11 +134,11 @@ namespace Rappen.XTB.CAT
                     break;
                 case ParamType.Entity:
                 case ParamType.EntityReference:
-                    if (form.txtRecord.Entity == null)
+                    if (txtRecord.Entity == null)
                     {
                         if (MessageBox.Show($"Please select a record", "Input Parameter", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
                         {
-                            return ShowDialog(input, service, owner);
+                            return ShowDialog(input, owner);
                         }
                         else
                         {
@@ -137,26 +147,26 @@ namespace Rappen.XTB.CAT
                     }
                     if (type == ParamType.Entity)
                     {
-                        input["rawvalue"] = form.txtRecord.Entity;
+                        input["rawvalue"] = txtRecord.Entity;
                     }
                     else
                     {
-                        input["rawvalue"] = form.txtRecord.Entity.ToEntityReference();
+                        input["rawvalue"] = txtRecord.Entity.ToEntityReference();
                     }
-                    input["value"] = form.txtRecord.Text;
+                    input["value"] = txtRecord.Text;
                     break;
                 case ParamType.Boolean:
-                    input["rawvalue"] = form.chkBoolean.Checked;
+                    input["rawvalue"] = chkBoolean.Checked;
                     break;
                 case ParamType.DateTime:
-                    input["rawvalue"] = form.dtDateTime.Value;
+                    input["rawvalue"] = dtDateTime.Value;
                     break;
             }
             if (invalidstr)
             {
-                if (MessageBox.Show($"Not a valid {type}: {form.txtString.Text}", "Input Parameter", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
+                if (MessageBox.Show($"Not a valid {type}: {txtString.Text}", "Input Parameter", MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
                 {
-                    return ShowDialog(input, service, owner);
+                    return ShowDialog(input, owner);
                 }
                 else
                 {
@@ -181,10 +191,14 @@ namespace Rappen.XTB.CAT
 
         private void btnLookup_Click(object sender, EventArgs e)
         {
+            if (!(cmbEntity.SelectedItem is EntityMetadataProxy entity))
+            {
+                return;
+            }
             var lkp = new CDSLookupDialog
             {
-                Service = cmbEntities.Service,
-                LogicalName = cmbEntities.SelectedEntity.LogicalName
+                Service = txtRecord.OrganizationService,
+                LogicalName = entity.Metadata.LogicalName
             };
             if (lkp.ShowDialog(this) != DialogResult.OK)
             {
@@ -192,6 +206,18 @@ namespace Rappen.XTB.CAT
             }
             txtRecord.Entity = lkp.Entity;
         }
+
+        private void cmbEntity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtRecord.Entity = null;
+        }
+
+        private void PopulateEntities(EntityMetadataProxy[] entities)
+        {
+            cmbEntity.Items.Clear();
+            cmbEntity.Items.AddRange(entities);
+        }
+
     }
 
     public enum ParamType

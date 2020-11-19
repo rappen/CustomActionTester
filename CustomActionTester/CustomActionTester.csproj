@@ -188,6 +188,7 @@
     <Compile Include="CAT.designer.cs">
       <DependentUpon>CAT.cs</DependentUpon>
     </Compile>
+    <Compile Include="EntityMetadataProxy.cs" />
     <Compile Include="InputValue.cs">
       <SubType>Form</SubType>
     </Compile>

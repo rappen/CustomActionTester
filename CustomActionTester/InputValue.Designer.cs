@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputValue));
-            this.panEntityReference = new System.Windows.Forms.Panel();
+            this.panEntity = new System.Windows.Forms.Panel();
             this.btnLookup = new System.Windows.Forms.Button();
             this.txtRecord = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
-            this.cmbEntities = new xrmtb.XrmToolBox.Controls.EntitiesDropdownControl();
             this.panString = new System.Windows.Forms.Panel();
             this.txtString = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -49,7 +48,8 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.dtDateTime = new System.Windows.Forms.DateTimePicker();
             this.panDateTime = new System.Windows.Forms.Panel();
-            this.panEntityReference.SuspendLayout();
+            this.cmbEntity = new System.Windows.Forms.ComboBox();
+            this.panEntity.SuspendLayout();
             this.panString.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panBoolean.SuspendLayout();
@@ -57,17 +57,17 @@
             this.panDateTime.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panEntityReference
+            // panEntity
             // 
-            this.panEntityReference.Controls.Add(this.btnLookup);
-            this.panEntityReference.Controls.Add(this.txtRecord);
-            this.panEntityReference.Controls.Add(this.cmbEntities);
-            this.panEntityReference.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panEntityReference.Location = new System.Drawing.Point(40, 77);
-            this.panEntityReference.Name = "panEntityReference";
-            this.panEntityReference.Size = new System.Drawing.Size(336, 74);
-            this.panEntityReference.TabIndex = 0;
-            this.panEntityReference.Visible = false;
+            this.panEntity.Controls.Add(this.cmbEntity);
+            this.panEntity.Controls.Add(this.btnLookup);
+            this.panEntity.Controls.Add(this.txtRecord);
+            this.panEntity.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panEntity.Location = new System.Drawing.Point(40, 77);
+            this.panEntity.Name = "panEntity";
+            this.panEntity.Size = new System.Drawing.Size(336, 74);
+            this.panEntity.TabIndex = 0;
+            this.panEntity.Visible = false;
             // 
             // btnLookup
             // 
@@ -96,20 +96,6 @@
             this.txtRecord.Size = new System.Drawing.Size(286, 20);
             this.txtRecord.TabIndex = 2;
             // 
-            // cmbEntities
-            // 
-            this.cmbEntities.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbEntities.AutoLoadData = true;
-            this.cmbEntities.LanguageCode = 1033;
-            this.cmbEntities.Location = new System.Drawing.Point(3, 12);
-            this.cmbEntities.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.cmbEntities.Name = "cmbEntities";
-            this.cmbEntities.Service = null;
-            this.cmbEntities.Size = new System.Drawing.Size(317, 25);
-            this.cmbEntities.SolutionFilter = null;
-            this.cmbEntities.TabIndex = 0;
-            // 
             // panString
             // 
             this.panString.Controls.Add(this.txtString);
@@ -134,7 +120,7 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnOk);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(40, 152);
+            this.panel1.Location = new System.Drawing.Point(40, 146);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(336, 52);
             this.panel1.TabIndex = 3;
@@ -235,7 +221,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 77);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(40, 127);
+            this.panel3.Size = new System.Drawing.Size(40, 121);
             this.panel3.TabIndex = 6;
             // 
             // panel4
@@ -243,7 +229,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel4.Location = new System.Drawing.Point(376, 77);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(40, 127);
+            this.panel4.Size = new System.Drawing.Size(40, 121);
             this.panel4.TabIndex = 7;
             // 
             // dtDateTime
@@ -265,6 +251,20 @@
             this.panDateTime.TabIndex = 8;
             this.panDateTime.Visible = false;
             // 
+            // cmbEntity
+            // 
+            this.cmbEntity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbEntity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbEntity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbEntity.FormattingEnabled = true;
+            this.cmbEntity.Location = new System.Drawing.Point(6, 16);
+            this.cmbEntity.Name = "cmbEntity";
+            this.cmbEntity.Size = new System.Drawing.Size(315, 21);
+            this.cmbEntity.Sorted = true;
+            this.cmbEntity.TabIndex = 5;
+            this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
+            // 
             // InputValue
             // 
             this.AcceptButton = this.btnOk;
@@ -272,12 +272,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(416, 204);
+            this.ClientSize = new System.Drawing.Size(416, 198);
             this.Controls.Add(this.panDateTime);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panBoolean);
             this.Controls.Add(this.panString);
-            this.Controls.Add(this.panEntityReference);
+            this.Controls.Add(this.panEntity);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
@@ -289,8 +289,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Input Parameter Dialog";
-            this.panEntityReference.ResumeLayout(false);
-            this.panEntityReference.PerformLayout();
+            this.panEntity.ResumeLayout(false);
+            this.panEntity.PerformLayout();
             this.panString.ResumeLayout(false);
             this.panString.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -305,10 +305,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panEntityReference;
+        private System.Windows.Forms.Panel panEntity;
         private System.Windows.Forms.Button btnLookup;
         private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtRecord;
-        private xrmtb.XrmToolBox.Controls.EntitiesDropdownControl cmbEntities;
         private System.Windows.Forms.Panel panString;
         private System.Windows.Forms.TextBox txtString;
         private System.Windows.Forms.Panel panel1;
@@ -325,5 +324,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DateTimePicker dtDateTime;
         private System.Windows.Forms.Panel panDateTime;
+        private System.Windows.Forms.ComboBox cmbEntity;
     }
 }
