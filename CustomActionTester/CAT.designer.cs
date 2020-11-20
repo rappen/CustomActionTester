@@ -104,8 +104,8 @@
             this.btnExecute.Image = ((System.Drawing.Image)(resources.GetObject("btnExecute.Image")));
             this.btnExecute.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExecute.Name = "btnExecute";
-            this.btnExecute.Size = new System.Drawing.Size(159, 28);
-            this.btnExecute.Text = "Execute Custom Action";
+            this.btnExecute.Size = new System.Drawing.Size(182, 28);
+            this.btnExecute.Text = "Execute Custom Action (F5)";
             this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
             // 
             // tslAbout

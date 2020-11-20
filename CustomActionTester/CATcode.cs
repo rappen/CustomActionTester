@@ -12,7 +12,7 @@ using XrmToolBox.Extensibility.Interfaces;
 
 namespace Rappen.XTB.CAT
 {
-    public partial class CustomActionTester : IGitHubPlugin, IAboutPlugin
+    public partial class CustomActionTester : IGitHubPlugin, IAboutPlugin, IShortcutReceiver
     {
         #region Private Fields
 
@@ -31,6 +31,29 @@ namespace Rappen.XTB.CAT
         #endregion Public Properties
 
         #region Public Methods
+
+        public void ReceiveKeyDownShortcut(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5 && btnExecute.Enabled)
+            {
+                btnExecute_Click(null, null);
+            }
+        }
+
+        public void ReceiveKeyPressShortcut(KeyPressEventArgs e)
+        {
+            // Noop
+        }
+
+        public void ReceiveKeyUpShortcut(KeyEventArgs e)
+        {
+            // Noop
+        }
+
+        public void ReceivePreviewKeyDownShortcut(PreviewKeyDownEventArgs e)
+        {
+            // Noop
+        }
 
         public void ShowAboutDialog()
         {
