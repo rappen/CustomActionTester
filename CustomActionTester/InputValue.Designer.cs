@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputValue));
             this.panEntity = new System.Windows.Forms.Panel();
+            this.cmbEntity = new System.Windows.Forms.ComboBox();
             this.btnLookup = new System.Windows.Forms.Button();
             this.txtRecord = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.panString = new System.Windows.Forms.Panel();
@@ -48,7 +49,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.dtDateTime = new System.Windows.Forms.DateTimePicker();
             this.panDateTime = new System.Windows.Forms.Panel();
-            this.cmbEntity = new System.Windows.Forms.ComboBox();
+            this.tbnRemove = new System.Windows.Forms.Button();
             this.panEntity.SuspendLayout();
             this.panString.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -68,6 +69,20 @@
             this.panEntity.Size = new System.Drawing.Size(336, 74);
             this.panEntity.TabIndex = 0;
             this.panEntity.Visible = false;
+            // 
+            // cmbEntity
+            // 
+            this.cmbEntity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbEntity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbEntity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbEntity.FormattingEnabled = true;
+            this.cmbEntity.Location = new System.Drawing.Point(6, 16);
+            this.cmbEntity.Name = "cmbEntity";
+            this.cmbEntity.Size = new System.Drawing.Size(315, 21);
+            this.cmbEntity.Sorted = true;
+            this.cmbEntity.TabIndex = 5;
+            this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
             // 
             // btnLookup
             // 
@@ -117,6 +132,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.tbnRemove);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnOk);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -251,19 +267,15 @@
             this.panDateTime.TabIndex = 8;
             this.panDateTime.Visible = false;
             // 
-            // cmbEntity
+            // tbnRemove
             // 
-            this.cmbEntity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbEntity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbEntity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbEntity.FormattingEnabled = true;
-            this.cmbEntity.Location = new System.Drawing.Point(6, 16);
-            this.cmbEntity.Name = "cmbEntity";
-            this.cmbEntity.Size = new System.Drawing.Size(315, 21);
-            this.cmbEntity.Sorted = true;
-            this.cmbEntity.TabIndex = 5;
-            this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
+            this.tbnRemove.DialogResult = System.Windows.Forms.DialogResult.Ignore;
+            this.tbnRemove.Location = new System.Drawing.Point(6, 17);
+            this.tbnRemove.Name = "tbnRemove";
+            this.tbnRemove.Size = new System.Drawing.Size(103, 23);
+            this.tbnRemove.TabIndex = 2;
+            this.tbnRemove.Text = "Remove Value";
+            this.tbnRemove.UseVisualStyleBackColor = true;
             // 
             // InputValue
             // 
@@ -325,5 +337,6 @@
         private System.Windows.Forms.DateTimePicker dtDateTime;
         private System.Windows.Forms.Panel panDateTime;
         private System.Windows.Forms.ComboBox cmbEntity;
+        private System.Windows.Forms.Button tbnRemove;
     }
 }

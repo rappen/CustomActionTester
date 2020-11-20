@@ -87,11 +87,18 @@ namespace Rappen.XTB.CAT
             {
                 inputdlg = new InputValue(Service);
             }
-            if (inputdlg.ShowDialog(e.Entity, this) == DialogResult.OK)
+            var dlgresult = inputdlg.ShowDialog(e.Entity, this);
+            if (dlgresult == DialogResult.Cancel)
             {
-                gridInputParams.Refresh();
-                gridInputParams.AutoResizeColumns();
+                return;
             }
+            if (dlgresult == DialogResult.Ignore)
+            {
+                e.Entity.Attributes.Remove("value");
+                e.Entity.Attributes.Remove("rawvalue");
+            }
+            gridInputParams.Refresh();
+            gridInputParams.AutoResizeColumns();
         }
     }
 }
