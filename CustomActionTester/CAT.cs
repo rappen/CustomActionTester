@@ -37,7 +37,7 @@ namespace Rappen.XTB.CAT
             txtCreatedBy.OrganizationService = newService;
             gridInputParams.OrganizationService = newService;
             gridOutputParams.OrganizationService = newService;
-
+            txtCDSDataHelper.OrganizationService = newService;
             if (newService != null)
             {
                 GetSolutions(chkSolManaged.Checked, chkSolInvisible.Checked);
