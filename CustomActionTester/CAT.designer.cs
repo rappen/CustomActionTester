@@ -76,6 +76,8 @@
             this.rbFormatXML = new System.Windows.Forms.RadioButton();
             this.rbFormatJSON = new System.Windows.Forms.RadioButton();
             this.rbFormatText = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtExecution = new System.Windows.Forms.TextBox();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
@@ -476,6 +478,8 @@
             // 
             // grResults
             // 
+            this.grResults.Controls.Add(this.txtExecution);
+            this.grResults.Controls.Add(this.label10);
             this.grResults.Controls.Add(this.label6);
             this.grResults.Controls.Add(this.gridOutputParams);
             this.grResults.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -489,7 +493,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 28);
+            this.label6.Location = new System.Drawing.Point(13, 53);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 16;
@@ -530,7 +534,7 @@
             this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle5;
             this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridOutputParams.FilterColumns = "";
-            this.gridOutputParams.Location = new System.Drawing.Point(114, 27);
+            this.gridOutputParams.Location = new System.Drawing.Point(114, 53);
             this.gridOutputParams.MultiSelect = false;
             this.gridOutputParams.Name = "gridOutputParams";
             this.gridOutputParams.OrganizationService = null;
@@ -548,7 +552,7 @@
             this.gridOutputParams.ShowEditingIcon = false;
             this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(372, 237);
+            this.gridOutputParams.Size = new System.Drawing.Size(372, 211);
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.RecordClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridOutputParams_RecordClick);
             // 
@@ -657,6 +661,24 @@
             this.rbFormatText.UseVisualStyleBackColor = true;
             this.rbFormatText.CheckedChanged += new System.EventHandler(this.rbFormatResult_CheckedChanged);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 30);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Execution Time";
+            // 
+            // txtExecution
+            // 
+            this.txtExecution.BackColor = System.Drawing.SystemColors.Window;
+            this.txtExecution.Location = new System.Drawing.Point(114, 27);
+            this.txtExecution.Name = "txtExecution";
+            this.txtExecution.ReadOnly = true;
+            this.txtExecution.Size = new System.Drawing.Size(100, 20);
+            this.txtExecution.TabIndex = 18;
+            // 
             // CustomActionTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -737,5 +759,7 @@
         private System.Windows.Forms.Label label9;
         private xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox cmbSolution;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtExecution;
+        private System.Windows.Forms.Label label10;
     }
 }

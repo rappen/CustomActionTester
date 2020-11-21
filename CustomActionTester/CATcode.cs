@@ -2,7 +2,9 @@
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -82,6 +84,8 @@ namespace Rappen.XTB.CAT
 
         private void ExecuteCA()
         {
+            txtExecution.Text = string.Empty;
+            ClearOutputParamValues();
             var request = new OrganizationRequest(txtMessageName.Text);
             foreach (var input in gridInputParams.DataSource as IEnumerable<Entity>)
             {
@@ -103,7 +107,10 @@ namespace Rappen.XTB.CAT
                 Message = "Executing Custom Action",
                 Work = (worker, args) =>
                 {
-                    args.Result = Service.Execute(request);
+                    var sw = Stopwatch.StartNew();
+                    var result = Service.Execute(request);
+                    sw.Stop();
+                    args.Result = new Tuple<OrganizationResponse, long>(result, sw.ElapsedMilliseconds);
                 },
                 PostWorkCallBack = (args) =>
                 {
@@ -111,9 +118,10 @@ namespace Rappen.XTB.CAT
                     {
                         MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    else if (args.Result is OrganizationResponse response)
+                    else if (args.Result is Tuple<OrganizationResponse, long> response)
                     {
-                        foreach (var result in response.Results)
+                        txtExecution.Text = $"{response.Item2} ms";
+                        foreach (var result in response.Item1.Results)
                         {
                             var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
                             var output = outputs.FirstOrDefault(o => o["name"].ToString().Equals(result.Key));
@@ -128,6 +136,12 @@ namespace Rappen.XTB.CAT
                     }
                 }
             });
+        }
+
+        private void ClearOutputParamValues()
+        {
+            var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
+            outputs.ToList().ForEach(o => o.Attributes.Remove("value"));
         }
 
         private void ExtractTypeInfo(EntityCollection records)
@@ -417,6 +431,7 @@ namespace Rappen.XTB.CAT
             txtUniqueName.Entity = ca;
             txtMessageName.Entity = ca;
             txtCreatedBy.Entity = ca;
+            txtExecution.Text = string.Empty;
             GetInputParams(ca);
         }
 
