@@ -208,7 +208,7 @@ namespace Rappen.XTB.CAT
             }
         }
 
-        private void GetCustomActions()
+        private void GetCustomActions(Entity solution)
         {
             var qx = new QueryExpression("workflow");
             qx.ColumnSet.AddColumns("name", "uniquename", "createdby", "primaryentity", "scope", "mode", "ismanaged", "iscustomizable", "istransacted", "iscustomprocessingstepallowedforotherpublishers", "inputparameters", "description");
@@ -221,6 +221,12 @@ namespace Rappen.XTB.CAT
             var qxsdk = qx.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid", JoinOperator.LeftOuter);
             qxsdk.EntityAlias = "M";
             qxsdk.Columns.AddColumns("name", "workflowsdkstepenabled");
+            if (solution != null)
+            {
+                var solcomp = qx.AddLink("solutioncomponent", "workflowid", "objectid");
+                solcomp.LinkCriteria.AddCondition("solutionid", ConditionOperator.Equal, solution.Id);
+            }
+
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Getting Custom Actions",
@@ -242,11 +248,12 @@ namespace Rappen.XTB.CAT
             });
         }
 
-        private void GetInputParams()
+        private void GetInputParams(Entity ca)
         {
-            if (!(cmbCustomActions.SelectedEntity is Entity ca))
+            if (ca == null)
             {
                 gridInputParams.DataSource = null;
+                gridOutputParams.DataSource = null;
                 return;
             }
             var qx = new QueryExpression("sdkmessagerequestfield");
@@ -277,15 +284,15 @@ namespace Rappen.XTB.CAT
                         ExtractTypeInfo(inputs);
                         gridInputParams.DataSource = inputs;
                         gridInputParams.AutoResizeColumns();
-                        GetOutputParams();
+                        GetOutputParams(ca);
                     }
                 }
             });
         }
 
-        private void GetOutputParams()
+        private void GetOutputParams(Entity ca)
         {
-            if (!(cmbCustomActions.SelectedEntity is Entity ca))
+            if (ca == null)
             {
                 gridOutputParams.DataSource = null;
                 return;
@@ -334,6 +341,42 @@ namespace Rappen.XTB.CAT
             return record["value"].ToString();
         }
 
+        private void GetSolutions(bool managed, bool invisible)
+        {
+            var qx = new QueryExpression("solution");
+            qx.Distinct = true;
+            qx.ColumnSet.AddColumns("uniquename", "friendlyname", "version", "solutionid");
+            qx.AddOrder("friendlyname", OrderType.Ascending);
+            qx.Criteria.AddCondition("ismanaged", ConditionOperator.Equal, managed);
+            qx.Criteria.AddCondition("isvisible", ConditionOperator.Equal, !invisible);
+            var solcomp = qx.AddLink("solutioncomponent", "solutionid", "solutionid");
+            solcomp.Columns.AddColumns("componenttype");
+            var wf = solcomp.AddLink("workflow", "objectid", "workflowid");
+            wf.LinkCriteria.AddCondition("category", ConditionOperator.Equal, 3);
+            wf.LinkCriteria.AddCondition("type", ConditionOperator.Equal, 1);
+            wf.LinkCriteria.AddCondition("componentstate", ConditionOperator.Equal, 0);
+            wf.LinkCriteria.AddCondition("statuscode", ConditionOperator.Equal, 2);
+            WorkAsync(new WorkAsyncInfo
+            {
+                Message = "Getting Solutions",
+                Work = (worker, args) =>
+                {
+                    args.Result = Service.RetrieveMultiple(qx);
+                },
+                PostWorkCallBack = (args) =>
+                {
+                    if (args.Error != null)
+                    {
+                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (args.Result is EntityCollection solutions)
+                    {
+                        cmbSolution.DataSource = solutions;
+                    }
+                }
+            });
+        }
+
         private void HandleAIResult(string result)
         {
             if (!string.IsNullOrEmpty(result))
@@ -367,6 +410,14 @@ namespace Rappen.XTB.CAT
                     }
                 }
             });
+        }
+
+        private void SetCustomAction(Entity ca)
+        {
+            txtUniqueName.Entity = ca;
+            txtMessageName.Entity = ca;
+            txtCreatedBy.Entity = ca;
+            GetInputParams(ca);
         }
 
         #endregion Private Methods

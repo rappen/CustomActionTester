@@ -1,7 +1,6 @@
 ﻿using McTools.Xrm.Connection;
 using Microsoft.Xrm.Sdk;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
 
@@ -9,7 +8,12 @@ namespace Rappen.XTB.CAT
 {
     public partial class CustomActionTester : PluginControlBase
     {
+        #region Private Fields
+
         private InputValue inputdlg;
+
+        #endregion Private Fields
+
         #region Public Constructors
 
         public CustomActionTester()
@@ -26,10 +30,7 @@ namespace Rappen.XTB.CAT
             base.UpdateConnection(newService, detail, actionName, parameter);
             LoadEntities();
             inputdlg = null;
-            cmbCustomActions.OrganizationService = null;
-            cmbCustomActions.SelectedIndex = -1;
-            gridInputParams.DataSource = null;
-            gridOutputParams.DataSource = null;
+            cmbSolution.OrganizationService = newService;
             cmbCustomActions.OrganizationService = newService;
             txtUniqueName.OrganizationService = newService;
             txtUniqueName.OrganizationService = newService;
@@ -39,7 +40,7 @@ namespace Rappen.XTB.CAT
 
             if (newService != null)
             {
-                GetCustomActions();
+                GetSolutions(chkSolManaged.Checked, chkSolInvisible.Checked);
             }
         }
 
@@ -52,35 +53,25 @@ namespace Rappen.XTB.CAT
             ExecuteCA();
         }
 
+        private void chkSolFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            GetSolutions(chkSolManaged.Checked, chkSolInvisible.Checked);
+        }
+
         private void cmbCustomActions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtUniqueName.Entity = cmbCustomActions.SelectedEntity;
-            txtMessageName.Entity = cmbCustomActions.SelectedEntity;
-            txtCreatedBy.Entity = cmbCustomActions.SelectedEntity;
-            GetInputParams();
+            SetCustomAction(cmbCustomActions.SelectedEntity);
+        }
+
+        private void cmbSolution_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetCustomActions(cmbSolution.SelectedEntity);
         }
 
         private void CustomActionTester_Load(object sender, EventArgs e)
         {
             LogUse("Load");
         }
-
-        private void gridOutputParams_RecordClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
-        {
-            FormatResultDetail();
-        }
-
-        private void rbFormatResult_CheckedChanged(object sender, EventArgs e)
-        {
-            FormatResultDetail();
-        }
-
-        private void tslAbout_Click(object sender, EventArgs e)
-        {
-            ShowAboutDialog();
-        }
-
-        #endregion Private Methods
 
         private void gridInputParams_RecordDoubleClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
         {
@@ -106,5 +97,22 @@ namespace Rappen.XTB.CAT
             gridInputParams.Refresh();
             gridInputParams.AutoResizeColumns();
         }
+
+        private void gridOutputParams_RecordClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
+        {
+            FormatResultDetail();
+        }
+
+        private void rbFormatResult_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatResultDetail();
+        }
+
+        private void tslAbout_Click(object sender, EventArgs e)
+        {
+            ShowAboutDialog();
+        }
+
+        #endregion Private Methods
     }
 }

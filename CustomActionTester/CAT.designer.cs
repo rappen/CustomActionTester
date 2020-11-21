@@ -57,6 +57,12 @@
             this.splitLeft = new System.Windows.Forms.SplitContainer();
             this.gbCustomAction = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.gbSolution = new System.Windows.Forms.GroupBox();
+            this.chkSolInvisible = new System.Windows.Forms.CheckBox();
+            this.chkSolManaged = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbSolution = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.grResults = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.gridOutputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
@@ -81,6 +87,7 @@
             this.splitLeft.Panel2.SuspendLayout();
             this.splitLeft.SuspendLayout();
             this.gbCustomAction.SuspendLayout();
+            this.gbSolution.SuspendLayout();
             this.grResults.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).BeginInit();
             this.gbResultDetails.SuspendLayout();
@@ -270,7 +277,7 @@
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(372, 194);
+            this.gridInputParams.Size = new System.Drawing.Size(372, 113);
             this.gridInputParams.TabIndex = 13;
             this.gridInputParams.RecordDoubleClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordDoubleClick);
             // 
@@ -359,6 +366,7 @@
             // splitLeft.Panel1
             // 
             this.splitLeft.Panel1.Controls.Add(this.gbCustomAction);
+            this.splitLeft.Panel1.Controls.Add(this.gbSolution);
             // 
             // splitLeft.Panel2
             // 
@@ -382,9 +390,9 @@
             this.gbCustomAction.Controls.Add(this.label4);
             this.gbCustomAction.Controls.Add(this.label3);
             this.gbCustomAction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbCustomAction.Location = new System.Drawing.Point(0, 0);
+            this.gbCustomAction.Location = new System.Drawing.Point(0, 81);
             this.gbCustomAction.Name = "gbCustomAction";
-            this.gbCustomAction.Size = new System.Drawing.Size(498, 346);
+            this.gbCustomAction.Size = new System.Drawing.Size(498, 265);
             this.gbCustomAction.TabIndex = 0;
             this.gbCustomAction.TabStop = false;
             this.gbCustomAction.Text = "Custom Action";
@@ -396,6 +404,75 @@
             this.label8.Size = new System.Drawing.Size(70, 63);
             this.label8.TabIndex = 20;
             this.label8.Text = "Double click row to set parameter value!";
+            // 
+            // gbSolution
+            // 
+            this.gbSolution.Controls.Add(this.chkSolInvisible);
+            this.gbSolution.Controls.Add(this.chkSolManaged);
+            this.gbSolution.Controls.Add(this.label9);
+            this.gbSolution.Controls.Add(this.cmbSolution);
+            this.gbSolution.Controls.Add(this.label7);
+            this.gbSolution.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbSolution.Location = new System.Drawing.Point(0, 0);
+            this.gbSolution.Name = "gbSolution";
+            this.gbSolution.Size = new System.Drawing.Size(498, 81);
+            this.gbSolution.TabIndex = 2;
+            this.gbSolution.TabStop = false;
+            this.gbSolution.Text = "Solution";
+            // 
+            // chkSolInvisible
+            // 
+            this.chkSolInvisible.AutoSize = true;
+            this.chkSolInvisible.Location = new System.Drawing.Point(191, 19);
+            this.chkSolInvisible.Name = "chkSolInvisible";
+            this.chkSolInvisible.Size = new System.Drawing.Size(64, 17);
+            this.chkSolInvisible.TabIndex = 11;
+            this.chkSolInvisible.Text = "Invisible";
+            this.chkSolInvisible.UseVisualStyleBackColor = true;
+            this.chkSolInvisible.CheckedChanged += new System.EventHandler(this.chkSolFilter_CheckedChanged);
+            // 
+            // chkSolManaged
+            // 
+            this.chkSolManaged.AutoSize = true;
+            this.chkSolManaged.Location = new System.Drawing.Point(114, 19);
+            this.chkSolManaged.Name = "chkSolManaged";
+            this.chkSolManaged.Size = new System.Drawing.Size(71, 17);
+            this.chkSolManaged.TabIndex = 10;
+            this.chkSolManaged.Text = "Managed";
+            this.chkSolManaged.UseVisualStyleBackColor = true;
+            this.chkSolManaged.CheckedChanged += new System.EventHandler(this.chkSolFilter_CheckedChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(16, 20);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Filter";
+            // 
+            // cmbSolution
+            // 
+            this.cmbSolution.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSolution.DisplayFormat = "{{friendlyname}} ({{uniquename}} {{version}})";
+            this.cmbSolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSolution.FormattingEnabled = true;
+            this.cmbSolution.Location = new System.Drawing.Point(114, 42);
+            this.cmbSolution.Name = "cmbSolution";
+            this.cmbSolution.OrganizationService = null;
+            this.cmbSolution.Size = new System.Drawing.Size(372, 21);
+            this.cmbSolution.TabIndex = 7;
+            this.cmbSolution.SelectedIndexChanged += new System.EventHandler(this.cmbSolution_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(16, 45);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Solution";
             // 
             // grResults
             // 
@@ -605,6 +682,8 @@
             this.splitLeft.ResumeLayout(false);
             this.gbCustomAction.ResumeLayout(false);
             this.gbCustomAction.PerformLayout();
+            this.gbSolution.ResumeLayout(false);
+            this.gbSolution.PerformLayout();
             this.grResults.ResumeLayout(false);
             this.grResults.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).EndInit();
@@ -652,5 +731,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox gbSolution;
+        private System.Windows.Forms.CheckBox chkSolInvisible;
+        private System.Windows.Forms.CheckBox chkSolManaged;
+        private System.Windows.Forms.Label label9;
+        private xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox cmbSolution;
+        private System.Windows.Forms.Label label7;
     }
 }
