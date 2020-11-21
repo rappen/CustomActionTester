@@ -138,22 +138,49 @@ namespace Rappen.XTB.CAT
                     else if (args.Result is Tuple<OrganizationResponse, long> response)
                     {
                         txtExecution.Text = $"{response.Item2} ms";
-                        foreach (var result in response.Item1.Results)
-                        {
-                            var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
-                            var output = outputs.FirstOrDefault(o => o["name"].ToString().Equals(result.Key));
-                            if (output != null)
-                            {
-                                output["value"] = result.Value;
-                            }
-                        }
                         btnPTV.Enabled = true;
-                        gridOutputParams.Refresh();
-                        gridOutputParams.AutoResizeColumns();
-                        FormatResultDetailDefault();
+                        var outputparams = response.Item1.Results;
+                        PopulateOutputParamValues(outputparams);
                     }
                 }
             });
+        }
+
+        private void PopulateOutputParamValues(ParameterCollection outputparams)
+        {
+            foreach (var result in outputparams)
+            {
+                var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
+                var output = outputs.FirstOrDefault(o => o["name"].ToString().Equals(result.Key));
+                if (output != null)
+                {
+                    var rawvalue = result.Value;
+                    var value = rawvalue;
+                    output["rawvalue"] = rawvalue;
+                    if (rawvalue is Money money)
+                    {
+                        value = money.Value;
+                    }
+                    else if (rawvalue is OptionSetValue osv)
+                    {
+                        value = osv.Value;
+                    }
+                    else if (rawvalue is Entity entity)
+                    {
+                        txtCDSDataHelper.Entity = entity;
+                        value = txtCDSDataHelper.Text;
+                    }
+                    else if (rawvalue is EntityReference entref)
+                    {
+                        txtCDSDataHelper.EntityReference = entref;
+                        value = txtCDSDataHelper.Text;
+                    }
+                    output["value"] = value;
+                }
+            }
+            gridOutputParams.Refresh();
+            gridOutputParams.AutoResizeColumns();
+            FormatResultDetailDefault();
         }
 
         private void ExtractTypeInfo(EntityCollection records)
