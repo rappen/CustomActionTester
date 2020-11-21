@@ -15,14 +15,20 @@ using XrmToolBox.Extensibility.Interfaces;
 
 namespace Rappen.XTB.CAT
 {
-    public partial class CustomActionTester : IGitHubPlugin, IAboutPlugin, IShortcutReceiver
+    public partial class CustomActionTester : IGitHubPlugin, IAboutPlugin, IShortcutReceiver, IMessageBusHost
     {
+        #region Public Events
+
+        public event EventHandler<MessageBusEventArgs> OnOutgoingMessage;
+
+        #endregion Public Events
+
         #region Private Fields
 
         private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
         private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
         private AppInsights ai = new AppInsights(aiEndpoint, aiKey, Assembly.GetExecutingAssembly(), "Custom Action Tester");
-        public EntityMetadataProxy[] entities;
+        private EntityMetadataProxy[] entities;
 
         #endregion Private Fields
 
@@ -35,6 +41,11 @@ namespace Rappen.XTB.CAT
         #endregion Public Properties
 
         #region Public Methods
+
+        public void OnIncomingMessage(MessageBusEventArgs message)
+        {
+            // N/A
+        }
 
         public void ReceiveKeyDownShortcut(KeyEventArgs e)
         {
@@ -81,6 +92,12 @@ namespace Rappen.XTB.CAT
         #endregion Internal Methods
 
         #region Private Methods
+
+        private void ClearOutputParamValues()
+        {
+            var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
+            outputs.ToList().ForEach(o => o.Attributes.Remove("value"));
+        }
 
         private void ExecuteCA()
         {
@@ -130,18 +147,13 @@ namespace Rappen.XTB.CAT
                                 output["value"] = result.Value;
                             }
                         }
+                        btnPTV.Enabled = true;
                         gridOutputParams.Refresh();
                         gridOutputParams.AutoResizeColumns();
                         FormatResultDetailDefault();
                     }
                 }
             });
-        }
-
-        private void ClearOutputParamValues()
-        {
-            var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
-            outputs.ToList().ForEach(o => o.Attributes.Remove("value"));
         }
 
         private void ExtractTypeInfo(EntityCollection records)
@@ -433,6 +445,11 @@ namespace Rappen.XTB.CAT
             txtCreatedBy.Entity = ca;
             txtExecution.Text = string.Empty;
             GetInputParams(ca);
+        }
+
+        private void TraceLastExecution()
+        {
+            OnOutgoingMessage(this, new MessageBusEventArgs("Plugin Trace Viewer", true) { TargetArgument = $"Message={txtMessageName.Text}" });
         }
 
         #endregion Private Methods

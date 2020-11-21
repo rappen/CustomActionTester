@@ -114,5 +114,10 @@ namespace Rappen.XTB.CAT
         }
 
         #endregion Private Methods
+
+        private void btnPTV_Click(object sender, EventArgs e)
+        {
+            TraceLastExecution();
+        }
     }
 }
