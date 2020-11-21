@@ -24,6 +24,7 @@ namespace Rappen.XTB.CAT
         public override void UpdateConnection(IOrganizationService newService, ConnectionDetail detail, string actionName, object parameter)
         {
             base.UpdateConnection(newService, detail, actionName, parameter);
+            LoadEntities();
             inputdlg = null;
             cmbCustomActions.OrganizationService = null;
             cmbCustomActions.SelectedIndex = -1;
@@ -85,14 +86,19 @@ namespace Rappen.XTB.CAT
         {
             if (inputdlg == null)
             {
-                inputdlg = new InputValue(Service);
+                inputdlg = new InputValue(Service, entities);
             }
             var dlgresult = inputdlg.ShowDialog(e.Entity, this);
             if (dlgresult == DialogResult.Cancel)
             {
                 return;
             }
-            if (dlgresult == DialogResult.Ignore)
+            if (dlgresult == DialogResult.OK && inputdlg.Result != null)
+            {
+                e.Entity["rawvalue"] = inputdlg.Result;
+                e.Entity["value"] = inputdlg.FormattedResult;
+            }
+            else if (dlgresult == DialogResult.Ignore)
             {
                 e.Entity.Attributes.Remove("value");
                 e.Entity.Attributes.Remove("rawvalue");

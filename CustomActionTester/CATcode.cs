@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Rappen.XTB.CAT
         private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
         private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
         private AppInsights ai = new AppInsights(aiEndpoint, aiKey, Assembly.GetExecutingAssembly(), "Custom Action Tester");
+        public EntityMetadataProxy[] entities;
 
         #endregion Private Fields
 
@@ -128,10 +130,11 @@ namespace Rappen.XTB.CAT
             });
         }
 
-        private void ExtractTypeInfo(EntityCollection records, string attribute)
+        private void ExtractTypeInfo(EntityCollection records)
         {
             foreach (var record in records.Entities)
             {
+                var attribute = record.Contains("parser") ? "parser" : "formatter";
                 if (record.TryGetAttributeValue(attribute, out string parser))
                 {
                     parser = parser.Split(',')[0];
@@ -142,6 +145,29 @@ namespace Rappen.XTB.CAT
                     record["type"] = parser;
                 }
             }
+            var otcrecords = records.Entities.Where(r => r.Contains("parameterbindinginformation"));
+            var siblingrecords = new List<Entity>();
+            foreach (var otcrecord in otcrecords)
+            {
+                var siblingrecord = records.Entities.FirstOrDefault(r => r["name"].ToString() == otcrecord["name"].ToString() && !r.Contains("parameterbindinginformation"));
+                if (siblingrecord == null)
+                {
+                    continue;
+                }
+                var binding = otcrecord["parameterbindinginformation"].ToString();
+                var otcstr = binding.Replace("OTC:", "").Trim();
+                if (int.TryParse(otcstr, out int otc))
+                {
+                    if (entities.FirstOrDefault(e => e.Metadata.ObjectTypeCode == otc) is EntityMetadataProxy entity)
+                    {
+                        otcrecord["type"] = otcrecord["type"].ToString() + " " +
+                            (entity.Metadata?.DisplayName?.UserLocalizedLabel?.Label ?? entity.Metadata.LogicalName);
+                        otcrecord["entity"] = entity;
+                    }
+                }
+                siblingrecords.Add(siblingrecord);
+            }
+            siblingrecords.ForEach(s => records.Entities.Remove(s));
         }
 
         private void FormatResultDetail()
@@ -225,7 +251,7 @@ namespace Rappen.XTB.CAT
             }
             var qx = new QueryExpression("sdkmessagerequestfield");
             qx.Distinct = true;
-            qx.ColumnSet.AddColumns("name", "position", "optional", "parser", "fieldmask");
+            qx.ColumnSet.AddColumns("name", "position", "parameterbindinginformation", "optional", "parser", "fieldmask");
             qx.AddOrder("position", OrderType.Ascending);
             var req = qx.AddLink("sdkmessagerequest", "sdkmessagerequestid", "sdkmessagerequestid");
             var pair = req.AddLink("sdkmessagepair", "sdkmessagepairid", "sdkmessagepairid");
@@ -244,10 +270,11 @@ namespace Rappen.XTB.CAT
                     if (args.Error != null)
                     {
                         MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
-                    else if (args.Result is EntityCollection inputs)
+                    if (args.Result is EntityCollection inputs)
                     {
-                        ExtractTypeInfo(inputs, "parser");
+                        ExtractTypeInfo(inputs);
                         gridInputParams.DataSource = inputs;
                         gridInputParams.AutoResizeColumns();
                         GetOutputParams();
@@ -288,7 +315,7 @@ namespace Rappen.XTB.CAT
                     }
                     else if (args.Result is EntityCollection outputs)
                     {
-                        ExtractTypeInfo(outputs, "formatter");
+                        ExtractTypeInfo(outputs);
                         gridOutputParams.DataSource = outputs;
                         gridOutputParams.AutoResizeColumns();
                     }
@@ -313,6 +340,33 @@ namespace Rappen.XTB.CAT
             {
                 LogError("Failed to write to Application Insights:\n{0}", result);
             }
+        }
+
+        private void LoadEntities()
+        {
+            WorkAsync(new WorkAsyncInfo
+            {
+                Message = "Loading entities...",
+                Work = (worker, eventargs) =>
+                {
+                    eventargs.Result = MetadataHelper.LoadEntities(Service);
+                },
+                PostWorkCallBack = (completedargs) =>
+                {
+                    if (completedargs.Error != null)
+                    {
+                        MessageBox.Show(completedargs.Error.Message);
+                        return;
+                    }
+                    if (completedargs.Result is RetrieveMetadataChangesResponse resp)
+                    {
+                        entities = resp.EntityMetadata
+                            .Where(e => e.IsCustomizable.Value == true && e.IsIntersect.Value != true)
+                            .Select(m => new EntityMetadataProxy(m))
+                            .OrderBy(e => e.ToString()).ToArray();
+                    }
+                }
+            });
         }
 
         #endregion Private Methods

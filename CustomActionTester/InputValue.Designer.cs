@@ -50,6 +50,7 @@
             this.dtDateTime = new System.Windows.Forms.DateTimePicker();
             this.panDateTime = new System.Windows.Forms.Panel();
             this.tbnRemove = new System.Windows.Forms.Button();
+            this.lblHint = new System.Windows.Forms.Label();
             this.panEntity.SuspendLayout();
             this.panString.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -64,9 +65,9 @@
             this.panEntity.Controls.Add(this.btnLookup);
             this.panEntity.Controls.Add(this.txtRecord);
             this.panEntity.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panEntity.Location = new System.Drawing.Point(40, 77);
+            this.panEntity.Location = new System.Drawing.Point(40, 103);
             this.panEntity.Name = "panEntity";
-            this.panEntity.Size = new System.Drawing.Size(336, 74);
+            this.panEntity.Size = new System.Drawing.Size(380, 58);
             this.panEntity.TabIndex = 0;
             this.panEntity.Visible = false;
             // 
@@ -77,9 +78,9 @@
             this.cmbEntity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbEntity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbEntity.FormattingEnabled = true;
-            this.cmbEntity.Location = new System.Drawing.Point(6, 16);
+            this.cmbEntity.Location = new System.Drawing.Point(82, 4);
             this.cmbEntity.Name = "cmbEntity";
-            this.cmbEntity.Size = new System.Drawing.Size(315, 21);
+            this.cmbEntity.Size = new System.Drawing.Size(283, 21);
             this.cmbEntity.Sorted = true;
             this.cmbEntity.TabIndex = 5;
             this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
@@ -87,7 +88,7 @@
             // btnLookup
             // 
             this.btnLookup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLookup.Location = new System.Drawing.Point(297, 42);
+            this.btnLookup.Location = new System.Drawing.Point(341, 30);
             this.btnLookup.Name = "btnLookup";
             this.btnLookup.Size = new System.Drawing.Size(24, 22);
             this.btnLookup.TabIndex = 4;
@@ -104,20 +105,20 @@
             this.txtRecord.Entity = null;
             this.txtRecord.EntityReference = null;
             this.txtRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtRecord.Location = new System.Drawing.Point(6, 43);
+            this.txtRecord.Location = new System.Drawing.Point(82, 31);
             this.txtRecord.LogicalName = null;
             this.txtRecord.Name = "txtRecord";
             this.txtRecord.OrganizationService = null;
-            this.txtRecord.Size = new System.Drawing.Size(286, 20);
+            this.txtRecord.Size = new System.Drawing.Size(254, 20);
             this.txtRecord.TabIndex = 2;
             // 
             // panString
             // 
             this.panString.Controls.Add(this.txtString);
             this.panString.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panString.Location = new System.Drawing.Point(40, 151);
+            this.panString.Location = new System.Drawing.Point(40, 161);
             this.panString.Name = "panString";
-            this.panString.Size = new System.Drawing.Size(336, 34);
+            this.panString.Size = new System.Drawing.Size(380, 27);
             this.panString.TabIndex = 1;
             this.panString.Visible = false;
             // 
@@ -125,9 +126,9 @@
             // 
             this.txtString.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtString.Location = new System.Drawing.Point(6, 6);
+            this.txtString.Location = new System.Drawing.Point(82, 4);
             this.txtString.Name = "txtString";
-            this.txtString.Size = new System.Drawing.Size(315, 20);
+            this.txtString.Size = new System.Drawing.Size(283, 20);
             this.txtString.TabIndex = 1;
             // 
             // panel1
@@ -136,16 +137,16 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnOk);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(40, 146);
+            this.panel1.Location = new System.Drawing.Point(40, 161);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(336, 52);
+            this.panel1.Size = new System.Drawing.Size(380, 36);
             this.panel1.TabIndex = 3;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(246, 17);
+            this.btnCancel.Location = new System.Drawing.Point(290, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -156,7 +157,7 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(165, 17);
+            this.btnOk.Location = new System.Drawing.Point(209, 3);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
@@ -167,16 +168,16 @@
             // 
             this.panBoolean.Controls.Add(this.chkBoolean);
             this.panBoolean.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panBoolean.Location = new System.Drawing.Point(40, 185);
+            this.panBoolean.Location = new System.Drawing.Point(40, 188);
             this.panBoolean.Name = "panBoolean";
-            this.panBoolean.Size = new System.Drawing.Size(336, 27);
+            this.panBoolean.Size = new System.Drawing.Size(380, 27);
             this.panBoolean.TabIndex = 4;
             this.panBoolean.Visible = false;
             // 
             // chkBoolean
             // 
             this.chkBoolean.AutoSize = true;
-            this.chkBoolean.Location = new System.Drawing.Point(81, 6);
+            this.chkBoolean.Location = new System.Drawing.Point(82, 6);
             this.chkBoolean.Name = "chkBoolean";
             this.chkBoolean.Size = new System.Drawing.Size(15, 14);
             this.chkBoolean.TabIndex = 1;
@@ -184,6 +185,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblHint);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.lblType);
             this.panel2.Controls.Add(this.label4);
@@ -191,7 +193,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(416, 77);
+            this.panel2.Size = new System.Drawing.Size(460, 103);
             this.panel2.TabIndex = 5;
             // 
             // label1
@@ -235,47 +237,56 @@
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(0, 77);
+            this.panel3.Location = new System.Drawing.Point(0, 103);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(40, 121);
+            this.panel3.Size = new System.Drawing.Size(40, 94);
             this.panel3.TabIndex = 6;
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(376, 77);
+            this.panel4.Location = new System.Drawing.Point(420, 103);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(40, 121);
+            this.panel4.Size = new System.Drawing.Size(40, 94);
             this.panel4.TabIndex = 7;
             // 
             // dtDateTime
             // 
             this.dtDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDateTime.Location = new System.Drawing.Point(81, 4);
+            this.dtDateTime.Location = new System.Drawing.Point(82, 4);
             this.dtDateTime.Name = "dtDateTime";
-            this.dtDateTime.Size = new System.Drawing.Size(159, 20);
+            this.dtDateTime.Size = new System.Drawing.Size(158, 20);
             this.dtDateTime.TabIndex = 5;
             // 
             // panDateTime
             // 
             this.panDateTime.Controls.Add(this.dtDateTime);
             this.panDateTime.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panDateTime.Location = new System.Drawing.Point(40, 212);
+            this.panDateTime.Location = new System.Drawing.Point(40, 215);
             this.panDateTime.Name = "panDateTime";
-            this.panDateTime.Size = new System.Drawing.Size(336, 27);
+            this.panDateTime.Size = new System.Drawing.Size(380, 27);
             this.panDateTime.TabIndex = 8;
             this.panDateTime.Visible = false;
             // 
             // tbnRemove
             // 
             this.tbnRemove.DialogResult = System.Windows.Forms.DialogResult.Ignore;
-            this.tbnRemove.Location = new System.Drawing.Point(6, 17);
+            this.tbnRemove.Location = new System.Drawing.Point(6, 3);
             this.tbnRemove.Name = "tbnRemove";
             this.tbnRemove.Size = new System.Drawing.Size(103, 23);
             this.tbnRemove.TabIndex = 2;
             this.tbnRemove.Text = "Remove Value";
             this.tbnRemove.UseVisualStyleBackColor = true;
+            // 
+            // lblHint
+            // 
+            this.lblHint.AutoSize = true;
+            this.lblHint.Location = new System.Drawing.Point(118, 72);
+            this.lblHint.Name = "lblHint";
+            this.lblHint.Size = new System.Drawing.Size(61, 13);
+            this.lblHint.TabIndex = 2;
+            this.lblHint.Text = "Enter value";
             // 
             // InputValue
             // 
@@ -284,9 +295,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(416, 198);
-            this.Controls.Add(this.panDateTime);
+            this.ClientSize = new System.Drawing.Size(460, 197);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panDateTime);
             this.Controls.Add(this.panBoolean);
             this.Controls.Add(this.panString);
             this.Controls.Add(this.panEntity);
@@ -301,6 +312,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Input Parameter Dialog";
+            this.Shown += new System.EventHandler(this.InputValue_Shown);
             this.panEntity.ResumeLayout(false);
             this.panEntity.PerformLayout();
             this.panString.ResumeLayout(false);
@@ -338,5 +350,6 @@
         private System.Windows.Forms.Panel panDateTime;
         private System.Windows.Forms.ComboBox cmbEntity;
         private System.Windows.Forms.Button tbnRemove;
+        private System.Windows.Forms.Label lblHint;
     }
 }
