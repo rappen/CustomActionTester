@@ -189,39 +189,53 @@ namespace Rappen.XTB.CAT
         private void FormatResultDetail()
         {
             var value = GetResultDetailValue();
-            if (!string.IsNullOrEmpty(value))
+            if (value is string strvalue)
             {
-                if (rbFormatJSON.Checked)
+                if (!string.IsNullOrEmpty(strvalue))
                 {
-                    var parsedJson = JToken.Parse(value);
-                    value = parsedJson.ToString(Newtonsoft.Json.Formatting.Indented);
+                    try
+                    {
+                        if (rbFormatJSON.Checked)
+                        {
+                            var parsedJson = JToken.Parse(strvalue);
+                            strvalue = parsedJson.ToString(Newtonsoft.Json.Formatting.Indented);
+                        }
+                        else if (rbFormatXML.Checked)
+                        {
+                            var string_writer = new StringWriter();
+                            var xml_text_writer = new XmlTextWriter(string_writer);
+                            xml_text_writer.Formatting = System.Xml.Formatting.Indented;
+                            strvalue = string_writer.ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        strvalue = $"Error: {ex}";
+                    }
                 }
-                else if (rbFormatXML.Checked)
-                {
-                    var string_writer = new StringWriter();
-                    var xml_text_writer = new XmlTextWriter(string_writer);
-                    xml_text_writer.Formatting = System.Xml.Formatting.Indented;
-                    value = string_writer.ToString();
-                }
+                txtResultDetail.Text = strvalue;
             }
-            txtResultDetail.Text = value;
         }
 
         private void FormatResultDetailDefault()
         {
             var value = GetResultDetailValue();
-            if (string.IsNullOrEmpty(value))
+            if (value is string strvalue)
             {
-                return;
+                if (string.IsNullOrEmpty(strvalue))
+                {
+                    return;
+                }
+                if (strvalue.StartsWith("{"))
+                {
+                    rbFormatJSON.Checked = true;
+                }
+                else if (strvalue.StartsWith("<"))
+                {
+                    rbFormatXML.Checked = true;
+                }
             }
-            if (value.StartsWith("{"))
-            {
-                rbFormatJSON.Checked = true;
-            }
-            else if (value.StartsWith("<"))
-            {
-                rbFormatXML.Checked = true;
-            }
+            FormatResultDetail();
         }
 
         private void GetCustomActions(Entity solution)
@@ -372,15 +386,15 @@ namespace Rappen.XTB.CAT
             });
         }
 
-        private string GetResultDetailValue()
+        private object GetResultDetailValue()
         {
             var record = gridOutputParams.SelectedCellRecords.FirstOrDefault();
-            if (record?.Contains("value") != true || record["value"] == null)
+            if (record == null || !record.TryGetAttributeValue("rawvalue", out object result))
             {
                 txtResultDetail.Text = string.Empty;
                 return null;
             }
-            return record["value"].ToString();
+            return ValueToString(result, true, false, true, Service);
         }
 
         private void GetSolutions(bool managed, bool invisible)
@@ -521,6 +535,60 @@ namespace Rappen.XTB.CAT
         private void TraceLastExecution()
         {
             OnOutgoingMessage(this, new MessageBusEventArgs("Plugin Trace Viewer", true) { TargetArgument = $"Message={txtMessageName.Text}" });
+        }
+
+        public static string ValueToString(object value, bool attributetypes, bool convertqueries, bool expandcollections, IOrganizationService service, int indent = 1)
+        {
+            var indentstring = new string(' ', indent * 2);
+            if (value == null)
+            {
+                return $"{indentstring}<null>";
+            }
+            else if (value is EntityCollection collection)
+            {
+                var result = $"{collection.EntityName} collection\n  Records: {collection.Entities.Count}\n  TotalRecordCount: {collection.TotalRecordCount}\n  MoreRecords: {collection.MoreRecords}\n  PagingCookie: {collection.PagingCookie}";
+                if (expandcollections)
+                {
+                    result += $"\n{indentstring}  {string.Join($"\n{indentstring}", collection.Entities.Select(e => ValueToString(e, attributetypes, convertqueries, expandcollections, service, indent + 1)))}";
+                }
+                return result;
+            }
+            else if (value is Entity entity)
+            {
+                var keylen = entity.Attributes.Count > 0 ? entity.Attributes.Max(p => p.Key.Length) : 50;
+                return $"{entity.LogicalName} {entity.Id}\n{indentstring}" + string.Join($"\n{indentstring}", entity.Attributes.OrderBy(a => a.Key).Select(a => $"{a.Key}{new string(' ', keylen - a.Key.Length)} = {ValueToString(a.Value, attributetypes, convertqueries, expandcollections, service, indent + 1)}"));
+            }
+            else if (value is ColumnSet columnset)
+            {
+                var columnlist = new List<string>(columnset.Columns);
+                columnlist.Sort();
+                return $"\n{indentstring}" + string.Join($"\n{indentstring}", columnlist);
+            }
+            else if (value is FetchExpression fetchexpression)
+            {
+                return $"{value}\n{indentstring}{fetchexpression.Query}";
+            }
+            else
+            {
+                var result = string.Empty;
+                if (value is EntityReference entityreference)
+                {
+                    result = $"{entityreference.LogicalName} {entityreference.Id} {entityreference.Name}";
+                }
+                else if (value is OptionSetValue optionsetvalue)
+                {
+                    result = optionsetvalue.Value.ToString();
+                }
+                else if (value is Money money)
+                {
+                    result = money.Value.ToString();
+                }
+                else
+                {
+                    result = value.ToString().Replace("\n", $"\n  {indentstring}");
+                }
+                return result + (attributetypes ? $" \t({value.GetType()})" : "");
+            }
         }
 
         #endregion Private Methods

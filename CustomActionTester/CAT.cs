@@ -84,7 +84,7 @@ namespace Rappen.XTB.CAT
             GetInputParamValue(e);
         }
 
-        private void gridOutputParams_RecordClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
+        private void gridOutputParams_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             FormatResultDetail();
         }
