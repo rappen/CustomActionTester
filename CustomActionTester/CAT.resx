@@ -198,6 +198,15 @@
   <metadata name="value.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="picHistoryOpen.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        dAAADnQBaySz1gAAAAd0SU1FB+MLFBUNOQTppYsAAACHSURBVDhPpZMhDoAwDEV3RiTXQHKFSSSWKyGx
+        SORk4YuGlf2xBsQL6YPXLCQLIvILKhnbuss8LJKOdI23Nx/VqMXADAzEsZ8Ez+c7UIicVgyoBJ4YUOmN
+        QSEQjV10xcAMGueuRSF+nUBB/PkfKN4lVCqeJVTmtJYUgoEYd4EtMcMbusReKAknRd4IhiV2gSYAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -210,6 +219,15 @@
   <metadata name="dataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="picHistoryClose.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAAAK9JREFUOE+lkrEOAiEQRPlE/8DPsLQ31jb2/o+lhYUxsdTitBNWZpM94Rg2mive
+        sQwzk3AhiMgs9BPfMS/cUJJSkhRTHr9aGB4v2a8Ocj5eqgPG9XRTLzKmjQeb5c4tMQ/WUm8MrKQXBtWG
+        lXhh0AhlCfDCgIoIrBdbxfsvgIqzCuwKWG32SqpNGZ5qvZJxYOHpGSupDCxs9ErCcH/q8/TCBjz6lHPG
+        tMb0L1T8HQkfxdEQpTowtzoAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="$this.PluginIcon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAAAAEcAAABHAAAAAAEAAAAA

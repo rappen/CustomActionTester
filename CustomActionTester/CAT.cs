@@ -1,6 +1,7 @@
 ﻿using McTools.Xrm.Connection;
 using Microsoft.Xrm.Sdk;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
 
@@ -53,6 +54,11 @@ namespace Rappen.XTB.CAT
             ExecuteCA();
         }
 
+        private void btnPTV_Click(object sender, EventArgs e)
+        {
+            TraceLastExecution();
+        }
+
         private void chkSolFilter_CheckedChanged(object sender, EventArgs e)
         {
             GetSolutions(chkSolManaged.Checked, chkSolInvisible.Checked);
@@ -103,6 +109,18 @@ namespace Rappen.XTB.CAT
             FormatResultDetail();
         }
 
+        private void llCallHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/rappen/CustomActionTester/issues/3");
+        }
+
+        private void picHistory_Click(object sender, EventArgs e)
+        {
+            splitRight.Panel2Collapsed = sender == picHistoryClose;
+            picHistoryOpen.Visible = splitRight.Panel2Collapsed;
+            picHistoryClose.Left = picHistoryClose.Parent.Width - 19;
+        }
+
         private void rbFormatResult_CheckedChanged(object sender, EventArgs e)
         {
             FormatResultDetail();
@@ -112,12 +130,6 @@ namespace Rappen.XTB.CAT
         {
             ShowAboutDialog();
         }
-
         #endregion Private Methods
-
-        private void btnPTV_Click(object sender, EventArgs e)
-        {
-            TraceLastExecution();
-        }
     }
 }
