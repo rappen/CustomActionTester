@@ -146,43 +146,6 @@ namespace Rappen.XTB.CAT
             });
         }
 
-        private void PopulateOutputParamValues(ParameterCollection outputparams)
-        {
-            foreach (var result in outputparams)
-            {
-                var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
-                var output = outputs.FirstOrDefault(o => o["name"].ToString().Equals(result.Key));
-                if (output != null)
-                {
-                    var rawvalue = result.Value;
-                    var value = rawvalue;
-                    output["rawvalue"] = rawvalue;
-                    if (rawvalue is Money money)
-                    {
-                        value = money.Value;
-                    }
-                    else if (rawvalue is OptionSetValue osv)
-                    {
-                        value = osv.Value;
-                    }
-                    else if (rawvalue is Entity entity)
-                    {
-                        txtCDSDataHelper.Entity = entity;
-                        value = txtCDSDataHelper.Text;
-                    }
-                    else if (rawvalue is EntityReference entref)
-                    {
-                        txtCDSDataHelper.EntityReference = entref;
-                        value = txtCDSDataHelper.Text;
-                    }
-                    output["value"] = value;
-                }
-            }
-            gridOutputParams.Refresh();
-            gridOutputParams.AutoResizeColumns();
-            FormatResultDetailDefault();
-        }
-
         private void ExtractTypeInfo(EntityCollection records)
         {
             foreach (var record in records.Entities)
@@ -343,6 +306,32 @@ namespace Rappen.XTB.CAT
             });
         }
 
+        private void GetInputParamValue(xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
+        {
+            if (inputdlg == null)
+            {
+                inputdlg = new InputValue(Service, entities);
+            }
+            var dlgresult = inputdlg.ShowDialog(e.Entity, this);
+            if (dlgresult == DialogResult.Cancel)
+            {
+                return;
+            }
+            if (dlgresult == DialogResult.OK && inputdlg.Result != null)
+            {
+                e.Entity["rawvalue"] = inputdlg.Result;
+                e.Entity["value"] = inputdlg.FormattedResult;
+            }
+            else if (dlgresult == DialogResult.Ignore)
+            {
+                e.Entity.Attributes.Remove("value");
+                e.Entity.Attributes.Remove("rawvalue");
+            }
+            gridInputParams.Refresh();
+            gridInputParams.AutoResizeColumns();
+            btnExecute.Enabled = ReadyToExecute();
+        }
+
         private void GetOutputParams(Entity ca)
         {
             if (ca == null)
@@ -465,6 +454,60 @@ namespace Rappen.XTB.CAT
             });
         }
 
+        private void PopulateOutputParamValues(ParameterCollection outputparams)
+        {
+            foreach (var result in outputparams)
+            {
+                var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
+                var output = outputs.FirstOrDefault(o => o["name"].ToString().Equals(result.Key));
+                if (output != null)
+                {
+                    var rawvalue = result.Value;
+                    var value = rawvalue;
+                    output["rawvalue"] = rawvalue;
+                    if (rawvalue is Money money)
+                    {
+                        value = money.Value;
+                    }
+                    else if (rawvalue is OptionSetValue osv)
+                    {
+                        value = osv.Value;
+                    }
+                    else if (rawvalue is Entity entity)
+                    {
+                        txtCDSDataHelper.Entity = entity;
+                        value = txtCDSDataHelper.Text;
+                    }
+                    else if (rawvalue is EntityReference entref)
+                    {
+                        txtCDSDataHelper.EntityReference = entref;
+                        value = txtCDSDataHelper.Text;
+                    }
+                    output["value"] = value;
+                }
+            }
+            gridOutputParams.Refresh();
+            gridOutputParams.AutoResizeColumns();
+            FormatResultDetailDefault();
+        }
+
+        private bool ReadyToExecute()
+        {
+            if (cmbCustomActions.SelectedEntity == null || !(gridInputParams.DataSource is IEnumerable<Entity> inputparams))
+            {
+                return false;
+            }
+            foreach (var inputparam in inputparams)
+            {
+                if (inputparam.TryGetAttributeValue("optional", out bool optional) && !optional &&
+                    !inputparam.TryGetAttributeValue("rawvalue", out object _))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private void SetCustomAction(Entity ca)
         {
             txtUniqueName.Entity = ca;
@@ -472,6 +515,7 @@ namespace Rappen.XTB.CAT
             txtCreatedBy.Entity = ca;
             txtExecution.Text = string.Empty;
             GetInputParams(ca);
+            btnExecute.Enabled = ReadyToExecute();
         }
 
         private void TraceLastExecution()

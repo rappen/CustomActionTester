@@ -81,27 +81,7 @@ namespace Rappen.XTB.CAT
 
         private void gridInputParams_RecordDoubleClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
         {
-            if (inputdlg == null)
-            {
-                inputdlg = new InputValue(Service, entities);
-            }
-            var dlgresult = inputdlg.ShowDialog(e.Entity, this);
-            if (dlgresult == DialogResult.Cancel)
-            {
-                return;
-            }
-            if (dlgresult == DialogResult.OK && inputdlg.Result != null)
-            {
-                e.Entity["rawvalue"] = inputdlg.Result;
-                e.Entity["value"] = inputdlg.FormattedResult;
-            }
-            else if (dlgresult == DialogResult.Ignore)
-            {
-                e.Entity.Attributes.Remove("value");
-                e.Entity.Attributes.Remove("rawvalue");
-            }
-            gridInputParams.Refresh();
-            gridInputParams.AutoResizeColumns();
+            GetInputParamValue(e);
         }
 
         private void gridOutputParams_RecordClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
