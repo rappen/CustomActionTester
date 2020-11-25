@@ -394,6 +394,10 @@ namespace Rappen.XTB.CAT
                 txtResultDetail.Text = string.Empty;
                 return null;
             }
+            if (result is string)
+            {
+                return result;
+            }
             return ValueToString(result, true, false, true, Service);
         }
 
