@@ -13,6 +13,8 @@ namespace Rappen.XTB.CAT
 
         public List<string> layoutcolumns;
 
+        public string DisplayName => Metadata?.DisplayName?.UserLocalizedLabel?.Label ?? Metadata?.LogicalName;
+
         #endregion Public Fields
 
         #region Public Constructors

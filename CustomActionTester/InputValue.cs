@@ -1,32 +1,12 @@
 ﻿using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Metadata;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using xrmtb.XrmToolBox.Controls.Controls;
+using ParamType = Rappen.XTB.CAT.Customapirequestparameter.Type_OptionSet;
 
 namespace Rappen.XTB.CAT
 {
-    public enum ParamType
-    {
-        String,
-        Integer,
-        Int,
-        Int32,
-        Int64,
-        Decimal,
-        Double,
-        Float,
-        Money,
-        Entity,
-        EntityReference,
-        Boolean,
-        DateTime,
-        OptionSetValue,
-        Undefined
-    }
-
     public partial class InputValue : Form
     {
         #region Private Fields
@@ -112,16 +92,28 @@ namespace Rappen.XTB.CAT
 
         #region Private Methods
 
-        private static ParamType GetType(Entity input)
+        private static ParamType? GetType(Entity input)
         {
-            if (input.TryGetAttributeValue("type", out string typestr) && Enum.TryParse(typestr.Split(' ')[0], out ParamType type))
+            if (input.TryGetAttributeValue("type", out string typestr))
             {
-                return type;
+                typestr = typestr
+                    .Replace("OptionSetValue", "Picklist")
+                    .Replace("Int32", "Integer")
+                    .Replace("Int64", "Integer")
+                    .Replace("Double", "Float");
+                if (Enum.TryParse(typestr, out ParamType type))
+                {
+                    return type;
+                }
             }
-            return ParamType.Undefined;
+            if (input.TryGetAttributeValue("type", out OptionSetValue typeosv))
+            {
+                return (ParamType)typeosv.Value;
+            }
+            return null;
         }
 
-        private DialogResult HandleInput(ParamType type)
+        private DialogResult HandleInput(ParamType? type)
         {
             var invalidstr = false;
             Result = null;
@@ -132,9 +124,9 @@ namespace Rappen.XTB.CAT
                     Result = txtString.Text;
                     break;
                 case ParamType.Integer:
-                case ParamType.Int:
-                case ParamType.Int32:
-                case ParamType.Int64:
+                //case ParamType.Int:
+                //case ParamType.Int32:
+                //case ParamType.Int64:
                     if (!int.TryParse(txtString.Text, out int intvalue))
                     {
                         invalidstr = true;
@@ -159,7 +151,7 @@ namespace Rappen.XTB.CAT
                         Result = decvalue;
                     }
                     break;
-                case ParamType.Double:
+                //case ParamType.Double:
                 case ParamType.Float:
                     if (!double.TryParse(txtString.Text, out double douvalue))
                     {
@@ -168,7 +160,7 @@ namespace Rappen.XTB.CAT
                     }
                     Result = douvalue;
                     break;
-                case ParamType.OptionSetValue:
+                case ParamType.Picklist:
                     if (!int.TryParse(txtString.Text, out int osvvalue))
                     {
                         invalidstr = true;
@@ -210,7 +202,7 @@ namespace Rappen.XTB.CAT
             return DialogResult.OK;
         }
 
-        private bool ParseInput(ParamType type, Entity input)
+        private bool ParseInput(ParamType? type, Entity input)
         {
             panString.Visible = false;
             panEntity.Visible = false;
@@ -223,18 +215,18 @@ namespace Rappen.XTB.CAT
             {
                 case ParamType.String:
                 case ParamType.Integer:
-                case ParamType.Int:
-                case ParamType.Int32:
-                case ParamType.Int64:
+                //case ParamType.Int:
+                //case ParamType.Int32:
+                //case ParamType.Int64:
                 case ParamType.Decimal:
-                case ParamType.Double:
+                //case ParamType.Double:
                 case ParamType.Float:
                 case ParamType.Money:
                     panString.Visible = true;
                     txtString.Text = currentvalue?.ToString();
                     focus = txtString;
                     break;
-                case ParamType.OptionSetValue:
+                case ParamType.Picklist:
                     lblHint.Text = "Enter numeric value of the OptionSetValue";
                     panString.Visible = true;
                     if (currentvalue is OptionSetValue osv)
@@ -246,12 +238,12 @@ namespace Rappen.XTB.CAT
                 case ParamType.Entity:
                 case ParamType.EntityReference:
                     panEntity.Visible = true;
-                    if (input.GetAttributeValue<EntityMetadataProxy>("entity") is EntityMetadataProxy entitytype &&
+                    if (input.TryGetAttributeValue("entity", out EntityMetadataProxy entitytype) &&
                         cmbEntity.Items.Cast<EntityMetadataProxy>().FirstOrDefault(e => e.Metadata.LogicalName == entitytype.Metadata.LogicalName) is EntityMetadataProxy selentity)
                     {
                         cmbEntity.SelectedItem = selentity;
                         cmbEntity.Enabled = false;
-                        lblHint.Text = $"Select {selentity.Metadata.DisplayName?.UserLocalizedLabel?.Label ?? selentity.Metadata.LogicalName}";
+                        lblHint.Text = $"Select {selentity.DisplayName}";
                         focus = btnLookup;
                     }
                     else

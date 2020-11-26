@@ -3,6 +3,7 @@ using Microsoft.Xrm.Sdk;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using xrmtb.XrmToolBox.Controls.Controls;
 using XrmToolBox.Extensibility;
 
 namespace Rappen.XTB.CAT
@@ -33,6 +34,7 @@ namespace Rappen.XTB.CAT
             inputdlg = null;
             cmbSolution.OrganizationService = newService;
             cmbCustomActions.OrganizationService = newService;
+            cmbCustomAPIs.OrganizationService = newService;
             txtUniqueName.OrganizationService = newService;
             txtUniqueName.OrganizationService = newService;
             txtCreatedBy.OrganizationService = newService;
@@ -66,7 +68,10 @@ namespace Rappen.XTB.CAT
 
         private void cmbCustomActions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetCustomAction(cmbCustomActions.SelectedEntity);
+            if (sender is CDSDataComboBox cmb)
+            {
+                SetCustomAction(cmb.SelectedEntity);
+            }
         }
 
         private void cmbSolution_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,6 +115,7 @@ namespace Rappen.XTB.CAT
         {
             ShowAboutDialog();
         }
+
         #endregion Private Methods
     }
 }
