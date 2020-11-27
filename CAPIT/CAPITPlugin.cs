@@ -12,8 +12,8 @@ namespace Rappen.XTB.CAT
     // Do not forget to update version number and author (company attribute) in AssemblyInfo.cs class
     // To generate Base64 string for Images below, you can use https://www.base64-image.de/
     [Export(typeof(IXrmToolBoxPlugin)),
-        ExportMetadata("Name", "Custom Action Tester"),
-        ExportMetadata("Description", "Browse Custom Actions, enter input parameters, execute the action, investigate output parameters."),
+        ExportMetadata("Name", "Custom API Tester"),
+        ExportMetadata("Description", "Browse Custom APIs, enter input parameters, execute the action, investigate output parameters."),
         // Please specify the base64 content of a 32x32 pixels image
         ExportMetadata("SmallImageBase64", "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAFXRFWHRDcmVhdGlvbiBUaW1lAAfkCxAVMSRTevQyAAAAB3RJTUUH5AsQFTgivtoJPgAAAAlwSFlzAAAK8AAACvABQqw0mAAAAPZQTFRF///G3ufGrca9jKW9e5y9hKW9pb291t7GIVq1AEKtAEq9GFKta5S17/fGAEK1AFLWAFrvAGP/WoS1vc69AFLeAFrnEEqtlK29AErOAGP3lLW9c5y9nLW9CEqtOYy9hLV7nMZjQoy9MYTGSoy1Snu15+/GEGvvtdZK//8AvdZCGHPnpcZaxta9xt459/cIc62MlL1r7/cQtdZCKWO1Y6WcOYTGUpSttc5K9//GjLVzrc5S9/8Ae62EjK29SpS1c62EAErGIXPeKXvW5+8YWpyljL1rxt4xY6WU1ucpzt4xrc5K3u8hMYTOUoS1Y4y1QnO1KXvOc5S9dp3VHwAAAAF0Uk5TAEDm2GYAAAHlSURBVHjabVN5X9pAFAyUww0h8DiikUYQK50EiWCL3DZiS1FqbL//l+nLHY75J9k383tvdndWkhJM7y5brvvvvD6VTqHoakKVHcdRhVG7O6Iz70Ju6ORDbzjio7jPFzS5SSlUZWOV5vOiQgdoCHea4htRfTa7Cf+awo34bMJ3gQ3FinDKrZb07wD4G08xAqeuGvM9255jFi+dD3+DIvF/j/4YL3q8F1FnQSts0OP6Dte0xWPS4p0FZ56DP2827EEbO6IlRhtzMp+bG5OaRpknVImebGDB/rz5z/xZsNy2d6TzjKzg2giTNVlDYPT6ugWWNMMbHzmRupJWbGGIjWfsN0JsqY15YEKRcjLRC356qwF+WYyujfES/UBQ8wQ94JkXa2DtVx/Q+YFOJOARFmDx4tEMivQ06ccCxTOpLzA+uMtoBJu85W0OUscbIDSpC47Wtwp9h+21sAbxGQ4x8a9L40zkVdIHsDv3wxHM5FYfvI9c827baFDvq79/04oEfV/bFH54FZVP6ardaV8nHro3V16DL34eyqULOomKkQkiVT+ObBC5z1EoL5NQpvlWEvtzcaEf9he59MOol9S9Jk1ZK+w/rbIi1Eo1jGJFFrXM8evMnQkhM4QoKUXpJDLZT7lcvrDH/gfvVVNhYVbBYAAAAABJRU5ErkJggg=="),
         // Please specify the base64 content of a 80x80 pixels image
@@ -21,17 +21,17 @@ namespace Rappen.XTB.CAT
         ExportMetadata("BackgroundColor", "#FFFFC0"),
         ExportMetadata("PrimaryFontColor", "#0000C0"),
         ExportMetadata("SecondaryFontColor", "#0000FF")]
-    public class MyPlugin : PluginBase
+    public class CAPITPlugin : PluginBase
     {
         public override IXrmToolBoxPluginControl GetControl()
         {
-            return new CustomActionTester();
+            return new CustomActionTester(Tool.CAPIT);
         }
 
         /// <summary>
         /// Constructor 
         /// </summary>
-        public MyPlugin()
+        public CAPITPlugin()
         {
             // If you have external assemblies that you need to load, uncomment the following to 
             // hook into the event that will fire when an Assembly fails to resolve

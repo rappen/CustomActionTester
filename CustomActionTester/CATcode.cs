@@ -25,9 +25,6 @@ namespace Rappen.XTB.CAT
 
         #region Private Fields
 
-        private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
-        private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
-        private AppInsights ai = new AppInsights(aiEndpoint, aiKey, Assembly.GetExecutingAssembly(), "Custom Action Tester");
         private EntityMetadataProxy[] entities;
 
         #endregion Private Fields
@@ -264,26 +261,61 @@ namespace Rappen.XTB.CAT
 
         private void GetCustomActions(Entity solution)
         {
-            var qx = new QueryExpression("workflow");
-            qx.ColumnSet.AddColumns("name", "uniquename", "createdby", "primaryentity", "scope", "mode", "ismanaged", "iscustomizable", "istransacted", "iscustomprocessingstepallowedforotherpublishers", "inputparameters", "description");
-            qx.AddOrder("ismanaged", OrderType.Descending);
-            qx.AddOrder("name", OrderType.Ascending);
-            qx.Criteria.AddCondition("category", ConditionOperator.Equal, 3);
-            qx.Criteria.AddCondition("type", ConditionOperator.Equal, 1);
-            qx.Criteria.AddCondition("componentstate", ConditionOperator.Equal, 0);
-            qx.Criteria.AddCondition("statuscode", ConditionOperator.Equal, 2);
-            var qxsdk = qx.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid", JoinOperator.LeftOuter);
-            qxsdk.EntityAlias = "M";
-            qxsdk.Columns.AddColumns("name", "workflowsdkstepenabled");
-            if (solution != null)
+            cmbCustomActions.DataSource = null;
+            QueryExpression qx = null;
+            var message = string.Empty;
+            switch (tool)
             {
-                var solcomp = qx.AddLink("solutioncomponent", "workflowid", "objectid");
-                solcomp.LinkCriteria.AddCondition("solutionid", ConditionOperator.Equal, solution.Id);
+                case Tool.CAPIT:
+                    qx = new QueryExpression(Customapi.EntityName);
+                    qx.ColumnSet.AddColumns(
+                        Customapi.UniqueName,
+                        Customapi.PrimaryName,
+                        Customapi.DisplayName,
+                        Customapi.Description,
+                        Customapi.CreatedBy,
+                        Customapi.Isfunction,
+                        Customapi.IsPrivate,
+                        Customapi.ExecuteprivilegeName,
+                        Customapi.AllowedcustomProcessingStepType,
+                        Customapi.BoundEntityLogicalName,
+                        Customapi.BindingType);
+                    qx.AddOrder(Customapi.PrimaryName, OrderType.Ascending);
+                    if (solution != null)
+                    {
+                        var solcomp = qx.AddLink(Solutioncomponent.EntityName, Customapi.PrimaryKey, Solutioncomponent.ObjectId);
+                        solcomp.LinkCriteria.AddCondition(Solutioncomponent.SolutionId, ConditionOperator.Equal, solution.Id);
+                    }
+                    message = "Getting Custom APIs";
+                    break;
+                case Tool.CAT:
+                    qx = new QueryExpression("workflow");
+                    qx.ColumnSet.AddColumns("name", "uniquename", "createdby", "primaryentity", "scope", "mode", "ismanaged", "iscustomizable", "istransacted", "iscustomprocessingstepallowedforotherpublishers", "inputparameters", "description");
+                    qx.AddOrder("ismanaged", OrderType.Descending);
+                    qx.AddOrder("name", OrderType.Ascending);
+                    qx.Criteria.AddCondition("category", ConditionOperator.Equal, 3);
+                    qx.Criteria.AddCondition("type", ConditionOperator.Equal, 1);
+                    qx.Criteria.AddCondition("componentstate", ConditionOperator.Equal, 0);
+                    qx.Criteria.AddCondition("statuscode", ConditionOperator.Equal, 2);
+                    var qxsdk = qx.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid", JoinOperator.LeftOuter);
+                    qxsdk.EntityAlias = "M";
+                    qxsdk.Columns.AddColumns("name", "workflowsdkstepenabled");
+                    if (solution != null)
+                    {
+                        var solcomp = qx.AddLink("solutioncomponent", "workflowid", "objectid");
+                        solcomp.LinkCriteria.AddCondition("solutionid", ConditionOperator.Equal, solution.Id);
+                    }
+                    message = "Getting Custom Actions";
+                    break;
+            }
+            if (qx == null)
+            {
+                return;
             }
 
             WorkAsync(new WorkAsyncInfo
             {
-                Message = "Getting Custom Actions",
+                Message = message,
                 Work = (worker, args) =>
                 {
                     args.Result = Service.RetrieveMultiple(qx);
@@ -296,57 +328,7 @@ namespace Rappen.XTB.CAT
                     }
                     else if (args.Result is EntityCollection actions)
                     {
-                        ListenToActionChange(false);
                         cmbCustomActions.DataSource = actions;
-                        cmbCustomActions.SelectedIndex = -1;
-                        ListenToActionChange(true);
-                    }
-                    GetCustomAPIs(solution);
-                }
-            });
-        }
-
-        private void GetCustomAPIs(Entity solution)
-        {
-            var qx = new QueryExpression(Customapi.EntityName);
-            qx.ColumnSet.AddColumns(
-                Customapi.UniqueName,
-                Customapi.PrimaryName,
-                Customapi.DisplayName,
-                Customapi.Description,
-                Customapi.CreatedBy,
-                Customapi.Isfunction,
-                Customapi.IsPrivate,
-                Customapi.ExecuteprivilegeName,
-                Customapi.AllowedcustomProcessingStepType,
-                Customapi.BoundEntityLogicalName,
-                Customapi.BindingType);
-            qx.AddOrder(Customapi.PrimaryName, OrderType.Ascending);
-            if (solution != null)
-            {
-                var solcomp = qx.AddLink(Solutioncomponent.EntityName, Customapi.PrimaryKey, Solutioncomponent.ObjectId);
-                solcomp.LinkCriteria.AddCondition(Solutioncomponent.SolutionId, ConditionOperator.Equal, solution.Id);
-            }
-
-            WorkAsync(new WorkAsyncInfo
-            {
-                Message = "Getting Custom APIs",
-                Work = (worker, args) =>
-                {
-                    args.Result = Service.RetrieveMultiple(qx);
-                },
-                PostWorkCallBack = (args) =>
-                {
-                    if (args.Error != null)
-                    {
-                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else if (args.Result is EntityCollection actions)
-                    {
-                        ListenToActionChange(false);
-                        cmbCustomAPIs.DataSource = actions;
-                        cmbCustomAPIs.SelectedIndex = -1;
-                        ListenToActionChange(true);
                     }
                 }
             });
@@ -567,20 +549,6 @@ namespace Rappen.XTB.CAT
             }
         }
 
-        private void ListenToActionChange(bool dolisten)
-        {
-            if (dolisten)
-            {
-                cmbCustomActions.SelectedIndexChanged += cmbCustomActions_SelectedIndexChanged;
-                cmbCustomAPIs.SelectedIndexChanged += cmbCustomActions_SelectedIndexChanged;
-            }
-            else
-            {
-                cmbCustomActions.SelectedIndexChanged -= cmbCustomActions_SelectedIndexChanged;
-                cmbCustomAPIs.SelectedIndexChanged -= cmbCustomActions_SelectedIndexChanged;
-            }
-        }
-
         private void LoadEntities()
         {
             WorkAsync(new WorkAsyncInfo
@@ -702,8 +670,7 @@ namespace Rappen.XTB.CAT
 
         private bool ReadyToExecute()
         {
-            if ((cmbCustomActions.SelectedEntity == null && cmbCustomAPIs.SelectedEntity == null) ||
-                !(gridInputParams.DataSource is IEnumerable<Entity> inputparams))
+            if (cmbCustomActions.SelectedEntity == null || !(gridInputParams.DataSource is IEnumerable<Entity> inputparams))
             {
                 return false;
             }
@@ -724,19 +691,6 @@ namespace Rappen.XTB.CAT
             {
                 return;
             }
-            ListenToActionChange(false);
-            switch (ca.LogicalName)
-            {
-                case "customapi":
-                    cmbCustomActions.SelectedIndex = -1;
-                    txtMessageName.DisplayFormat = "{{uniquename}}";
-                    break;
-                case "workflow":
-                    cmbCustomAPIs.SelectedIndex = -1;
-                    txtMessageName.DisplayFormat = "{{M.name}}";
-                    break;
-            }
-            ListenToActionChange(true);
             txtUniqueName.Entity = ca;
             txtMessageName.Entity = ca;
             txtCreatedBy.Entity = ca;
