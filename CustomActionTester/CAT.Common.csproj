@@ -189,6 +189,7 @@
     </Compile>
     <Compile Include="CustomAPI.Const.cs" />
     <Compile Include="EntityMetadataProxy.cs" />
+    <Compile Include="ICATTool.cs" />
     <Compile Include="InputValue.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -148,6 +148,7 @@ namespace Rappen.XTB.CAT
         {
             var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
             outputs.ToList().ForEach(o => o.Attributes.Remove("value"));
+            outputs.ToList().ForEach(o => o.Attributes.Remove("rawvalue"));
         }
 
         private void ExecuteCA()
@@ -176,13 +177,13 @@ namespace Rappen.XTB.CAT
                 }
                 else if (input.TryGetAttributeValue("isoptional", out bool optional) && !optional)
                 {
-                    MessageBox.Show($"Missing value for required parameter: {name}", "Execute Custom Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Missing value for required parameter: {name}", $"Execute {catTool.Target}", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
             WorkAsync(new WorkAsyncInfo
             {
-                Message = "Executing Custom Action",
+                Message = $"Executing {catTool.Target}",
                 Work = (worker, args) =>
                 {
                     var sw = Stopwatch.StartNew();
@@ -262,52 +263,7 @@ namespace Rappen.XTB.CAT
         private void GetCustomActions(Entity solution)
         {
             cmbCustomActions.DataSource = null;
-            QueryExpression qx = null;
-            var message = string.Empty;
-            switch (tool)
-            {
-                case Tool.CAPIT:
-                    qx = new QueryExpression(Customapi.EntityName);
-                    qx.ColumnSet.AddColumns(
-                        Customapi.UniqueName,
-                        Customapi.PrimaryName,
-                        Customapi.DisplayName,
-                        Customapi.Description,
-                        Customapi.CreatedBy,
-                        Customapi.Isfunction,
-                        Customapi.IsPrivate,
-                        Customapi.ExecuteprivilegeName,
-                        Customapi.AllowedcustomProcessingStepType,
-                        Customapi.BoundEntityLogicalName,
-                        Customapi.BindingType);
-                    qx.AddOrder(Customapi.PrimaryName, OrderType.Ascending);
-                    if (solution != null)
-                    {
-                        var solcomp = qx.AddLink(Solutioncomponent.EntityName, Customapi.PrimaryKey, Solutioncomponent.ObjectId);
-                        solcomp.LinkCriteria.AddCondition(Solutioncomponent.SolutionId, ConditionOperator.Equal, solution.Id);
-                    }
-                    message = "Getting Custom APIs";
-                    break;
-                case Tool.CAT:
-                    qx = new QueryExpression("workflow");
-                    qx.ColumnSet.AddColumns("name", "uniquename", "createdby", "primaryentity", "scope", "mode", "ismanaged", "iscustomizable", "istransacted", "iscustomprocessingstepallowedforotherpublishers", "inputparameters", "description");
-                    qx.AddOrder("ismanaged", OrderType.Descending);
-                    qx.AddOrder("name", OrderType.Ascending);
-                    qx.Criteria.AddCondition("category", ConditionOperator.Equal, 3);
-                    qx.Criteria.AddCondition("type", ConditionOperator.Equal, 1);
-                    qx.Criteria.AddCondition("componentstate", ConditionOperator.Equal, 0);
-                    qx.Criteria.AddCondition("statuscode", ConditionOperator.Equal, 2);
-                    var qxsdk = qx.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid", JoinOperator.LeftOuter);
-                    qxsdk.EntityAlias = "M";
-                    qxsdk.Columns.AddColumns("name", "workflowsdkstepenabled");
-                    if (solution != null)
-                    {
-                        var solcomp = qx.AddLink("solutioncomponent", "workflowid", "objectid");
-                        solcomp.LinkCriteria.AddCondition("solutionid", ConditionOperator.Equal, solution.Id);
-                    }
-                    message = "Getting Custom Actions";
-                    break;
-            }
+            var qx = catTool.GetActionQuery(solution?.Id ?? Guid.Empty);
             if (qx == null)
             {
                 return;
@@ -315,7 +271,7 @@ namespace Rappen.XTB.CAT
 
             WorkAsync(new WorkAsyncInfo
             {
-                Message = message,
+                Message = $"Getting {catTool.Target}s",
                 Work = (worker, args) =>
                 {
                     args.Result = Service.RetrieveMultiple(qx);
@@ -342,37 +298,7 @@ namespace Rappen.XTB.CAT
                 gridOutputParams.DataSource = null;
                 return;
             }
-            var qx = new QueryExpression();
-            switch (ca.LogicalName)
-            {
-                case "customapi":
-                    qx = new QueryExpression(Customapirequestparameter.EntityName);
-                    qx.ColumnSet.AddColumns(
-                        Customapirequestparameter.UniqueName,
-                        Customapirequestparameter.PrimaryName,
-                        Customapirequestparameter.DisplayName,
-                        Customapirequestparameter.Description,
-                        Customapirequestparameter.Isoptional,
-                        Customapirequestparameter.Type,
-                        Customapirequestparameter.LogicalEntityName);
-                    qx.AddOrder(Customapirequestparameter.Isoptional, OrderType.Ascending);
-                    qx.AddOrder(Customapirequestparameter.PrimaryName, OrderType.Ascending);
-                    qx.Criteria.AddCondition(Customapirequestparameter.CustomapiId, ConditionOperator.Equal, ca.Id);
-                    break;
-                case "workflow":
-                    qx = new QueryExpression("sdkmessagerequestfield");
-                    qx.Distinct = true;
-                    qx.ColumnSet.AddColumns("name", "position", "parameterbindinginformation", "optional", "parser", "fieldmask");
-                    qx.AddOrder("position", OrderType.Ascending);
-                    var req = qx.AddLink("sdkmessagerequest", "sdkmessagerequestid", "sdkmessagerequestid");
-                    var pair = req.AddLink("sdkmessagepair", "sdkmessagepairid", "sdkmessagepairid");
-                    var msg = pair.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid");
-                    var wf = msg.AddLink("workflow", "sdkmessageid", "sdkmessageid");
-                    wf.LinkCriteria.AddCondition("workflowid", ConditionOperator.Equal, ca.Id);
-                    break;
-                default:
-                    return;
-            }
+            var qx = catTool.GetInputQuery(ca.Id);
 
             WorkAsync(new WorkAsyncInfo
             {
@@ -433,36 +359,7 @@ namespace Rappen.XTB.CAT
                 gridOutputParams.DataSource = null;
                 return;
             }
-            var qx = new QueryExpression();
-            switch (ca.LogicalName)
-            {
-                case "customapi":
-                    qx = new QueryExpression(Customapiresponseproperty.EntityName);
-                    qx.ColumnSet.AddColumns(
-                        Customapiresponseproperty.UniqueName,
-                        Customapiresponseproperty.PrimaryName,
-                        Customapiresponseproperty.DisplayName,
-                        Customapiresponseproperty.Description,
-                        Customapiresponseproperty.Type,
-                        Customapiresponseproperty.LogicalEntityName);
-                    qx.AddOrder(Customapiresponseproperty.PrimaryName, OrderType.Ascending);
-                    qx.Criteria.AddCondition(Customapirequestparameter.CustomapiId, ConditionOperator.Equal, ca.Id);
-                    break;
-                case "workflow":
-                    qx = new QueryExpression("sdkmessageresponsefield");
-                    qx.Distinct = true;
-                    qx.ColumnSet.AddColumns("name", "position", "parameterbindinginformation", "formatter", "publicname");
-                    qx.AddOrder("position", OrderType.Ascending);
-                    var resp = qx.AddLink("sdkmessageresponse", "sdkmessageresponseid", "sdkmessageresponseid");
-                    var req = resp.AddLink("sdkmessagerequest", "sdkmessagerequestid", "sdkmessagerequestid");
-                    var pair = req.AddLink("sdkmessagepair", "sdkmessagepairid", "sdkmessagepairid");
-                    var msg = pair.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid");
-                    var wf = msg.AddLink("workflow", "sdkmessageid", "sdkmessageid");
-                    wf.LinkCriteria.AddCondition("workflowid", ConditionOperator.Equal, ca.Id);
-                    break;
-                default:
-                    return;
-            }
+            var qx = catTool.GetOutputQuery(ca.Id);
 
             WorkAsync(new WorkAsyncInfo
             {
@@ -578,37 +475,38 @@ namespace Rappen.XTB.CAT
 
         private void PopulateOutputParamValues(ParameterCollection outputparams)
         {
+            var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
             foreach (var result in outputparams)
             {
-                var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
-                var output =
-                    outputs.FirstOrDefault(o => o.Contains(Customapiresponseproperty.UniqueName) && o[Customapiresponseproperty.UniqueName].ToString().Equals(result.Key)) ??
-                    outputs.FirstOrDefault(o => o.Contains("name") && o["name"].ToString().Equals(result.Key));
-                if (output != null)
+                var output = outputs
+                    .FirstOrDefault(o => o.Contains(catTool.ParameterIdentifierColumn) &&
+                        o[catTool.ParameterIdentifierColumn].ToString().Equals(result.Key));
+                if (output == null)
                 {
-                    var rawvalue = result.Value;
-                    var value = rawvalue;
-                    output["rawvalue"] = rawvalue;
-                    if (rawvalue is Money money)
-                    {
-                        value = money.Value;
-                    }
-                    else if (rawvalue is OptionSetValue osv)
-                    {
-                        value = osv.Value;
-                    }
-                    else if (rawvalue is Entity entity)
-                    {
-                        txtCDSDataHelper.Entity = entity;
-                        value = txtCDSDataHelper.Text;
-                    }
-                    else if (rawvalue is EntityReference entref)
-                    {
-                        txtCDSDataHelper.EntityReference = entref;
-                        value = txtCDSDataHelper.Text;
-                    }
-                    output["value"] = value;
+                    continue;
                 }
+                var rawvalue = result.Value;
+                var value = rawvalue;
+                output["rawvalue"] = rawvalue;
+                if (rawvalue is Money money)
+                {
+                    value = money.Value;
+                }
+                else if (rawvalue is OptionSetValue osv)
+                {
+                    value = osv.Value;
+                }
+                else if (rawvalue is Entity entity)
+                {
+                    txtCDSDataHelper.Entity = entity;
+                    value = txtCDSDataHelper.Text;
+                }
+                else if (rawvalue is EntityReference entref)
+                {
+                    txtCDSDataHelper.EntityReference = entref;
+                    value = txtCDSDataHelper.Text;
+                }
+                output["value"] = value;
             }
             gridOutputParams.Refresh();
             gridOutputParams.AutoResizeColumns();
@@ -617,52 +515,10 @@ namespace Rappen.XTB.CAT
 
         private void PreProcessParams(EntityCollection records)
         {
-            #region Custom Action specifics
-            foreach (var record in records.Entities.Where(e => !e.Contains("type")))
-            {
-                var attribute = record.Contains("parser") ? "parser" : "formatter";
-                if (record.TryGetAttributeValue(attribute, out string parser))
-                {
-                    parser = parser.Split(',')[0];
-                    while (parser.Contains("."))
-                    {
-                        parser = parser.Substring(parser.IndexOf('.') + 1);
-                    }
-                    record["type"] = parser;
-                }
-            }
-            var otcrecords = records.Entities.Where(r => r.Contains("parameterbindinginformation"));
-            if (otcrecords.Count() > 0)
-            {
-                var siblingrecords = new List<Entity>();
-                foreach (var otcrecord in otcrecords)
-                {
-                    var siblingrecord = records.Entities.FirstOrDefault(r => r["name"].ToString() == otcrecord["name"].ToString() && !r.Contains("parameterbindinginformation"));
-                    if (siblingrecord == null)
-                    {
-                        continue;
-                    }
-                    var binding = otcrecord["parameterbindinginformation"].ToString();
-                    var otcstr = binding.Replace("OTC:", "").Trim();
-                    if (int.TryParse(otcstr, out int otc))
-                    {
-                        if (entities.FirstOrDefault(e => e.Metadata.ObjectTypeCode == otc) is EntityMetadataProxy meta)
-                        {
-                            otcrecord["entity"] = meta;
-                        }
-                    }
-                    siblingrecords.Add(siblingrecord);
-                }
-                siblingrecords.ForEach(s => records.Entities.Remove(s));
-            }
-            #endregion Custom Action specifics
-
+            catTool.PreProcessParams(records, entities);
             records.Entities.Where(e => !e.Contains("position")).ToList().ForEach(e => e["postition"] =
                 records.Entities.Any(e2 => e2.Contains("position")) ?
                     records.Entities.Where(e3 => e3.Contains("position")).Max(e3 => (int)e3["position"]) + 1 : 0);
-            records.Entities.Where(e => !e.Contains("isoptional") && e.Contains("optional")).ToList().ForEach(e => e["isoptional"] = e["optional"]);
-            records.Entities.Where(e => e.Contains("logicalentityname")).ToList().ForEach(e => e["entity"] =
-                entities.FirstOrDefault(em => em.Metadata.LogicalName == e["logicalentityname"].ToString()));
             records.Entities
                 .Where(e => e.TryGetAttributeValue("entity", out EntityMetadataProxy meta))
                 .ToList().ForEach(e => e["subtype"] = e.GetAttributeValue<EntityMetadataProxy>("entity").DisplayName);

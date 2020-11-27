@@ -25,7 +25,7 @@ namespace Rappen.XTB.CAT
     {
         public override IXrmToolBoxPluginControl GetControl()
         {
-            return new CustomActionTester(Tool.CAT);
+            return new CustomActionTester(new CATTool());
         }
 
         /// <summary>

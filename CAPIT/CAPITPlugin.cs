@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using XrmToolBox.Extensibility;
 using XrmToolBox.Extensibility.Interfaces;
+using Rappen.XTB.CAPIT;
 
 namespace Rappen.XTB.CAT
 {
@@ -25,7 +26,7 @@ namespace Rappen.XTB.CAT
     {
         public override IXrmToolBoxPluginControl GetControl()
         {
-            return new CustomActionTester(Tool.CAPIT);
+            return new CustomActionTester(new CAPITTool());
         }
 
         /// <summary>
