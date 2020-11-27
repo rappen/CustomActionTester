@@ -160,17 +160,27 @@ namespace Rappen.XTB.CAT
             var request = new OrganizationRequest(txtMessageName.Text);
             foreach (var input in gridInputParams.DataSource as IEnumerable<Entity>)
             {
-                if (input.TryGetAttributeValue("name", out string name))
+                var name = string.Empty;
+                if (input.TryGetAttributeValue(Customapirequestparameter.UniqueName, out string capiname))
                 {
-                    if (input.TryGetAttributeValue("rawvalue", out object value))
-                    {
-                        request[name] = value;
-                    }
-                    else if (input.TryGetAttributeValue("isoptional", out bool optional) && !optional)
-                    {
-                        MessageBox.Show($"Missing value for required parameter: {name}", "Execute Custom Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
+                    name = capiname;
+                }
+                if (string.IsNullOrWhiteSpace(name) && input.TryGetAttributeValue("name", out string caname))
+                {
+                    name = caname;
+                }
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    continue;
+                }
+                if (input.TryGetAttributeValue("rawvalue", out object value))
+                {
+                    request[name] = value;
+                }
+                else if (input.TryGetAttributeValue("isoptional", out bool optional) && !optional)
+                {
+                    MessageBox.Show($"Missing value for required parameter: {name}", "Execute Custom Action", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
             }
             WorkAsync(new WorkAsyncInfo
@@ -441,16 +451,37 @@ namespace Rappen.XTB.CAT
                 gridOutputParams.DataSource = null;
                 return;
             }
-            var qx = new QueryExpression("sdkmessageresponsefield");
-            qx.Distinct = true;
-            qx.ColumnSet.AddColumns("name", "position", "parameterbindinginformation", "formatter", "publicname");
-            qx.AddOrder("position", OrderType.Ascending);
-            var resp = qx.AddLink("sdkmessageresponse", "sdkmessageresponseid", "sdkmessageresponseid");
-            var req = resp.AddLink("sdkmessagerequest", "sdkmessagerequestid", "sdkmessagerequestid");
-            var pair = req.AddLink("sdkmessagepair", "sdkmessagepairid", "sdkmessagepairid");
-            var msg = pair.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid");
-            var wf = msg.AddLink("workflow", "sdkmessageid", "sdkmessageid");
-            wf.LinkCriteria.AddCondition("workflowid", ConditionOperator.Equal, ca.Id);
+            var qx = new QueryExpression();
+            switch (ca.LogicalName)
+            {
+                case "customapi":
+                    qx = new QueryExpression(Customapiresponseproperty.EntityName);
+                    qx.ColumnSet.AddColumns(
+                        Customapiresponseproperty.UniqueName,
+                        Customapiresponseproperty.PrimaryName,
+                        Customapiresponseproperty.DisplayName,
+                        Customapiresponseproperty.Description,
+                        Customapiresponseproperty.Type,
+                        Customapiresponseproperty.LogicalEntityName);
+                    qx.AddOrder(Customapiresponseproperty.PrimaryName, OrderType.Ascending);
+                    qx.Criteria.AddCondition(Customapirequestparameter.CustomapiId, ConditionOperator.Equal, ca.Id);
+                    break;
+                case "workflow":
+                    qx = new QueryExpression("sdkmessageresponsefield");
+                    qx.Distinct = true;
+                    qx.ColumnSet.AddColumns("name", "position", "parameterbindinginformation", "formatter", "publicname");
+                    qx.AddOrder("position", OrderType.Ascending);
+                    var resp = qx.AddLink("sdkmessageresponse", "sdkmessageresponseid", "sdkmessageresponseid");
+                    var req = resp.AddLink("sdkmessagerequest", "sdkmessagerequestid", "sdkmessagerequestid");
+                    var pair = req.AddLink("sdkmessagepair", "sdkmessagepairid", "sdkmessagepairid");
+                    var msg = pair.AddLink("sdkmessage", "sdkmessageid", "sdkmessageid");
+                    var wf = msg.AddLink("workflow", "sdkmessageid", "sdkmessageid");
+                    wf.LinkCriteria.AddCondition("workflowid", ConditionOperator.Equal, ca.Id);
+                    break;
+                default:
+                    return;
+            }
+
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Loading Output Parameters",
@@ -582,7 +613,9 @@ namespace Rappen.XTB.CAT
             foreach (var result in outputparams)
             {
                 var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
-                var output = outputs.FirstOrDefault(o => o["name"].ToString().Equals(result.Key));
+                var output =
+                    outputs.FirstOrDefault(o => o.Contains(Customapiresponseproperty.UniqueName) && o[Customapiresponseproperty.UniqueName].ToString().Equals(result.Key)) ??
+                    outputs.FirstOrDefault(o => o.Contains("name") && o["name"].ToString().Equals(result.Key));
                 if (output != null)
                 {
                     var rawvalue = result.Value;
