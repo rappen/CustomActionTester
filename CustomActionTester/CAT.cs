@@ -50,7 +50,7 @@ namespace Rappen.XTB.CAT
             cmbSolution.OrganizationService = newService;
             cmbCustomActions.OrganizationService = newService;
             txtUniqueName.OrganizationService = newService;
-            txtUniqueName.OrganizationService = newService;
+            txtMessageName.OrganizationService = newService;
             txtCreatedBy.OrganizationService = newService;
             gridInputParams.OrganizationService = newService;
             gridOutputParams.OrganizationService = newService;
