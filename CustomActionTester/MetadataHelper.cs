@@ -11,9 +11,9 @@ namespace Rappen.XTB.CAT
     {
         #region Public Fields
 
-        public static String[] attributeProperties = { "DisplayName", "Description", "AttributeType", "IsManaged", "IsCustomizable", "IsCustomAttribute", "IsValidForCreate", "IsPrimaryName", "SchemaName", "MaxLength" };
-        public static String[] entityDetails = { "Attributes" };
-        public static String[] entityProperties = { "LogicalName", "DisplayName", "DisplayCollectionName", "PrimaryIdAttribute", "PrimaryNameAttribute", "ObjectTypeCode", "IsManaged", "IsCustomizable", "IsCustomEntity", "IsIntersect", "IsActivity", "IsBPFEntity", "IsValidForAdvancedFind", "IsPrivate", "OneToManyRelationships", "ManyToManyRelationships" };
+        public static string[] attributeProperties = { "DisplayName", "Description", "AttributeType", "IsManaged", "IsCustomizable", "IsCustomAttribute", "IsValidForCreate", "IsPrimaryName", "SchemaName", "MaxLength" };
+        public static string[] entityDetails = { "Attributes" };
+        public static string[] entityProperties = { "LogicalName", "DisplayName", "DisplayCollectionName", "PrimaryIdAttribute", "PrimaryNameAttribute", "ObjectTypeCode", "IsManaged", "IsCustomizable", "IsCustomEntity", "IsIntersect", "IsActivity", "IsBPFEntity", "IsValidForAdvancedFind", "IsPrivate", "OneToManyRelationships", "ManyToManyRelationships" };
 
         #endregion Public Fields
 
