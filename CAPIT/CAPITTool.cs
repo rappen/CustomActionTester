@@ -3,6 +3,7 @@ using Microsoft.Xrm.Sdk.Query;
 using Rappen.XTB.CAT;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace Rappen.XTB.CAPIT
@@ -16,6 +17,12 @@ namespace Rappen.XTB.CAPIT
         public string MessageIdentifierColumn => Customapi.UniqueName;
 
         public string ParameterIdentifierColumn => Customapirequestparameter.UniqueName;
+
+        public Bitmap Logo16 => Properties.Resources.CAPIT_logo_16;
+
+        public Bitmap Logo24 => Properties.Resources.CAPIT_logo_24;
+
+        public Icon Icon16 => Properties.Resources.CAPIT_icon;
 
         public QueryExpression GetActionQuery(Guid solutionid)
         {

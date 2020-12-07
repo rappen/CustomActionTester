@@ -2,9 +2,11 @@
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using xrmtb.XrmToolBox.Controls.Controls;
+using XrmToolBox;
 using XrmToolBox.Extensibility;
 
 namespace Rappen.XTB.CAT
@@ -33,6 +35,9 @@ namespace Rappen.XTB.CAT
 
         private void FixFormForTool()
         {
+            TabIcon = catTool.Logo16;
+            PluginIcon = catTool.Icon16;
+            tslAbout.Image = catTool.Logo24;
             gbCustomWhat.Text = catTool.Target;
             lblCustomWhat.Text = catTool.Target;
             txtMessageName.DisplayFormat = catTool.MessageIdentifierColumn;

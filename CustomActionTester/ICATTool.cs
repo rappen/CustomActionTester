@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Rappen.XTB.CAT
 {
@@ -11,6 +12,11 @@ namespace Rappen.XTB.CAT
         string Target { get; }
         string MessageIdentifierColumn { get; }
         string ParameterIdentifierColumn { get; }
+        Bitmap Logo16 { get; }
+        Bitmap Logo24 { get; }
+        Icon Icon16 { get; }
+
+
         QueryExpression GetActionQuery(Guid solutionid);
         QueryExpression GetInputQuery(Guid actionid);
         QueryExpression GetOutputQuery(Guid actionid);
