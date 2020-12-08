@@ -12,6 +12,8 @@
     <AssemblyName>Rappen.XTB.CAT.Common</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ILMerge">
+      <HintPath>..\packages\ILMerge.3.0.41\tools\net452\ILMerge.exe</HintPath>
+    </Reference>
     <Reference Include="McTools.Xrm.Connection, Version=1.2020.10.35, Culture=neutral, PublicKeyToken=96037217801d9658, processorArchitecture=MSIL">
       <HintPath>..\packages\MscrmTools.Xrm.Connection.1.2020.10.35\lib\net462\McTools.Xrm.Connection.dll</HintPath>
     </Reference>

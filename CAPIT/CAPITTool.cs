@@ -24,6 +24,8 @@ namespace Rappen.XTB.CAPIT
 
         public Icon Icon16 => Properties.Resources.CAPIT_icon;
 
+        public Image LogoAbout => Properties.Resources.CAPIT_about;
+
         public QueryExpression GetActionQuery(Guid solutionid)
         {
             var qx = new QueryExpression(Customapi.EntityName);

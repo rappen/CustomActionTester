@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\ILMerge.3.0.41\build\ILMerge.props" Condition="Exists('..\packages\ILMerge.3.0.41\build\ILMerge.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,10 +9,12 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Rappen.XTB.CAPIT</RootNamespace>
-    <AssemblyName>Rappen.XTB.CAPIT</AssemblyName>
+    <AssemblyName>Rappen.XTB.CAPIT.Unmerged</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ILMerge">
+      <HintPath>..\packages\ILMerge.3.0.41\tools\net452\ILMerge.exe</HintPath>
+    </Reference>
     <Reference Include="McTools.Xrm.Connection, Version=1.2020.10.35, Culture=neutral, PublicKeyToken=96037217801d9658, processorArchitecture=MSIL">
       <HintPath>..\packages\MscrmTools.Xrm.Connection.1.2020.10.35\lib\net462\McTools.Xrm.Connection.dll</HintPath>
     </Reference>
@@ -195,12 +201,26 @@
   <ItemGroup>
     <None Include="Resources\CAPIT-024-tsp.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CAPIT-About-800.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CAPIT-About-400.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug (
+    <PostBuildEvent>ilmerge.exe /target:library /targetplatform:v4,"C:\Windows\Microsoft.NET\Framework\v4.0.30319" "/out:Rappen.XTB.CAPIT.dll" "$(TargetFileName)" "Rappen.XTB.CAT.Common.dll" "xrmtb.XrmToolBox.Controls.dll"
+
+if $(ConfigurationName) == Debug (
   IF NOT EXIST ..\..\..\Work mkdir ..\..\..\Work
   IF NOT EXIST ..\..\..\Work\Plugins mkdir ..\..\..\Work\Plugins
-  copy /Y Rappen.*.dll ..\..\..\Work\Plugins
+  copy /Y Rappen.XTB.CAPIT.dll ..\..\..\Work\Plugins
 )</PostBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\ILMerge.3.0.41\build\ILMerge.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILMerge.3.0.41\build\ILMerge.props'))" />
+  </Target>
 </Project>

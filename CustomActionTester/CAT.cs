@@ -64,6 +64,7 @@ namespace Rappen.XTB.CAT
             {
                 GetSolutions(chkSolManaged.Checked, chkSolInvisible.Checked);
             }
+            var myid = Guid.NewGuid();
         }
 
         #endregion Public Methods

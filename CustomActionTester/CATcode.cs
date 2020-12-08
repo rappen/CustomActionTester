@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml;
 using XrmToolBox.Extensibility;
@@ -73,6 +74,7 @@ namespace Rappen.XTB.CAT
             {
                 StartPosition = FormStartPosition.CenterParent
             };
+            about.imgLogo.Image = catTool.LogoAbout;
             about.lblVersion.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             about.ShowDialog();
         }

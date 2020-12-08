@@ -15,7 +15,7 @@ namespace Rappen.XTB.CAT
         Bitmap Logo16 { get; }
         Bitmap Logo24 { get; }
         Icon Icon16 { get; }
-
+        Image LogoAbout { get; }
 
         QueryExpression GetActionQuery(Guid solutionid);
         QueryExpression GetInputQuery(Guid actionid);

@@ -23,6 +23,8 @@ namespace Rappen.XTB.CAT
 
         public Icon Icon16 => Properties.Resources.CAT_icon;
 
+        public Image LogoAbout => Properties.Resources.CAT_about;
+
         public QueryExpression GetActionQuery(Guid solutionid)
         {
             var qx = new QueryExpression("workflow");
