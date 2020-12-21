@@ -4,7 +4,7 @@
 // GitHub     : https://github.com/rappen/LCG-UDG
 // Source Org : https://jonassandbox.crm4.dynamics.com/
 // Filename   : C:\Dev\GitHub\CustomActionTester\CustomActionTester\CustomAPI.Const.cs
-// Created    : 2020-11-26 23:43:34
+// Created    : 2020-12-21 22:56:22
 // *********************************************************************
 
 namespace Rappen.XTB.CAT
@@ -132,8 +132,6 @@ namespace Rappen.XTB.CAT
         public const string Description = "description";
         /// <summary>Type: String, RequiredLevel: ApplicationRequired, MaxLength: 100, Format: Text</summary>
         public const string DisplayName = "displayname";
-        /// <summary>Type: String, RequiredLevel: None, MaxLength: 100, Format: Text</summary>
-        public const string EntityLogicalName = "entitylogicalname";
         /// <summary>Type: ManagedProperty, RequiredLevel: SystemRequired</summary>
         public const string Iscustomizable = "iscustomizable";
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
@@ -200,8 +198,6 @@ namespace Rappen.XTB.CAT
         public const string Description = "description";
         /// <summary>Type: String, RequiredLevel: ApplicationRequired, MaxLength: 100, Format: Text</summary>
         public const string DisplayName = "displayname";
-        /// <summary>Type: String, RequiredLevel: None, MaxLength: 100, Format: Text</summary>
-        public const string EntityLogicalName = "entitylogicalname";
         /// <summary>Type: ManagedProperty, RequiredLevel: SystemRequired</summary>
         public const string Iscustomizable = "iscustomizable";
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
@@ -244,6 +240,61 @@ namespace Rappen.XTB.CAT
             String = 10,
             StringArray = 11,
             GuId = 12
+        }
+
+        #endregion OptionSets
+    }
+
+    /// <summary>DisplayName: Process, OwnershipType: UserOwned, IntroducedVersion: 5.0.0.0</summary>
+    public static class Workflow
+    {
+        public const string EntityName = "workflow";
+        public const string EntityCollectionName = "workflows";
+
+        #region Attributes
+
+        /// <summary>Type: Uniqueidentifier, RequiredLevel: SystemRequired</summary>
+        public const string PrimaryKey = "workflowid";
+        /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Category, OptionSetType: Picklist, DefaultFormValue: 0</summary>
+        public const string Category = "category";
+        /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Component State, OptionSetType: Picklist, DefaultFormValue: -1</summary>
+        public const string ComponentState = "componentstate";
+        /// <summary>Type: Status, RequiredLevel: None, DisplayName: Status Reason, OptionSetType: Status</summary>
+        public const string StatusCode = "statuscode";
+        /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Type, OptionSetType: Picklist, DefaultFormValue: -1</summary>
+        public const string Type = "type";
+
+        #endregion Attributes
+
+        #region OptionSets
+
+        public enum Category_OptionSet
+        {
+            Workflow = 0,
+            Dialog = 1,
+            BusinessRule = 2,
+            Action = 3,
+            BusinessProcessFlow = 4,
+            ModernFlow = 5,
+            Reserved = 6
+        }
+        public enum ComponentState_OptionSet
+        {
+            Published = 0,
+            Unpublished = 1,
+            Deleted = 2,
+            DeletedUnpublished = 3
+        }
+        public enum StatusCode_OptionSet
+        {
+            Draft = 1,
+            Activated = 2
+        }
+        public enum Type_OptionSet
+        {
+            Definition = 1,
+            Activation = 2,
+            Template = 3
         }
 
         #endregion OptionSets
@@ -300,6 +351,52 @@ namespace Rappen.XTB.CAT
         #endregion OptionSets
     }
 
+    /// <summary>OwnershipType: OrganizationOwned, IntroducedVersion: 5.0.0.0</summary>
+    public static class Solution
+    {
+        public const string EntityName = "solution";
+        public const string EntityCollectionName = "solutions";
+
+        #region Attributes
+
+        /// <summary>Type: Uniqueidentifier, RequiredLevel: SystemRequired</summary>
+        public const string PrimaryKey = "solutionid";
+        /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 256, Format: Text</summary>
+        public const string PrimaryName = "friendlyname";
+        /// <summary>Type: Boolean, RequiredLevel: None, True: 1, False: 0, DefaultValue: True</summary>
+        public const string Isvisible = "isvisible";
+        /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 65, Format: Text</summary>
+        public const string UniqueName = "uniquename";
+        /// <summary>Type: Boolean, RequiredLevel: None, True: 1, False: 0, DefaultValue: False</summary>
+        public const string Ismanaged = "ismanaged";
+        /// <summary>Type: Lookup, RequiredLevel: SystemRequired, Targets: publisher</summary>
+        public const string PublisherId = "publisherid";
+        /// <summary>Type: Picklist, RequiredLevel: None, DisplayName: Solution Type, OptionSetType: Picklist, DefaultFormValue: 0</summary>
+        public const string SolutionType = "solutiontype";
+        /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 256, Format: VersionNumber</summary>
+        public const string Version = "version";
+
+        #endregion Attributes
+
+        #region Relationships
+
+        /// <summary>Parent: "Solution" Child: "Solutioncomponent" Lookup: "SolutionId"</summary>
+        public const string Rel1M_SolutionSolutioncomponent = "solution_solutioncomponent";
+
+        #endregion Relationships
+
+        #region OptionSets
+
+        public enum SolutionType_OptionSet
+        {
+            None = 0,
+            Snapshot = 1,
+            Internal = 2
+        }
+
+        #endregion OptionSets
+    }
+
     /// <summary>DisplayName: Solution Component, OwnershipType: None, IntroducedVersion: 5.0.0.0</summary>
     public static class Solutioncomponent
     {
@@ -310,12 +407,112 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Type: Boolean, RequiredLevel: None, True: 1, False: 0, DefaultValue: True</summary>
         public const string Ismetadata = "ismetadata";
+        /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Component Type, OptionSetType: Picklist</summary>
+        public const string ComponentType = "componenttype";
         /// <summary>Type: Uniqueidentifier, RequiredLevel: None</summary>
         public const string ObjectId = "objectid";
         /// <summary>Type: Lookup, RequiredLevel: None, Targets: solution</summary>
         public const string SolutionId = "solutionid";
 
         #endregion Attributes
+
+        #region OptionSets
+
+        public enum ComponentType_OptionSet
+        {
+            Entity = 1,
+            Attribute = 2,
+            Relationship = 3,
+            AttributePicklistValue = 4,
+            AttributeLookupValue = 5,
+            ViewAttribute = 6,
+            LocalizedLabel = 7,
+            RelationshipExtraCondition = 8,
+            OptionSet = 9,
+            EntityRelationship = 10,
+            EntityRelationshipRole = 11,
+            EntityRelationshipRelationships = 12,
+            ManagedProperty = 13,
+            EntityKey = 14,
+            Privilege = 16,
+            PrivilegeObjectTypeCode = 17,
+            Role = 20,
+            RolePrivilege = 21,
+            DisplayString = 22,
+            DisplayStringMap = 23,
+            Form = 24,
+            Organization = 25,
+            SavedQuery = 26,
+            Workflow = 29,
+            Report = 31,
+            ReportEntity = 32,
+            ReportCategory = 33,
+            ReportVisibility = 34,
+            Attachment = 35,
+            EMailTemplate = 36,
+            ContractTemplate = 37,
+            KBArticleTemplate = 38,
+            MailMergeTemplate = 39,
+            DuplicateRule = 44,
+            DuplicateRuleCondition = 45,
+            EntityMap = 46,
+            AttributeMap = 47,
+            RibbonCommand = 48,
+            RibbonContextGroup = 49,
+            RibbonCustomization = 50,
+            RibbonRule = 52,
+            RibbonTabToCommandMap = 53,
+            RibbonDiff = 55,
+            SavedQueryVisualization = 59,
+            SystemForm = 60,
+            WebResource = 61,
+            SiteMap = 62,
+            ConnectionRole = 63,
+            ComplexControl = 64,
+            FieldSecurityProfile = 70,
+            FieldPermission = 71,
+            PluginType = 90,
+            PluginAssembly = 91,
+            SDKMessageProcessingStep = 92,
+            SDKMessageProcessingStepImage = 93,
+            ServiceEndpoint = 95,
+            RoutingRule = 150,
+            RoutingRuleItem = 151,
+            SLA = 152,
+            SLAItem = 153,
+            ConvertRule = 154,
+            ConvertRuleItem = 155,
+            HierarchyRule = 65,
+            MobileOfflineProfile = 161,
+            MobileOfflineProfileItem = 162,
+            SimilarityRule = 165,
+            CustomControl = 66,
+            CustomControlDefaultConfig = 68,
+            DataSourceMapping = 166,
+            SDKMessage = 201,
+            SDKMessageFilter = 202,
+            SdkMessagePair = 203,
+            SdkMessageRequest = 204,
+            SdkMessageRequestField = 205,
+            SdkMessageResponse = 206,
+            SdkMessageResponseField = 207,
+            WebWizard = 210,
+            Index = 18,
+            ImportMap = 208,
+            CanvasApp = 300,
+            Connector = 371,
+            Connector1 = 372,
+            EnvironmentVariableDefinition = 380,
+            EnvironmentVariableValue = 381,
+            AIProjectType = 400,
+            AIProject = 401,
+            AIConfiguration = 402,
+            EntityAnalyticsConfiguration = 430,
+            AttributeImageConfiguration = 431,
+            EntityImageConfiguration = 432
+        }
+
+        #endregion OptionSets
     }
 
     /// <summary>DisplayName: View, OwnershipType: OrganizationOwned, IntroducedVersion: 5.0.0.0</summary>

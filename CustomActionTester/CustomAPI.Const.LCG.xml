@@ -62,7 +62,6 @@
         <string>customapirequestparameterid</string>
         <string>description</string>
         <string>displayname</string>
-        <string>entitylogicalname</string>
         <string>iscustomizable</string>
         <string>ismanaged</string>
         <string>isoptional</string>
@@ -84,7 +83,6 @@
         <string>customapiresponsepropertyid</string>
         <string>description</string>
         <string>displayname</string>
-        <string>entitylogicalname</string>
         <string>iscustomizable</string>
         <string>ismanaged</string>
         <string>name</string>
@@ -94,6 +92,17 @@
       <Relationships>
         <string>customapi_customapiresponseproperty</string>
       </Relationships>
+    </SelectedEntity>
+    <SelectedEntity>
+      <Name>workflow</Name>
+      <Attributes>
+        <string>category</string>
+        <string>componentstate</string>
+        <string>workflowid</string>
+        <string>statuscode</string>
+        <string>type</string>
+      </Attributes>
+      <Relationships />
     </SelectedEntity>
     <SelectedEntity>
       <Name>userquery</Name>
@@ -112,9 +121,26 @@
       <Relationships />
     </SelectedEntity>
     <SelectedEntity>
+      <Name>solution</Name>
+      <Attributes>
+        <string>friendlyname</string>
+        <string>isvisible</string>
+        <string>uniquename</string>
+        <string>ismanaged</string>
+        <string>publisherid</string>
+        <string>solutionid</string>
+        <string>solutiontype</string>
+        <string>version</string>
+      </Attributes>
+      <Relationships>
+        <string>solution_solutioncomponent</string>
+      </Relationships>
+    </SelectedEntity>
+    <SelectedEntity>
       <Name>solutioncomponent</Name>
       <Attributes>
         <string>ismetadata</string>
+        <string>componenttype</string>
         <string>objectid</string>
         <string>solutionid</string>
       </Attributes>
@@ -149,7 +175,7 @@
     <ManagedTrue>false</ManagedTrue>
     <ManagedFalse>false</ManagedFalse>
     <Intersect>false</Intersect>
-    <SelectedOnly>false</SelectedOnly>
+    <SelectedOnly>true</SelectedOnly>
   </EntityFilter>
   <AttributeFilter>
     <Expanded>true</Expanded>
