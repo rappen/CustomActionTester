@@ -232,13 +232,17 @@ namespace Rappen.XTB.CAT
                         {
                             var string_writer = new StringWriter();
                             var xml_text_writer = new XmlTextWriter(string_writer);
-                            xml_text_writer.Formatting = System.Xml.Formatting.Indented;
+                            xml_text_writer.Formatting = Formatting.Indented;
                             strvalue = string_writer.ToString();
+                            if (string.IsNullOrWhiteSpace(strvalue))
+                            {
+                                throw new XmlException("Unable to parse XML");
+                            }
                         }
                     }
                     catch (Exception ex)
                     {
-                        strvalue = $"Error: {ex}";
+                        rbFormatText.Checked = true;
                     }
                 }
                 txtResultDetail.Text = strvalue;
