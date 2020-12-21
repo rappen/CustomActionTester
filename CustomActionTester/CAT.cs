@@ -38,9 +38,7 @@ namespace Rappen.XTB.CAT
             tslAbout.Image = catTool.Logo24;
             gbCustomWhat.Text = catTool.Target;
             lblCustomWhat.Text = catTool.Target;
-            txtUniqueName.DisplayFormat = catTool.NameIdentifierColumn;
-            txtMessageName.DisplayFormat = catTool.MessageIdentifierColumn;
-            txtScope.DisplayFormat = "{{" + catTool.ScopeColumn + "}} {{" + catTool.BoundEntityColumn + "}}";
+            RefreshLayout();
         }
 
         #endregion Public Constructors
@@ -54,8 +52,6 @@ namespace Rappen.XTB.CAT
             inputdlg = null;
             cmbSolution.OrganizationService = newService;
             cmbCustomActions.OrganizationService = newService;
-            txtUniqueName.OrganizationService = newService;
-            txtMessageName.OrganizationService = newService;
             txtScope.OrganizationService = newService;
             txtScopeRecord.OrganizationService = newService;
             gridInputParams.OrganizationService = newService;
@@ -142,6 +138,20 @@ namespace Rappen.XTB.CAT
         private void btnLookup_Click(object sender, EventArgs e)
         {
             LookupBoundRecord();
+        }
+
+        private void mnuShowDisplay_Click(object sender, EventArgs e)
+        {
+            mnuShowDisplay.Checked = true;
+            mnuShowUnique.Checked = false;
+            RefreshLayout();
+        }
+
+        private void mnuShowUnique_Click(object sender, EventArgs e)
+        {
+            mnuShowUnique.Checked = true;
+            mnuShowDisplay.Checked = false;
+            RefreshLayout();
         }
     }
 }

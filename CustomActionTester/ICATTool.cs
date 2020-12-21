@@ -10,11 +10,7 @@ namespace Rappen.XTB.CAT
     {
         string Name { get; }
         string Target { get; }
-        string NameIdentifierColumn { get; }
-        string MessageIdentifierColumn { get; }
-        string ParameterIdentifierColumn { get; }
-        string ScopeColumn { get; }
-        string BoundEntityColumn { get; }
+        Columns Columns { get; }
         Bitmap Logo16 { get; }
         Bitmap Logo24 { get; }
         Icon Icon16 { get; }
@@ -25,5 +21,17 @@ namespace Rappen.XTB.CAT
         QueryExpression GetOutputQuery(Guid actionid);
         void PreProcessParams(EntityCollection records, IEnumerable<EntityMetadataProxy> entities);
         Customapi.BindingType_OptionSet BindingType(Entity ca);
+        void AddSolutionFilter(QueryExpression qx);
+    }
+
+    public class Columns
+    {
+        public string APIName;
+        public string APIUniqueName;
+        public string APIMessageName;
+        public string APIScope;
+        public string APIBoundEntity;
+        public string ParamName;
+        public string ParamUniqueName;
     }
 }

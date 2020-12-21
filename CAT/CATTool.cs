@@ -13,16 +13,6 @@ namespace Rappen.XTB.CAT
 
         public string Target => "Custom Action";
 
-        public string NameIdentifierColumn => "uniquename";
-
-        public string MessageIdentifierColumn => "M.name";
-
-        public string ParameterIdentifierColumn => "name";
-
-        public string ScopeColumn => string.Empty;
-
-        public string BoundEntityColumn => string.Empty;
-
         public Bitmap Logo16 => Properties.Resources.CAT_logo_16;
 
         public Bitmap Logo24 => Properties.Resources.CAT_logo_24;
@@ -30,6 +20,26 @@ namespace Rappen.XTB.CAT
         public Icon Icon16 => Properties.Resources.CAT_icon;
 
         public Image LogoAbout => Properties.Resources.CAT_about;
+
+        public Columns Columns => new Columns
+        {
+            APIName = "name",
+            APIUniqueName = "uniquename",
+            APIMessageName = "M.name",
+            ParamName = "name",
+            ParamUniqueName = "uniquename"
+        };
+
+        public void AddSolutionFilter(QueryExpression qx)
+        {
+            var solcomp = qx.AddLink(Solutioncomponent.EntityName, Solutioncomponent.SolutionId, Solution.PrimaryKey);
+            solcomp.Columns.AddColumns(Solutioncomponent.ComponentType);
+            var wf = solcomp.AddLink(Workflow.EntityName, Solutioncomponent.ObjectId, Workflow.PrimaryKey);
+            wf.LinkCriteria.AddCondition(Workflow.Category, ConditionOperator.Equal, (int)Workflow.Category_OptionSet.Action);
+            wf.LinkCriteria.AddCondition(Workflow.Type, ConditionOperator.Equal, (int)Workflow.Type_OptionSet.Definition);
+            wf.LinkCriteria.AddCondition(Workflow.ComponentState, ConditionOperator.Equal, (int)Workflow.ComponentState_OptionSet.Published);
+            wf.LinkCriteria.AddCondition(Workflow.StatusCode, ConditionOperator.Equal, (int)Workflow.StatusCode_OptionSet.Activated);
+        }
 
         public Customapi.BindingType_OptionSet BindingType(Entity ca)
         {

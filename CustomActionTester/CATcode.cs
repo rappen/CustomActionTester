@@ -157,7 +157,7 @@ namespace Rappen.XTB.CAT
         {
             txtExecution.Text = string.Empty;
             ClearOutputParamValues();
-            var request = new OrganizationRequest(txtMessageName.Text);
+            var request = new OrganizationRequest(GetApiMessage());
             if (txtScopeRecord.EntityReference != null)
             {
                 request.Parameters["Target"] = txtScopeRecord.EntityReference;
@@ -270,9 +270,18 @@ namespace Rappen.XTB.CAT
             FormatResultDetail();
         }
 
+        private string GetApiMessage()
+        {
+            if (cmbCustomActions.SelectedEntity==null||!cmbCustomActions.SelectedEntity.TryGetAttributeValue(catTool.Columns.APIMessageName, out string message))
+            {
+                return string.Empty;
+            }
+            return message;
+        }
+
         private string GetBoundEntity()
         {
-            if (txtScope.Entity == null || !txtScope.Entity.TryGetAttributeValue(catTool.BoundEntityColumn, out string entity))
+            if (txtScope.Entity == null || !txtScope.Entity.TryGetAttributeValue(catTool.Columns.APIBoundEntity, out string entity))
             {
                 return string.Empty;
             }
@@ -423,19 +432,13 @@ namespace Rappen.XTB.CAT
 
         private void GetSolutions(bool managed, bool invisible)
         {
-            var qx = new QueryExpression("solution");
+            var qx = new QueryExpression(Solution.EntityName);
             qx.Distinct = true;
-            qx.ColumnSet.AddColumns("uniquename", "friendlyname", "version", "solutionid");
-            qx.AddOrder("friendlyname", OrderType.Ascending);
-            qx.Criteria.AddCondition("ismanaged", ConditionOperator.Equal, managed);
-            qx.Criteria.AddCondition("isvisible", ConditionOperator.Equal, !invisible);
-            var solcomp = qx.AddLink("solutioncomponent", "solutionid", "solutionid");
-            solcomp.Columns.AddColumns("componenttype");
-            var wf = solcomp.AddLink("workflow", "objectid", "workflowid");
-            wf.LinkCriteria.AddCondition("category", ConditionOperator.Equal, 3);
-            wf.LinkCriteria.AddCondition("type", ConditionOperator.Equal, 1);
-            wf.LinkCriteria.AddCondition("componentstate", ConditionOperator.Equal, 0);
-            wf.LinkCriteria.AddCondition("statuscode", ConditionOperator.Equal, 2);
+            qx.ColumnSet.AddColumns(Solution.PrimaryKey, Solution.PrimaryName, Solution.UniqueName, Solution.Version);
+            qx.AddOrder(Solution.PrimaryName, OrderType.Ascending);
+            qx.Criteria.AddCondition(Solution.Ismanaged, ConditionOperator.Equal, managed);
+            qx.Criteria.AddCondition(Solution.Isvisible, ConditionOperator.Equal, !invisible);
+            catTool.AddSolutionFilter(qx);
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Getting Solutions",
@@ -518,8 +521,8 @@ namespace Rappen.XTB.CAT
             foreach (var result in outputparams)
             {
                 var output = outputs
-                    .FirstOrDefault(o => o.Contains(catTool.ParameterIdentifierColumn) &&
-                        o[catTool.ParameterIdentifierColumn].ToString().Equals(result.Key));
+                    .FirstOrDefault(o => o.Contains(catTool.Columns.ParamUniqueName) &&
+                        o[catTool.Columns.ParamUniqueName].ToString().Equals(result.Key));
                 if (output == null)
                 {
                     continue;
@@ -590,8 +593,6 @@ namespace Rappen.XTB.CAT
             {
                 return;
             }
-            txtUniqueName.Entity = ca;
-            txtMessageName.Entity = ca;
             txtScope.Entity = ca;
             txtScopeRecord.Entity = null;
             var bindingtype = catTool.BindingType(ca);
@@ -603,7 +604,15 @@ namespace Rappen.XTB.CAT
 
         private void TraceLastExecution()
         {
-            OnOutgoingMessage(this, new MessageBusEventArgs("Plugin Trace Viewer", true) { TargetArgument = $"Message={txtMessageName.Text}" });
+            OnOutgoingMessage(this, new MessageBusEventArgs("Plugin Trace Viewer", true) { TargetArgument = $"Message={GetApiMessage()}" });
+        }
+
+        private void RefreshLayout()
+        {
+            var unique = mnuShowUnique.Checked;
+            cmbSolution.DisplayFormat = "{{" + (unique ? Solution.UniqueName : Solution.PrimaryName) + "}} {{" + Solution.Version + "}}";
+            cmbCustomActions.DisplayFormat = unique ? catTool.Columns.APIUniqueName : catTool.Columns.APIName;
+            txtScope.DisplayFormat = "{{" + catTool.Columns.APIScope + "}} {{" + catTool.Columns.APIBoundEntity + "}}";
         }
 
         #endregion Private Methods

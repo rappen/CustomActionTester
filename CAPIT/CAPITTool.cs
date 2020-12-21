@@ -14,12 +14,6 @@ namespace Rappen.XTB.CAPIT
 
         public string Target => "Custom API";
 
-        public string NameIdentifierColumn => Customapi.PrimaryName;
-
-        public string MessageIdentifierColumn => Customapi.UniqueName;
-
-        public string ParameterIdentifierColumn => Customapirequestparameter.UniqueName;
-
         public Bitmap Logo16 => Properties.Resources.CAPIT_logo_16;
 
         public Bitmap Logo24 => Properties.Resources.CAPIT_logo_24;
@@ -28,9 +22,23 @@ namespace Rappen.XTB.CAPIT
 
         public Image LogoAbout => Properties.Resources.CAPIT_about;
 
-        public string ScopeColumn => Customapi.BindingType;
+        public Columns Columns => new Columns
+        {
+            APIName = Customapi.PrimaryName,
+            APIUniqueName = Customapi.UniqueName,
+            APIMessageName = Customapi.UniqueName,
+            APIScope = Customapi.BindingType,
+            APIBoundEntity = Customapi.BoundEntityLogicalName,
+            ParamName = Customapirequestparameter.PrimaryName,
+            ParamUniqueName = Customapirequestparameter.UniqueName
+        };
 
-        public string BoundEntityColumn => Customapi.BoundEntityLogicalName;
+        public void AddSolutionFilter(QueryExpression qx)
+        {
+            var solcomp = qx.AddLink(Solutioncomponent.EntityName, Solutioncomponent.SolutionId, Solution.PrimaryKey);
+            var custapi = solcomp.AddLink(Customapi.EntityName, Solutioncomponent.ObjectId, Customapi.PrimaryKey);
+            custapi.LinkCriteria.AddCondition(Customapi.StatusCode, ConditionOperator.Equal, (int)Customapi.StatusCode_OptionSet.Active);
+        }
 
         public Customapi.BindingType_OptionSet BindingType(Entity ca)
         {

@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomActionTester));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.btnExecute = new System.Windows.Forms.ToolStripButton();
             this.tslAbout = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPTV = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSettings = new System.Windows.Forms.ToolStripDropDownButton();
+            this.mnuShowDisplay = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuShowUnique = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbCustomActions = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
             this.lblCustomWhat = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtUniqueName = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
-            this.txtMessageName = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtScope = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.gridInputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
@@ -129,7 +129,9 @@
             this.btnExecute,
             this.tslAbout,
             this.toolStripSeparator1,
-            this.btnPTV});
+            this.btnPTV,
+            this.toolStripSeparator2,
+            this.btnSettings});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
             this.toolStripMenu.Size = new System.Drawing.Size(1045, 31);
@@ -171,6 +173,38 @@
             this.btnPTV.Text = "Trace last execution";
             this.btnPTV.Click += new System.EventHandler(this.btnPTV_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuShowDisplay,
+            this.mnuShowUnique});
+            this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
+            this.btnSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(86, 28);
+            this.btnSettings.Text = "Settings";
+            // 
+            // mnuShowDisplay
+            // 
+            this.mnuShowDisplay.Checked = true;
+            this.mnuShowDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mnuShowDisplay.Name = "mnuShowDisplay";
+            this.mnuShowDisplay.Size = new System.Drawing.Size(180, 22);
+            this.mnuShowDisplay.Text = "Display Name";
+            this.mnuShowDisplay.Click += new System.EventHandler(this.mnuShowDisplay_Click);
+            // 
+            // mnuShowUnique
+            // 
+            this.mnuShowUnique.Name = "mnuShowUnique";
+            this.mnuShowUnique.Size = new System.Drawing.Size(180, 22);
+            this.mnuShowUnique.Text = "Unique Name";
+            this.mnuShowUnique.Click += new System.EventHandler(this.mnuShowUnique_Click);
+            // 
             // cmbCustomActions
             // 
             this.cmbCustomActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -194,56 +228,6 @@
             this.lblCustomWhat.TabIndex = 6;
             this.lblCustomWhat.Text = "Custom Action";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 54);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Unique Name";
-            // 
-            // txtUniqueName
-            // 
-            this.txtUniqueName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUniqueName.BackColor = System.Drawing.SystemColors.Window;
-            this.txtUniqueName.DisplayFormat = "{{uniquename}}";
-            this.txtUniqueName.Entity = null;
-            this.txtUniqueName.EntityReference = null;
-            this.txtUniqueName.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtUniqueName.Location = new System.Drawing.Point(114, 51);
-            this.txtUniqueName.LogicalName = null;
-            this.txtUniqueName.Name = "txtUniqueName";
-            this.txtUniqueName.OrganizationService = null;
-            this.txtUniqueName.Size = new System.Drawing.Size(372, 20);
-            this.txtUniqueName.TabIndex = 8;
-            // 
-            // txtMessageName
-            // 
-            this.txtMessageName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessageName.BackColor = System.Drawing.SystemColors.Window;
-            this.txtMessageName.DisplayFormat = "{{M.name}}";
-            this.txtMessageName.Entity = null;
-            this.txtMessageName.EntityReference = null;
-            this.txtMessageName.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtMessageName.Location = new System.Drawing.Point(114, 77);
-            this.txtMessageName.LogicalName = null;
-            this.txtMessageName.Name = "txtMessageName";
-            this.txtMessageName.OrganizationService = null;
-            this.txtMessageName.Size = new System.Drawing.Size(372, 20);
-            this.txtMessageName.TabIndex = 10;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 80);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Message Name";
-            // 
             // txtScope
             // 
             this.txtScope.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -253,7 +237,7 @@
             this.txtScope.Entity = null;
             this.txtScope.EntityReference = null;
             this.txtScope.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtScope.Location = new System.Drawing.Point(114, 103);
+            this.txtScope.Location = new System.Drawing.Point(114, 52);
             this.txtScope.LogicalName = null;
             this.txtScope.Name = "txtScope";
             this.txtScope.OrganizationService = null;
@@ -263,7 +247,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 106);
+            this.label4.Location = new System.Drawing.Point(13, 55);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 11;
@@ -280,14 +264,14 @@
             this.gridInputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridInputParams.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridInputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.gridInputParams.ColumnOrder = "";
             this.gridInputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.index,
@@ -296,35 +280,35 @@
             this.type,
             this.subtype,
             this.value});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle8;
             this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridInputParams.FilterColumns = "";
-            this.gridInputParams.Location = new System.Drawing.Point(114, 155);
+            this.gridInputParams.Location = new System.Drawing.Point(114, 104);
             this.gridInputParams.MultiSelect = false;
             this.gridInputParams.Name = "gridInputParams";
             this.gridInputParams.OrganizationService = null;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.gridInputParams.RowHeadersVisible = false;
             this.gridInputParams.RowHeadersWidth = 16;
             this.gridInputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(372, 177);
+            this.gridInputParams.Size = new System.Drawing.Size(372, 180);
             this.gridInputParams.TabIndex = 13;
             this.gridInputParams.RecordDoubleClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordDoubleClick);
             // 
@@ -388,7 +372,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 161);
+            this.label5.Location = new System.Drawing.Point(13, 110);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 14;
@@ -428,7 +412,7 @@
             // 
             this.splitLeft.Panel2.Controls.Add(this.grResults);
             this.splitLeft.Size = new System.Drawing.Size(498, 638);
-            this.splitLeft.SplitterDistance = 432;
+            this.splitLeft.SplitterDistance = 381;
             this.splitLeft.SplitterWidth = 8;
             this.splitLeft.TabIndex = 15;
             // 
@@ -440,18 +424,14 @@
             this.gbCustomWhat.Controls.Add(this.label8);
             this.gbCustomWhat.Controls.Add(this.cmbCustomActions);
             this.gbCustomWhat.Controls.Add(this.txtScope);
-            this.gbCustomWhat.Controls.Add(this.label2);
             this.gbCustomWhat.Controls.Add(this.lblCustomWhat);
-            this.gbCustomWhat.Controls.Add(this.txtUniqueName);
-            this.gbCustomWhat.Controls.Add(this.txtMessageName);
             this.gbCustomWhat.Controls.Add(this.gridInputParams);
             this.gbCustomWhat.Controls.Add(this.label5);
             this.gbCustomWhat.Controls.Add(this.label4);
-            this.gbCustomWhat.Controls.Add(this.label3);
             this.gbCustomWhat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbCustomWhat.Location = new System.Drawing.Point(0, 81);
             this.gbCustomWhat.Name = "gbCustomWhat";
-            this.gbCustomWhat.Size = new System.Drawing.Size(498, 351);
+            this.gbCustomWhat.Size = new System.Drawing.Size(498, 300);
             this.gbCustomWhat.TabIndex = 0;
             this.gbCustomWhat.TabStop = false;
             this.gbCustomWhat.Text = "Custom Action";
@@ -459,7 +439,7 @@
             // btnScopeRecord
             // 
             this.btnScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScopeRecord.Location = new System.Drawing.Point(462, 128);
+            this.btnScopeRecord.Location = new System.Drawing.Point(462, 77);
             this.btnScopeRecord.Name = "btnScopeRecord";
             this.btnScopeRecord.Size = new System.Drawing.Size(24, 22);
             this.btnScopeRecord.TabIndex = 25;
@@ -476,7 +456,7 @@
             this.txtScopeRecord.Entity = null;
             this.txtScopeRecord.EntityReference = null;
             this.txtScopeRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtScopeRecord.Location = new System.Drawing.Point(114, 129);
+            this.txtScopeRecord.Location = new System.Drawing.Point(114, 78);
             this.txtScopeRecord.LogicalName = null;
             this.txtScopeRecord.Name = "txtScopeRecord";
             this.txtScopeRecord.OrganizationService = null;
@@ -486,7 +466,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 132);
+            this.label12.Location = new System.Drawing.Point(13, 81);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(42, 13);
             this.label12.TabIndex = 23;
@@ -494,7 +474,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(24, 204);
+            this.label8.Location = new System.Drawing.Point(24, 153);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 63);
             this.label8.TabIndex = 20;
@@ -579,7 +559,7 @@
             this.grResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grResults.Location = new System.Drawing.Point(0, 0);
             this.grResults.Name = "grResults";
-            this.grResults.Size = new System.Drawing.Size(498, 198);
+            this.grResults.Size = new System.Drawing.Size(498, 249);
             this.grResults.TabIndex = 17;
             this.grResults.TabStop = false;
             this.grResults.Text = "Results";
@@ -637,49 +617,49 @@
             this.gridOutputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridOutputParams.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridOutputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.gridOutputParams.ColumnOrder = "";
             this.gridOutputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle11;
             this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridOutputParams.FilterColumns = "";
             this.gridOutputParams.Location = new System.Drawing.Point(114, 51);
             this.gridOutputParams.MultiSelect = false;
             this.gridOutputParams.Name = "gridOutputParams";
             this.gridOutputParams.OrganizationService = null;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.gridOutputParams.RowHeadersVisible = false;
             this.gridOutputParams.RowHeadersWidth = 16;
             this.gridOutputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridOutputParams.ShowEditingIcon = false;
             this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(372, 125);
+            this.gridOutputParams.Size = new System.Drawing.Size(372, 183);
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
             // 
@@ -965,10 +945,6 @@
         private System.Windows.Forms.ToolStrip toolStripMenu;
         private xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox cmbCustomActions;
         private System.Windows.Forms.Label lblCustomWhat;
-        private System.Windows.Forms.Label label2;
-        private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtUniqueName;
-        private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtMessageName;
-        private System.Windows.Forms.Label label3;
         private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtScope;
         private System.Windows.Forms.Label label4;
         private xrmtb.XrmToolBox.Controls.CRMGridView gridInputParams;
@@ -989,8 +965,6 @@
         private System.Windows.Forms.ToolStripLabel tslAbout;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox gbSolution;
-        private System.Windows.Forms.CheckBox chkSolInvisible;
-        private System.Windows.Forms.CheckBox chkSolManaged;
         private System.Windows.Forms.Label label9;
         private xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox cmbSolution;
         private System.Windows.Forms.Label label7;
@@ -1022,5 +996,11 @@
         private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtScopeRecord;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnScopeRecord;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mnuShowDisplay;
+        private System.Windows.Forms.ToolStripMenuItem mnuShowUnique;
+        private System.Windows.Forms.CheckBox chkSolInvisible;
+        private System.Windows.Forms.CheckBox chkSolManaged;
+        private System.Windows.Forms.ToolStripDropDownButton btnSettings;
     }
 }
