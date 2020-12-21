@@ -2,11 +2,9 @@
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using xrmtb.XrmToolBox.Controls.Controls;
-using XrmToolBox;
 using XrmToolBox.Extensibility;
 
 namespace Rappen.XTB.CAT
@@ -40,7 +38,9 @@ namespace Rappen.XTB.CAT
             tslAbout.Image = catTool.Logo24;
             gbCustomWhat.Text = catTool.Target;
             lblCustomWhat.Text = catTool.Target;
+            txtUniqueName.DisplayFormat = catTool.NameIdentifierColumn;
             txtMessageName.DisplayFormat = catTool.MessageIdentifierColumn;
+            txtScope.DisplayFormat = "{{" + catTool.ScopeColumn + "}} {{" + catTool.BoundEntityColumn + "}}";
         }
 
         #endregion Public Constructors
@@ -56,7 +56,8 @@ namespace Rappen.XTB.CAT
             cmbCustomActions.OrganizationService = newService;
             txtUniqueName.OrganizationService = newService;
             txtMessageName.OrganizationService = newService;
-            txtCreatedBy.OrganizationService = newService;
+            txtScope.OrganizationService = newService;
+            txtScopeRecord.OrganizationService = newService;
             gridInputParams.OrganizationService = newService;
             gridOutputParams.OrganizationService = newService;
             txtCDSDataHelper.OrganizationService = newService;
@@ -137,5 +138,10 @@ namespace Rappen.XTB.CAT
         }
 
         #endregion Private Methods
+
+        private void btnLookup_Click(object sender, EventArgs e)
+        {
+            LookupBoundRecord();
+        }
     }
 }

@@ -13,9 +13,15 @@ namespace Rappen.XTB.CAT
 
         public string Target => "Custom Action";
 
+        public string NameIdentifierColumn => "uniquename";
+
         public string MessageIdentifierColumn => "M.name";
 
         public string ParameterIdentifierColumn => "name";
+
+        public string ScopeColumn => string.Empty;
+
+        public string BoundEntityColumn => string.Empty;
 
         public Bitmap Logo16 => Properties.Resources.CAT_logo_16;
 
@@ -24,6 +30,11 @@ namespace Rappen.XTB.CAT
         public Icon Icon16 => Properties.Resources.CAT_icon;
 
         public Image LogoAbout => Properties.Resources.CAT_about;
+
+        public Customapi.BindingType_OptionSet BindingType(Entity ca)
+        {
+            return Customapi.BindingType_OptionSet.Global;
+        }
 
         public QueryExpression GetActionQuery(Guid solutionid)
         {

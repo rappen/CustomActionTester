@@ -14,6 +14,8 @@ namespace Rappen.XTB.CAPIT
 
         public string Target => "Custom API";
 
+        public string NameIdentifierColumn => Customapi.PrimaryName;
+
         public string MessageIdentifierColumn => Customapi.UniqueName;
 
         public string ParameterIdentifierColumn => Customapirequestparameter.UniqueName;
@@ -25,6 +27,19 @@ namespace Rappen.XTB.CAPIT
         public Icon Icon16 => Properties.Resources.CAPIT_icon;
 
         public Image LogoAbout => Properties.Resources.CAPIT_about;
+
+        public string ScopeColumn => Customapi.BindingType;
+
+        public string BoundEntityColumn => Customapi.BoundEntityLogicalName;
+
+        public Customapi.BindingType_OptionSet BindingType(Entity ca)
+        {
+            if (!ca.TryGetAttributeValue(Customapi.BindingType, out OptionSetValue type))
+            {
+                return Customapi.BindingType_OptionSet.Global;
+            }
+            return (Customapi.BindingType_OptionSet)type.Value;
+        }
 
         public QueryExpression GetActionQuery(Guid solutionid)
         {

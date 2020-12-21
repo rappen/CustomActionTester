@@ -8,9 +8,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml;
+using xrmtb.XrmToolBox.Controls.Controls;
 using XrmToolBox.Extensibility;
 using XrmToolBox.Extensibility.Interfaces;
 
@@ -158,6 +158,10 @@ namespace Rappen.XTB.CAT
             txtExecution.Text = string.Empty;
             ClearOutputParamValues();
             var request = new OrganizationRequest(txtMessageName.Text);
+            if (txtScopeRecord.EntityReference != null)
+            {
+                request.Parameters["Target"] = txtScopeRecord.EntityReference;
+            }
             foreach (var input in gridInputParams.DataSource as IEnumerable<Entity>)
             {
                 var name = string.Empty;
@@ -260,6 +264,15 @@ namespace Rappen.XTB.CAT
                 }
             }
             FormatResultDetail();
+        }
+
+        private string GetBoundEntity()
+        {
+            if (txtScope.Entity == null || !txtScope.Entity.TryGetAttributeValue(catTool.BoundEntityColumn, out string entity))
+            {
+                return string.Empty;
+            }
+            return entity.Trim();
         }
 
         private void GetCustomActions(Entity solution)
@@ -475,6 +488,26 @@ namespace Rappen.XTB.CAT
             });
         }
 
+        private void LookupBoundRecord()
+        {
+            var entity = GetBoundEntity();
+            if (string.IsNullOrWhiteSpace(entity))
+            {
+                return;
+            }
+            var lkp = new CDSLookupDialog
+            {
+                Service = txtScopeRecord.OrganizationService,
+                LogicalName = entity
+            };
+            if (lkp.ShowDialog(this) != DialogResult.OK)
+            {
+                return;
+            }
+            txtScopeRecord.Entity = lkp.Entity;
+            btnExecute.Enabled = ReadyToExecute();
+        }
+
         private void PopulateOutputParamValues(ParameterCollection outputparams)
         {
             var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
@@ -532,6 +565,10 @@ namespace Rappen.XTB.CAT
             {
                 return false;
             }
+            if (!string.IsNullOrWhiteSpace(GetBoundEntity()) && txtScopeRecord.Entity == null)
+            {
+                return false;
+            }
             foreach (var inputparam in inputparams)
             {
                 if (inputparam.TryGetAttributeValue("isoptional", out bool optional) && !optional &&
@@ -551,7 +588,11 @@ namespace Rappen.XTB.CAT
             }
             txtUniqueName.Entity = ca;
             txtMessageName.Entity = ca;
-            txtCreatedBy.Entity = ca;
+            txtScope.Entity = ca;
+            txtScopeRecord.Entity = null;
+            var bindingtype = catTool.BindingType(ca);
+            txtScopeRecord.Enabled = bindingtype != Customapi.BindingType_OptionSet.Global;
+            btnScopeRecord.Enabled = bindingtype != Customapi.BindingType_OptionSet.Global;
             txtExecution.Text = string.Empty;
             GetInputParams(ca);
         }

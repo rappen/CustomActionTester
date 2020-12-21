@@ -46,7 +46,7 @@
             this.txtUniqueName = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.txtMessageName = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtCreatedBy = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
+            this.txtScope = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.gridInputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
             this.index = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +59,9 @@
             this.splitFullForm = new System.Windows.Forms.SplitContainer();
             this.splitLeft = new System.Windows.Forms.SplitContainer();
             this.gbCustomWhat = new System.Windows.Forms.GroupBox();
+            this.btnScopeRecord = new System.Windows.Forms.Button();
+            this.txtScopeRecord = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.gbSolution = new System.Windows.Forms.GroupBox();
             this.chkSolInvisible = new System.Windows.Forms.CheckBox();
@@ -241,30 +244,30 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Message Name";
             // 
-            // txtCreatedBy
+            // txtScope
             // 
-            this.txtCreatedBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtScope.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCreatedBy.BackColor = System.Drawing.SystemColors.Window;
-            this.txtCreatedBy.DisplayFormat = "{{createdby}}";
-            this.txtCreatedBy.Entity = null;
-            this.txtCreatedBy.EntityReference = null;
-            this.txtCreatedBy.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtCreatedBy.Location = new System.Drawing.Point(114, 103);
-            this.txtCreatedBy.LogicalName = null;
-            this.txtCreatedBy.Name = "txtCreatedBy";
-            this.txtCreatedBy.OrganizationService = null;
-            this.txtCreatedBy.Size = new System.Drawing.Size(372, 20);
-            this.txtCreatedBy.TabIndex = 12;
+            this.txtScope.BackColor = System.Drawing.SystemColors.Window;
+            this.txtScope.DisplayFormat = "{{bindingtype}}";
+            this.txtScope.Entity = null;
+            this.txtScope.EntityReference = null;
+            this.txtScope.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.txtScope.Location = new System.Drawing.Point(114, 103);
+            this.txtScope.LogicalName = null;
+            this.txtScope.Name = "txtScope";
+            this.txtScope.OrganizationService = null;
+            this.txtScope.Size = new System.Drawing.Size(372, 20);
+            this.txtScope.TabIndex = 12;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 106);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Created By";
+            this.label4.Text = "Scope";
             // 
             // gridInputParams
             // 
@@ -303,7 +306,7 @@
             this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridInputParams.FilterColumns = "";
-            this.gridInputParams.Location = new System.Drawing.Point(114, 129);
+            this.gridInputParams.Location = new System.Drawing.Point(114, 155);
             this.gridInputParams.MultiSelect = false;
             this.gridInputParams.Name = "gridInputParams";
             this.gridInputParams.OrganizationService = null;
@@ -321,7 +324,7 @@
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(372, 172);
+            this.gridInputParams.Size = new System.Drawing.Size(372, 177);
             this.gridInputParams.TabIndex = 13;
             this.gridInputParams.RecordDoubleClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordDoubleClick);
             // 
@@ -385,7 +388,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 129);
+            this.label5.Location = new System.Drawing.Point(13, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 14;
@@ -425,15 +428,18 @@
             // 
             this.splitLeft.Panel2.Controls.Add(this.grResults);
             this.splitLeft.Size = new System.Drawing.Size(498, 638);
-            this.splitLeft.SplitterDistance = 401;
+            this.splitLeft.SplitterDistance = 432;
             this.splitLeft.SplitterWidth = 8;
             this.splitLeft.TabIndex = 15;
             // 
             // gbCustomWhat
             // 
+            this.gbCustomWhat.Controls.Add(this.btnScopeRecord);
+            this.gbCustomWhat.Controls.Add(this.txtScopeRecord);
+            this.gbCustomWhat.Controls.Add(this.label12);
             this.gbCustomWhat.Controls.Add(this.label8);
             this.gbCustomWhat.Controls.Add(this.cmbCustomActions);
-            this.gbCustomWhat.Controls.Add(this.txtCreatedBy);
+            this.gbCustomWhat.Controls.Add(this.txtScope);
             this.gbCustomWhat.Controls.Add(this.label2);
             this.gbCustomWhat.Controls.Add(this.lblCustomWhat);
             this.gbCustomWhat.Controls.Add(this.txtUniqueName);
@@ -445,14 +451,50 @@
             this.gbCustomWhat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbCustomWhat.Location = new System.Drawing.Point(0, 81);
             this.gbCustomWhat.Name = "gbCustomWhat";
-            this.gbCustomWhat.Size = new System.Drawing.Size(498, 320);
+            this.gbCustomWhat.Size = new System.Drawing.Size(498, 351);
             this.gbCustomWhat.TabIndex = 0;
             this.gbCustomWhat.TabStop = false;
             this.gbCustomWhat.Text = "Custom Action";
             // 
+            // btnScopeRecord
+            // 
+            this.btnScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnScopeRecord.Location = new System.Drawing.Point(462, 128);
+            this.btnScopeRecord.Name = "btnScopeRecord";
+            this.btnScopeRecord.Size = new System.Drawing.Size(24, 22);
+            this.btnScopeRecord.TabIndex = 25;
+            this.btnScopeRecord.Text = "...";
+            this.btnScopeRecord.UseVisualStyleBackColor = true;
+            this.btnScopeRecord.Click += new System.EventHandler(this.btnLookup_Click);
+            // 
+            // txtScopeRecord
+            // 
+            this.txtScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtScopeRecord.BackColor = System.Drawing.SystemColors.Window;
+            this.txtScopeRecord.DisplayFormat = "";
+            this.txtScopeRecord.Entity = null;
+            this.txtScopeRecord.EntityReference = null;
+            this.txtScopeRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.txtScopeRecord.Location = new System.Drawing.Point(114, 129);
+            this.txtScopeRecord.LogicalName = null;
+            this.txtScopeRecord.Name = "txtScopeRecord";
+            this.txtScopeRecord.OrganizationService = null;
+            this.txtScopeRecord.Size = new System.Drawing.Size(342, 20);
+            this.txtScopeRecord.TabIndex = 24;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(13, 132);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(42, 13);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Record";
+            // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(38, 168);
+            this.label8.Location = new System.Drawing.Point(24, 204);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 63);
             this.label8.TabIndex = 20;
@@ -537,7 +579,7 @@
             this.grResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grResults.Location = new System.Drawing.Point(0, 0);
             this.grResults.Name = "grResults";
-            this.grResults.Size = new System.Drawing.Size(498, 229);
+            this.grResults.Size = new System.Drawing.Size(498, 198);
             this.grResults.TabIndex = 17;
             this.grResults.TabStop = false;
             this.grResults.Text = "Results";
@@ -637,7 +679,7 @@
             this.gridOutputParams.ShowEditingIcon = false;
             this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(372, 156);
+            this.gridOutputParams.Size = new System.Drawing.Size(372, 125);
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
             // 
@@ -927,7 +969,7 @@
         private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtUniqueName;
         private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtMessageName;
         private System.Windows.Forms.Label label3;
-        private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtCreatedBy;
+        private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtScope;
         private System.Windows.Forms.Label label4;
         private xrmtb.XrmToolBox.Controls.CRMGridView gridInputParams;
         private System.Windows.Forms.Label label5;
@@ -977,5 +1019,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn subtype;
         private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtScopeRecord;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnScopeRecord;
     }
 }
