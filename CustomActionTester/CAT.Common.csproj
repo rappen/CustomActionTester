@@ -219,6 +219,7 @@
       <DependentUpon>InputValue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <Import Project="..\Rappen.XTB.Helper\Rappen.XTB.Helpers.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

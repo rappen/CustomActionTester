@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json.Linq;
+using Rappen.XTB.Helpers.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -272,11 +273,7 @@ namespace Rappen.XTB.CAT
 
         private string GetApiMessage()
         {
-            if (cmbCustomActions.SelectedEntity==null||!cmbCustomActions.SelectedEntity.TryGetAttributeValue(catTool.Columns.APIMessageName, out string message))
-            {
-                return string.Empty;
-            }
-            return message;
+            return cmbCustomActions.SelectedEntity.PropertyAsBaseType(catTool.Columns.APIMessageName, string.Empty, true) as string;
         }
 
         private string GetBoundEntity()
