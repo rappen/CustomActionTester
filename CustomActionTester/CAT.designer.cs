@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomActionTester));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.btnExecute = new System.Windows.Forms.ToolStripButton();
             this.tslAbout = new System.Windows.Forms.ToolStripLabel();
@@ -44,41 +44,24 @@
             this.btnSettings = new System.Windows.Forms.ToolStripDropDownButton();
             this.mnuShowDisplay = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuShowUnique = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmbCustomActions = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
             this.lblCustomWhat = new System.Windows.Forms.Label();
-            this.txtScope = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.gridInputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
-            this.index = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.option = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.splitFullForm = new System.Windows.Forms.SplitContainer();
             this.splitLeft = new System.Windows.Forms.SplitContainer();
             this.gbCustomWhat = new System.Windows.Forms.GroupBox();
             this.btnScopeRecord = new System.Windows.Forms.Button();
-            this.txtScopeRecord = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.gbSolution = new System.Windows.Forms.GroupBox();
             this.chkSolInvisible = new System.Windows.Forms.CheckBox();
             this.chkSolManaged = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.cmbSolution = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.grResults = new System.Windows.Forms.GroupBox();
-            this.txtCDSDataHelper = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.txtExecution = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.gridOutputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitRight = new System.Windows.Forms.SplitContainer();
             this.gbResultDetails = new System.Windows.Forms.GroupBox();
             this.txtResultDetail = new System.Windows.Forms.RichTextBox();
@@ -95,8 +78,24 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblDetailHeader = new System.Windows.Forms.Label();
             this.picHistoryClose = new System.Windows.Forms.PictureBox();
+            this.txtScopeRecord = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
+            this.cmbCustomActions = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
+            this.txtScope = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
+            this.gridInputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
+            this.dgInputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsOptional = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsSubtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbSolution = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
+            this.txtCDSDataHelper = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
+            this.gridOutputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
+            this.dgOutputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgOutputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgOutputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgOutputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
             this.splitFullForm.Panel1.SuspendLayout();
             this.splitFullForm.Panel2.SuspendLayout();
@@ -108,7 +107,6 @@
             this.gbCustomWhat.SuspendLayout();
             this.gbSolution.SuspendLayout();
             this.grResults.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitRight)).BeginInit();
             this.splitRight.Panel1.SuspendLayout();
             this.splitRight.Panel2.SuspendLayout();
@@ -120,6 +118,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryOpen)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripMenu
@@ -194,30 +194,16 @@
             this.mnuShowDisplay.Checked = true;
             this.mnuShowDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mnuShowDisplay.Name = "mnuShowDisplay";
-            this.mnuShowDisplay.Size = new System.Drawing.Size(180, 22);
+            this.mnuShowDisplay.Size = new System.Drawing.Size(147, 22);
             this.mnuShowDisplay.Text = "Display Name";
             this.mnuShowDisplay.Click += new System.EventHandler(this.mnuShowDisplay_Click);
             // 
             // mnuShowUnique
             // 
             this.mnuShowUnique.Name = "mnuShowUnique";
-            this.mnuShowUnique.Size = new System.Drawing.Size(180, 22);
+            this.mnuShowUnique.Size = new System.Drawing.Size(147, 22);
             this.mnuShowUnique.Text = "Unique Name";
             this.mnuShowUnique.Click += new System.EventHandler(this.mnuShowUnique_Click);
-            // 
-            // cmbCustomActions
-            // 
-            this.cmbCustomActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbCustomActions.DisplayFormat = "";
-            this.cmbCustomActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCustomActions.FormattingEnabled = true;
-            this.cmbCustomActions.Location = new System.Drawing.Point(114, 25);
-            this.cmbCustomActions.Name = "cmbCustomActions";
-            this.cmbCustomActions.OrganizationService = null;
-            this.cmbCustomActions.Size = new System.Drawing.Size(372, 21);
-            this.cmbCustomActions.TabIndex = 5;
-            this.cmbCustomActions.SelectedIndexChanged += new System.EventHandler(this.cmbCustomActions_SelectedIndexChanged);
             // 
             // lblCustomWhat
             // 
@@ -228,22 +214,6 @@
             this.lblCustomWhat.TabIndex = 6;
             this.lblCustomWhat.Text = "Custom Action";
             // 
-            // txtScope
-            // 
-            this.txtScope.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtScope.BackColor = System.Drawing.SystemColors.Window;
-            this.txtScope.DisplayFormat = "{{bindingtype}}";
-            this.txtScope.Entity = null;
-            this.txtScope.EntityReference = null;
-            this.txtScope.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtScope.Location = new System.Drawing.Point(114, 52);
-            this.txtScope.LogicalName = null;
-            this.txtScope.Name = "txtScope";
-            this.txtScope.OrganizationService = null;
-            this.txtScope.Size = new System.Drawing.Size(372, 20);
-            this.txtScope.TabIndex = 12;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -252,122 +222,6 @@
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "Scope";
-            // 
-            // gridInputParams
-            // 
-            this.gridInputParams.AllowUserToOrderColumns = true;
-            this.gridInputParams.AllowUserToResizeRows = false;
-            this.gridInputParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridInputParams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridInputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.gridInputParams.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.gridInputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.gridInputParams.ColumnOrder = "";
-            this.gridInputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.index,
-            this.name,
-            this.option,
-            this.type,
-            this.subtype,
-            this.value});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle8;
-            this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gridInputParams.FilterColumns = "";
-            this.gridInputParams.Location = new System.Drawing.Point(114, 104);
-            this.gridInputParams.MultiSelect = false;
-            this.gridInputParams.Name = "gridInputParams";
-            this.gridInputParams.OrganizationService = null;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.gridInputParams.RowHeadersVisible = false;
-            this.gridInputParams.RowHeadersWidth = 16;
-            this.gridInputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridInputParams.ShowEditingIcon = false;
-            this.gridInputParams.ShowFriendlyNames = true;
-            this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(372, 180);
-            this.gridInputParams.TabIndex = 13;
-            this.gridInputParams.RecordDoubleClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordDoubleClick);
-            // 
-            // index
-            // 
-            this.index.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.index.DataPropertyName = "position";
-            this.index.HeaderText = "#";
-            this.index.MinimumWidth = 24;
-            this.index.Name = "index";
-            this.index.ReadOnly = true;
-            this.index.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.index.Width = 24;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "Name";
-            this.name.MinimumWidth = 50;
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // option
-            // 
-            this.option.DataPropertyName = "isoptional";
-            this.option.HeaderText = "Optional";
-            this.option.MinimumWidth = 50;
-            this.option.Name = "option";
-            this.option.ReadOnly = true;
-            this.option.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.option.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // type
-            // 
-            this.type.DataPropertyName = "type";
-            this.type.HeaderText = "Type";
-            this.type.MinimumWidth = 50;
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            this.type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // subtype
-            // 
-            this.subtype.DataPropertyName = "subtype";
-            this.subtype.HeaderText = "Sub Type";
-            this.subtype.MinimumWidth = 50;
-            this.subtype.Name = "subtype";
-            this.subtype.ReadOnly = true;
-            this.subtype.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // value
-            // 
-            this.value.DataPropertyName = "value";
-            this.value.HeaderText = "Value";
-            this.value.MinimumWidth = 50;
-            this.value.Name = "value";
-            this.value.ReadOnly = true;
-            this.value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // label5
             // 
@@ -447,22 +301,6 @@
             this.btnScopeRecord.UseVisualStyleBackColor = true;
             this.btnScopeRecord.Click += new System.EventHandler(this.btnLookup_Click);
             // 
-            // txtScopeRecord
-            // 
-            this.txtScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtScopeRecord.BackColor = System.Drawing.SystemColors.Window;
-            this.txtScopeRecord.DisplayFormat = "";
-            this.txtScopeRecord.Entity = null;
-            this.txtScopeRecord.EntityReference = null;
-            this.txtScopeRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtScopeRecord.Location = new System.Drawing.Point(114, 78);
-            this.txtScopeRecord.LogicalName = null;
-            this.txtScopeRecord.Name = "txtScopeRecord";
-            this.txtScopeRecord.OrganizationService = null;
-            this.txtScopeRecord.Size = new System.Drawing.Size(342, 20);
-            this.txtScopeRecord.TabIndex = 24;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -526,20 +364,6 @@
             this.label9.TabIndex = 9;
             this.label9.Text = "Filter";
             // 
-            // cmbSolution
-            // 
-            this.cmbSolution.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbSolution.DisplayFormat = "{{friendlyname}} ({{uniquename}} {{version}})";
-            this.cmbSolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSolution.FormattingEnabled = true;
-            this.cmbSolution.Location = new System.Drawing.Point(114, 42);
-            this.cmbSolution.Name = "cmbSolution";
-            this.cmbSolution.OrganizationService = null;
-            this.cmbSolution.Size = new System.Drawing.Size(372, 21);
-            this.cmbSolution.TabIndex = 7;
-            this.cmbSolution.SelectedIndexChanged += new System.EventHandler(this.cmbSolution_SelectedIndexChanged);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -563,21 +387,6 @@
             this.grResults.TabIndex = 17;
             this.grResults.TabStop = false;
             this.grResults.Text = "Results";
-            // 
-            // txtCDSDataHelper
-            // 
-            this.txtCDSDataHelper.BackColor = System.Drawing.SystemColors.Window;
-            this.txtCDSDataHelper.DisplayFormat = "";
-            this.txtCDSDataHelper.Entity = null;
-            this.txtCDSDataHelper.EntityReference = null;
-            this.txtCDSDataHelper.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtCDSDataHelper.Location = new System.Drawing.Point(16, 122);
-            this.txtCDSDataHelper.LogicalName = null;
-            this.txtCDSDataHelper.Name = "txtCDSDataHelper";
-            this.txtCDSDataHelper.OrganizationService = null;
-            this.txtCDSDataHelper.Size = new System.Drawing.Size(100, 20);
-            this.txtCDSDataHelper.TabIndex = 19;
-            this.txtCDSDataHelper.Visible = false;
             // 
             // txtExecution
             // 
@@ -605,101 +414,6 @@
             this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 16;
             this.label6.Text = "Output Params";
-            // 
-            // gridOutputParams
-            // 
-            this.gridOutputParams.AllowUserToOrderColumns = true;
-            this.gridOutputParams.AllowUserToResizeRows = false;
-            this.gridOutputParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridOutputParams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridOutputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.gridOutputParams.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.gridOutputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.gridOutputParams.ColumnOrder = "";
-            this.gridOutputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle11;
-            this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gridOutputParams.FilterColumns = "";
-            this.gridOutputParams.Location = new System.Drawing.Point(114, 51);
-            this.gridOutputParams.MultiSelect = false;
-            this.gridOutputParams.Name = "gridOutputParams";
-            this.gridOutputParams.OrganizationService = null;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            this.gridOutputParams.RowHeadersVisible = false;
-            this.gridOutputParams.RowHeadersWidth = 16;
-            this.gridOutputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridOutputParams.ShowEditingIcon = false;
-            this.gridOutputParams.ShowFriendlyNames = true;
-            this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(372, 183);
-            this.gridOutputParams.TabIndex = 15;
-            this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column1.DataPropertyName = "position";
-            this.Column1.HeaderText = "#";
-            this.Column1.MinimumWidth = 24;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column1.Width = 24;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "name";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 50;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "type";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Type";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 50;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "value";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Value";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 50;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // splitRight
             // 
@@ -890,6 +604,292 @@
             this.picHistoryClose.TabStop = false;
             this.picHistoryClose.Click += new System.EventHandler(this.picHistory_Click);
             // 
+            // txtScopeRecord
+            // 
+            this.txtScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtScopeRecord.BackColor = System.Drawing.SystemColors.Window;
+            this.txtScopeRecord.DisplayFormat = "";
+            this.txtScopeRecord.Entity = null;
+            this.txtScopeRecord.EntityReference = null;
+            this.txtScopeRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.txtScopeRecord.Location = new System.Drawing.Point(114, 78);
+            this.txtScopeRecord.LogicalName = null;
+            this.txtScopeRecord.Name = "txtScopeRecord";
+            this.txtScopeRecord.OrganizationService = null;
+            this.txtScopeRecord.Size = new System.Drawing.Size(342, 20);
+            this.txtScopeRecord.TabIndex = 24;
+            // 
+            // cmbCustomActions
+            // 
+            this.cmbCustomActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCustomActions.DisplayFormat = "";
+            this.cmbCustomActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCustomActions.FormattingEnabled = true;
+            this.cmbCustomActions.Location = new System.Drawing.Point(114, 25);
+            this.cmbCustomActions.Name = "cmbCustomActions";
+            this.cmbCustomActions.OrganizationService = null;
+            this.cmbCustomActions.Size = new System.Drawing.Size(372, 21);
+            this.cmbCustomActions.TabIndex = 5;
+            this.cmbCustomActions.SelectionChangeCommitted += new System.EventHandler(this.cmbCustomActions_SelectionChangeCommitted);
+            // 
+            // txtScope
+            // 
+            this.txtScope.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtScope.BackColor = System.Drawing.SystemColors.Window;
+            this.txtScope.DisplayFormat = "{{bindingtype}}";
+            this.txtScope.Entity = null;
+            this.txtScope.EntityReference = null;
+            this.txtScope.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.txtScope.Location = new System.Drawing.Point(114, 52);
+            this.txtScope.LogicalName = null;
+            this.txtScope.Name = "txtScope";
+            this.txtScope.OrganizationService = null;
+            this.txtScope.Size = new System.Drawing.Size(372, 20);
+            this.txtScope.TabIndex = 12;
+            // 
+            // gridInputParams
+            // 
+            this.gridInputParams.AllowUserToOrderColumns = true;
+            this.gridInputParams.AllowUserToResizeRows = false;
+            this.gridInputParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridInputParams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridInputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gridInputParams.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.gridInputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridInputParams.ColumnOrder = "";
+            this.gridInputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgInputsIndex,
+            this.dgInputsName,
+            this.dgInputsOptional,
+            this.dgInputsType,
+            this.dgInputsSubtype,
+            this.dgInputsValue});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gridInputParams.FilterColumns = "";
+            this.gridInputParams.Location = new System.Drawing.Point(114, 104);
+            this.gridInputParams.MultiSelect = false;
+            this.gridInputParams.Name = "gridInputParams";
+            this.gridInputParams.OrganizationService = null;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gridInputParams.RowHeadersVisible = false;
+            this.gridInputParams.RowHeadersWidth = 16;
+            this.gridInputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridInputParams.ShowEditingIcon = false;
+            this.gridInputParams.ShowFriendlyNames = true;
+            this.gridInputParams.ShowIdColumn = false;
+            this.gridInputParams.Size = new System.Drawing.Size(372, 180);
+            this.gridInputParams.TabIndex = 13;
+            this.gridInputParams.RecordDoubleClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordDoubleClick);
+            // 
+            // dgInputsIndex
+            // 
+            this.dgInputsIndex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dgInputsIndex.DataPropertyName = "position";
+            this.dgInputsIndex.HeaderText = "#";
+            this.dgInputsIndex.MinimumWidth = 24;
+            this.dgInputsIndex.Name = "dgInputsIndex";
+            this.dgInputsIndex.ReadOnly = true;
+            this.dgInputsIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgInputsIndex.Width = 24;
+            // 
+            // dgInputsName
+            // 
+            this.dgInputsName.DataPropertyName = "name";
+            this.dgInputsName.HeaderText = "Name";
+            this.dgInputsName.MinimumWidth = 50;
+            this.dgInputsName.Name = "dgInputsName";
+            this.dgInputsName.ReadOnly = true;
+            this.dgInputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsOptional
+            // 
+            this.dgInputsOptional.DataPropertyName = "isoptional";
+            this.dgInputsOptional.HeaderText = "Optional";
+            this.dgInputsOptional.MinimumWidth = 50;
+            this.dgInputsOptional.Name = "dgInputsOptional";
+            this.dgInputsOptional.ReadOnly = true;
+            this.dgInputsOptional.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgInputsOptional.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsType
+            // 
+            this.dgInputsType.DataPropertyName = "type";
+            this.dgInputsType.HeaderText = "Type";
+            this.dgInputsType.MinimumWidth = 50;
+            this.dgInputsType.Name = "dgInputsType";
+            this.dgInputsType.ReadOnly = true;
+            this.dgInputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsSubtype
+            // 
+            this.dgInputsSubtype.DataPropertyName = "subtype";
+            this.dgInputsSubtype.HeaderText = "Sub Type";
+            this.dgInputsSubtype.MinimumWidth = 50;
+            this.dgInputsSubtype.Name = "dgInputsSubtype";
+            this.dgInputsSubtype.ReadOnly = true;
+            this.dgInputsSubtype.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsValue
+            // 
+            this.dgInputsValue.DataPropertyName = "value";
+            this.dgInputsValue.HeaderText = "Value";
+            this.dgInputsValue.MinimumWidth = 50;
+            this.dgInputsValue.Name = "dgInputsValue";
+            this.dgInputsValue.ReadOnly = true;
+            this.dgInputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cmbSolution
+            // 
+            this.cmbSolution.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSolution.DisplayFormat = "{{friendlyname}} ({{uniquename}} {{version}})";
+            this.cmbSolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSolution.FormattingEnabled = true;
+            this.cmbSolution.Location = new System.Drawing.Point(114, 42);
+            this.cmbSolution.Name = "cmbSolution";
+            this.cmbSolution.OrganizationService = null;
+            this.cmbSolution.Size = new System.Drawing.Size(372, 21);
+            this.cmbSolution.TabIndex = 7;
+            this.cmbSolution.SelectionChangeCommitted += new System.EventHandler(this.cmbSolution_SelectionChangeCommitted);
+            // 
+            // txtCDSDataHelper
+            // 
+            this.txtCDSDataHelper.BackColor = System.Drawing.SystemColors.Window;
+            this.txtCDSDataHelper.DisplayFormat = "";
+            this.txtCDSDataHelper.Entity = null;
+            this.txtCDSDataHelper.EntityReference = null;
+            this.txtCDSDataHelper.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.txtCDSDataHelper.Location = new System.Drawing.Point(16, 122);
+            this.txtCDSDataHelper.LogicalName = null;
+            this.txtCDSDataHelper.Name = "txtCDSDataHelper";
+            this.txtCDSDataHelper.OrganizationService = null;
+            this.txtCDSDataHelper.Size = new System.Drawing.Size(100, 20);
+            this.txtCDSDataHelper.TabIndex = 19;
+            this.txtCDSDataHelper.Visible = false;
+            // 
+            // gridOutputParams
+            // 
+            this.gridOutputParams.AllowUserToOrderColumns = true;
+            this.gridOutputParams.AllowUserToResizeRows = false;
+            this.gridOutputParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridOutputParams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridOutputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gridOutputParams.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.gridOutputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.gridOutputParams.ColumnOrder = "";
+            this.gridOutputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgOutputsIndex,
+            this.dgOutputsName,
+            this.dgOutputsType,
+            this.dgOutputsValue});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle5;
+            this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gridOutputParams.FilterColumns = "";
+            this.gridOutputParams.Location = new System.Drawing.Point(114, 51);
+            this.gridOutputParams.MultiSelect = false;
+            this.gridOutputParams.Name = "gridOutputParams";
+            this.gridOutputParams.OrganizationService = null;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.gridOutputParams.RowHeadersVisible = false;
+            this.gridOutputParams.RowHeadersWidth = 16;
+            this.gridOutputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridOutputParams.ShowEditingIcon = false;
+            this.gridOutputParams.ShowFriendlyNames = true;
+            this.gridOutputParams.ShowIdColumn = false;
+            this.gridOutputParams.Size = new System.Drawing.Size(372, 183);
+            this.gridOutputParams.TabIndex = 15;
+            this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
+            // 
+            // dgOutputsIndex
+            // 
+            this.dgOutputsIndex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dgOutputsIndex.DataPropertyName = "position";
+            this.dgOutputsIndex.HeaderText = "#";
+            this.dgOutputsIndex.MinimumWidth = 24;
+            this.dgOutputsIndex.Name = "dgOutputsIndex";
+            this.dgOutputsIndex.ReadOnly = true;
+            this.dgOutputsIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgOutputsIndex.Width = 24;
+            // 
+            // dgOutputsName
+            // 
+            this.dgOutputsName.DataPropertyName = "name";
+            this.dgOutputsName.HeaderText = "Name";
+            this.dgOutputsName.MinimumWidth = 50;
+            this.dgOutputsName.Name = "dgOutputsName";
+            this.dgOutputsName.ReadOnly = true;
+            this.dgOutputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgOutputsType
+            // 
+            this.dgOutputsType.DataPropertyName = "type";
+            this.dgOutputsType.HeaderText = "Type";
+            this.dgOutputsType.MinimumWidth = 50;
+            this.dgOutputsType.Name = "dgOutputsType";
+            this.dgOutputsType.ReadOnly = true;
+            this.dgOutputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgOutputsValue
+            // 
+            this.dgOutputsValue.DataPropertyName = "value";
+            this.dgOutputsValue.HeaderText = "Value";
+            this.dgOutputsValue.MinimumWidth = 50;
+            this.dgOutputsValue.Name = "dgOutputsValue";
+            this.dgOutputsValue.ReadOnly = true;
+            this.dgOutputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // CustomActionTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -904,7 +904,6 @@
             this.Load += new System.EventHandler(this.CustomActionTester_Load);
             this.toolStripMenu.ResumeLayout(false);
             this.toolStripMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).EndInit();
             this.splitFullForm.Panel1.ResumeLayout(false);
             this.splitFullForm.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).EndInit();
@@ -919,7 +918,6 @@
             this.gbSolution.PerformLayout();
             this.grResults.ResumeLayout(false);
             this.grResults.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).EndInit();
             this.splitRight.Panel1.ResumeLayout(false);
             this.splitRight.Panel2.ResumeLayout(false);
             this.splitRight.Panel2.PerformLayout();
@@ -936,6 +934,8 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -983,16 +983,12 @@
         private System.Windows.Forms.LinkLabel llCallHistory;
         private System.Windows.Forms.Label lblResultDetailType;
         private System.Windows.Forms.Panel panTextFormat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn index;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn option;
-        private System.Windows.Forms.DataGridViewTextBoxColumn type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn subtype;
-        private System.Windows.Forms.DataGridViewTextBoxColumn value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsIndex;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsOptional;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsSubtype;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsValue;
         private xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox txtScopeRecord;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnScopeRecord;
@@ -1002,5 +998,9 @@
         private System.Windows.Forms.CheckBox chkSolInvisible;
         private System.Windows.Forms.CheckBox chkSolManaged;
         private System.Windows.Forms.ToolStripDropDownButton btnSettings;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsIndex;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsValue;
     }
 }

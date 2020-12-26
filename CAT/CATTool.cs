@@ -27,7 +27,7 @@ namespace Rappen.XTB.CAT
             APIUniqueName = "uniquename",
             APIMessageName = "M.name",
             ParamName = "name",
-            ParamUniqueName = "uniquename"
+            ParamUniqueName = "name"
         };
 
         public void AddSolutionFilter(QueryExpression qx)

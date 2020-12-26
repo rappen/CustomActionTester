@@ -28,6 +28,8 @@ namespace Rappen.XTB.CAT
             catTool = catinstance;
             ai = new AppInsights(aiEndpoint, aiKey, Assembly.GetExecutingAssembly(), catTool.Name);
             InitializeComponent();
+            gridInputParams.AutoGenerateColumns = false;
+            gridOutputParams.AutoGenerateColumns = false;
             FixFormForTool();
         }
 
@@ -83,15 +85,12 @@ namespace Rappen.XTB.CAT
             GetSolutions(chkSolManaged.Checked, chkSolInvisible.Checked);
         }
 
-        private void cmbCustomActions_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbCustomActions_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (sender is CDSDataComboBox cmb)
-            {
-                SetCustomAction(cmb.SelectedEntity);
-            }
+            SetCustomAction(cmbCustomActions.SelectedEntity);
         }
 
-        private void cmbSolution_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbSolution_SelectionChangeCommitted(object sender, EventArgs e)
         {
             GetCustomActions(cmbSolution.SelectedEntity);
         }

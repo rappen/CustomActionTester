@@ -313,6 +313,7 @@ namespace Rappen.XTB.CAT
                     else if (args.Result is EntityCollection actions)
                     {
                         cmbCustomActions.DataSource = actions;
+                        SetCustomAction(cmbCustomActions.SelectedEntity);
                     }
                 }
             });
@@ -455,6 +456,7 @@ namespace Rappen.XTB.CAT
                     else if (args.Result is EntityCollection solutions)
                     {
                         cmbSolution.DataSource = solutions;
+                        GetCustomActions(cmbSolution.SelectedEntity);
                     }
                 }
             });
@@ -613,6 +615,10 @@ namespace Rappen.XTB.CAT
             cmbSolution.DisplayFormat = "{{" + (unique ? Solution.UniqueName : Solution.PrimaryName) + "}} {{" + Solution.Version + "}}";
             cmbCustomActions.DisplayFormat = unique ? catTool.Columns.APIUniqueName : catTool.Columns.APIName;
             txtScope.DisplayFormat = "{{" + catTool.Columns.APIScope + "}} {{" + catTool.Columns.APIBoundEntity + "}}";
+            dgInputsName.DataPropertyName = unique ? catTool.Columns.ParamUniqueName : catTool.Columns.ParamName;
+            dgOutputsName.DataPropertyName = unique ? catTool.Columns.ParamUniqueName : catTool.Columns.ParamName;
+            gridInputParams.Refresh();
+            gridOutputParams.Refresh();
         }
 
         #endregion Private Methods
