@@ -61,7 +61,7 @@ namespace Rappen.XTB.CAT
             txtCDSDataHelper.OrganizationService = newService;
             if (newService != null)
             {
-                GetSolutions(chkSolManaged.Checked, chkSolInvisible.Checked);
+                GetSolutions(rbSolManaged.Checked);
             }
             var myid = Guid.NewGuid();
         }
@@ -80,9 +80,9 @@ namespace Rappen.XTB.CAT
             TraceLastExecution();
         }
 
-        private void chkSolFilter_CheckedChanged(object sender, EventArgs e)
+        private void rbSolFilter_CheckedChanged(object sender, EventArgs e)
         {
-            GetSolutions(chkSolManaged.Checked, chkSolInvisible.Checked);
+            GetSolutions(rbSolManaged.Checked);
         }
 
         private void cmbCustomActions_SelectionChangeCommitted(object sender, EventArgs e)

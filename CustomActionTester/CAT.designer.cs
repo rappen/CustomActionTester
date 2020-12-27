@@ -51,17 +51,32 @@
             this.splitLeft = new System.Windows.Forms.SplitContainer();
             this.gbCustomWhat = new System.Windows.Forms.GroupBox();
             this.btnScopeRecord = new System.Windows.Forms.Button();
+            this.txtScopeRecord = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.cmbCustomActions = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
+            this.txtScope = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
+            this.gridInputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
+            this.dgInputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsOptional = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsSubtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbSolution = new System.Windows.Forms.GroupBox();
-            this.chkSolInvisible = new System.Windows.Forms.CheckBox();
-            this.chkSolManaged = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.cmbSolution = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.grResults = new System.Windows.Forms.GroupBox();
+            this.txtCDSDataHelper = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
             this.txtExecution = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.gridOutputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
+            this.dgOutputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgOutputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgOutputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgOutputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitRight = new System.Windows.Forms.SplitContainer();
             this.gbResultDetails = new System.Windows.Forms.GroupBox();
             this.txtResultDetail = new System.Windows.Forms.RichTextBox();
@@ -78,23 +93,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblDetailHeader = new System.Windows.Forms.Label();
             this.picHistoryClose = new System.Windows.Forms.PictureBox();
-            this.txtScopeRecord = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
-            this.cmbCustomActions = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
-            this.txtScope = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
-            this.gridInputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
-            this.dgInputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsOptional = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsSubtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmbSolution = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
-            this.txtCDSDataHelper = new xrmtb.XrmToolBox.Controls.Controls.CDSDataTextBox();
-            this.gridOutputParams = new xrmtb.XrmToolBox.Controls.CRMGridView();
-            this.dgOutputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgOutputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgOutputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgOutputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rbSolUnmanaged = new System.Windows.Forms.RadioButton();
+            this.rbSolManaged = new System.Windows.Forms.RadioButton();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
             this.splitFullForm.Panel1.SuspendLayout();
@@ -105,8 +105,10 @@
             this.splitLeft.Panel2.SuspendLayout();
             this.splitLeft.SuspendLayout();
             this.gbCustomWhat.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).BeginInit();
             this.gbSolution.SuspendLayout();
             this.grResults.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitRight)).BeginInit();
             this.splitRight.Panel1.SuspendLayout();
             this.splitRight.Panel2.SuspendLayout();
@@ -118,8 +120,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryOpen)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryClose)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripMenu
@@ -301,6 +301,22 @@
             this.btnScopeRecord.UseVisualStyleBackColor = true;
             this.btnScopeRecord.Click += new System.EventHandler(this.btnLookup_Click);
             // 
+            // txtScopeRecord
+            // 
+            this.txtScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtScopeRecord.BackColor = System.Drawing.SystemColors.Window;
+            this.txtScopeRecord.DisplayFormat = "";
+            this.txtScopeRecord.Entity = null;
+            this.txtScopeRecord.EntityReference = null;
+            this.txtScopeRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.txtScopeRecord.Location = new System.Drawing.Point(114, 78);
+            this.txtScopeRecord.LogicalName = null;
+            this.txtScopeRecord.Name = "txtScopeRecord";
+            this.txtScopeRecord.OrganizationService = null;
+            this.txtScopeRecord.Size = new System.Drawing.Size(342, 20);
+            this.txtScopeRecord.TabIndex = 24;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -318,10 +334,156 @@
             this.label8.TabIndex = 20;
             this.label8.Text = "Double click row to set parameter value!";
             // 
+            // cmbCustomActions
+            // 
+            this.cmbCustomActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCustomActions.DisplayFormat = "";
+            this.cmbCustomActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCustomActions.FormattingEnabled = true;
+            this.cmbCustomActions.Location = new System.Drawing.Point(114, 25);
+            this.cmbCustomActions.Name = "cmbCustomActions";
+            this.cmbCustomActions.OrganizationService = null;
+            this.cmbCustomActions.Size = new System.Drawing.Size(372, 21);
+            this.cmbCustomActions.TabIndex = 5;
+            this.cmbCustomActions.SelectionChangeCommitted += new System.EventHandler(this.cmbCustomActions_SelectionChangeCommitted);
+            // 
+            // txtScope
+            // 
+            this.txtScope.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtScope.BackColor = System.Drawing.SystemColors.Window;
+            this.txtScope.DisplayFormat = "{{bindingtype}}";
+            this.txtScope.Entity = null;
+            this.txtScope.EntityReference = null;
+            this.txtScope.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.txtScope.Location = new System.Drawing.Point(114, 52);
+            this.txtScope.LogicalName = null;
+            this.txtScope.Name = "txtScope";
+            this.txtScope.OrganizationService = null;
+            this.txtScope.Size = new System.Drawing.Size(372, 20);
+            this.txtScope.TabIndex = 12;
+            // 
+            // gridInputParams
+            // 
+            this.gridInputParams.AllowUserToOrderColumns = true;
+            this.gridInputParams.AllowUserToResizeRows = false;
+            this.gridInputParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridInputParams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridInputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gridInputParams.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.gridInputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridInputParams.ColumnOrder = "";
+            this.gridInputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgInputsIndex,
+            this.dgInputsName,
+            this.dgInputsOptional,
+            this.dgInputsType,
+            this.dgInputsSubtype,
+            this.dgInputsValue});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gridInputParams.FilterColumns = "";
+            this.gridInputParams.Location = new System.Drawing.Point(114, 104);
+            this.gridInputParams.MultiSelect = false;
+            this.gridInputParams.Name = "gridInputParams";
+            this.gridInputParams.OrganizationService = null;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gridInputParams.RowHeadersVisible = false;
+            this.gridInputParams.RowHeadersWidth = 16;
+            this.gridInputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridInputParams.ShowEditingIcon = false;
+            this.gridInputParams.ShowFriendlyNames = true;
+            this.gridInputParams.ShowIdColumn = false;
+            this.gridInputParams.Size = new System.Drawing.Size(372, 180);
+            this.gridInputParams.TabIndex = 13;
+            this.gridInputParams.RecordDoubleClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordDoubleClick);
+            // 
+            // dgInputsIndex
+            // 
+            this.dgInputsIndex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dgInputsIndex.DataPropertyName = "position";
+            this.dgInputsIndex.HeaderText = "#";
+            this.dgInputsIndex.MinimumWidth = 24;
+            this.dgInputsIndex.Name = "dgInputsIndex";
+            this.dgInputsIndex.ReadOnly = true;
+            this.dgInputsIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgInputsIndex.Width = 24;
+            // 
+            // dgInputsName
+            // 
+            this.dgInputsName.DataPropertyName = "name";
+            this.dgInputsName.HeaderText = "Name";
+            this.dgInputsName.MinimumWidth = 50;
+            this.dgInputsName.Name = "dgInputsName";
+            this.dgInputsName.ReadOnly = true;
+            this.dgInputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsOptional
+            // 
+            this.dgInputsOptional.DataPropertyName = "isoptional";
+            this.dgInputsOptional.HeaderText = "Optional";
+            this.dgInputsOptional.MinimumWidth = 50;
+            this.dgInputsOptional.Name = "dgInputsOptional";
+            this.dgInputsOptional.ReadOnly = true;
+            this.dgInputsOptional.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgInputsOptional.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsType
+            // 
+            this.dgInputsType.DataPropertyName = "type";
+            this.dgInputsType.HeaderText = "Type";
+            this.dgInputsType.MinimumWidth = 50;
+            this.dgInputsType.Name = "dgInputsType";
+            this.dgInputsType.ReadOnly = true;
+            this.dgInputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsSubtype
+            // 
+            this.dgInputsSubtype.DataPropertyName = "subtype";
+            this.dgInputsSubtype.HeaderText = "Sub Type";
+            this.dgInputsSubtype.MinimumWidth = 50;
+            this.dgInputsSubtype.Name = "dgInputsSubtype";
+            this.dgInputsSubtype.ReadOnly = true;
+            this.dgInputsSubtype.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsValue
+            // 
+            this.dgInputsValue.DataPropertyName = "value";
+            this.dgInputsValue.HeaderText = "Value";
+            this.dgInputsValue.MinimumWidth = 50;
+            this.dgInputsValue.Name = "dgInputsValue";
+            this.dgInputsValue.ReadOnly = true;
+            this.dgInputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // gbSolution
             // 
-            this.gbSolution.Controls.Add(this.chkSolInvisible);
-            this.gbSolution.Controls.Add(this.chkSolManaged);
+            this.gbSolution.Controls.Add(this.rbSolManaged);
+            this.gbSolution.Controls.Add(this.rbSolUnmanaged);
             this.gbSolution.Controls.Add(this.label9);
             this.gbSolution.Controls.Add(this.cmbSolution);
             this.gbSolution.Controls.Add(this.label7);
@@ -333,28 +495,6 @@
             this.gbSolution.TabStop = false;
             this.gbSolution.Text = "Solution";
             // 
-            // chkSolInvisible
-            // 
-            this.chkSolInvisible.AutoSize = true;
-            this.chkSolInvisible.Location = new System.Drawing.Point(191, 19);
-            this.chkSolInvisible.Name = "chkSolInvisible";
-            this.chkSolInvisible.Size = new System.Drawing.Size(64, 17);
-            this.chkSolInvisible.TabIndex = 11;
-            this.chkSolInvisible.Text = "Invisible";
-            this.chkSolInvisible.UseVisualStyleBackColor = true;
-            this.chkSolInvisible.CheckedChanged += new System.EventHandler(this.chkSolFilter_CheckedChanged);
-            // 
-            // chkSolManaged
-            // 
-            this.chkSolManaged.AutoSize = true;
-            this.chkSolManaged.Location = new System.Drawing.Point(114, 19);
-            this.chkSolManaged.Name = "chkSolManaged";
-            this.chkSolManaged.Size = new System.Drawing.Size(71, 17);
-            this.chkSolManaged.TabIndex = 10;
-            this.chkSolManaged.Text = "Managed";
-            this.chkSolManaged.UseVisualStyleBackColor = true;
-            this.chkSolManaged.CheckedChanged += new System.EventHandler(this.chkSolFilter_CheckedChanged);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -363,6 +503,20 @@
             this.label9.Size = new System.Drawing.Size(29, 13);
             this.label9.TabIndex = 9;
             this.label9.Text = "Filter";
+            // 
+            // cmbSolution
+            // 
+            this.cmbSolution.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSolution.DisplayFormat = "{{friendlyname}} ({{uniquename}} {{version}})";
+            this.cmbSolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSolution.FormattingEnabled = true;
+            this.cmbSolution.Location = new System.Drawing.Point(114, 42);
+            this.cmbSolution.Name = "cmbSolution";
+            this.cmbSolution.OrganizationService = null;
+            this.cmbSolution.Size = new System.Drawing.Size(372, 21);
+            this.cmbSolution.TabIndex = 7;
+            this.cmbSolution.SelectionChangeCommitted += new System.EventHandler(this.cmbSolution_SelectionChangeCommitted);
             // 
             // label7
             // 
@@ -387,6 +541,21 @@
             this.grResults.TabIndex = 17;
             this.grResults.TabStop = false;
             this.grResults.Text = "Results";
+            // 
+            // txtCDSDataHelper
+            // 
+            this.txtCDSDataHelper.BackColor = System.Drawing.SystemColors.Window;
+            this.txtCDSDataHelper.DisplayFormat = "";
+            this.txtCDSDataHelper.Entity = null;
+            this.txtCDSDataHelper.EntityReference = null;
+            this.txtCDSDataHelper.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.txtCDSDataHelper.Location = new System.Drawing.Point(16, 122);
+            this.txtCDSDataHelper.LogicalName = null;
+            this.txtCDSDataHelper.Name = "txtCDSDataHelper";
+            this.txtCDSDataHelper.OrganizationService = null;
+            this.txtCDSDataHelper.Size = new System.Drawing.Size(100, 20);
+            this.txtCDSDataHelper.TabIndex = 19;
+            this.txtCDSDataHelper.Visible = false;
             // 
             // txtExecution
             // 
@@ -414,6 +583,101 @@
             this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 16;
             this.label6.Text = "Output Params";
+            // 
+            // gridOutputParams
+            // 
+            this.gridOutputParams.AllowUserToOrderColumns = true;
+            this.gridOutputParams.AllowUserToResizeRows = false;
+            this.gridOutputParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridOutputParams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridOutputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gridOutputParams.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.gridOutputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.gridOutputParams.ColumnOrder = "";
+            this.gridOutputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgOutputsIndex,
+            this.dgOutputsName,
+            this.dgOutputsType,
+            this.dgOutputsValue});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle5;
+            this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gridOutputParams.FilterColumns = "";
+            this.gridOutputParams.Location = new System.Drawing.Point(114, 51);
+            this.gridOutputParams.MultiSelect = false;
+            this.gridOutputParams.Name = "gridOutputParams";
+            this.gridOutputParams.OrganizationService = null;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.gridOutputParams.RowHeadersVisible = false;
+            this.gridOutputParams.RowHeadersWidth = 16;
+            this.gridOutputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridOutputParams.ShowEditingIcon = false;
+            this.gridOutputParams.ShowFriendlyNames = true;
+            this.gridOutputParams.ShowIdColumn = false;
+            this.gridOutputParams.Size = new System.Drawing.Size(372, 183);
+            this.gridOutputParams.TabIndex = 15;
+            this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
+            // 
+            // dgOutputsIndex
+            // 
+            this.dgOutputsIndex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dgOutputsIndex.DataPropertyName = "position";
+            this.dgOutputsIndex.HeaderText = "#";
+            this.dgOutputsIndex.MinimumWidth = 24;
+            this.dgOutputsIndex.Name = "dgOutputsIndex";
+            this.dgOutputsIndex.ReadOnly = true;
+            this.dgOutputsIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgOutputsIndex.Width = 24;
+            // 
+            // dgOutputsName
+            // 
+            this.dgOutputsName.DataPropertyName = "name";
+            this.dgOutputsName.HeaderText = "Name";
+            this.dgOutputsName.MinimumWidth = 50;
+            this.dgOutputsName.Name = "dgOutputsName";
+            this.dgOutputsName.ReadOnly = true;
+            this.dgOutputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgOutputsType
+            // 
+            this.dgOutputsType.DataPropertyName = "type";
+            this.dgOutputsType.HeaderText = "Type";
+            this.dgOutputsType.MinimumWidth = 50;
+            this.dgOutputsType.Name = "dgOutputsType";
+            this.dgOutputsType.ReadOnly = true;
+            this.dgOutputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgOutputsValue
+            // 
+            this.dgOutputsValue.DataPropertyName = "value";
+            this.dgOutputsValue.HeaderText = "Value";
+            this.dgOutputsValue.MinimumWidth = 50;
+            this.dgOutputsValue.Name = "dgOutputsValue";
+            this.dgOutputsValue.ReadOnly = true;
+            this.dgOutputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // splitRight
             // 
@@ -604,291 +868,27 @@
             this.picHistoryClose.TabStop = false;
             this.picHistoryClose.Click += new System.EventHandler(this.picHistory_Click);
             // 
-            // txtScopeRecord
+            // rbSolUnmanaged
             // 
-            this.txtScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtScopeRecord.BackColor = System.Drawing.SystemColors.Window;
-            this.txtScopeRecord.DisplayFormat = "";
-            this.txtScopeRecord.Entity = null;
-            this.txtScopeRecord.EntityReference = null;
-            this.txtScopeRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtScopeRecord.Location = new System.Drawing.Point(114, 78);
-            this.txtScopeRecord.LogicalName = null;
-            this.txtScopeRecord.Name = "txtScopeRecord";
-            this.txtScopeRecord.OrganizationService = null;
-            this.txtScopeRecord.Size = new System.Drawing.Size(342, 20);
-            this.txtScopeRecord.TabIndex = 24;
+            this.rbSolUnmanaged.AutoSize = true;
+            this.rbSolUnmanaged.Checked = true;
+            this.rbSolUnmanaged.Location = new System.Drawing.Point(114, 18);
+            this.rbSolUnmanaged.Name = "rbSolUnmanaged";
+            this.rbSolUnmanaged.Size = new System.Drawing.Size(83, 17);
+            this.rbSolUnmanaged.TabIndex = 10;
+            this.rbSolUnmanaged.Text = "Unmanaged";
+            this.rbSolUnmanaged.UseVisualStyleBackColor = true;
+            this.rbSolUnmanaged.CheckedChanged += new System.EventHandler(this.rbSolFilter_CheckedChanged);
             // 
-            // cmbCustomActions
+            // rbSolManaged
             // 
-            this.cmbCustomActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbCustomActions.DisplayFormat = "";
-            this.cmbCustomActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCustomActions.FormattingEnabled = true;
-            this.cmbCustomActions.Location = new System.Drawing.Point(114, 25);
-            this.cmbCustomActions.Name = "cmbCustomActions";
-            this.cmbCustomActions.OrganizationService = null;
-            this.cmbCustomActions.Size = new System.Drawing.Size(372, 21);
-            this.cmbCustomActions.TabIndex = 5;
-            this.cmbCustomActions.SelectionChangeCommitted += new System.EventHandler(this.cmbCustomActions_SelectionChangeCommitted);
-            // 
-            // txtScope
-            // 
-            this.txtScope.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtScope.BackColor = System.Drawing.SystemColors.Window;
-            this.txtScope.DisplayFormat = "{{bindingtype}}";
-            this.txtScope.Entity = null;
-            this.txtScope.EntityReference = null;
-            this.txtScope.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtScope.Location = new System.Drawing.Point(114, 52);
-            this.txtScope.LogicalName = null;
-            this.txtScope.Name = "txtScope";
-            this.txtScope.OrganizationService = null;
-            this.txtScope.Size = new System.Drawing.Size(372, 20);
-            this.txtScope.TabIndex = 12;
-            // 
-            // gridInputParams
-            // 
-            this.gridInputParams.AllowUserToOrderColumns = true;
-            this.gridInputParams.AllowUserToResizeRows = false;
-            this.gridInputParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridInputParams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridInputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.gridInputParams.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.gridInputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.gridInputParams.ColumnOrder = "";
-            this.gridInputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgInputsIndex,
-            this.dgInputsName,
-            this.dgInputsOptional,
-            this.dgInputsType,
-            this.dgInputsSubtype,
-            this.dgInputsValue});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gridInputParams.FilterColumns = "";
-            this.gridInputParams.Location = new System.Drawing.Point(114, 104);
-            this.gridInputParams.MultiSelect = false;
-            this.gridInputParams.Name = "gridInputParams";
-            this.gridInputParams.OrganizationService = null;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.gridInputParams.RowHeadersVisible = false;
-            this.gridInputParams.RowHeadersWidth = 16;
-            this.gridInputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridInputParams.ShowEditingIcon = false;
-            this.gridInputParams.ShowFriendlyNames = true;
-            this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(372, 180);
-            this.gridInputParams.TabIndex = 13;
-            this.gridInputParams.RecordDoubleClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordDoubleClick);
-            // 
-            // dgInputsIndex
-            // 
-            this.dgInputsIndex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dgInputsIndex.DataPropertyName = "position";
-            this.dgInputsIndex.HeaderText = "#";
-            this.dgInputsIndex.MinimumWidth = 24;
-            this.dgInputsIndex.Name = "dgInputsIndex";
-            this.dgInputsIndex.ReadOnly = true;
-            this.dgInputsIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgInputsIndex.Width = 24;
-            // 
-            // dgInputsName
-            // 
-            this.dgInputsName.DataPropertyName = "name";
-            this.dgInputsName.HeaderText = "Name";
-            this.dgInputsName.MinimumWidth = 50;
-            this.dgInputsName.Name = "dgInputsName";
-            this.dgInputsName.ReadOnly = true;
-            this.dgInputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgInputsOptional
-            // 
-            this.dgInputsOptional.DataPropertyName = "isoptional";
-            this.dgInputsOptional.HeaderText = "Optional";
-            this.dgInputsOptional.MinimumWidth = 50;
-            this.dgInputsOptional.Name = "dgInputsOptional";
-            this.dgInputsOptional.ReadOnly = true;
-            this.dgInputsOptional.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgInputsOptional.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgInputsType
-            // 
-            this.dgInputsType.DataPropertyName = "type";
-            this.dgInputsType.HeaderText = "Type";
-            this.dgInputsType.MinimumWidth = 50;
-            this.dgInputsType.Name = "dgInputsType";
-            this.dgInputsType.ReadOnly = true;
-            this.dgInputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgInputsSubtype
-            // 
-            this.dgInputsSubtype.DataPropertyName = "subtype";
-            this.dgInputsSubtype.HeaderText = "Sub Type";
-            this.dgInputsSubtype.MinimumWidth = 50;
-            this.dgInputsSubtype.Name = "dgInputsSubtype";
-            this.dgInputsSubtype.ReadOnly = true;
-            this.dgInputsSubtype.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgInputsValue
-            // 
-            this.dgInputsValue.DataPropertyName = "value";
-            this.dgInputsValue.HeaderText = "Value";
-            this.dgInputsValue.MinimumWidth = 50;
-            this.dgInputsValue.Name = "dgInputsValue";
-            this.dgInputsValue.ReadOnly = true;
-            this.dgInputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cmbSolution
-            // 
-            this.cmbSolution.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbSolution.DisplayFormat = "{{friendlyname}} ({{uniquename}} {{version}})";
-            this.cmbSolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSolution.FormattingEnabled = true;
-            this.cmbSolution.Location = new System.Drawing.Point(114, 42);
-            this.cmbSolution.Name = "cmbSolution";
-            this.cmbSolution.OrganizationService = null;
-            this.cmbSolution.Size = new System.Drawing.Size(372, 21);
-            this.cmbSolution.TabIndex = 7;
-            this.cmbSolution.SelectionChangeCommitted += new System.EventHandler(this.cmbSolution_SelectionChangeCommitted);
-            // 
-            // txtCDSDataHelper
-            // 
-            this.txtCDSDataHelper.BackColor = System.Drawing.SystemColors.Window;
-            this.txtCDSDataHelper.DisplayFormat = "";
-            this.txtCDSDataHelper.Entity = null;
-            this.txtCDSDataHelper.EntityReference = null;
-            this.txtCDSDataHelper.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.txtCDSDataHelper.Location = new System.Drawing.Point(16, 122);
-            this.txtCDSDataHelper.LogicalName = null;
-            this.txtCDSDataHelper.Name = "txtCDSDataHelper";
-            this.txtCDSDataHelper.OrganizationService = null;
-            this.txtCDSDataHelper.Size = new System.Drawing.Size(100, 20);
-            this.txtCDSDataHelper.TabIndex = 19;
-            this.txtCDSDataHelper.Visible = false;
-            // 
-            // gridOutputParams
-            // 
-            this.gridOutputParams.AllowUserToOrderColumns = true;
-            this.gridOutputParams.AllowUserToResizeRows = false;
-            this.gridOutputParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridOutputParams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridOutputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.gridOutputParams.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.gridOutputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.gridOutputParams.ColumnOrder = "";
-            this.gridOutputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgOutputsIndex,
-            this.dgOutputsName,
-            this.dgOutputsType,
-            this.dgOutputsValue});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle5;
-            this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gridOutputParams.FilterColumns = "";
-            this.gridOutputParams.Location = new System.Drawing.Point(114, 51);
-            this.gridOutputParams.MultiSelect = false;
-            this.gridOutputParams.Name = "gridOutputParams";
-            this.gridOutputParams.OrganizationService = null;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.gridOutputParams.RowHeadersVisible = false;
-            this.gridOutputParams.RowHeadersWidth = 16;
-            this.gridOutputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridOutputParams.ShowEditingIcon = false;
-            this.gridOutputParams.ShowFriendlyNames = true;
-            this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(372, 183);
-            this.gridOutputParams.TabIndex = 15;
-            this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
-            // 
-            // dgOutputsIndex
-            // 
-            this.dgOutputsIndex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dgOutputsIndex.DataPropertyName = "position";
-            this.dgOutputsIndex.HeaderText = "#";
-            this.dgOutputsIndex.MinimumWidth = 24;
-            this.dgOutputsIndex.Name = "dgOutputsIndex";
-            this.dgOutputsIndex.ReadOnly = true;
-            this.dgOutputsIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgOutputsIndex.Width = 24;
-            // 
-            // dgOutputsName
-            // 
-            this.dgOutputsName.DataPropertyName = "name";
-            this.dgOutputsName.HeaderText = "Name";
-            this.dgOutputsName.MinimumWidth = 50;
-            this.dgOutputsName.Name = "dgOutputsName";
-            this.dgOutputsName.ReadOnly = true;
-            this.dgOutputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgOutputsType
-            // 
-            this.dgOutputsType.DataPropertyName = "type";
-            this.dgOutputsType.HeaderText = "Type";
-            this.dgOutputsType.MinimumWidth = 50;
-            this.dgOutputsType.Name = "dgOutputsType";
-            this.dgOutputsType.ReadOnly = true;
-            this.dgOutputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgOutputsValue
-            // 
-            this.dgOutputsValue.DataPropertyName = "value";
-            this.dgOutputsValue.HeaderText = "Value";
-            this.dgOutputsValue.MinimumWidth = 50;
-            this.dgOutputsValue.Name = "dgOutputsValue";
-            this.dgOutputsValue.ReadOnly = true;
-            this.dgOutputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.rbSolManaged.AutoSize = true;
+            this.rbSolManaged.Location = new System.Drawing.Point(232, 18);
+            this.rbSolManaged.Name = "rbSolManaged";
+            this.rbSolManaged.Size = new System.Drawing.Size(70, 17);
+            this.rbSolManaged.TabIndex = 11;
+            this.rbSolManaged.Text = "Managed";
+            this.rbSolManaged.UseVisualStyleBackColor = true;
             // 
             // CustomActionTester
             // 
@@ -914,10 +914,12 @@
             this.splitLeft.ResumeLayout(false);
             this.gbCustomWhat.ResumeLayout(false);
             this.gbCustomWhat.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).EndInit();
             this.gbSolution.ResumeLayout(false);
             this.gbSolution.PerformLayout();
             this.grResults.ResumeLayout(false);
             this.grResults.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).EndInit();
             this.splitRight.Panel1.ResumeLayout(false);
             this.splitRight.Panel2.ResumeLayout(false);
             this.splitRight.Panel2.PerformLayout();
@@ -934,8 +936,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryClose)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -995,12 +995,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnuShowDisplay;
         private System.Windows.Forms.ToolStripMenuItem mnuShowUnique;
-        private System.Windows.Forms.CheckBox chkSolInvisible;
-        private System.Windows.Forms.CheckBox chkSolManaged;
         private System.Windows.Forms.ToolStripDropDownButton btnSettings;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsType;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsValue;
+        private System.Windows.Forms.RadioButton rbSolManaged;
+        private System.Windows.Forms.RadioButton rbSolUnmanaged;
     }
 }

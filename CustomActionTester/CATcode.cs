@@ -425,14 +425,14 @@ namespace Rappen.XTB.CAT
             return ValueToString(result, false, false, true, Service);
         }
 
-        private void GetSolutions(bool managed, bool invisible)
+        private void GetSolutions(bool managed)
         {
             var qx = new QueryExpression(Solution.EntityName);
             qx.Distinct = true;
             qx.ColumnSet.AddColumns(Solution.PrimaryKey, Solution.PrimaryName, Solution.UniqueName, Solution.Version);
             qx.AddOrder(Solution.PrimaryName, OrderType.Ascending);
             qx.Criteria.AddCondition(Solution.Ismanaged, ConditionOperator.Equal, managed);
-            qx.Criteria.AddCondition(Solution.Isvisible, ConditionOperator.Equal, !invisible);
+            qx.Criteria.AddCondition(Solution.Isvisible, ConditionOperator.Equal, true);
             catTool.AddSolutionFilter(qx);
             WorkAsync(new WorkAsyncInfo
             {
