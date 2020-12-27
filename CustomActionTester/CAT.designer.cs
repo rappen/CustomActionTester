@@ -64,6 +64,8 @@
             this.dgInputsSubtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgInputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbSolution = new System.Windows.Forms.GroupBox();
+            this.rbSolManaged = new System.Windows.Forms.RadioButton();
+            this.rbSolUnmanaged = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
             this.cmbSolution = new xrmtb.XrmToolBox.Controls.Controls.CDSDataComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -93,8 +95,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblDetailHeader = new System.Windows.Forms.Label();
             this.picHistoryClose = new System.Windows.Forms.PictureBox();
-            this.rbSolUnmanaged = new System.Windows.Forms.RadioButton();
-            this.rbSolManaged = new System.Windows.Forms.RadioButton();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
             this.splitFullForm.Panel1.SuspendLayout();
@@ -246,7 +246,7 @@
             // 
             this.splitFullForm.Panel2.Controls.Add(this.splitRight);
             this.splitFullForm.Size = new System.Drawing.Size(1045, 638);
-            this.splitFullForm.SplitterDistance = 498;
+            this.splitFullForm.SplitterDistance = 605;
             this.splitFullForm.SplitterWidth = 8;
             this.splitFullForm.TabIndex = 15;
             // 
@@ -265,7 +265,7 @@
             // splitLeft.Panel2
             // 
             this.splitLeft.Panel2.Controls.Add(this.grResults);
-            this.splitLeft.Size = new System.Drawing.Size(498, 638);
+            this.splitLeft.Size = new System.Drawing.Size(605, 638);
             this.splitLeft.SplitterDistance = 381;
             this.splitLeft.SplitterWidth = 8;
             this.splitLeft.TabIndex = 15;
@@ -285,7 +285,7 @@
             this.gbCustomWhat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbCustomWhat.Location = new System.Drawing.Point(0, 81);
             this.gbCustomWhat.Name = "gbCustomWhat";
-            this.gbCustomWhat.Size = new System.Drawing.Size(498, 300);
+            this.gbCustomWhat.Size = new System.Drawing.Size(605, 300);
             this.gbCustomWhat.TabIndex = 0;
             this.gbCustomWhat.TabStop = false;
             this.gbCustomWhat.Text = "Custom Action";
@@ -293,7 +293,7 @@
             // btnScopeRecord
             // 
             this.btnScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScopeRecord.Location = new System.Drawing.Point(462, 77);
+            this.btnScopeRecord.Location = new System.Drawing.Point(569, 77);
             this.btnScopeRecord.Name = "btnScopeRecord";
             this.btnScopeRecord.Size = new System.Drawing.Size(24, 22);
             this.btnScopeRecord.TabIndex = 25;
@@ -314,7 +314,7 @@
             this.txtScopeRecord.LogicalName = null;
             this.txtScopeRecord.Name = "txtScopeRecord";
             this.txtScopeRecord.OrganizationService = null;
-            this.txtScopeRecord.Size = new System.Drawing.Size(342, 20);
+            this.txtScopeRecord.Size = new System.Drawing.Size(449, 20);
             this.txtScopeRecord.TabIndex = 24;
             // 
             // label12
@@ -344,7 +344,7 @@
             this.cmbCustomActions.Location = new System.Drawing.Point(114, 25);
             this.cmbCustomActions.Name = "cmbCustomActions";
             this.cmbCustomActions.OrganizationService = null;
-            this.cmbCustomActions.Size = new System.Drawing.Size(372, 21);
+            this.cmbCustomActions.Size = new System.Drawing.Size(479, 21);
             this.cmbCustomActions.TabIndex = 5;
             this.cmbCustomActions.SelectionChangeCommitted += new System.EventHandler(this.cmbCustomActions_SelectionChangeCommitted);
             // 
@@ -361,7 +361,7 @@
             this.txtScope.LogicalName = null;
             this.txtScope.Name = "txtScope";
             this.txtScope.OrganizationService = null;
-            this.txtScope.Size = new System.Drawing.Size(372, 20);
+            this.txtScope.Size = new System.Drawing.Size(479, 20);
             this.txtScope.TabIndex = 12;
             // 
             // gridInputParams
@@ -419,7 +419,7 @@
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(372, 180);
+            this.gridInputParams.Size = new System.Drawing.Size(479, 180);
             this.gridInputParams.TabIndex = 13;
             this.gridInputParams.RecordDoubleClick += new xrmtb.XrmToolBox.Controls.CRMRecordEventHandler(this.gridInputParams_RecordDoubleClick);
             // 
@@ -490,10 +490,33 @@
             this.gbSolution.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbSolution.Location = new System.Drawing.Point(0, 0);
             this.gbSolution.Name = "gbSolution";
-            this.gbSolution.Size = new System.Drawing.Size(498, 81);
+            this.gbSolution.Size = new System.Drawing.Size(605, 81);
             this.gbSolution.TabIndex = 2;
             this.gbSolution.TabStop = false;
             this.gbSolution.Text = "Solution";
+            // 
+            // rbSolManaged
+            // 
+            this.rbSolManaged.AutoSize = true;
+            this.rbSolManaged.Location = new System.Drawing.Point(232, 18);
+            this.rbSolManaged.Name = "rbSolManaged";
+            this.rbSolManaged.Size = new System.Drawing.Size(70, 17);
+            this.rbSolManaged.TabIndex = 11;
+            this.rbSolManaged.Text = "Managed";
+            this.rbSolManaged.UseVisualStyleBackColor = true;
+            // 
+            // rbSolUnmanaged
+            // 
+            this.rbSolUnmanaged.AutoSize = true;
+            this.rbSolUnmanaged.Checked = true;
+            this.rbSolUnmanaged.Location = new System.Drawing.Point(114, 18);
+            this.rbSolUnmanaged.Name = "rbSolUnmanaged";
+            this.rbSolUnmanaged.Size = new System.Drawing.Size(83, 17);
+            this.rbSolUnmanaged.TabIndex = 10;
+            this.rbSolUnmanaged.TabStop = true;
+            this.rbSolUnmanaged.Text = "Unmanaged";
+            this.rbSolUnmanaged.UseVisualStyleBackColor = true;
+            this.rbSolUnmanaged.CheckedChanged += new System.EventHandler(this.rbSolFilter_CheckedChanged);
             // 
             // label9
             // 
@@ -514,7 +537,7 @@
             this.cmbSolution.Location = new System.Drawing.Point(114, 42);
             this.cmbSolution.Name = "cmbSolution";
             this.cmbSolution.OrganizationService = null;
-            this.cmbSolution.Size = new System.Drawing.Size(372, 21);
+            this.cmbSolution.Size = new System.Drawing.Size(479, 21);
             this.cmbSolution.TabIndex = 7;
             this.cmbSolution.SelectionChangeCommitted += new System.EventHandler(this.cmbSolution_SelectionChangeCommitted);
             // 
@@ -537,7 +560,7 @@
             this.grResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grResults.Location = new System.Drawing.Point(0, 0);
             this.grResults.Name = "grResults";
-            this.grResults.Size = new System.Drawing.Size(498, 249);
+            this.grResults.Size = new System.Drawing.Size(605, 249);
             this.grResults.TabIndex = 17;
             this.grResults.TabStop = false;
             this.grResults.Text = "Results";
@@ -637,7 +660,7 @@
             this.gridOutputParams.ShowEditingIcon = false;
             this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(372, 183);
+            this.gridOutputParams.Size = new System.Drawing.Size(479, 183);
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
             // 
@@ -695,7 +718,7 @@
             this.splitRight.Panel2.Controls.Add(this.llCallHistory);
             this.splitRight.Panel2.Controls.Add(this.panel2);
             this.splitRight.Panel2Collapsed = true;
-            this.splitRight.Size = new System.Drawing.Size(539, 638);
+            this.splitRight.Size = new System.Drawing.Size(432, 638);
             this.splitRight.SplitterDistance = 272;
             this.splitRight.SplitterWidth = 8;
             this.splitRight.TabIndex = 1;
@@ -707,7 +730,7 @@
             this.gbResultDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbResultDetails.Location = new System.Drawing.Point(0, 35);
             this.gbResultDetails.Name = "gbResultDetails";
-            this.gbResultDetails.Size = new System.Drawing.Size(539, 603);
+            this.gbResultDetails.Size = new System.Drawing.Size(432, 603);
             this.gbResultDetails.TabIndex = 0;
             this.gbResultDetails.TabStop = false;
             this.gbResultDetails.Text = "Result Details";
@@ -720,7 +743,7 @@
             this.txtResultDetail.Location = new System.Drawing.Point(3, 60);
             this.txtResultDetail.Name = "txtResultDetail";
             this.txtResultDetail.ReadOnly = true;
-            this.txtResultDetail.Size = new System.Drawing.Size(533, 540);
+            this.txtResultDetail.Size = new System.Drawing.Size(426, 540);
             this.txtResultDetail.TabIndex = 0;
             this.txtResultDetail.Text = "";
             // 
@@ -731,7 +754,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(533, 44);
+            this.panel1.Size = new System.Drawing.Size(426, 44);
             this.panel1.TabIndex = 1;
             // 
             // lblResultDetailType
@@ -749,7 +772,7 @@
             this.panTextFormat.Controls.Add(this.rbFormatXML);
             this.panTextFormat.Controls.Add(this.rbFormatJSON);
             this.panTextFormat.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panTextFormat.Location = new System.Drawing.Point(310, 0);
+            this.panTextFormat.Location = new System.Drawing.Point(203, 0);
             this.panTextFormat.Name = "panTextFormat";
             this.panTextFormat.Size = new System.Drawing.Size(223, 44);
             this.panTextFormat.TabIndex = 3;
@@ -796,7 +819,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(539, 35);
+            this.panel3.Size = new System.Drawing.Size(432, 35);
             this.panel3.TabIndex = 40;
             // 
             // picHistoryOpen
@@ -804,7 +827,7 @@
             this.picHistoryOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picHistoryOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picHistoryOpen.Image = ((System.Drawing.Image)(resources.GetObject("picHistoryOpen.Image")));
-            this.picHistoryOpen.Location = new System.Drawing.Point(518, 9);
+            this.picHistoryOpen.Location = new System.Drawing.Point(411, 9);
             this.picHistoryOpen.Name = "picHistoryOpen";
             this.picHistoryOpen.Size = new System.Drawing.Size(16, 16);
             this.picHistoryOpen.TabIndex = 48;
@@ -867,28 +890,6 @@
             this.picHistoryClose.TabIndex = 36;
             this.picHistoryClose.TabStop = false;
             this.picHistoryClose.Click += new System.EventHandler(this.picHistory_Click);
-            // 
-            // rbSolUnmanaged
-            // 
-            this.rbSolUnmanaged.AutoSize = true;
-            this.rbSolUnmanaged.Checked = true;
-            this.rbSolUnmanaged.Location = new System.Drawing.Point(114, 18);
-            this.rbSolUnmanaged.Name = "rbSolUnmanaged";
-            this.rbSolUnmanaged.Size = new System.Drawing.Size(83, 17);
-            this.rbSolUnmanaged.TabIndex = 10;
-            this.rbSolUnmanaged.Text = "Unmanaged";
-            this.rbSolUnmanaged.UseVisualStyleBackColor = true;
-            this.rbSolUnmanaged.CheckedChanged += new System.EventHandler(this.rbSolFilter_CheckedChanged);
-            // 
-            // rbSolManaged
-            // 
-            this.rbSolManaged.AutoSize = true;
-            this.rbSolManaged.Location = new System.Drawing.Point(232, 18);
-            this.rbSolManaged.Name = "rbSolManaged";
-            this.rbSolManaged.Size = new System.Drawing.Size(70, 17);
-            this.rbSolManaged.TabIndex = 11;
-            this.rbSolManaged.Text = "Managed";
-            this.rbSolManaged.UseVisualStyleBackColor = true;
             // 
             // CustomActionTester
             // 
