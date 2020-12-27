@@ -158,36 +158,7 @@ namespace Rappen.XTB.CAT
         {
             txtExecution.Text = string.Empty;
             ClearOutputParamValues();
-            var request = new OrganizationRequest(GetApiMessage());
-            if (txtScopeRecord.EntityReference != null)
-            {
-                request.Parameters["Target"] = txtScopeRecord.EntityReference;
-            }
-            foreach (var input in gridInputParams.DataSource as IEnumerable<Entity>)
-            {
-                var name = string.Empty;
-                if (input.TryGetAttributeValue(Customapirequestparameter.UniqueName, out string capiname))
-                {
-                    name = capiname;
-                }
-                if (string.IsNullOrWhiteSpace(name) && input.TryGetAttributeValue("name", out string caname))
-                {
-                    name = caname;
-                }
-                if (string.IsNullOrWhiteSpace(name))
-                {
-                    continue;
-                }
-                if (input.TryGetAttributeValue("rawvalue", out object value))
-                {
-                    request[name] = value;
-                }
-                else if (input.TryGetAttributeValue("isoptional", out bool optional) && !optional)
-                {
-                    MessageBox.Show($"Missing value for required parameter: {name}", $"Execute {catTool.Target}", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
+            var request = GetRequest();
             WorkAsync(new WorkAsyncInfo
             {
                 Message = $"Executing {catTool.Target}",
@@ -213,6 +184,32 @@ namespace Rappen.XTB.CAT
                     }
                 }
             });
+        }
+
+        private OrganizationRequest GetRequest()
+        {
+            var request = new OrganizationRequest(GetApiMessage());
+            if (txtScopeRecord.EntityReference != null)
+            {
+                request.Parameters["Target"] = txtScopeRecord.EntityReference;
+            }
+            foreach (var input in gridInputParams.DataSource as IEnumerable<Entity>)
+            {
+                if (!input.TryGetAttributeValue(catTool.Columns.ParamUniqueName, out string name))
+                {
+                    continue;
+                }
+                if (input.TryGetAttributeValue("rawvalue", out object value))
+                {
+                    request[name] = value;
+                }
+                else if (input.TryGetAttributeValue("isoptional", out bool optional) && !optional)
+                {
+                    MessageBox.Show($"Missing value for required parameter: {name}", $"Execute {catTool.Target}", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return null;
+                }
+            }
+            return request;
         }
 
         private void FormatResultDetail()
