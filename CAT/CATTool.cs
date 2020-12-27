@@ -67,6 +67,8 @@ namespace Rappen.XTB.CAT
             return qx;
         }
 
+        public string GetActionUrlPath(Guid actionid) => $"/sfa/workflow/edit.aspx?id={actionid}";
+
         public QueryExpression GetInputQuery(Guid actionid)
         {
             var qx = new QueryExpression("sdkmessagerequestfield");

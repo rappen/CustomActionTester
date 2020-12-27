@@ -22,6 +22,7 @@ namespace Rappen.XTB.CAT
         void PreProcessParams(EntityCollection records, IEnumerable<EntityMetadataProxy> entities);
         Customapi.BindingType_OptionSet BindingType(Entity ca);
         void AddSolutionFilter(QueryExpression qx);
+        string GetActionUrlPath(Guid actionid);
     }
 
     public class Columns

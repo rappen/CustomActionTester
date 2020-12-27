@@ -550,6 +550,37 @@ namespace Rappen.XTB.CAT
             btnExecute.Enabled = ReadyToExecute();
         }
 
+        private void OpenAction(Entity ca)
+        {
+            var url = GetFullWebApplicationUrl();
+            url = string.Concat(url,
+                url.EndsWith("/") ? "" : "/",
+                catTool.GetActionUrlPath(ca.Id));
+            Process.Start(url);
+        }
+
+        private string GetFullWebApplicationUrl()
+        {
+            var url = ConnectionDetail.WebApplicationUrl;
+            if (string.IsNullOrEmpty(url))
+            {
+                url = ConnectionDetail.ServerName;
+            }
+            if (!url.ToLower().StartsWith("http"))
+            {
+                url = string.Concat("http://", url);
+            }
+            var uri = new Uri(url);
+            if (!uri.Host.EndsWith(".dynamics.com"))
+            {
+                if (string.IsNullOrEmpty(uri.AbsolutePath.Trim('/')))
+                {
+                    uri = new Uri(uri, ConnectionDetail.Organization);
+                }
+            }
+            return uri.ToString();
+        }
+
         private void PopulateOutputParamValues(ParameterCollection outputparams)
         {
             var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
@@ -624,6 +655,7 @@ namespace Rappen.XTB.CAT
 
         private void SetCustomAction(Entity ca)
         {
+            btnOpenAction.Enabled = ca != null;
             if (ca == null)
             {
                 return;

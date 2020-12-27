@@ -73,6 +73,8 @@ namespace Rappen.XTB.CAPIT
             return qx;
         }
 
+        public string GetActionUrlPath(Guid actionid) => $"/main.aspx?pagetype=entityrecord&etn=customapi&id={actionid}";
+        
         public QueryExpression GetInputQuery(Guid actionid)
         {
             var qx = new QueryExpression(Customapirequestparameter.EntityName);

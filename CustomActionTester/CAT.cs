@@ -151,5 +151,10 @@ namespace Rappen.XTB.CAT
             mnuShowDisplay.Checked = false;
             RefreshLayout();
         }
+
+        private void btnOpenAction_Click(object sender, EventArgs e)
+        {
+            OpenAction(cmbCustomActions.SelectedEntity);
+        }
     }
 }
