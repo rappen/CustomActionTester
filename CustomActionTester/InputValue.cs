@@ -45,7 +45,7 @@ namespace Rappen.XTB.CAT
             txtRecord.OrganizationService = service;
             if (!ParseInput(type, input))
             {
-                MessageBox.Show($"Type {type} is not yet supported by CAT.", "Input Parameter", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show($"Type {type} is not yet supported.", "Input Parameter", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return DialogResult.Cancel;
             }
             var result = ShowDialog(owner);
@@ -169,6 +169,14 @@ namespace Rappen.XTB.CAT
                     Result = new OptionSetValue(osvvalue);
                     FormattedResult = osvvalue.ToString();
                     break;
+                case ParamType.GuId:
+                    if (!Guid.TryParse(txtString.Text, out Guid guidvalue))
+                    {
+                        invalidstr = true;
+                        break;
+                    }
+                    Result = guidvalue;
+                    break;
                 case ParamType.Entity:
                 case ParamType.EntityReference:
                     if (txtRecord.Entity == null)
@@ -224,6 +232,11 @@ namespace Rappen.XTB.CAT
                 case ParamType.Money:
                     panString.Visible = true;
                     txtString.Text = currentvalue?.ToString();
+                    focus = txtString;
+                    break;
+                case ParamType.GuId:
+                    panString.Visible = true;
+                    txtString.Text = currentvalue?.ToString() ?? Guid.Empty.ToString();
                     focus = txtString;
                     break;
                 case ParamType.Picklist:
