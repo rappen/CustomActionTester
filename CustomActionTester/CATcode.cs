@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using xrmtb.XrmToolBox.Controls.Controls;
+using xrmtb.XrmToolBox.Controls.Helper;
 using XrmToolBox.Extensibility;
 using XrmToolBox.Extensibility.Interfaces;
 
@@ -28,6 +29,7 @@ namespace Rappen.XTB.CAT
         #region Private Fields
 
         private EntityMetadataProxy[] entities;
+        private Guid InArgumentId = Guid.Empty;
 
         #endregion Private Fields
 
@@ -43,7 +45,15 @@ namespace Rappen.XTB.CAT
 
         public void OnIncomingMessage(MessageBusEventArgs message)
         {
-            // N/A
+            if (message.TargetArgument is string arg && Guid.TryParse(arg, out Guid argid))
+            {
+                InArgumentId = argid;
+                if (cmbSolution.DataSource != null)
+                {
+                    SelectDefaultSolution();
+                    GetCustomActions(cmbSolution.SelectedEntity);
+                }
+            }
         }
 
         public void ReceiveKeyDownShortcut(KeyEventArgs e)
@@ -307,10 +317,26 @@ namespace Rappen.XTB.CAT
                     else if (args.Result is EntityCollection actions)
                     {
                         cmbCustomActions.DataSource = actions;
+                        if (!InArgumentId.Equals(Guid.Empty))
+                        {
+                            SelectActionByInArgumentId();
+                        }
                         SetCustomAction(cmbCustomActions.SelectedEntity);
                     }
                 }
             });
+        }
+
+        private void SelectActionByInArgumentId()
+        {
+            cmbCustomActions.SelectedItem = cmbCustomActions.Items
+                .OfType<EntityWrapper>()
+                .FirstOrDefault(e =>
+                    e.Entity.Id.Equals(InArgumentId));
+            if (cmbCustomActions.SelectedItem != null)
+            {
+                InArgumentId = Guid.Empty;
+            }
         }
 
         private void GetInputParams(Entity ca)
@@ -450,10 +476,23 @@ namespace Rappen.XTB.CAT
                     else if (args.Result is EntityCollection solutions)
                     {
                         cmbSolution.DataSource = solutions;
+                        if (!InArgumentId.Equals(Guid.Empty))
+                        {
+                            SelectDefaultSolution();
+                        }
                         GetCustomActions(cmbSolution.SelectedEntity);
                     }
                 }
             });
+        }
+
+        private void SelectDefaultSolution()
+        {
+            cmbSolution.SelectedItem = cmbSolution.Items
+                .OfType<EntityWrapper>()
+                .FirstOrDefault(e =>
+                    e.Entity.TryGetAttributeValue<string>(Solution.UniqueName, out string uniquename) &&
+                    uniquename.Equals("Default"));
         }
 
         private void HandleAIResult(string result)
