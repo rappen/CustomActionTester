@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Rappen.XrmToolBox.CustomAPITester</id>
+    <version>1.0.0</version>
+    <title>Custom API Tester for XrmToolBox</title>
+    <authors>Jonas Rapp</authors>
+    <owners>rappen</owners>
+    <projectUrl>https://github.com/rappen/CustomActionTester</projectUrl>
+    <iconUrl>https://jonasr.app/wp-content/uploads/CAPIT-150-tsp.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Browse Custom APIs, enter input parameters, execute the action, investigate output parameters.</description>
+    <summary>Browse Custom APIs, enter input parameters, execute the action, investigate output parameters.</summary>
+    <releaseNotes>
+First release
+    </releaseNotes>
+    <copyright>Copyright 2020 Jonas Rapp</copyright>
+    <tags>XrmToolBox Plugins CustomAPITester</tags>
+    <dependencies>
+      <dependency id="XrmToolBox" version="1.2020.12.43" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Rappen.XTB.CAPIT.dll" target="lib\net452\Plugins" />
+  </files>
+</package>
