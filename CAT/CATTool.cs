@@ -30,6 +30,8 @@ namespace Rappen.XTB.CAT
             ParamUniqueName = "name"
         };
 
+        public string ManagerTool => string.Empty;
+
         public void AddSolutionFilter(QueryExpression qx)
         {
             var solcomp = qx.AddLink(Solutioncomponent.EntityName, Solutioncomponent.SolutionId, Solution.PrimaryKey);

@@ -195,12 +195,6 @@
     <Compile Include="CustomAPI.Const.cs" />
     <Compile Include="EntityMetadataProxy.cs" />
     <Compile Include="ICATTool.cs" />
-    <Compile Include="InputValue.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InputValue.Designer.cs">
-      <DependentUpon>InputValue.cs</DependentUpon>
-    </Compile>
     <Compile Include="MetadataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -214,9 +208,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CAT.resx">
       <DependentUpon>CAT.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InputValue.resx">
-      <DependentUpon>InputValue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\Rappen.XTB.Helper\Rappen.XTB.Helpers.projitems" Label="Shared" />

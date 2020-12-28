@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
+using xrmtb.XrmToolBox.Controls.Controls;
 using XrmToolBox.Extensibility;
 
 namespace Rappen.XTB.CAT
@@ -16,7 +17,6 @@ namespace Rappen.XTB.CAT
         private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
         private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
         private AppInsights ai;
-        private InputValue inputdlg;
 
         #endregion Private Fields
 
@@ -39,6 +39,7 @@ namespace Rappen.XTB.CAT
             tslAbout.Image = catTool.Logo24;
             gbCustomWhat.Text = catTool.Target;
             lblCustomWhat.Text = catTool.Target;
+            btnManage.Visible = !string.IsNullOrWhiteSpace(catTool.ManagerTool);
             RefreshLayout();
         }
 
@@ -50,7 +51,6 @@ namespace Rappen.XTB.CAT
         {
             base.UpdateConnection(newService, detail, actionName, parameter);
             LoadEntities();
-            inputdlg = null;
             cmbSolution.OrganizationService = newService;
             cmbCustomActions.OrganizationService = newService;
             txtScope.OrganizationService = newService;
@@ -58,6 +58,7 @@ namespace Rappen.XTB.CAT
             gridInputParams.OrganizationService = newService;
             gridOutputParams.OrganizationService = newService;
             txtCDSDataHelper.OrganizationService = newService;
+            txtRecord.OrganizationService = newService;
             if (newService != null)
             {
                 GetSolutions(rbSolManaged.Checked);
@@ -99,11 +100,6 @@ namespace Rappen.XTB.CAT
             LogUse("Load");
         }
 
-        private void gridInputParams_RecordDoubleClick(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
-        {
-            GetInputParamValue(e);
-        }
-
         private void gridOutputParams_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             FormatResultDetail();
@@ -133,7 +129,7 @@ namespace Rappen.XTB.CAT
 
         #endregion Private Methods
 
-        private void btnLookup_Click(object sender, EventArgs e)
+        private void btnScopeRecord_Click(object sender, EventArgs e)
         {
             LookupBoundRecord();
         }
@@ -155,6 +151,31 @@ namespace Rappen.XTB.CAT
         private void btnOpenAction_Click(object sender, EventArgs e)
         {
             OpenAction(cmbCustomActions.SelectedEntity);
+        }
+
+        private void gridInputParams_RecordEnter(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
+        {
+            PopulateInputParamValue(e.Entity);
+        }
+
+        private void btnCAValueSet_Click(object sender, EventArgs e)
+        {
+            SetInputParamValue(sender == btnCAValueClear);
+        }
+
+        private void btnLookup_Click(object sender, EventArgs e)
+        {
+            LookupInputParamRecord();
+        }
+
+        private void cmbEntity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtRecord.Entity = null;
+        }
+
+        private void btnManage_Click(object sender, EventArgs e)
+        {
+            ManageAction(cmbCustomActions.SelectedEntity);
         }
     }
 }

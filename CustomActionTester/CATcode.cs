@@ -18,6 +18,8 @@ using XrmToolBox.Extensibility.Interfaces;
 
 namespace Rappen.XTB.CAT
 {
+    using ParamType = Rappen.XTB.CAT.Customapirequestparameter.Type_OptionSet;
+
     public partial class CustomActionTester : IGitHubPlugin, IAboutPlugin, IShortcutReceiver, IMessageBusHost
     {
         #region Public Events
@@ -375,29 +377,39 @@ namespace Rappen.XTB.CAT
             });
         }
 
-        private void GetInputParamValue(xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
+        private void PopulateInputParamValue(Entity input)
         {
-            if (inputdlg == null)
-            {
-                inputdlg = new InputValue(Service, entities);
-            }
-            var dlgresult = inputdlg.ShowDialog(e.Entity, this);
-            if (dlgresult == DialogResult.Cancel)
+            panCAValue.Tag = input;
+            panCAValue.Visible = ParseInput(input);
+        }
+
+        private void SetInputParamValue(bool clear)
+        {
+            if (!(panCAValue.Tag is Entity input))
             {
                 return;
             }
-            if (dlgresult == DialogResult.OK && inputdlg.Result != null)
+            if (clear)
             {
-                e.Entity["rawvalue"] = inputdlg.Result;
-                e.Entity["value"] = inputdlg.FormattedResult;
+                input.RemoveProperty("rawvalue");
+                input.RemoveProperty("value");
             }
-            else if (dlgresult == DialogResult.Ignore)
+            else
             {
-                e.Entity.Attributes.Remove("value");
-                e.Entity.Attributes.Remove("rawvalue");
+                if (!HandleInput(input))
+                {
+                    return;
+                }
             }
+            SuspendLayout();
             gridInputParams.Refresh();
             gridInputParams.AutoResizeColumns();
+            gridInputParams.Rows.OfType<DataGridViewRow>()
+                .Where(r => r.Cells["#entity"].Value == input)
+                .ToList()
+                .ForEach(r => r.Selected = true);
+            PopulateInputParamValue(input);
+            ResumeLayout();
             btnExecute.Enabled = ReadyToExecute();
         }
 
@@ -525,6 +537,7 @@ namespace Rappen.XTB.CAT
                             .Where(e => e.IsCustomizable.Value == true && e.IsIntersect.Value != true)
                             .Select(m => new EntityMetadataProxy(m))
                             .OrderBy(e => e.ToString()).ToArray();
+                        cmbEntity.Items.AddRange(entities);
                     }
                 }
             });
@@ -533,21 +546,36 @@ namespace Rappen.XTB.CAT
         private void LookupBoundRecord()
         {
             var entity = GetBoundEntity();
-            if (string.IsNullOrWhiteSpace(entity))
+            txtScopeRecord.Entity = LookupRecord(entity);
+            btnExecute.Enabled = ReadyToExecute();
+        }
+
+        private void LookupInputParamRecord()
+        {
+            if (!(cmbEntity.SelectedItem is EntityMetadataProxy entity))
             {
                 return;
+            }
+            var entityname = entity.Metadata.LogicalName;
+            txtRecord.Entity = LookupRecord(entityname);
+        }
+
+        private Entity LookupRecord(string entityname)
+        {
+            if (string.IsNullOrWhiteSpace(entityname))
+            {
+                return null;
             }
             var lkp = new CDSLookupDialog
             {
-                Service = txtScopeRecord.OrganizationService,
-                LogicalName = entity
+                Service = Service,
+                LogicalName = entityname
             };
-            if (lkp.ShowDialog(this) != DialogResult.OK)
+            if (lkp.ShowDialog(this) == DialogResult.OK)
             {
-                return;
+                return lkp.Entity;
             }
-            txtScopeRecord.Entity = lkp.Entity;
-            btnExecute.Enabled = ReadyToExecute();
+            return null;
         }
 
         private void OpenAction(Entity ca)
@@ -557,6 +585,11 @@ namespace Rappen.XTB.CAT
                 url.EndsWith("/") ? "" : "/",
                 catTool.GetActionUrlPath(ca.Id));
             Process.Start(url);
+        }
+
+        private void ManageAction(Entity ca)
+        {
+            OnOutgoingMessage(this, new MessageBusEventArgs(catTool.ManagerTool, true) { TargetArgument = ca.Id.ToString() });
         }
 
         private string GetFullWebApplicationUrl()
@@ -656,6 +689,7 @@ namespace Rappen.XTB.CAT
         private void SetCustomAction(Entity ca)
         {
             btnOpenAction.Enabled = ca != null;
+            btnManage.Enabled = ca != null;
             if (ca == null)
             {
                 return;
@@ -663,8 +697,7 @@ namespace Rappen.XTB.CAT
             txtScope.Entity = ca;
             txtScopeRecord.Entity = null;
             var bindingtype = catTool.BindingType(ca);
-            txtScopeRecord.Enabled = bindingtype != Customapi.BindingType_OptionSet.Global;
-            btnScopeRecord.Enabled = bindingtype != Customapi.BindingType_OptionSet.Global;
+            panCARecord.Visible = bindingtype != Customapi.BindingType_OptionSet.Global;
             txtExecution.Text = string.Empty;
             GetInputParams(ca);
         }
@@ -684,6 +717,208 @@ namespace Rappen.XTB.CAT
             dgOutputsName.DataPropertyName = unique ? catTool.Columns.ParamUniqueName : catTool.Columns.ParamName;
             gridInputParams.Refresh();
             gridOutputParams.Refresh();
+        }
+
+        private static ParamType? GetType(Entity input)
+        {
+            if (input.TryGetAttributeValue("type", out string typestr))
+            {
+                typestr = typestr
+                    .Replace("OptionSetValue", "Picklist")
+                    .Replace("Int32", "Integer")
+                    .Replace("Int64", "Integer")
+                    .Replace("Double", "Float");
+                if (Enum.TryParse(typestr, out ParamType type))
+                {
+                    return type;
+                }
+            }
+            if (input.TryGetAttributeValue("type", out OptionSetValue typeosv))
+            {
+                return (ParamType)typeosv.Value;
+            }
+            return null;
+        }
+
+        private bool ParseInput(Entity input)
+        {
+            panString.Visible = false;
+            panEntity.Visible = false;
+            panBoolean.Visible = false;
+            panDateTime.Visible = false;
+            txtString.Text = string.Empty;
+            chkBoolean.Checked = false;
+            dtDateTime.Value = DateTime.Today;
+            cmbEntity.SelectedIndex = -1;
+            txtRecord.Entity = null;
+            if (input == null)
+            {
+                return false;
+            }
+            var currentvalue = input.Contains("rawvalue") ? input["rawvalue"] : null;
+            var type = GetType(input);
+            switch (type)
+            {
+                case ParamType.String:
+                case ParamType.Integer:
+                case ParamType.Decimal:
+                case ParamType.Float:
+                    panString.Visible = true;
+                    txtString.Text = currentvalue?.ToString();
+                    break;
+                case ParamType.Money:
+                    panString.Visible = true;
+                    if (currentvalue is Money money)
+                    {
+                        txtString.Text = money.Value.ToString();
+                    }
+                    break;
+                case ParamType.GuId:
+                    panString.Visible = true;
+                    txtString.Text = currentvalue?.ToString() ?? Guid.Empty.ToString();
+                    break;
+                case ParamType.Picklist:
+                    panString.Visible = true;
+                    if (currentvalue is OptionSetValue osv)
+                    {
+                        txtString.Text = osv.Value.ToString();
+                    }
+                    break;
+                case ParamType.Entity:
+                case ParamType.EntityReference:
+                    panEntity.Visible = true;
+                    if (input.TryGetAttributeValue("entity", out EntityMetadataProxy entitytype) &&
+                        cmbEntity.Items.Cast<EntityMetadataProxy>().FirstOrDefault(e => e.Metadata.LogicalName == entitytype.Metadata.LogicalName) is EntityMetadataProxy selentity)
+                    {
+                        cmbEntity.SelectedItem = selentity;
+                        cmbEntity.Enabled = false;
+                    }
+                    else
+                    {
+                        cmbEntity.Enabled = true;
+                    }
+                    if (currentvalue is Entity entity)
+                    {
+                        cmbEntity.SelectedItem = cmbEntity.Items.Cast<EntityMetadataProxy>().FirstOrDefault(e => e.Metadata.LogicalName == entity.LogicalName);
+                        txtRecord.Entity = entity;
+                    }
+                    else if (currentvalue is EntityReference entref)
+                    {
+                        cmbEntity.SelectedItem = cmbEntity.Items.Cast<EntityMetadataProxy>().FirstOrDefault(e => e.Metadata.LogicalName == entref.LogicalName);
+                        txtRecord.EntityReference = entref;
+                    }
+                    break;
+                case ParamType.Boolean:
+                    panBoolean.Visible = true;
+                    chkBoolean.Checked = currentvalue is bool boolval && boolval;
+                    break;
+                case ParamType.DateTime:
+                    panDateTime.Visible = true;
+                    if (currentvalue is DateTime dtvalue)
+                    {
+                        dtDateTime.Value = dtvalue;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+            return true;
+        }
+
+        private bool HandleInput(Entity input)
+        {
+            var invalidstr = false;
+            object result = null;
+            object formattedresult = null;
+            var type = GetType(input);
+            switch (type)
+            {
+                case ParamType.String:
+                    result = txtString.Text;
+                    break;
+                case ParamType.Integer:
+                    if (!int.TryParse(txtString.Text, out int intvalue))
+                    {
+                        invalidstr = true;
+                        break;
+                    }
+                    result = intvalue;
+                    break;
+                case ParamType.Decimal:
+                case ParamType.Money:
+                    if (!decimal.TryParse(txtString.Text, out decimal decvalue))
+                    {
+                        invalidstr = true;
+                        break;
+                    }
+                    if (type == ParamType.Money)
+                    {
+                        result = new Money(decvalue);
+                        formattedresult = decvalue;
+                    }
+                    else
+                    {
+                        result = decvalue;
+                    }
+                    break;
+                case ParamType.Float:
+                    if (!double.TryParse(txtString.Text, out double douvalue))
+                    {
+                        invalidstr = true;
+                        break;
+                    }
+                    result = douvalue;
+                    break;
+                case ParamType.Picklist:
+                    if (!int.TryParse(txtString.Text, out int osvvalue))
+                    {
+                        invalidstr = true;
+                        break;
+                    }
+                    result = new OptionSetValue(osvvalue);
+                    formattedresult = osvvalue.ToString();
+                    break;
+                case ParamType.GuId:
+                    if (!Guid.TryParse(txtString.Text, out Guid guidvalue))
+                    {
+                        invalidstr = true;
+                        break;
+                    }
+                    result = guidvalue;
+                    break;
+                case ParamType.Entity:
+                case ParamType.EntityReference:
+                    if (txtRecord.Entity == null)
+                    {
+                        MessageBox.Show($"No record selected", "Input Parameter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    if (type == ParamType.Entity)
+                    {
+                        result = txtRecord.Entity;
+                    }
+                    else if (type == ParamType.EntityReference)
+                    {
+                        result = txtRecord.Entity.ToEntityReference();
+                    }
+                    formattedresult = txtRecord.Text;
+                    break;
+                case ParamType.Boolean:
+                    result = chkBoolean.Checked;
+                    break;
+                case ParamType.DateTime:
+                    result = dtDateTime.Value;
+                    break;
+            }
+            if (invalidstr)
+            {
+                MessageBox.Show($"Not a valid {type}: {txtString.Text}", "Input Parameter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            formattedresult = formattedresult ?? result;
+            input["rawvalue"] = result;
+            input["value"] = formattedresult;
+            return true;
         }
 
         #endregion Private Methods

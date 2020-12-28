@@ -33,6 +33,8 @@ namespace Rappen.XTB.CAPIT
             ParamUniqueName = Customapirequestparameter.UniqueName
         };
 
+        public string ManagerTool => "Custom API Manager";
+
         public void AddSolutionFilter(QueryExpression qx)
         {
             var solcomp = qx.AddLink(Solutioncomponent.EntityName, Solutioncomponent.SolutionId, Solution.PrimaryKey);
