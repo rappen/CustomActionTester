@@ -2,9 +2,11 @@
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using xrmtb.XrmToolBox.Controls.Controls;
+using XrmToolBox;
 using XrmToolBox.Extensibility;
 
 namespace Rappen.XTB.CAT
@@ -39,7 +41,7 @@ namespace Rappen.XTB.CAT
             tslAbout.Image = catTool.Logo24;
             gbCustomWhat.Text = catTool.Target;
             lblCustomWhat.Text = catTool.Target;
-            btnManage.Visible = !string.IsNullOrWhiteSpace(catTool.ManagerTool);
+            btnManage.Visible = !string.IsNullOrWhiteSpace(catTool.ManagerTool) && PluginManagerExtended.Instance.Plugins.Any(p => p.Metadata.Name == catTool.ManagerTool);
             RefreshLayout();
         }
 
@@ -50,6 +52,7 @@ namespace Rappen.XTB.CAT
         public override void UpdateConnection(IOrganizationService newService, ConnectionDetail detail, string actionName, object parameter)
         {
             base.UpdateConnection(newService, detail, actionName, parameter);
+            btnOpenAction.Text = $"Open in {(detail.WebApplicationUrl.ToLower().Contains("dynamics.com") ? "Dataverse" : "CRM")}";
             LoadEntities();
             cmbSolution.OrganizationService = newService;
             cmbCustomActions.OrganizationService = newService;
