@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jonas Rapp, Sweden")]
 [assembly: AssemblyProduct("CustomActionTester")]
-[assembly: AssemblyCopyright("Copyright © Jonas Rapp 2020")]
+[assembly: AssemblyCopyright("Copyright © Jonas Rapp 2020-2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

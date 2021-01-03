@@ -12,10 +12,12 @@
     <description>Browse Custom Actions, enter input parameters, execute the action, investigate output parameters.</description>
     <summary>Browse Custom Actions, enter input parameters, execute the action, investigate output parameters.</summary>
     <releaseNotes>
+      Fixed bug with different value types for parameters #21
+      
       Full release notes:
       https://github.com/rappen/CustomActionTester/releases/tag/$buildnumber$
     </releaseNotes>
-    <copyright>Copyright 2020 Jonas Rapp</copyright>
+    <copyright>Copyright 2020-2021 Jonas Rapp</copyright>
     <tags>XrmToolBox Plugins CustomActionTester</tags>
     <dependencies>
       <dependency id="XrmToolBox" version="1.2020.12.43" />
