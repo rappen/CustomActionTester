@@ -51,7 +51,7 @@ namespace Rappen.XTB.CAT
         public QueryExpression GetActionQuery(Guid solutionid)
         {
             var qx = new QueryExpression("workflow");
-            qx.ColumnSet.AddColumns("name", "uniquename", "createdby", "primaryentity", "scope", "mode", "ismanaged", "iscustomizable", "istransacted", "iscustomprocessingstepallowedforotherpublishers", "inputparameters", "description");
+            qx.ColumnSet.AddColumns("name", "uniquename", "createdby", "primaryentity", "scope", "mode", "ismanaged", "iscustomizable", "istransacted", "inputparameters", "description");
             qx.AddOrder("ismanaged", OrderType.Descending);
             qx.AddOrder("name", OrderType.Ascending);
             qx.Criteria.AddCondition("category", ConditionOperator.Equal, 3);
