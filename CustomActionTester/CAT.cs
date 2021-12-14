@@ -41,7 +41,7 @@ namespace Rappen.XTB.CAT
             tslAbout.Image = catTool.Logo24;
             gbCustomWhat.Text = catTool.Target;
             lblCustomWhat.Text = catTool.Target;
-            btnManage.Visible = !string.IsNullOrWhiteSpace(catTool.ManagerTool) && PluginManagerExtended.Instance.Plugins.Any(p => p.Metadata.Name == catTool.ManagerTool);
+            btnManage.Visible = !string.IsNullOrWhiteSpace(catTool.ManagerTool)/* && PluginManagerExtended.Instance.Plugins.Any(p => p.Metadata.Name == catTool.ManagerTool)*/;
             RefreshLayout();
         }
 
