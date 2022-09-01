@@ -67,6 +67,7 @@
             this.cmbEntity = new System.Windows.Forms.ComboBox();
             this.btnLookup = new System.Windows.Forms.Button();
             this.txtRecord = new Rappen.XTB.Helpers.Controls.XRMColumnText();
+            this.rhRecord = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.panDateTime = new System.Windows.Forms.Panel();
             this.dtDateTime = new System.Windows.Forms.DateTimePicker();
             this.panBoolean = new System.Windows.Forms.Panel();
@@ -80,6 +81,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panCARecord = new System.Windows.Forms.Panel();
             this.txtScopeRecord = new Rappen.XTB.Helpers.Controls.XRMColumnText();
+            this.rhScopeRecord = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.label12 = new System.Windows.Forms.Label();
             this.btnScopeRecord = new System.Windows.Forms.Button();
             this.panCA = new System.Windows.Forms.Panel();
@@ -93,6 +95,8 @@
             this.cmbSolution = new Rappen.XTB.Helpers.Controls.XRMColumnLookup();
             this.label7 = new System.Windows.Forms.Label();
             this.grResults = new System.Windows.Forms.GroupBox();
+            this.txtCDSDataHelper = new Rappen.XTB.Helpers.Controls.XRMColumnText();
+            this.rhResult = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.txtExecution = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -117,10 +121,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblDetailHeader = new System.Windows.Forms.Label();
             this.picHistoryClose = new System.Windows.Forms.PictureBox();
-            this.rhScopeRecord = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
-            this.rhResult = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
-            this.txtCDSDataHelper = new Rappen.XTB.Helpers.Controls.XRMColumnText();
-            this.rhRecord = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
             this.splitFullForm.Panel1.SuspendLayout();
@@ -174,8 +174,8 @@
             this.btnSettings});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
-            this.toolStripMenu.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStripMenu.Size = new System.Drawing.Size(1568, 34);
+            this.toolStripMenu.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStripMenu.Size = new System.Drawing.Size(1045, 31);
             this.toolStripMenu.TabIndex = 4;
             this.toolStripMenu.Text = "toolStrip1";
             // 
@@ -185,7 +185,7 @@
             this.btnExecute.Image = ((System.Drawing.Image)(resources.GetObject("btnExecute.Image")));
             this.btnExecute.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExecute.Name = "btnExecute";
-            this.btnExecute.Size = new System.Drawing.Size(256, 29);
+            this.btnExecute.Size = new System.Drawing.Size(182, 28);
             this.btnExecute.Text = "Execute Custom Action (F5)";
             this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
             // 
@@ -195,14 +195,14 @@
             this.tslAbout.Image = ((System.Drawing.Image)(resources.GetObject("tslAbout.Image")));
             this.tslAbout.IsLink = true;
             this.tslAbout.Name = "tslAbout";
-            this.tslAbout.Size = new System.Drawing.Size(152, 29);
+            this.tslAbout.Size = new System.Drawing.Size(106, 28);
             this.tslAbout.Text = "by Jonas Rapp";
             this.tslAbout.Click += new System.EventHandler(this.tslAbout_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // btnOpenAction
             // 
@@ -210,7 +210,7 @@
             this.btnOpenAction.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenAction.Image")));
             this.btnOpenAction.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnOpenAction.Name = "btnOpenAction";
-            this.btnOpenAction.Size = new System.Drawing.Size(186, 29);
+            this.btnOpenAction.Size = new System.Drawing.Size(131, 28);
             this.btnOpenAction.Text = "Open in Dataverse";
             this.btnOpenAction.Click += new System.EventHandler(this.btnOpenAction_Click);
             // 
@@ -220,14 +220,14 @@
             this.btnManage.Image = ((System.Drawing.Image)(resources.GetObject("btnManage.Image")));
             this.btnManage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnManage.Name = "btnManage";
-            this.btnManage.Size = new System.Drawing.Size(277, 29);
+            this.btnManage.Size = new System.Drawing.Size(193, 28);
             this.btnManage.Text = "Open in Custom API Manager";
             this.btnManage.Click += new System.EventHandler(this.btnManage_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
             // 
             // btnPTV
             // 
@@ -235,14 +235,14 @@
             this.btnPTV.Image = ((System.Drawing.Image)(resources.GetObject("btnPTV.Image")));
             this.btnPTV.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPTV.Name = "btnPTV";
-            this.btnPTV.Size = new System.Drawing.Size(191, 29);
+            this.btnPTV.Size = new System.Drawing.Size(138, 28);
             this.btnPTV.Text = "Trace last execution";
             this.btnPTV.Click += new System.EventHandler(this.btnPTV_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // btnSettings
             // 
@@ -252,7 +252,7 @@
             this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
             this.btnSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(118, 29);
+            this.btnSettings.Size = new System.Drawing.Size(86, 28);
             this.btnSettings.Text = "Settings";
             // 
             // mnuShowDisplay
@@ -260,52 +260,48 @@
             this.mnuShowDisplay.Checked = true;
             this.mnuShowDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mnuShowDisplay.Name = "mnuShowDisplay";
-            this.mnuShowDisplay.Size = new System.Drawing.Size(224, 34);
+            this.mnuShowDisplay.Size = new System.Drawing.Size(147, 22);
             this.mnuShowDisplay.Text = "Display Name";
             this.mnuShowDisplay.Click += new System.EventHandler(this.mnuShowDisplay_Click);
             // 
             // mnuShowUnique
             // 
             this.mnuShowUnique.Name = "mnuShowUnique";
-            this.mnuShowUnique.Size = new System.Drawing.Size(224, 34);
+            this.mnuShowUnique.Size = new System.Drawing.Size(147, 22);
             this.mnuShowUnique.Text = "Unique Name";
             this.mnuShowUnique.Click += new System.EventHandler(this.mnuShowUnique_Click);
             // 
             // lblCustomWhat
             // 
             this.lblCustomWhat.AutoSize = true;
-            this.lblCustomWhat.Location = new System.Drawing.Point(15, 15);
-            this.lblCustomWhat.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCustomWhat.Location = new System.Drawing.Point(10, 10);
             this.lblCustomWhat.Name = "lblCustomWhat";
-            this.lblCustomWhat.Size = new System.Drawing.Size(113, 20);
+            this.lblCustomWhat.Size = new System.Drawing.Size(75, 13);
             this.lblCustomWhat.TabIndex = 6;
             this.lblCustomWhat.Text = "Custom Action";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 57);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(10, 37);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 20);
+            this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "Scope";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 15);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(10, 10);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 20);
+            this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 14;
             this.label5.Text = "Input Params";
             // 
             // splitFullForm
             // 
             this.splitFullForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitFullForm.Location = new System.Drawing.Point(0, 34);
-            this.splitFullForm.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.splitFullForm.Location = new System.Drawing.Point(0, 31);
             this.splitFullForm.Name = "splitFullForm";
             // 
             // splitFullForm.Panel1
@@ -315,16 +311,15 @@
             // splitFullForm.Panel2
             // 
             this.splitFullForm.Panel2.Controls.Add(this.splitRight);
-            this.splitFullForm.Size = new System.Drawing.Size(1568, 995);
-            this.splitFullForm.SplitterDistance = 907;
-            this.splitFullForm.SplitterWidth = 12;
+            this.splitFullForm.Size = new System.Drawing.Size(1045, 638);
+            this.splitFullForm.SplitterDistance = 604;
+            this.splitFullForm.SplitterWidth = 8;
             this.splitFullForm.TabIndex = 15;
             // 
             // splitLeft
             // 
             this.splitLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitLeft.Location = new System.Drawing.Point(0, 0);
-            this.splitLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.splitLeft.Name = "splitLeft";
             this.splitLeft.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -336,9 +331,9 @@
             // splitLeft.Panel2
             // 
             this.splitLeft.Panel2.Controls.Add(this.grResults);
-            this.splitLeft.Size = new System.Drawing.Size(907, 995);
-            this.splitLeft.SplitterDistance = 594;
-            this.splitLeft.SplitterWidth = 12;
+            this.splitLeft.Size = new System.Drawing.Size(604, 638);
+            this.splitLeft.SplitterDistance = 391;
+            this.splitLeft.SplitterWidth = 8;
             this.splitLeft.TabIndex = 15;
             // 
             // gbCustomWhat
@@ -348,11 +343,9 @@
             this.gbCustomWhat.Controls.Add(this.panCARecord);
             this.gbCustomWhat.Controls.Add(this.panCA);
             this.gbCustomWhat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbCustomWhat.Location = new System.Drawing.Point(0, 125);
-            this.gbCustomWhat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbCustomWhat.Location = new System.Drawing.Point(0, 81);
             this.gbCustomWhat.Name = "gbCustomWhat";
-            this.gbCustomWhat.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbCustomWhat.Size = new System.Drawing.Size(907, 469);
+            this.gbCustomWhat.Size = new System.Drawing.Size(604, 310);
             this.gbCustomWhat.TabIndex = 0;
             this.gbCustomWhat.TabStop = false;
             this.gbCustomWhat.Text = "Custom Action";
@@ -362,10 +355,9 @@
             this.panCAInputs.Controls.Add(this.gridInputParams);
             this.panCAInputs.Controls.Add(this.label5);
             this.panCAInputs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panCAInputs.Location = new System.Drawing.Point(4, 158);
-            this.panCAInputs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panCAInputs.Location = new System.Drawing.Point(3, 103);
             this.panCAInputs.Name = "panCAInputs";
-            this.panCAInputs.Size = new System.Drawing.Size(899, 249);
+            this.panCAInputs.Size = new System.Drawing.Size(598, 167);
             this.panCAInputs.TabIndex = 28;
             // 
             // gridInputParams
@@ -408,8 +400,7 @@
             this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle8;
             this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridInputParams.FilterColumns = "";
-            this.gridInputParams.Location = new System.Drawing.Point(166, 11);
-            this.gridInputParams.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gridInputParams.Location = new System.Drawing.Point(111, 7);
             this.gridInputParams.MultiSelect = false;
             this.gridInputParams.Name = "gridInputParams";
             this.gridInputParams.ReadOnly = true;
@@ -428,7 +419,7 @@
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(719, 234);
+            this.gridInputParams.Size = new System.Drawing.Size(478, 157);
             this.gridInputParams.TabIndex = 13;
             this.gridInputParams.RecordEnter += new Rappen.XTB.Helpers.Controls.XRMRecordEventHandler(this.gridInputParams_RecordEnter);
             // 
@@ -495,10 +486,9 @@
             this.panCAValue.Controls.Add(this.panel7);
             this.panCAValue.Controls.Add(this.panel6);
             this.panCAValue.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panCAValue.Location = new System.Drawing.Point(4, 407);
-            this.panCAValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panCAValue.Location = new System.Drawing.Point(3, 270);
             this.panCAValue.Name = "panCAValue";
-            this.panCAValue.Size = new System.Drawing.Size(899, 57);
+            this.panCAValue.Size = new System.Drawing.Size(598, 37);
             this.panCAValue.TabIndex = 29;
             // 
             // panCAValueParent
@@ -508,10 +498,9 @@
             this.panCAValueParent.Controls.Add(this.panBoolean);
             this.panCAValueParent.Controls.Add(this.panString);
             this.panCAValueParent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panCAValueParent.Location = new System.Drawing.Point(160, 0);
-            this.panCAValueParent.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panCAValueParent.Location = new System.Drawing.Point(107, 0);
             this.panCAValueParent.Name = "panCAValueParent";
-            this.panCAValueParent.Size = new System.Drawing.Size(531, 57);
+            this.panCAValueParent.Size = new System.Drawing.Size(352, 37);
             this.panCAValueParent.TabIndex = 2;
             // 
             // panEntity
@@ -521,9 +510,8 @@
             this.panEntity.Controls.Add(this.txtRecord);
             this.panEntity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panEntity.Location = new System.Drawing.Point(0, 0);
-            this.panEntity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panEntity.Name = "panEntity";
-            this.panEntity.Size = new System.Drawing.Size(531, 57);
+            this.panEntity.Size = new System.Drawing.Size(352, 37);
             this.panEntity.TabIndex = 19;
             this.panEntity.Visible = false;
             // 
@@ -533,10 +521,9 @@
             this.cmbEntity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbEntity.DropDownWidth = 400;
             this.cmbEntity.FormattingEnabled = true;
-            this.cmbEntity.Location = new System.Drawing.Point(6, 12);
-            this.cmbEntity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmbEntity.Location = new System.Drawing.Point(4, 8);
             this.cmbEntity.Name = "cmbEntity";
-            this.cmbEntity.Size = new System.Drawing.Size(168, 28);
+            this.cmbEntity.Size = new System.Drawing.Size(113, 21);
             this.cmbEntity.Sorted = true;
             this.cmbEntity.TabIndex = 5;
             this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
@@ -544,10 +531,9 @@
             // btnLookup
             // 
             this.btnLookup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLookup.Location = new System.Drawing.Point(495, 11);
-            this.btnLookup.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnLookup.Location = new System.Drawing.Point(328, 7);
             this.btnLookup.Name = "btnLookup";
-            this.btnLookup.Size = new System.Drawing.Size(36, 34);
+            this.btnLookup.Size = new System.Drawing.Size(24, 22);
             this.btnLookup.TabIndex = 4;
             this.btnLookup.Text = "...";
             this.btnLookup.UseVisualStyleBackColor = true;
@@ -560,21 +546,26 @@
             this.txtRecord.BackColor = System.Drawing.SystemColors.Window;
             this.txtRecord.Column = null;
             this.txtRecord.DisplayFormat = "";
-            this.txtRecord.Location = new System.Drawing.Point(184, 12);
-            this.txtRecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtRecord.Location = new System.Drawing.Point(123, 8);
             this.txtRecord.Name = "txtRecord";
             this.txtRecord.RecordHost = this.rhRecord;
-            this.txtRecord.Size = new System.Drawing.Size(299, 26);
+            this.txtRecord.Size = new System.Drawing.Size(199, 20);
             this.txtRecord.TabIndex = 2;
+            // 
+            // rhRecord
+            // 
+            this.rhRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.rhRecord.LogicalName = null;
+            this.rhRecord.Record = null;
+            this.rhRecord.Service = null;
             // 
             // panDateTime
             // 
             this.panDateTime.Controls.Add(this.dtDateTime);
             this.panDateTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panDateTime.Location = new System.Drawing.Point(0, 0);
-            this.panDateTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panDateTime.Name = "panDateTime";
-            this.panDateTime.Size = new System.Drawing.Size(531, 57);
+            this.panDateTime.Size = new System.Drawing.Size(352, 37);
             this.panDateTime.TabIndex = 18;
             this.panDateTime.Visible = false;
             // 
@@ -582,10 +573,9 @@
             // 
             this.dtDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dtDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDateTime.Location = new System.Drawing.Point(6, 12);
-            this.dtDateTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDateTime.Location = new System.Drawing.Point(4, 8);
             this.dtDateTime.Name = "dtDateTime";
-            this.dtDateTime.Size = new System.Drawing.Size(235, 26);
+            this.dtDateTime.Size = new System.Drawing.Size(158, 20);
             this.dtDateTime.TabIndex = 5;
             // 
             // panBoolean
@@ -593,9 +583,8 @@
             this.panBoolean.Controls.Add(this.chkBoolean);
             this.panBoolean.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panBoolean.Location = new System.Drawing.Point(0, 0);
-            this.panBoolean.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panBoolean.Name = "panBoolean";
-            this.panBoolean.Size = new System.Drawing.Size(531, 57);
+            this.panBoolean.Size = new System.Drawing.Size(352, 37);
             this.panBoolean.TabIndex = 17;
             this.panBoolean.Visible = false;
             // 
@@ -603,10 +592,9 @@
             // 
             this.chkBoolean.AutoSize = true;
             this.chkBoolean.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkBoolean.Location = new System.Drawing.Point(15, 15);
-            this.chkBoolean.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.chkBoolean.Location = new System.Drawing.Point(10, 10);
             this.chkBoolean.Name = "chkBoolean";
-            this.chkBoolean.Size = new System.Drawing.Size(135, 24);
+            this.chkBoolean.Size = new System.Drawing.Size(94, 17);
             this.chkBoolean.TabIndex = 1;
             this.chkBoolean.Text = "Boolean value";
             this.chkBoolean.UseVisualStyleBackColor = true;
@@ -616,9 +604,8 @@
             this.panString.Controls.Add(this.txtString);
             this.panString.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panString.Location = new System.Drawing.Point(0, 0);
-            this.panString.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panString.Name = "panString";
-            this.panString.Size = new System.Drawing.Size(531, 57);
+            this.panString.Size = new System.Drawing.Size(352, 37);
             this.panString.TabIndex = 16;
             this.panString.Visible = false;
             // 
@@ -626,10 +613,9 @@
             // 
             this.txtString.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtString.Location = new System.Drawing.Point(6, 12);
-            this.txtString.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtString.Location = new System.Drawing.Point(4, 8);
             this.txtString.Name = "txtString";
-            this.txtString.Size = new System.Drawing.Size(513, 26);
+            this.txtString.Size = new System.Drawing.Size(341, 20);
             this.txtString.TabIndex = 1;
             // 
             // panel7
@@ -637,19 +623,17 @@
             this.panel7.Controls.Add(this.btnCAValueClear);
             this.panel7.Controls.Add(this.btnCAValueSet);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(691, 0);
-            this.panel7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel7.Location = new System.Drawing.Point(459, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(208, 57);
+            this.panel7.Size = new System.Drawing.Size(139, 37);
             this.panel7.TabIndex = 1;
             // 
             // btnCAValueClear
             // 
             this.btnCAValueClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCAValueClear.Location = new System.Drawing.Point(106, 11);
-            this.btnCAValueClear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCAValueClear.Location = new System.Drawing.Point(71, 7);
             this.btnCAValueClear.Name = "btnCAValueClear";
-            this.btnCAValueClear.Size = new System.Drawing.Size(88, 35);
+            this.btnCAValueClear.Size = new System.Drawing.Size(59, 23);
             this.btnCAValueClear.TabIndex = 1;
             this.btnCAValueClear.Text = "Remove";
             this.btnCAValueClear.UseVisualStyleBackColor = true;
@@ -658,10 +642,9 @@
             // btnCAValueSet
             // 
             this.btnCAValueSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCAValueSet.Location = new System.Drawing.Point(9, 11);
-            this.btnCAValueSet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCAValueSet.Location = new System.Drawing.Point(6, 7);
             this.btnCAValueSet.Name = "btnCAValueSet";
-            this.btnCAValueSet.Size = new System.Drawing.Size(88, 35);
+            this.btnCAValueSet.Size = new System.Drawing.Size(59, 23);
             this.btnCAValueSet.TabIndex = 0;
             this.btnCAValueSet.Text = "Set";
             this.btnCAValueSet.UseVisualStyleBackColor = true;
@@ -672,18 +655,16 @@
             this.panel6.Controls.Add(this.label1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(0, 0);
-            this.panel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(160, 57);
+            this.panel6.Size = new System.Drawing.Size(107, 37);
             this.panel6.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 18);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(10, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Value";
             // 
@@ -693,10 +674,9 @@
             this.panCARecord.Controls.Add(this.label12);
             this.panCARecord.Controls.Add(this.btnScopeRecord);
             this.panCARecord.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panCARecord.Location = new System.Drawing.Point(4, 112);
-            this.panCARecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panCARecord.Location = new System.Drawing.Point(3, 73);
             this.panCARecord.Name = "panCARecord";
-            this.panCARecord.Size = new System.Drawing.Size(899, 46);
+            this.panCARecord.Size = new System.Drawing.Size(598, 30);
             this.panCARecord.TabIndex = 27;
             // 
             // txtScopeRecord
@@ -706,30 +686,34 @@
             this.txtScopeRecord.BackColor = System.Drawing.SystemColors.Window;
             this.txtScopeRecord.Column = null;
             this.txtScopeRecord.DisplayFormat = "";
-            this.txtScopeRecord.Location = new System.Drawing.Point(166, 11);
-            this.txtScopeRecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtScopeRecord.Location = new System.Drawing.Point(111, 7);
             this.txtScopeRecord.Name = "txtScopeRecord";
             this.txtScopeRecord.RecordHost = this.rhScopeRecord;
-            this.txtScopeRecord.Size = new System.Drawing.Size(673, 26);
+            this.txtScopeRecord.Size = new System.Drawing.Size(449, 20);
             this.txtScopeRecord.TabIndex = 24;
+            // 
+            // rhScopeRecord
+            // 
+            this.rhScopeRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.rhScopeRecord.LogicalName = null;
+            this.rhScopeRecord.Record = null;
+            this.rhScopeRecord.Service = null;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(15, 15);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(10, 10);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(61, 20);
+            this.label12.Size = new System.Drawing.Size(42, 13);
             this.label12.TabIndex = 23;
             this.label12.Text = "Record";
             // 
             // btnScopeRecord
             // 
             this.btnScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScopeRecord.Location = new System.Drawing.Point(850, 9);
-            this.btnScopeRecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnScopeRecord.Location = new System.Drawing.Point(566, 6);
             this.btnScopeRecord.Name = "btnScopeRecord";
-            this.btnScopeRecord.Size = new System.Drawing.Size(36, 34);
+            this.btnScopeRecord.Size = new System.Drawing.Size(24, 22);
             this.btnScopeRecord.TabIndex = 25;
             this.btnScopeRecord.Text = "...";
             this.btnScopeRecord.UseVisualStyleBackColor = true;
@@ -742,10 +726,9 @@
             this.panCA.Controls.Add(this.txtScope);
             this.panCA.Controls.Add(this.cmbCustomActions);
             this.panCA.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panCA.Location = new System.Drawing.Point(4, 24);
-            this.panCA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panCA.Location = new System.Drawing.Point(3, 16);
             this.panCA.Name = "panCA";
-            this.panCA.Size = new System.Drawing.Size(899, 88);
+            this.panCA.Size = new System.Drawing.Size(598, 57);
             this.panCA.TabIndex = 26;
             // 
             // txtScope
@@ -754,13 +737,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtScope.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtScope.Column = "";
-            this.txtScope.DisplayFormat = "{{bindingtype}}";
-            this.txtScope.Location = new System.Drawing.Point(166, 52);
-            this.txtScope.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtScope.DisplayFormat = "{bindingtype}";
+            this.txtScope.Location = new System.Drawing.Point(111, 34);
             this.txtScope.Name = "txtScope";
             this.txtScope.ReadOnly = true;
             this.txtScope.RecordHost = this.rhCustomAction;
-            this.txtScope.Size = new System.Drawing.Size(717, 26);
+            this.txtScope.Size = new System.Drawing.Size(478, 20);
             this.txtScope.TabIndex = 12;
             // 
             // rhCustomAction
@@ -779,12 +761,11 @@
             this.cmbCustomActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCustomActions.Filter = null;
             this.cmbCustomActions.FormattingEnabled = true;
-            this.cmbCustomActions.Location = new System.Drawing.Point(166, 11);
-            this.cmbCustomActions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmbCustomActions.Location = new System.Drawing.Point(111, 7);
             this.cmbCustomActions.Name = "cmbCustomActions";
             this.cmbCustomActions.RecordHost = null;
             this.cmbCustomActions.Service = null;
-            this.cmbCustomActions.Size = new System.Drawing.Size(717, 28);
+            this.cmbCustomActions.Size = new System.Drawing.Size(478, 21);
             this.cmbCustomActions.TabIndex = 5;
             this.cmbCustomActions.SelectionChangeCommitted += new System.EventHandler(this.cmbCustomActions_SelectionChangeCommitted);
             // 
@@ -797,10 +778,8 @@
             this.gbSolution.Controls.Add(this.label7);
             this.gbSolution.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbSolution.Location = new System.Drawing.Point(0, 0);
-            this.gbSolution.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbSolution.Name = "gbSolution";
-            this.gbSolution.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbSolution.Size = new System.Drawing.Size(907, 125);
+            this.gbSolution.Size = new System.Drawing.Size(604, 81);
             this.gbSolution.TabIndex = 2;
             this.gbSolution.TabStop = false;
             this.gbSolution.Text = "Solution";
@@ -808,10 +787,9 @@
             // rbSolManaged
             // 
             this.rbSolManaged.AutoSize = true;
-            this.rbSolManaged.Location = new System.Drawing.Point(348, 28);
-            this.rbSolManaged.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rbSolManaged.Location = new System.Drawing.Point(232, 18);
             this.rbSolManaged.Name = "rbSolManaged";
-            this.rbSolManaged.Size = new System.Drawing.Size(101, 24);
+            this.rbSolManaged.Size = new System.Drawing.Size(70, 17);
             this.rbSolManaged.TabIndex = 11;
             this.rbSolManaged.Text = "Managed";
             this.rbSolManaged.UseVisualStyleBackColor = true;
@@ -820,10 +798,9 @@
             // 
             this.rbSolUnmanaged.AutoSize = true;
             this.rbSolUnmanaged.Checked = true;
-            this.rbSolUnmanaged.Location = new System.Drawing.Point(171, 28);
-            this.rbSolUnmanaged.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rbSolUnmanaged.Location = new System.Drawing.Point(114, 18);
             this.rbSolUnmanaged.Name = "rbSolUnmanaged";
-            this.rbSolUnmanaged.Size = new System.Drawing.Size(122, 24);
+            this.rbSolUnmanaged.Size = new System.Drawing.Size(83, 17);
             this.rbSolUnmanaged.TabIndex = 10;
             this.rbSolUnmanaged.TabStop = true;
             this.rbSolUnmanaged.Text = "Unmanaged";
@@ -833,10 +810,9 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(20, 31);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(13, 20);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 20);
+            this.label9.Size = new System.Drawing.Size(29, 13);
             this.label9.TabIndex = 9;
             this.label9.Text = "Filter";
             // 
@@ -845,26 +821,24 @@
             this.cmbSolution.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbSolution.Column = null;
-            this.cmbSolution.DisplayFormat = "{{friendlyname}} ({{uniquename}} {{version}})";
+            this.cmbSolution.DisplayFormat = "{friendlyname} ({uniquename} {version})";
             this.cmbSolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSolution.Filter = null;
             this.cmbSolution.FormattingEnabled = true;
-            this.cmbSolution.Location = new System.Drawing.Point(171, 65);
-            this.cmbSolution.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmbSolution.Location = new System.Drawing.Point(114, 42);
             this.cmbSolution.Name = "cmbSolution";
             this.cmbSolution.RecordHost = null;
             this.cmbSolution.Service = null;
-            this.cmbSolution.Size = new System.Drawing.Size(715, 28);
+            this.cmbSolution.Size = new System.Drawing.Size(477, 21);
             this.cmbSolution.TabIndex = 7;
             this.cmbSolution.SelectionChangeCommitted += new System.EventHandler(this.cmbSolution_SelectionChangeCommitted);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 69);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(13, 45);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 20);
+            this.label7.Size = new System.Drawing.Size(45, 13);
             this.label7.TabIndex = 8;
             this.label7.Text = "Solution";
             // 
@@ -877,41 +851,55 @@
             this.grResults.Controls.Add(this.gridOutputParams);
             this.grResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grResults.Location = new System.Drawing.Point(0, 0);
-            this.grResults.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grResults.Name = "grResults";
-            this.grResults.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.grResults.Size = new System.Drawing.Size(907, 389);
+            this.grResults.Size = new System.Drawing.Size(604, 239);
             this.grResults.TabIndex = 17;
             this.grResults.TabStop = false;
             this.grResults.Text = "Results";
             // 
+            // txtCDSDataHelper
+            // 
+            this.txtCDSDataHelper.BackColor = System.Drawing.SystemColors.Window;
+            this.txtCDSDataHelper.Column = null;
+            this.txtCDSDataHelper.DisplayFormat = "";
+            this.txtCDSDataHelper.Location = new System.Drawing.Point(16, 122);
+            this.txtCDSDataHelper.Name = "txtCDSDataHelper";
+            this.txtCDSDataHelper.RecordHost = this.rhResult;
+            this.txtCDSDataHelper.Size = new System.Drawing.Size(100, 20);
+            this.txtCDSDataHelper.TabIndex = 19;
+            this.txtCDSDataHelper.Visible = false;
+            // 
+            // rhResult
+            // 
+            this.rhResult.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.rhResult.LogicalName = null;
+            this.rhResult.Record = null;
+            this.rhResult.Service = null;
+            // 
             // txtExecution
             // 
             this.txtExecution.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtExecution.Location = new System.Drawing.Point(171, 38);
-            this.txtExecution.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtExecution.Location = new System.Drawing.Point(114, 25);
             this.txtExecution.Name = "txtExecution";
             this.txtExecution.ReadOnly = true;
-            this.txtExecution.Size = new System.Drawing.Size(148, 26);
+            this.txtExecution.Size = new System.Drawing.Size(100, 20);
             this.txtExecution.TabIndex = 18;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 43);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(13, 28);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(117, 20);
+            this.label10.Size = new System.Drawing.Size(80, 13);
             this.label10.TabIndex = 17;
             this.label10.Text = "Execution Time";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 78);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(13, 51);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(116, 20);
+            this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 16;
             this.label6.Text = "Output Params";
             // 
@@ -953,8 +941,7 @@
             this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle11;
             this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridOutputParams.FilterColumns = "";
-            this.gridOutputParams.Location = new System.Drawing.Point(171, 78);
-            this.gridOutputParams.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gridOutputParams.Location = new System.Drawing.Point(114, 51);
             this.gridOutputParams.MultiSelect = false;
             this.gridOutputParams.Name = "gridOutputParams";
             this.gridOutputParams.ReadOnly = true;
@@ -973,7 +960,7 @@
             this.gridOutputParams.ShowEditingIcon = false;
             this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(717, 288);
+            this.gridOutputParams.Size = new System.Drawing.Size(477, 173);
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
             // 
@@ -1019,7 +1006,6 @@
             // 
             this.splitRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitRight.Location = new System.Drawing.Point(0, 0);
-            this.splitRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.splitRight.Name = "splitRight";
             // 
             // splitRight.Panel1
@@ -1032,9 +1018,9 @@
             this.splitRight.Panel2.Controls.Add(this.llCallHistory);
             this.splitRight.Panel2.Controls.Add(this.panel2);
             this.splitRight.Panel2Collapsed = true;
-            this.splitRight.Size = new System.Drawing.Size(649, 995);
+            this.splitRight.Size = new System.Drawing.Size(433, 638);
             this.splitRight.SplitterDistance = 272;
-            this.splitRight.SplitterWidth = 12;
+            this.splitRight.SplitterWidth = 8;
             this.splitRight.TabIndex = 1;
             // 
             // gbResultDetails
@@ -1042,11 +1028,9 @@
             this.gbResultDetails.Controls.Add(this.txtResultDetail);
             this.gbResultDetails.Controls.Add(this.panel1);
             this.gbResultDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbResultDetails.Location = new System.Drawing.Point(0, 54);
-            this.gbResultDetails.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbResultDetails.Location = new System.Drawing.Point(0, 35);
             this.gbResultDetails.Name = "gbResultDetails";
-            this.gbResultDetails.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbResultDetails.Size = new System.Drawing.Size(649, 941);
+            this.gbResultDetails.Size = new System.Drawing.Size(433, 603);
             this.gbResultDetails.TabIndex = 0;
             this.gbResultDetails.TabStop = false;
             this.gbResultDetails.Text = "Result Details";
@@ -1056,11 +1040,10 @@
             this.txtResultDetail.BackColor = System.Drawing.SystemColors.Window;
             this.txtResultDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtResultDetail.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResultDetail.Location = new System.Drawing.Point(4, 92);
-            this.txtResultDetail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtResultDetail.Location = new System.Drawing.Point(3, 60);
             this.txtResultDetail.Name = "txtResultDetail";
             this.txtResultDetail.ReadOnly = true;
-            this.txtResultDetail.Size = new System.Drawing.Size(641, 844);
+            this.txtResultDetail.Size = new System.Drawing.Size(427, 540);
             this.txtResultDetail.TabIndex = 0;
             this.txtResultDetail.Text = "";
             // 
@@ -1069,19 +1052,17 @@
             this.panel1.Controls.Add(this.lblResultDetailType);
             this.panel1.Controls.Add(this.panTextFormat);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(4, 24);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(641, 68);
+            this.panel1.Size = new System.Drawing.Size(427, 44);
             this.panel1.TabIndex = 1;
             // 
             // lblResultDetailType
             // 
             this.lblResultDetailType.AutoSize = true;
-            this.lblResultDetailType.Location = new System.Drawing.Point(21, 23);
-            this.lblResultDetailType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblResultDetailType.Location = new System.Drawing.Point(14, 15);
             this.lblResultDetailType.Name = "lblResultDetailType";
-            this.lblResultDetailType.Size = new System.Drawing.Size(43, 20);
+            this.lblResultDetailType.Size = new System.Drawing.Size(31, 13);
             this.lblResultDetailType.TabIndex = 4;
             this.lblResultDetailType.Text = "Type";
             // 
@@ -1091,20 +1072,18 @@
             this.panTextFormat.Controls.Add(this.rbFormatXML);
             this.panTextFormat.Controls.Add(this.rbFormatJSON);
             this.panTextFormat.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panTextFormat.Location = new System.Drawing.Point(307, 0);
-            this.panTextFormat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panTextFormat.Location = new System.Drawing.Point(204, 0);
             this.panTextFormat.Name = "panTextFormat";
-            this.panTextFormat.Size = new System.Drawing.Size(334, 68);
+            this.panTextFormat.Size = new System.Drawing.Size(223, 44);
             this.panTextFormat.TabIndex = 3;
             // 
             // rbFormatText
             // 
             this.rbFormatText.AutoSize = true;
             this.rbFormatText.Checked = true;
-            this.rbFormatText.Location = new System.Drawing.Point(4, 20);
-            this.rbFormatText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rbFormatText.Location = new System.Drawing.Point(3, 13);
             this.rbFormatText.Name = "rbFormatText";
-            this.rbFormatText.Size = new System.Drawing.Size(64, 24);
+            this.rbFormatText.Size = new System.Drawing.Size(46, 17);
             this.rbFormatText.TabIndex = 0;
             this.rbFormatText.TabStop = true;
             this.rbFormatText.Text = "Text";
@@ -1114,10 +1093,9 @@
             // rbFormatXML
             // 
             this.rbFormatXML.AutoSize = true;
-            this.rbFormatXML.Location = new System.Drawing.Point(254, 20);
-            this.rbFormatXML.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rbFormatXML.Location = new System.Drawing.Point(169, 13);
             this.rbFormatXML.Name = "rbFormatXML";
-            this.rbFormatXML.Size = new System.Drawing.Size(67, 24);
+            this.rbFormatXML.Size = new System.Drawing.Size(47, 17);
             this.rbFormatXML.TabIndex = 2;
             this.rbFormatXML.Text = "XML";
             this.rbFormatXML.UseVisualStyleBackColor = true;
@@ -1126,10 +1104,9 @@
             // rbFormatJSON
             // 
             this.rbFormatJSON.AutoSize = true;
-            this.rbFormatJSON.Location = new System.Drawing.Point(122, 20);
-            this.rbFormatJSON.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rbFormatJSON.Location = new System.Drawing.Point(81, 13);
             this.rbFormatJSON.Name = "rbFormatJSON";
-            this.rbFormatJSON.Size = new System.Drawing.Size(76, 24);
+            this.rbFormatJSON.Size = new System.Drawing.Size(53, 17);
             this.rbFormatJSON.TabIndex = 1;
             this.rbFormatJSON.Text = "JSON";
             this.rbFormatJSON.UseVisualStyleBackColor = true;
@@ -1141,9 +1118,8 @@
             this.panel3.Controls.Add(this.label11);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(649, 54);
+            this.panel3.Size = new System.Drawing.Size(433, 35);
             this.panel3.TabIndex = 40;
             // 
             // picHistoryOpen
@@ -1151,10 +1127,9 @@
             this.picHistoryOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picHistoryOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picHistoryOpen.Image = ((System.Drawing.Image)(resources.GetObject("picHistoryOpen.Image")));
-            this.picHistoryOpen.Location = new System.Drawing.Point(617, 14);
-            this.picHistoryOpen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.picHistoryOpen.Location = new System.Drawing.Point(411, 9);
             this.picHistoryOpen.Name = "picHistoryOpen";
-            this.picHistoryOpen.Size = new System.Drawing.Size(24, 25);
+            this.picHistoryOpen.Size = new System.Drawing.Size(16, 16);
             this.picHistoryOpen.TabIndex = 48;
             this.picHistoryOpen.TabStop = false;
             this.picHistoryOpen.Click += new System.EventHandler(this.picHistory_Click);
@@ -1164,10 +1139,9 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label11.Location = new System.Drawing.Point(0, 9);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Location = new System.Drawing.Point(0, 6);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(185, 33);
+            this.label11.Size = new System.Drawing.Size(117, 24);
             this.label11.TabIndex = 37;
             this.label11.Text = "Output Detail";
             // 
@@ -1175,10 +1149,9 @@
             // 
             this.llCallHistory.AutoSize = true;
             this.llCallHistory.LinkArea = new System.Windows.Forms.LinkArea(57, 4);
-            this.llCallHistory.Location = new System.Drawing.Point(48, 171);
-            this.llCallHistory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.llCallHistory.Location = new System.Drawing.Point(32, 111);
             this.llCallHistory.Name = "llCallHistory";
-            this.llCallHistory.Size = new System.Drawing.Size(270, 42);
+            this.llCallHistory.Size = new System.Drawing.Size(186, 30);
             this.llCallHistory.TabIndex = 41;
             this.llCallHistory.TabStop = true;
             this.llCallHistory.Text = "Call history is not yet implemented.\r\nYou can vote it up here.";
@@ -1191,9 +1164,8 @@
             this.panel2.Controls.Add(this.picHistoryClose);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(96, 54);
+            this.panel2.Size = new System.Drawing.Size(64, 35);
             this.panel2.TabIndex = 39;
             // 
             // lblDetailHeader
@@ -1201,10 +1173,9 @@
             this.lblDetailHeader.AutoSize = true;
             this.lblDetailHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetailHeader.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblDetailHeader.Location = new System.Drawing.Point(0, 9);
-            this.lblDetailHeader.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDetailHeader.Location = new System.Drawing.Point(0, 6);
             this.lblDetailHeader.Name = "lblDetailHeader";
-            this.lblDetailHeader.Size = new System.Drawing.Size(107, 33);
+            this.lblDetailHeader.Size = new System.Drawing.Size(67, 24);
             this.lblDetailHeader.TabIndex = 37;
             this.lblDetailHeader.Text = "History";
             // 
@@ -1213,59 +1184,23 @@
             this.picHistoryClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picHistoryClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picHistoryClose.Image = ((System.Drawing.Image)(resources.GetObject("picHistoryClose.Image")));
-            this.picHistoryClose.Location = new System.Drawing.Point(68, 14);
-            this.picHistoryClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.picHistoryClose.Location = new System.Drawing.Point(45, 9);
             this.picHistoryClose.Name = "picHistoryClose";
-            this.picHistoryClose.Size = new System.Drawing.Size(24, 25);
+            this.picHistoryClose.Size = new System.Drawing.Size(16, 16);
             this.picHistoryClose.TabIndex = 36;
             this.picHistoryClose.TabStop = false;
             this.picHistoryClose.Click += new System.EventHandler(this.picHistory_Click);
             // 
-            // rhScopeRecord
-            // 
-            this.rhScopeRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.rhScopeRecord.LogicalName = null;
-            this.rhScopeRecord.Record = null;
-            this.rhScopeRecord.Service = null;
-            // 
-            // rhResult
-            // 
-            this.rhResult.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.rhResult.LogicalName = null;
-            this.rhResult.Record = null;
-            this.rhResult.Service = null;
-            // 
-            // txtCDSDataHelper
-            // 
-            this.txtCDSDataHelper.BackColor = System.Drawing.SystemColors.Window;
-            this.txtCDSDataHelper.Column = null;
-            this.txtCDSDataHelper.DisplayFormat = "";
-            this.txtCDSDataHelper.Location = new System.Drawing.Point(24, 188);
-            this.txtCDSDataHelper.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtCDSDataHelper.Name = "txtCDSDataHelper";
-            this.txtCDSDataHelper.RecordHost = this.rhResult;
-            this.txtCDSDataHelper.Size = new System.Drawing.Size(148, 26);
-            this.txtCDSDataHelper.TabIndex = 19;
-            this.txtCDSDataHelper.Visible = false;
-            // 
-            // rhRecord
-            // 
-            this.rhRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.rhRecord.LogicalName = null;
-            this.rhRecord.Record = null;
-            this.rhRecord.Service = null;
-            // 
             // CustomActionTester
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.splitFullForm);
             this.Controls.Add(this.toolStripMenu);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "CustomActionTester";
             this.PluginIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PluginIcon")));
-            this.Size = new System.Drawing.Size(1568, 1029);
+            this.Size = new System.Drawing.Size(1045, 669);
             this.TabIcon = ((System.Drawing.Image)(resources.GetObject("$this.TabIcon")));
             this.Load += new System.EventHandler(this.CustomActionTester_Load);
             this.toolStripMenu.ResumeLayout(false);

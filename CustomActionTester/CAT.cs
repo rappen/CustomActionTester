@@ -55,7 +55,7 @@ namespace Rappen.XTB.CAT
             cmbCustomActions.Service = newService;
             rhCustomAction.Service = newService;
             rhScopeRecord.Service = newService;
-            rhRecord.Service= newService;   
+            rhRecord.Service = newService;
             rhResult.Service = newService;
             gridInputParams.Service = newService;
             gridOutputParams.Service = newService;

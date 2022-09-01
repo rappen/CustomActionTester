@@ -185,7 +185,7 @@ namespace Rappen.XTB.CAT
                 {
                     if (args.Error != null)
                     {
-                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowErrorDialog(args.Error);
                     }
                     else if (args.Result is Tuple<OrganizationResponse, long> response)
                     {
@@ -314,7 +314,7 @@ namespace Rappen.XTB.CAT
                 {
                     if (args.Error != null)
                     {
-                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowErrorDialog(args.Error);
                     }
                     else if (args.Result is EntityCollection actions)
                     {
@@ -362,10 +362,9 @@ namespace Rappen.XTB.CAT
                 {
                     if (args.Error != null)
                     {
-                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        ShowErrorDialog(args.Error);
                     }
-                    if (args.Result is EntityCollection inputs)
+                    else if (args.Result is EntityCollection inputs)
                     {
                         PreProcessParams(inputs);
                         gridInputParams.DataSource = inputs;
@@ -433,7 +432,7 @@ namespace Rappen.XTB.CAT
                 {
                     if (args.Error != null)
                     {
-                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowErrorDialog(args.Error);
                     }
                     else if (args.Result is EntityCollection outputs)
                     {
@@ -483,7 +482,7 @@ namespace Rappen.XTB.CAT
                 {
                     if (args.Error != null)
                     {
-                        MessageBox.Show(args.Error.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowErrorDialog(args.Error);
                     }
                     else if (args.Result is EntityCollection solutions)
                     {
@@ -524,14 +523,13 @@ namespace Rappen.XTB.CAT
                 {
                     eventargs.Result = MetadataHelper.LoadEntities(Service);
                 },
-                PostWorkCallBack = (completedargs) =>
+                PostWorkCallBack = (args) =>
                 {
-                    if (completedargs.Error != null)
+                    if (args.Error != null)
                     {
-                        MessageBox.Show(completedargs.Error.Message);
-                        return;
+                        ShowErrorDialog(args.Error);
                     }
-                    if (completedargs.Result is RetrieveMetadataChangesResponse resp)
+                    else if (args.Result is RetrieveMetadataChangesResponse resp)
                     {
                         entities = resp.EntityMetadata
                             .Where(e => e.IsCustomizable.Value == true && e.IsIntersect.Value != true)
@@ -711,9 +709,9 @@ namespace Rappen.XTB.CAT
         private void RefreshLayout()
         {
             var unique = mnuShowUnique.Checked;
-            cmbSolution.DisplayFormat = "{{" + (unique ? Solution.UniqueName : Solution.PrimaryName) + "}} {{" + Solution.Version + "}}";
+            cmbSolution.DisplayFormat = "{" + (unique ? Solution.UniqueName : Solution.PrimaryName) + "} {" + Solution.Version + "}";
             cmbCustomActions.DisplayFormat = unique ? catTool.Columns.APIUniqueName : catTool.Columns.APIName;
-            txtScope.DisplayFormat = "{{" + catTool.Columns.APIScope + "}} {{" + catTool.Columns.APIBoundEntity + "}}";
+            txtScope.DisplayFormat = "{" + catTool.Columns.APIScope + "} {" + catTool.Columns.APIBoundEntity + "}";
             dgInputsName.DataPropertyName = unique ? catTool.Columns.ParamUniqueName : catTool.Columns.ParamName;
             dgOutputsName.DataPropertyName = unique ? catTool.Columns.ParamUniqueName : catTool.Columns.ParamName;
             gridInputParams.Refresh();
