@@ -7,6 +7,7 @@ using Rappen.XTB.Helpers.ControlItems;
 using Rappen.XTB.Helpers.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -174,28 +175,34 @@ namespace Rappen.XTB.CAT
             WorkAsync(new WorkAsyncInfo
             {
                 Message = $"Executing {catTool.Target}",
-                Work = (worker, args) =>
-                {
-                    var sw = Stopwatch.StartNew();
-                    var result = Service.Execute(request);
-                    sw.Stop();
-                    args.Result = new Tuple<OrganizationResponse, long>(result, sw.ElapsedMilliseconds);
-                },
-                PostWorkCallBack = (args) =>
-                {
-                    if (args.Error != null)
-                    {
-                        ShowErrorDialog(args.Error);
-                    }
-                    else if (args.Result is Tuple<OrganizationResponse, long> response)
-                    {
-                        txtExecution.Text = $"{response.Item2} ms";
-                        btnPTV.Enabled = true;
-                        var outputparams = response.Item1.Results;
-                        PopulateOutputParamValues(outputparams);
-                    }
-                }
+                AsyncArgument = request,
+                Work = ExecuteCAWork,
+                PostWorkCallBack = ExecuteCAPost
             });
+        }
+
+        private void ExecuteCAWork(BackgroundWorker worker, DoWorkEventArgs args)
+        {
+            var request = args.Argument as OrganizationRequest;
+            var sw = Stopwatch.StartNew();
+            var result = Service.Execute(request);
+            sw.Stop();
+            args.Result = new Tuple<OrganizationResponse, long>(result, sw.ElapsedMilliseconds);
+        }
+
+        private void ExecuteCAPost(RunWorkerCompletedEventArgs args)
+        {
+            if (args.Error != null)
+            {
+                ShowErrorDialog(args.Error);
+            }
+            else if (args.Result is Tuple<OrganizationResponse, long> response)
+            {
+                txtExecution.Text = $"{response.Item2} ms";
+                btnPTV.Enabled = true;
+                var outputparams = response.Item1.Results;
+                PopulateOutputParamValues(outputparams);
+            }
         }
 
         private OrganizationRequest GetRequest()
