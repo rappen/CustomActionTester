@@ -2,11 +2,8 @@
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using xrmtb.XrmToolBox.Controls.Controls;
-using XrmToolBox;
 using XrmToolBox.Extensibility;
 
 namespace Rappen.XTB.CAT
@@ -15,7 +12,7 @@ namespace Rappen.XTB.CAT
     {
         #region Private Fields
 
-        ICATTool catTool;
+        private ICATTool catTool;
         private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
         private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
         private AppInsights ai;
@@ -54,19 +51,18 @@ namespace Rappen.XTB.CAT
             base.UpdateConnection(newService, detail, actionName, parameter);
             btnOpenAction.Text = $"Open in {(detail.WebApplicationUrl.ToLower().Contains("dynamics.com") ? "Dataverse" : "CRM")}";
             LoadEntities();
-            cmbSolution.OrganizationService = newService;
-            cmbCustomActions.OrganizationService = newService;
-            txtScope.OrganizationService = newService;
-            txtScopeRecord.OrganizationService = newService;
-            gridInputParams.OrganizationService = newService;
-            gridOutputParams.OrganizationService = newService;
-            txtCDSDataHelper.OrganizationService = newService;
-            txtRecord.OrganizationService = newService;
+            cmbSolution.Service = newService;
+            cmbCustomActions.Service = newService;
+            rhCustomAction.Service = newService;
+            rhScopeRecord.Service = newService;
+            rhRecord.Service= newService;   
+            rhResult.Service = newService;
+            gridInputParams.Service = newService;
+            gridOutputParams.Service = newService;
             if (newService != null)
             {
                 GetSolutions(rbSolManaged.Checked);
             }
-            var myid = Guid.NewGuid();
         }
 
         #endregion Public Methods
@@ -90,12 +86,12 @@ namespace Rappen.XTB.CAT
 
         private void cmbCustomActions_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            SetCustomAction(cmbCustomActions.SelectedEntity);
+            SetCustomAction(cmbCustomActions.SelectedRecord);
         }
 
         private void cmbSolution_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            GetCustomActions(cmbSolution.SelectedEntity);
+            GetCustomActions(cmbSolution.SelectedRecord);
         }
 
         private void CustomActionTester_Load(object sender, EventArgs e)
@@ -153,10 +149,10 @@ namespace Rappen.XTB.CAT
 
         private void btnOpenAction_Click(object sender, EventArgs e)
         {
-            OpenAction(cmbCustomActions.SelectedEntity);
+            OpenAction(cmbCustomActions.SelectedRecord);
         }
 
-        private void gridInputParams_RecordEnter(object sender, xrmtb.XrmToolBox.Controls.CRMRecordEventArgs e)
+        private void gridInputParams_RecordEnter(object sender, Rappen.XTB.Helpers.Controls.XRMRecordEventArgs e)
         {
             PopulateInputParamValue(e.Entity);
         }
@@ -173,12 +169,12 @@ namespace Rappen.XTB.CAT
 
         private void cmbEntity_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtRecord.Entity = null;
+            rhScopeRecord.Record = null;
         }
 
         private void btnManage_Click(object sender, EventArgs e)
         {
-            ManageAction(cmbCustomActions.SelectedEntity);
+            ManageAction(cmbCustomActions.SelectedRecord);
         }
     }
 }

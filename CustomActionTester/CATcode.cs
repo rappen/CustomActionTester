@@ -3,6 +3,8 @@ using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json.Linq;
 using Rappen.XRM.Helpers.Extensions;
+using Rappen.XTB.Helpers.ControlItems;
+using Rappen.XTB.Helpers.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,8 +13,6 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
-using xrmtb.XrmToolBox.Controls.Controls;
-using xrmtb.XrmToolBox.Controls.Helper;
 using XrmToolBox.Extensibility;
 using XrmToolBox.Extensibility.Interfaces;
 
@@ -53,7 +53,7 @@ namespace Rappen.XTB.CAT
                 if (cmbSolution.DataSource != null)
                 {
                     SelectDefaultSolution();
-                    GetCustomActions(cmbSolution.SelectedEntity);
+                    GetCustomActions(cmbSolution.SelectedRecord);
                 }
             }
         }
@@ -201,9 +201,9 @@ namespace Rappen.XTB.CAT
         private OrganizationRequest GetRequest()
         {
             var request = new OrganizationRequest(GetApiMessage());
-            if (txtScopeRecord.EntityReference != null)
+            if (rhScopeRecord.Record?.ToEntityReference() != null)
             {
-                request.Parameters["Target"] = txtScopeRecord.EntityReference;
+                request.Parameters["Target"] = rhScopeRecord.Record?.ToEntityReference();
             }
             foreach (var input in gridInputParams.DataSource as IEnumerable<Entity>)
             {
@@ -282,12 +282,12 @@ namespace Rappen.XTB.CAT
 
         private string GetApiMessage()
         {
-            return cmbCustomActions.SelectedEntity.PropertyAsBaseType(catTool.Columns.APIMessageName, string.Empty, true) as string;
+            return cmbCustomActions.SelectedRecord.PropertyAsBaseType(catTool.Columns.APIMessageName, string.Empty, true) as string;
         }
 
         private string GetBoundEntity()
         {
-            if (txtScope.Entity == null || !txtScope.Entity.TryGetAttributeValue(catTool.Columns.APIBoundEntity, out string entity))
+            if (rhCustomAction.Record == null || !rhCustomAction.Record.TryGetAttributeValue(catTool.Columns.APIBoundEntity, out string entity))
             {
                 return string.Empty;
             }
@@ -323,7 +323,7 @@ namespace Rappen.XTB.CAT
                         {
                             SelectActionByInArgumentId();
                         }
-                        SetCustomAction(cmbCustomActions.SelectedEntity);
+                        SetCustomAction(cmbCustomActions.SelectedRecord);
                     }
                 }
             });
@@ -332,7 +332,7 @@ namespace Rappen.XTB.CAT
         private void SelectActionByInArgumentId()
         {
             cmbCustomActions.SelectedItem = cmbCustomActions.Items
-                .OfType<EntityWrapper>()
+                .OfType<EntityItem>()
                 .FirstOrDefault(e =>
                     e.Entity.Id.Equals(InArgumentId));
             if (cmbCustomActions.SelectedItem != null)
@@ -492,7 +492,7 @@ namespace Rappen.XTB.CAT
                         {
                             SelectDefaultSolution();
                         }
-                        GetCustomActions(cmbSolution.SelectedEntity);
+                        GetCustomActions(cmbSolution.SelectedRecord);
                     }
                 }
             });
@@ -501,7 +501,7 @@ namespace Rappen.XTB.CAT
         private void SelectDefaultSolution()
         {
             cmbSolution.SelectedItem = cmbSolution.Items
-                .OfType<EntityWrapper>()
+                .OfType<EntityItem>()
                 .FirstOrDefault(e =>
                     e.Entity.TryGetAttributeValue<string>(Solution.UniqueName, out string uniquename) &&
                     uniquename.Equals("Default"));
@@ -546,7 +546,7 @@ namespace Rappen.XTB.CAT
         private void LookupBoundRecord()
         {
             var entity = GetBoundEntity();
-            txtScopeRecord.Entity = LookupRecord(entity);
+            rhScopeRecord.Record = LookupRecord(entity);
             btnExecute.Enabled = ReadyToExecute();
         }
 
@@ -557,7 +557,7 @@ namespace Rappen.XTB.CAT
                 return;
             }
             var entityname = entity.Metadata.LogicalName;
-            txtRecord.Entity = LookupRecord(entityname);
+            rhRecord.Record = LookupRecord(entityname);
         }
 
         private Entity LookupRecord(string entityname)
@@ -566,14 +566,14 @@ namespace Rappen.XTB.CAT
             {
                 return null;
             }
-            var lkp = new CDSLookupDialog
+            var lkp = new XRMLookupDialog
             {
                 Service = Service,
                 LogicalName = entityname
             };
             if (lkp.ShowDialog(this) == DialogResult.OK)
             {
-                return lkp.Entity;
+                return lkp.Record;
             }
             return null;
         }
@@ -639,12 +639,13 @@ namespace Rappen.XTB.CAT
                 }
                 else if (rawvalue is Entity entity)
                 {
-                    txtCDSDataHelper.Entity = entity;
+                    rhResult.Record = entity;
                     value = txtCDSDataHelper.Text;
                 }
                 else if (rawvalue is EntityReference entref)
                 {
-                    txtCDSDataHelper.EntityReference = entref;
+                    rhResult.LogicalName = entref.LogicalName;
+                    rhResult.Id = entref.Id;
                     value = txtCDSDataHelper.Text;
                 }
                 output["value"] = value;
@@ -667,11 +668,11 @@ namespace Rappen.XTB.CAT
 
         private bool ReadyToExecute()
         {
-            if (cmbCustomActions.SelectedEntity == null || !(gridInputParams.DataSource is IEnumerable<Entity> inputparams))
+            if (cmbCustomActions.SelectedRecord == null || !(gridInputParams.DataSource is IEnumerable<Entity> inputparams))
             {
                 return false;
             }
-            if (!string.IsNullOrWhiteSpace(GetBoundEntity()) && txtScopeRecord.Entity == null)
+            if (!string.IsNullOrWhiteSpace(GetBoundEntity()) && rhScopeRecord.Record == null)
             {
                 return false;
             }
@@ -694,8 +695,8 @@ namespace Rappen.XTB.CAT
             {
                 return;
             }
-            txtScope.Entity = ca;
-            txtScopeRecord.Entity = null;
+            rhCustomAction.Record = ca;
+            rhScopeRecord.Record = null;
             var bindingtype = catTool.BindingType(ca);
             panCARecord.Visible = bindingtype != Customapi.BindingType_OptionSet.Global;
             txtExecution.Text = string.Empty;
@@ -750,7 +751,7 @@ namespace Rappen.XTB.CAT
             chkBoolean.Checked = false;
             dtDateTime.Value = DateTime.Today;
             cmbEntity.SelectedIndex = -1;
-            txtRecord.Entity = null;
+            rhRecord.Record = null;
             if (input == null)
             {
                 return false;
@@ -804,12 +805,13 @@ namespace Rappen.XTB.CAT
                     if (currentvalue is Entity entity)
                     {
                         cmbEntity.SelectedItem = cmbEntity.Items.Cast<EntityMetadataProxy>().FirstOrDefault(e => e.Metadata.LogicalName == entity.LogicalName);
-                        txtRecord.Entity = entity;
+                        rhRecord.Record = entity;
                     }
                     else if (currentvalue is EntityReference entref)
                     {
                         cmbEntity.SelectedItem = cmbEntity.Items.Cast<EntityMetadataProxy>().FirstOrDefault(e => e.Metadata.LogicalName == entref.LogicalName);
-                        txtRecord.EntityReference = entref;
+                        rhRecord.LogicalName = entref.LogicalName;
+                        rhRecord.Id = entref.Id;
                     }
                     break;
 
@@ -901,18 +903,18 @@ namespace Rappen.XTB.CAT
 
                 case ParamType.Entity:
                 case ParamType.EntityReference:
-                    if (txtRecord.Entity == null)
+                    if (rhRecord.Record == null)
                     {
                         MessageBox.Show($"No record selected", "Input Parameter", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
                     if (type == ParamType.Entity)
                     {
-                        result = txtRecord.Entity;
+                        result = rhRecord.Record;
                     }
                     else if (type == ParamType.EntityReference)
                     {
-                        result = txtRecord.Entity.ToEntityReference();
+                        result = rhRecord.Record.ToEntityReference();
                     }
                     formattedresult = txtRecord.Text;
                     break;
