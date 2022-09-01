@@ -259,7 +259,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>ilmerge.exe /target:library /targetplatform:v4,"C:\Windows\Microsoft.NET\Framework\v4.0.30319" "/out:Rappen.XTB.CAPIT.dll" "$(TargetFileName)" "Rappen.XTB.CAT.Common.dll" "xrmtb.XrmToolBox.Controls.dll"
+    <PostBuildEvent>ilmerge.exe /target:library /targetplatform:v4,"C:\Windows\Microsoft.NET\Framework\v4.0.30319" "/out:Rappen.XTB.CAPIT.dll" "$(TargetFileName)" "Rappen.XTB.CAT.Common.dll"
 
 if $(ConfigurationName) == Debug (
   IF NOT EXIST ..\..\..\Work mkdir ..\..\..\Work

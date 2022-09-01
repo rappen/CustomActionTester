@@ -97,7 +97,7 @@
     <Reference Include="NuGet.Versioning, Version=5.9.1.11, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\NuGet.Versioning.5.9.1\lib\net472\NuGet.Versioning.dll</HintPath>
     </Reference>
-     <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
     </Reference>
@@ -218,7 +218,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>ilmerge.exe /target:library /targetplatform:v4,"C:\Windows\Microsoft.NET\Framework\v4.0.30319" "/out:Rappen.XTB.CAT.dll" "$(TargetFileName)" "Rappen.XTB.CAT.Common.dll" "xrmtb.XrmToolBox.Controls.dll"
+    <PostBuildEvent>ilmerge.exe /target:library /targetplatform:v4,"C:\Windows\Microsoft.NET\Framework\v4.0.30319" "/out:Rappen.XTB.CAT.dll" "$(TargetFileName)" "Rappen.XTB.CAT.Common.dll"
 
 if $(ConfigurationName) == Debug (
   IF NOT EXIST ..\..\..\Work mkdir ..\..\..\Work
