@@ -2,7 +2,7 @@
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json.Linq;
-using Rappen.XTB.Helpers.Extensions;
+using Rappen.XRM.Helpers.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -766,6 +766,7 @@ namespace Rappen.XTB.CAT
                     panString.Visible = true;
                     txtString.Text = currentvalue?.ToString();
                     break;
+
                 case ParamType.Money:
                     panString.Visible = true;
                     if (currentvalue is Money money)
@@ -773,10 +774,12 @@ namespace Rappen.XTB.CAT
                         txtString.Text = money.Value.ToString();
                     }
                     break;
+
                 case ParamType.GuId:
                     panString.Visible = true;
                     txtString.Text = currentvalue?.ToString() ?? Guid.Empty.ToString();
                     break;
+
                 case ParamType.Picklist:
                     panString.Visible = true;
                     if (currentvalue is OptionSetValue osv)
@@ -784,6 +787,7 @@ namespace Rappen.XTB.CAT
                         txtString.Text = osv.Value.ToString();
                     }
                     break;
+
                 case ParamType.Entity:
                 case ParamType.EntityReference:
                     panEntity.Visible = true;
@@ -808,10 +812,12 @@ namespace Rappen.XTB.CAT
                         txtRecord.EntityReference = entref;
                     }
                     break;
+
                 case ParamType.Boolean:
                     panBoolean.Visible = true;
                     chkBoolean.Checked = currentvalue is bool boolval && boolval;
                     break;
+
                 case ParamType.DateTime:
                     panDateTime.Visible = true;
                     if (currentvalue is DateTime dtvalue)
@@ -819,6 +825,7 @@ namespace Rappen.XTB.CAT
                         dtDateTime.Value = dtvalue;
                     }
                     break;
+
                 default:
                     return false;
             }
@@ -836,6 +843,7 @@ namespace Rappen.XTB.CAT
                 case ParamType.String:
                     result = txtString.Text;
                     break;
+
                 case ParamType.Integer:
                     if (!int.TryParse(txtString.Text, out int intvalue))
                     {
@@ -844,6 +852,7 @@ namespace Rappen.XTB.CAT
                     }
                     result = intvalue;
                     break;
+
                 case ParamType.Decimal:
                 case ParamType.Money:
                     if (!decimal.TryParse(txtString.Text, out decimal decvalue))
@@ -861,6 +870,7 @@ namespace Rappen.XTB.CAT
                         result = decvalue;
                     }
                     break;
+
                 case ParamType.Float:
                     if (!double.TryParse(txtString.Text, out double douvalue))
                     {
@@ -869,6 +879,7 @@ namespace Rappen.XTB.CAT
                     }
                     result = douvalue;
                     break;
+
                 case ParamType.Picklist:
                     if (!int.TryParse(txtString.Text, out int osvvalue))
                     {
@@ -878,6 +889,7 @@ namespace Rappen.XTB.CAT
                     result = new OptionSetValue(osvvalue);
                     formattedresult = osvvalue.ToString();
                     break;
+
                 case ParamType.GuId:
                     if (!Guid.TryParse(txtString.Text, out Guid guidvalue))
                     {
@@ -886,6 +898,7 @@ namespace Rappen.XTB.CAT
                     }
                     result = guidvalue;
                     break;
+
                 case ParamType.Entity:
                 case ParamType.EntityReference:
                     if (txtRecord.Entity == null)
@@ -903,9 +916,11 @@ namespace Rappen.XTB.CAT
                     }
                     formattedresult = txtRecord.Text;
                     break;
+
                 case ParamType.Boolean:
                     result = chkBoolean.Checked;
                     break;
+
                 case ParamType.DateTime:
                     result = dtDateTime.Value;
                     break;
