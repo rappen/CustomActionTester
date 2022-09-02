@@ -7,8 +7,10 @@ using System.Linq;
 
 namespace Rappen.XTB.CAT
 {
-    class CATTool : ICATTool
+    internal class CATTool : ICATTool
     {
+        private const string nullcolumn = "~~null~~";
+
         public string Name => $"{Target} Tester";
 
         public string Target => "Custom Action";
@@ -27,7 +29,9 @@ namespace Rappen.XTB.CAT
             APIUniqueName = "uniquename",
             APIMessageName = "M.name",
             ParamName = "name",
-            ParamUniqueName = "name"
+            ParamUniqueName = "name",
+            APIScope = nullcolumn,
+            APIBoundEntity = nullcolumn
         };
 
         public string ManagerTool => string.Empty;
