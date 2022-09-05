@@ -175,34 +175,25 @@ namespace Rappen.XTB.CAT
             WorkAsync(new WorkAsyncInfo
             {
                 Message = $"Executing {catTool.Target}",
-                AsyncArgument = request,
-                Work = ExecuteCAWork,
-                PostWorkCallBack = ExecuteCAPost
+                Work = (worker, args) =>
+                {
+                    var sw = Stopwatch.StartNew();
+                    var result = Service.Execute(request);
+                    sw.Stop();
+                    args.Result = new Tuple<OrganizationResponse, long>(result, sw.ElapsedMilliseconds);
+                },
+                PostWorkCallBack = (args) =>
+                {
+                    ShowErrorDialog(args.Error);
+                    if (args.Error == null && args.Result is Tuple<OrganizationResponse, long> response)
+                    {
+                        txtExecution.Text = $"{response.Item2} ms";
+                        btnPTV.Enabled = true;
+                        var outputparams = response.Item1.Results;
+                        PopulateOutputParamValues(outputparams);
+                    }
+                }
             });
-        }
-
-        private void ExecuteCAWork(BackgroundWorker worker, DoWorkEventArgs args)
-        {
-            var request = args.Argument as OrganizationRequest;
-            var sw = Stopwatch.StartNew();
-            var result = Service.Execute(request);
-            sw.Stop();
-            args.Result = new Tuple<OrganizationResponse, long>(result, sw.ElapsedMilliseconds);
-        }
-
-        private void ExecuteCAPost(RunWorkerCompletedEventArgs args)
-        {
-            if (args.Error != null)
-            {
-                ShowErrorDialog(args.Error);
-            }
-            else if (args.Result is Tuple<OrganizationResponse, long> response)
-            {
-                txtExecution.Text = $"{response.Item2} ms";
-                btnPTV.Enabled = true;
-                var outputparams = response.Item1.Results;
-                PopulateOutputParamValues(outputparams);
-            }
         }
 
         private OrganizationRequest GetRequest()
@@ -319,11 +310,8 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    if (args.Error != null)
-                    {
-                        ShowErrorDialog(args.Error);
-                    }
-                    else if (args.Result is EntityCollection actions)
+                    ShowErrorDialog(args.Error);
+                    if (args.Error == null && args.Result is EntityCollection actions)
                     {
                         cmbCustomActions.DataSource = actions;
                         if (!InArgumentId.Equals(Guid.Empty))
@@ -367,11 +355,8 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    if (args.Error != null)
-                    {
-                        ShowErrorDialog(args.Error);
-                    }
-                    else if (args.Result is EntityCollection inputs)
+                    ShowErrorDialog(args.Error);
+                    if (args.Error == null && args.Result is EntityCollection inputs)
                     {
                         PreProcessParams(inputs);
                         gridInputParams.DataSource = inputs;
@@ -437,11 +422,8 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    if (args.Error != null)
-                    {
-                        ShowErrorDialog(args.Error);
-                    }
-                    else if (args.Result is EntityCollection outputs)
+                    ShowErrorDialog(args.Error);
+                    if (args.Error == null && args.Result is EntityCollection outputs)
                     {
                         PreProcessParams(outputs);
                         gridOutputParams.DataSource = outputs;
@@ -487,11 +469,8 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    if (args.Error != null)
-                    {
-                        ShowErrorDialog(args.Error);
-                    }
-                    else if (args.Result is EntityCollection solutions)
+                    ShowErrorDialog(args.Error);
+                    if (args.Error == null && args.Result is EntityCollection solutions)
                     {
                         cmbSolution.DataSource = solutions;
                         if (!InArgumentId.Equals(Guid.Empty))
@@ -532,11 +511,8 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    if (args.Error != null)
-                    {
-                        ShowErrorDialog(args.Error);
-                    }
-                    else if (args.Result is RetrieveMetadataChangesResponse resp)
+                    ShowErrorDialog(args.Error);
+                    if (args.Error == null && args.Result is RetrieveMetadataChangesResponse resp)
                     {
                         entities = resp.EntityMetadata
                             .Where(e => e.IsCustomizable.Value == true && e.IsIntersect.Value != true)
