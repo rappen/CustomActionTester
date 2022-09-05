@@ -172,6 +172,7 @@ namespace Rappen.XTB.CAT
             txtExecution.Text = string.Empty;
             ClearOutputParamValues();
             var request = GetRequest();
+            var catreq = new CATRequest(request);
             WorkAsync(new WorkAsyncInfo
             {
                 Message = $"Executing {catTool.Target}",
@@ -180,20 +181,37 @@ namespace Rappen.XTB.CAT
                     var sw = Stopwatch.StartNew();
                     var result = Service.Execute(request);
                     sw.Stop();
+                    catreq.Execution.Duration = sw.ElapsedMilliseconds;
                     args.Result = new Tuple<OrganizationResponse, long>(result, sw.ElapsedMilliseconds);
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    ShowErrorDialog(args.Error);
-                    if (args.Error == null && args.Result is Tuple<OrganizationResponse, long> response)
+                    if (args.Error != null)
+                    {
+                        catreq.Execution.ErrorMessage = args.Error.Message;
+                        ShowErrorDialog(args.Error);
+                    }
+                    else if (args.Result is Tuple<OrganizationResponse, long> response)
                     {
                         txtExecution.Text = $"{response.Item2} ms";
                         btnPTV.Enabled = true;
                         var outputparams = response.Item1.Results;
                         PopulateOutputParamValues(outputparams);
                     }
+                    SaveHistory(catreq);
                 }
             });
+        }
+
+        private void SaveHistory(CATRequest catreq)
+        {
+            if (!SettingsManager.Instance.TryLoad(typeof(CustomActionTester), out List<CATRequest> catreqshistory, catTool.Target + " History"))
+            {
+                catreqshistory = new List<CATRequest>();
+            }
+            catreqshistory.Add(catreq);
+            catreqshistory = catreqshistory.OrderBy(req => req.Execution?.RunTime).Reverse().ToList();
+            SettingsManager.Instance.Save(typeof(CustomActionTester), catreqshistory, catTool.Target + " History");
         }
 
         private OrganizationRequest GetRequest()
@@ -705,15 +723,11 @@ namespace Rappen.XTB.CAT
         {
             if (input.TryGetAttributeValue("type", out string typestr))
             {
-                typestr = typestr
-                    .Replace("OptionSetValue", "Picklist")
-                    .Replace("Int32", "Integer")
-                    .Replace("Int64", "Integer")
-                    .Replace("Double", "Float");
-                if (Enum.TryParse(typestr, out ParamType type))
+                try
                 {
-                    return type;
+                    return CATRequest.StringToParamType(typestr);
                 }
+                catch { }
             }
             if (input.TryGetAttributeValue("type", out OptionSetValue typeosv))
             {
