@@ -99,7 +99,7 @@
     <Reference Include="NuGet.Versioning, Version=5.9.1.11, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\NuGet.Versioning.5.9.1\lib\net472\NuGet.Versioning.dll</HintPath>
     </Reference>
-   <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -198,6 +198,7 @@
     <Compile Include="CAT.designer.cs">
       <DependentUpon>CAT.cs</DependentUpon>
     </Compile>
+    <Compile Include="CATRequest.cs" />
     <Compile Include="CustomAPI.Const.cs" />
     <Compile Include="EntityMetadataProxy.cs" />
     <Compile Include="ICATTool.cs" />
