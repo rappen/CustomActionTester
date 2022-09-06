@@ -205,12 +205,18 @@ namespace Rappen.XTB.CAT
 
         private void SaveHistory(CATRequest catreq)
         {
-            if (!SettingsManager.Instance.TryLoad(typeof(CustomActionTester), out List<CATRequest> catreqshistory, catTool.Target + " History"))
+            if (catreq.Execution == null)
             {
-                catreqshistory = new List<CATRequest>();
+                catreq.Execution = new ExecutionInfo();
             }
-            catreqshistory.Add(catreq);
-            catreqshistory = catreqshistory.OrderBy(req => req.Execution?.RunTime).Reverse().ToList();
+            catreq.Execution.Environment = ConnectionDetail.ConnectionName;
+            if (cmbSolution.SelectedRecord?.TryGetAttributeValue<string>("uniquename", out string solution) == true)
+            {
+                catreq.Execution.Solution = solution;
+            }
+
+            var catreqshistory = GetHistory();
+            catreqshistory.Insert(0, catreq);
             SettingsManager.Instance.Save(typeof(CustomActionTester), catreqshistory, catTool.Target + " History");
         }
 
@@ -931,6 +937,34 @@ namespace Rappen.XTB.CAT
             input["rawvalue"] = result;
             input["value"] = formattedresult;
             return true;
+        }
+
+        private void LoadHistory()
+        {
+            listHistory.Items.Clear();
+            var history = GetHistory();
+            listHistory.Items.AddRange(history
+                .Select(h => new ListViewItem(
+                    new string[] {
+                        h.Execution?.RunTime.ToString(),
+                        h.Name,
+                        h.Execution?.Duration.ToString(),
+                        h.Execution?.Environment,
+                        h.Execution?.Solution,
+                    }
+                )).ToArray());
+            listHistory.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
+
+        private List<CATRequest> GetHistory()
+        {
+            if (!SettingsManager.Instance.TryLoad(typeof(CustomActionTester), out List<CATRequest> catreqshistory, catTool.Target + " History"))
+            {
+                catreqshistory = new List<CATRequest>();
+            }
+            catreqshistory = catreqshistory.OrderBy(req => req.Execution?.RunTime).Reverse().ToList();
+
+            return catreqshistory;
         }
 
         #endregion Private Methods

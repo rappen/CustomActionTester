@@ -111,9 +111,13 @@ namespace Rappen.XTB.CAT
 
         private void picHistory_Click(object sender, EventArgs e)
         {
-            splitRight.Panel2Collapsed = sender == picHistoryClose;
+            splitRight.Panel2Collapsed = !splitRight.Panel2Collapsed;
             picHistoryOpen.Visible = splitRight.Panel2Collapsed;
-            picHistoryClose.Left = picHistoryClose.Parent.Width - 19;
+            picHistoryClose.Visible = !splitRight.Panel2Collapsed;
+            if (!splitRight.Panel2Collapsed)
+            {
+                LoadHistory();
+            }
         }
 
         private void rbFormatResult_CheckedChanged(object sender, EventArgs e)
