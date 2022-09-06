@@ -147,6 +147,8 @@ namespace Rappen.XTB.CAT
     {
         public DateTime RunTime { get; set; } = DateTime.Now;
         public long Duration { get; set; }
+        public string Environment { get; set; }
+        public string Solution { get; set; }
         public string ErrorMessage { get; set; }
         public object Result { get; set; }
     }
