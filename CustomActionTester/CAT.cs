@@ -36,7 +36,8 @@ namespace Rappen.XTB.CAT
             TabIcon = catTool.Logo16;
             PluginIcon = catTool.Icon16;
             tslAbout.Image = catTool.Logo24;
-            gbCustomWhat.Text = catTool.Target;
+            lblSelect.Text = $"{catTool.Target} Select";
+            lblOutput.Text = $"{catTool.Target} Output";
             lblCustomWhat.Text = catTool.Target;
             btnManage.Visible = !string.IsNullOrWhiteSpace(catTool.ManagerTool)/* && PluginManagerExtended.Instance.Plugins.Any(p => p.Metadata.Name == catTool.ManagerTool)*/;
             RefreshLayout();
@@ -111,10 +112,10 @@ namespace Rappen.XTB.CAT
 
         private void picHistory_Click(object sender, EventArgs e)
         {
-            splitRight.Panel2Collapsed = !splitRight.Panel2Collapsed;
-            picHistoryOpen.Visible = splitRight.Panel2Collapsed;
-            picHistoryClose.Visible = !splitRight.Panel2Collapsed;
-            if (!splitRight.Panel2Collapsed)
+            splitToolHistory.Panel2Collapsed = !splitToolHistory.Panel2Collapsed;
+            picHistoryOpen.Visible = splitToolHistory.Panel2Collapsed;
+            picHistoryClose.Visible = !splitToolHistory.Panel2Collapsed;
+            if (!splitToolHistory.Panel2Collapsed)
             {
                 LoadHistory();
             }
