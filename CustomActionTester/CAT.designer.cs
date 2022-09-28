@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomActionTester));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.btnExecute = new System.Windows.Forms.ToolStripButton();
             this.tslAbout = new System.Windows.Forms.ToolStripLabel();
@@ -83,14 +83,16 @@
             this.label12 = new System.Windows.Forms.Label();
             this.btnScopeRecord = new System.Windows.Forms.Button();
             this.panCA = new System.Windows.Forms.Panel();
-            this.lblCustomWhat = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtScope = new Rappen.XTB.Helpers.Controls.XRMColumnText();
-            this.cmbCustomActions = new Rappen.XTB.Helpers.Controls.XRMColumnLookup();
+            this.panInput = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.panSolution = new System.Windows.Forms.Panel();
+            this.lblCustomWhat = new System.Windows.Forms.Label();
             this.rbSolManaged = new System.Windows.Forms.RadioButton();
             this.rbSolUnmanaged = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
+            this.cmbCustomActions = new Rappen.XTB.Helpers.Controls.XRMColumnLookup();
             this.cmbSolution = new Rappen.XTB.Helpers.Controls.XRMColumnLookup();
             this.label7 = new System.Windows.Forms.Label();
             this.panHistoryHeader = new System.Windows.Forms.Panel();
@@ -133,8 +135,6 @@
             this.colSolution = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitToolHistory = new System.Windows.Forms.SplitContainer();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.panInput = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
             this.splitFullForm.Panel1.SuspendLayout();
@@ -156,6 +156,7 @@
             this.panel6.SuspendLayout();
             this.panCARecord.SuspendLayout();
             this.panCA.SuspendLayout();
+            this.panInput.SuspendLayout();
             this.panSolution.SuspendLayout();
             this.panHistoryHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryOpen)).BeginInit();
@@ -176,7 +177,6 @@
             this.splitToolHistory.Panel1.SuspendLayout();
             this.splitToolHistory.Panel2.SuspendLayout();
             this.splitToolHistory.SuspendLayout();
-            this.panInput.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenu
@@ -313,7 +313,7 @@
             // splitFullForm.Panel2
             // 
             this.splitFullForm.Panel2.Controls.Add(this.splitRight);
-            this.splitFullForm.Size = new System.Drawing.Size(1045, 481);
+            this.splitFullForm.Size = new System.Drawing.Size(1045, 696);
             this.splitFullForm.SplitterDistance = 603;
             this.splitFullForm.SplitterWidth = 8;
             this.splitFullForm.TabIndex = 15;
@@ -333,7 +333,7 @@
             this.splitLeft.Panel1.Controls.Add(this.panHistoryHeader);
             this.splitLeft.Panel1.Controls.Add(this.panel8);
             this.splitLeft.Panel2Collapsed = true;
-            this.splitLeft.Size = new System.Drawing.Size(603, 481);
+            this.splitLeft.Size = new System.Drawing.Size(603, 696);
             this.splitLeft.SplitterDistance = 409;
             this.splitLeft.SplitterWidth = 8;
             this.splitLeft.TabIndex = 15;
@@ -345,9 +345,9 @@
             this.panCustomWhat.Controls.Add(this.panCARecord);
             this.panCustomWhat.Controls.Add(this.panCA);
             this.panCustomWhat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panCustomWhat.Location = new System.Drawing.Point(0, 144);
+            this.panCustomWhat.Location = new System.Drawing.Point(0, 179);
             this.panCustomWhat.Name = "panCustomWhat";
-            this.panCustomWhat.Size = new System.Drawing.Size(603, 302);
+            this.panCustomWhat.Size = new System.Drawing.Size(603, 482);
             this.panCustomWhat.TabIndex = 43;
             // 
             // panCAInputs
@@ -357,7 +357,7 @@
             this.panCAInputs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panCAInputs.Location = new System.Drawing.Point(0, 55);
             this.panCAInputs.Name = "panCAInputs";
-            this.panCAInputs.Size = new System.Drawing.Size(603, 210);
+            this.panCAInputs.Size = new System.Drawing.Size(603, 390);
             this.panCAInputs.TabIndex = 28;
             // 
             // gridInputParams
@@ -373,14 +373,14 @@
             this.gridInputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridInputParams.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridInputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.gridInputParams.ColumnHeadersHeight = 34;
             this.gridInputParams.ColumnOrder = "";
             this.gridInputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -390,28 +390,28 @@
             this.dgInputsType,
             this.dgInputsSubtype,
             this.dgInputsValue});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle14;
             this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridInputParams.FilterColumns = "";
             this.gridInputParams.Location = new System.Drawing.Point(114, 7);
             this.gridInputParams.MultiSelect = false;
             this.gridInputParams.Name = "gridInputParams";
             this.gridInputParams.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.gridInputParams.RowHeadersVisible = false;
             this.gridInputParams.RowHeadersWidth = 16;
             this.gridInputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -419,7 +419,7 @@
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(476, 199);
+            this.gridInputParams.Size = new System.Drawing.Size(476, 379);
             this.gridInputParams.TabIndex = 13;
             this.gridInputParams.RecordEnter += new Rappen.XTB.Helpers.Controls.XRMRecordEventHandler(this.gridInputParams_RecordEnter);
             // 
@@ -486,7 +486,7 @@
             this.panCAValue.Controls.Add(this.panel7);
             this.panCAValue.Controls.Add(this.panel6);
             this.panCAValue.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panCAValue.Location = new System.Drawing.Point(0, 265);
+            this.panCAValue.Location = new System.Drawing.Point(0, 445);
             this.panCAValue.Name = "panCAValue";
             this.panCAValue.Size = new System.Drawing.Size(603, 37);
             this.panCAValue.TabIndex = 29;
@@ -729,15 +729,6 @@
             this.panCA.Size = new System.Drawing.Size(603, 25);
             this.panCA.TabIndex = 26;
             // 
-            // lblCustomWhat
-            // 
-            this.lblCustomWhat.AutoSize = true;
-            this.lblCustomWhat.Location = new System.Drawing.Point(13, 72);
-            this.lblCustomWhat.Name = "lblCustomWhat";
-            this.lblCustomWhat.Size = new System.Drawing.Size(75, 13);
-            this.lblCustomWhat.TabIndex = 6;
-            this.lblCustomWhat.Text = "Custom Action";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -761,22 +752,25 @@
             this.txtScope.Size = new System.Drawing.Size(476, 20);
             this.txtScope.TabIndex = 12;
             // 
-            // cmbCustomActions
+            // panInput
             // 
-            this.cmbCustomActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbCustomActions.Column = null;
-            this.cmbCustomActions.DisplayFormat = "";
-            this.cmbCustomActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCustomActions.Filter = null;
-            this.cmbCustomActions.FormattingEnabled = true;
-            this.cmbCustomActions.Location = new System.Drawing.Point(114, 69);
-            this.cmbCustomActions.Name = "cmbCustomActions";
-            this.cmbCustomActions.RecordHost = null;
-            this.cmbCustomActions.Service = null;
-            this.cmbCustomActions.Size = new System.Drawing.Size(476, 21);
-            this.cmbCustomActions.TabIndex = 5;
-            this.cmbCustomActions.SelectionChangeCommitted += new System.EventHandler(this.cmbCustomActions_SelectionChangeCommitted);
+            this.panInput.Controls.Add(this.label2);
+            this.panInput.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panInput.Location = new System.Drawing.Point(0, 144);
+            this.panInput.Name = "panInput";
+            this.panInput.Size = new System.Drawing.Size(603, 35);
+            this.panInput.TabIndex = 44;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label2.Location = new System.Drawing.Point(0, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 24);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "Input";
             // 
             // panSolution
             // 
@@ -792,6 +786,15 @@
             this.panSolution.Name = "panSolution";
             this.panSolution.Size = new System.Drawing.Size(603, 109);
             this.panSolution.TabIndex = 2;
+            // 
+            // lblCustomWhat
+            // 
+            this.lblCustomWhat.AutoSize = true;
+            this.lblCustomWhat.Location = new System.Drawing.Point(13, 72);
+            this.lblCustomWhat.Name = "lblCustomWhat";
+            this.lblCustomWhat.Size = new System.Drawing.Size(75, 13);
+            this.lblCustomWhat.TabIndex = 6;
+            this.lblCustomWhat.Text = "Custom Action";
             // 
             // rbSolManaged
             // 
@@ -824,6 +827,23 @@
             this.label9.Size = new System.Drawing.Size(29, 13);
             this.label9.TabIndex = 9;
             this.label9.Text = "Filter";
+            // 
+            // cmbCustomActions
+            // 
+            this.cmbCustomActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCustomActions.Column = null;
+            this.cmbCustomActions.DisplayFormat = "";
+            this.cmbCustomActions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCustomActions.Filter = null;
+            this.cmbCustomActions.FormattingEnabled = true;
+            this.cmbCustomActions.Location = new System.Drawing.Point(114, 69);
+            this.cmbCustomActions.Name = "cmbCustomActions";
+            this.cmbCustomActions.RecordHost = null;
+            this.cmbCustomActions.Service = null;
+            this.cmbCustomActions.Size = new System.Drawing.Size(476, 21);
+            this.cmbCustomActions.TabIndex = 5;
+            this.cmbCustomActions.SelectionChangeCommitted += new System.EventHandler(this.cmbCustomActions_SelectionChangeCommitted);
             // 
             // cmbSolution
             // 
@@ -858,7 +878,7 @@
             this.panHistoryHeader.Controls.Add(this.picHistoryClose);
             this.panHistoryHeader.Controls.Add(this.lblDetailHeader);
             this.panHistoryHeader.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panHistoryHeader.Location = new System.Drawing.Point(0, 446);
+            this.panHistoryHeader.Location = new System.Drawing.Point(0, 661);
             this.panHistoryHeader.Name = "panHistoryHeader";
             this.panHistoryHeader.Size = new System.Drawing.Size(603, 35);
             this.panHistoryHeader.TabIndex = 39;
@@ -938,8 +958,8 @@
             this.splitRight.Panel2.Controls.Add(this.panel3);
             this.splitRight.Panel2.Controls.Add(this.panel2);
             this.splitRight.Panel2.Controls.Add(this.panel9);
-            this.splitRight.Size = new System.Drawing.Size(434, 481);
-            this.splitRight.SplitterDistance = 222;
+            this.splitRight.Size = new System.Drawing.Size(434, 696);
+            this.splitRight.SplitterDistance = 433;
             this.splitRight.SplitterWidth = 8;
             this.splitRight.TabIndex = 1;
             // 
@@ -953,7 +973,7 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(0, 35);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(434, 187);
+            this.panel10.Size = new System.Drawing.Size(434, 398);
             this.panel10.TabIndex = 42;
             // 
             // txtCDSDataHelper
@@ -961,7 +981,7 @@
             this.txtCDSDataHelper.BackColor = System.Drawing.SystemColors.Window;
             this.txtCDSDataHelper.Column = null;
             this.txtCDSDataHelper.DisplayFormat = "";
-            this.txtCDSDataHelper.Location = new System.Drawing.Point(17, 114);
+            this.txtCDSDataHelper.Location = new System.Drawing.Point(292, 17);
             this.txtCDSDataHelper.Name = "txtCDSDataHelper";
             this.txtCDSDataHelper.RecordHost = this.rhResult;
             this.txtCDSDataHelper.Size = new System.Drawing.Size(100, 20);
@@ -1006,14 +1026,14 @@
             this.gridOutputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridOutputParams.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridOutputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.gridOutputParams.ColumnHeadersHeight = 34;
             this.gridOutputParams.ColumnOrder = "";
             this.gridOutputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1021,28 +1041,28 @@
             this.dgOutputsName,
             this.dgOutputsType,
             this.dgOutputsValue});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle17;
             this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridOutputParams.FilterColumns = "";
-            this.gridOutputParams.Location = new System.Drawing.Point(115, 42);
+            this.gridOutputParams.Location = new System.Drawing.Point(17, 61);
             this.gridOutputParams.MultiSelect = false;
             this.gridOutputParams.Name = "gridOutputParams";
             this.gridOutputParams.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.gridOutputParams.RowHeadersVisible = false;
             this.gridOutputParams.RowHeadersWidth = 16;
             this.gridOutputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -1050,7 +1070,7 @@
             this.gridOutputParams.ShowEditingIcon = false;
             this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(312, 142);
+            this.gridOutputParams.Size = new System.Drawing.Size(410, 334);
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
             // 
@@ -1128,18 +1148,21 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 35);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(434, 181);
+            this.panel3.Size = new System.Drawing.Size(434, 185);
             this.panel3.TabIndex = 46;
             // 
             // txtResultDetail
             // 
+            this.txtResultDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtResultDetail.BackColor = System.Drawing.SystemColors.Window;
-            this.txtResultDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtResultDetail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtResultDetail.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResultDetail.Location = new System.Drawing.Point(0, 44);
+            this.txtResultDetail.Location = new System.Drawing.Point(17, 36);
             this.txtResultDetail.Name = "txtResultDetail";
             this.txtResultDetail.ReadOnly = true;
-            this.txtResultDetail.Size = new System.Drawing.Size(434, 137);
+            this.txtResultDetail.Size = new System.Drawing.Size(410, 146);
             this.txtResultDetail.TabIndex = 0;
             this.txtResultDetail.Text = "";
             // 
@@ -1150,7 +1173,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(434, 44);
+            this.panel1.Size = new System.Drawing.Size(434, 38);
             this.panel1.TabIndex = 1;
             // 
             // lblResultDetailType
@@ -1170,7 +1193,7 @@
             this.panTextFormat.Dock = System.Windows.Forms.DockStyle.Right;
             this.panTextFormat.Location = new System.Drawing.Point(211, 0);
             this.panTextFormat.Name = "panTextFormat";
-            this.panTextFormat.Size = new System.Drawing.Size(223, 44);
+            this.panTextFormat.Size = new System.Drawing.Size(223, 38);
             this.panTextFormat.TabIndex = 3;
             // 
             // rbFormatText
@@ -1212,7 +1235,7 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 216);
+            this.panel2.Location = new System.Drawing.Point(0, 220);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(434, 35);
             this.panel2.TabIndex = 45;
@@ -1256,7 +1279,7 @@
             this.listHistory.HideSelection = false;
             this.listHistory.Location = new System.Drawing.Point(0, 0);
             this.listHistory.Name = "listHistory";
-            this.listHistory.Size = new System.Drawing.Size(0, 46);
+            this.listHistory.Size = new System.Drawing.Size(845, 159);
             this.listHistory.TabIndex = 42;
             this.listHistory.UseCompatibleStateImageBehavior = false;
             this.listHistory.View = System.Windows.Forms.View.Details;
@@ -1285,6 +1308,7 @@
             // splitToolHistory
             // 
             this.splitToolHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitToolHistory.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitToolHistory.Location = new System.Drawing.Point(0, 31);
             this.splitToolHistory.Name = "splitToolHistory";
             this.splitToolHistory.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -1298,37 +1322,18 @@
             this.splitToolHistory.Panel2.Controls.Add(this.listHistory);
             this.splitToolHistory.Panel2.Controls.Add(this.panel5);
             this.splitToolHistory.Panel2Collapsed = true;
-            this.splitToolHistory.Size = new System.Drawing.Size(1045, 481);
-            this.splitToolHistory.SplitterDistance = 442;
+            this.splitToolHistory.Size = new System.Drawing.Size(1045, 696);
+            this.splitToolHistory.SplitterDistance = 529;
+            this.splitToolHistory.SplitterWidth = 8;
             this.splitToolHistory.TabIndex = 16;
             // 
             // panel5
             // 
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(-50, 0);
+            this.panel5.Location = new System.Drawing.Point(845, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(200, 46);
+            this.panel5.Size = new System.Drawing.Size(200, 159);
             this.panel5.TabIndex = 0;
-            // 
-            // panInput
-            // 
-            this.panInput.Controls.Add(this.label2);
-            this.panInput.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panInput.Location = new System.Drawing.Point(0, 144);
-            this.panInput.Name = "panInput";
-            this.panInput.Size = new System.Drawing.Size(603, 35);
-            this.panInput.TabIndex = 44;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label2.Location = new System.Drawing.Point(0, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 24);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "Input";
             // 
             // CustomActionTester
             // 
@@ -1339,7 +1344,7 @@
             this.Controls.Add(this.toolStripMenu);
             this.Name = "CustomActionTester";
             this.PluginIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PluginIcon")));
-            this.Size = new System.Drawing.Size(1045, 512);
+            this.Size = new System.Drawing.Size(1045, 727);
             this.TabIcon = ((System.Drawing.Image)(resources.GetObject("$this.TabIcon")));
             this.Load += new System.EventHandler(this.CustomActionTester_Load);
             this.toolStripMenu.ResumeLayout(false);
@@ -1371,6 +1376,8 @@
             this.panCARecord.PerformLayout();
             this.panCA.ResumeLayout(false);
             this.panCA.PerformLayout();
+            this.panInput.ResumeLayout(false);
+            this.panInput.PerformLayout();
             this.panSolution.ResumeLayout(false);
             this.panSolution.PerformLayout();
             this.panHistoryHeader.ResumeLayout(false);
@@ -1399,8 +1406,6 @@
             this.splitToolHistory.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitToolHistory)).EndInit();
             this.splitToolHistory.ResumeLayout(false);
-            this.panInput.ResumeLayout(false);
-            this.panInput.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
