@@ -113,6 +113,10 @@ namespace Rappen.XTB.CAT
             {
                 return $"{indentstring}<null>";
             }
+            else if (value is string[] strings)
+            {
+                return $"[\n{indentstring}\"" + string.Join($"\",\n{indentstring}\"", strings) + "\"\n]";
+            }
             else if (value is EntityCollection collection)
             {
                 var result = $"{collection.EntityName} collection\n  Records: {collection.Entities.Count}\n  TotalRecordCount: {collection.TotalRecordCount}\n  MoreRecords: {collection.MoreRecords}\n  PagingCookie: {collection.PagingCookie}";
@@ -634,7 +638,11 @@ namespace Rappen.XTB.CAT
                 var rawvalue = result.Value;
                 var value = rawvalue;
                 output["rawvalue"] = rawvalue;
-                if (rawvalue is Money money)
+                if (rawvalue is string[] strings)
+                {
+                    value = string.Join(", ", strings).Replace("\n", " ");
+                }
+                else if (rawvalue is Money money)
                 {
                     value = money.Value;
                 }
