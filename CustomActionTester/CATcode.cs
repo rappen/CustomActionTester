@@ -106,64 +106,6 @@ namespace Rappen.XTB.CAT
 
         #region Private Methods
 
-        public static string ValueToString(object value, bool attributetypes, bool convertqueries, bool expandcollections, IOrganizationService service, int indent = 1)
-        {
-            var indentstring = new string(' ', indent * 2);
-            if (value == null)
-            {
-                return $"{indentstring}<null>";
-            }
-            else if (value is string[] strings)
-            {
-                return $"[\n{indentstring}\"" + string.Join($"\",\n{indentstring}\"", strings) + "\"\n]";
-            }
-            else if (value is EntityCollection collection)
-            {
-                var result = $"{collection.EntityName} collection\n  Records: {collection.Entities.Count}\n  TotalRecordCount: {collection.TotalRecordCount}\n  MoreRecords: {collection.MoreRecords}\n  PagingCookie: {collection.PagingCookie}";
-                if (expandcollections)
-                {
-                    result += $"\n{indentstring}  {string.Join($"\n{indentstring}", collection.Entities.Select(e => ValueToString(e, attributetypes, convertqueries, expandcollections, service, indent + 1)))}";
-                }
-                return result;
-            }
-            else if (value is Entity entity)
-            {
-                var keylen = entity.Attributes.Count > 0 ? entity.Attributes.Max(p => p.Key.Length) : 50;
-                return $"{entity.LogicalName} {entity.Id}\n{indentstring}" + string.Join($"\n{indentstring}", entity.Attributes.OrderBy(a => a.Key).Select(a => $"{a.Key}{new string(' ', keylen - a.Key.Length)} = {ValueToString(a.Value, attributetypes, convertqueries, expandcollections, service, indent + 1)}"));
-            }
-            else if (value is ColumnSet columnset)
-            {
-                var columnlist = new List<string>(columnset.Columns);
-                columnlist.Sort();
-                return $"\n{indentstring}" + string.Join($"\n{indentstring}", columnlist);
-            }
-            else if (value is FetchExpression fetchexpression)
-            {
-                return $"{value}\n{indentstring}{fetchexpression.Query}";
-            }
-            else
-            {
-                var result = string.Empty;
-                if (value is EntityReference entityreference)
-                {
-                    result = $"{entityreference.LogicalName} {entityreference.Id} {entityreference.Name}";
-                }
-                else if (value is OptionSetValue optionsetvalue)
-                {
-                    result = optionsetvalue.Value.ToString();
-                }
-                else if (value is Money money)
-                {
-                    result = money.Value.ToString();
-                }
-                else
-                {
-                    result = value.ToString().Replace("\n", $"\n  {indentstring}");
-                }
-                return result + (attributetypes ? $" \t({value.GetType()})" : "");
-            }
-        }
-
         private void ClearOutputParamValues()
         {
             var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
@@ -199,6 +141,7 @@ namespace Rappen.XTB.CAT
                     {
                         txtExecution.Text = $"{response.Item2} ms";
                         btnPTV.Enabled = true;
+                        catreq.Response = response.Item1;
                         var outputparams = response.Item1.Results;
                         PopulateOutputParamValues(outputparams);
                     }
@@ -470,13 +413,13 @@ namespace Rappen.XTB.CAT
                 txtResultDetail.Text = string.Empty;
                 return null;
             }
-            lblResultDetailType.Text = result.GetType().ToString();
+            lblResultDetailType.Text = CATRequest.ValueToParamType(result)?.ToString();
             if (result is string)
             {
                 panTextFormat.Visible = true;
                 return result;
             }
-            return ValueToString(result, false, false, true, Service);
+            return CATRequest.ValueToString(result);
         }
 
         private void GetSolutions(bool managed)

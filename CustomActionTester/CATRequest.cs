@@ -1,16 +1,22 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Serialization;
 using ParamType = Rappen.XTB.CAT.Customapirequestparameter.Type_OptionSet;
 
 namespace Rappen.XTB.CAT
 {
     public class CATRequest
     {
+        private OrganizationRequest request;
+        private OrganizationResponse response;
+
         public ExecutionInfo Execution { get; set; }
         public string Name { get; set; }
         public EntityReference Target { get; set; }
-        public List<CATRequestParameter> Parameters { get; set; }
+        public List<CATParameter> Parameters { get; set; }
+        public List<CATParameter> Responses { get; set; }
 
         internal CATRequest()
         { }
@@ -18,53 +24,12 @@ namespace Rappen.XTB.CAT
         public CATRequest(OrganizationRequest request)
         {
             Execution = new ExecutionInfo();
-            Name = request.RequestName;
-            if (request.Parameters != null)
-            {
-                if (request.Parameters.ContainsKey("Target"))
-                {
-                    Target = request["Target"] as EntityReference;
-                }
-                foreach (var parameter in request.Parameters)
-                {
-                    if (parameter.Key != "Target")
-                    {
-                        if (Parameters == null)
-                        {
-                            Parameters = new List<CATRequestParameter>();
-                        }
-                        Parameters.Add(new CATRequestParameter
-                        {
-                            Name = parameter.Key,
-                            Type = ValueToParamType(parameter.Value),
-                            Value = ValueToString(parameter.Value)
-                        });
-                    }
-                }
-            }
+            Request = request;
         }
 
         public override string ToString() => Execution?.RunTime.ToString("HH:mm:ss") + " " + Name;
 
-        private ParamType ValueToParamType(object value)
-        {
-            if (value is string) return ParamType.String;
-            if (value is bool) return ParamType.Boolean;
-            if (value is DateTime) return ParamType.DateTime;
-            if (value is decimal) return ParamType.Decimal;
-            if (value is Entity) return ParamType.Entity;
-            if (value is EntityCollection) return ParamType.EntityCollection;
-            if (value is EntityReference) return ParamType.EntityReference;
-            if (value is float) return ParamType.Float;
-            if (value is int) return ParamType.Integer;
-            if (value is Money) return ParamType.Money;
-            if (value is OptionSetValue) return ParamType.Picklist;
-            if (value is string) return ParamType.String;
-            if (value is string[]) return ParamType.StringArray;
-            if (value is Guid) return ParamType.GuId;
-            throw new Exception($"Incorrect value type: {value.GetType()} value: {value}");
-        }
-
+        [XmlIgnore]
         public OrganizationRequest Request
         {
             get
@@ -77,6 +42,68 @@ namespace Rappen.XTB.CAT
                 Parameters.ForEach(p => request.Parameters.Add(p.Name, StringToParamValue(p.Type, p.Value)));
                 return request;
             }
+            private set
+            {
+                request = value;
+                Name = request.RequestName;
+                Parameters = new List<CATParameter>();
+                if (request.Parameters != null)
+                {
+                    if (request.Parameters.ContainsKey("Target"))
+                    {
+                        Target = request["Target"] as EntityReference;
+                    }
+                    request.Parameters.Where(p => p.Key != "Target" && p.Value != null).ToList().ForEach(p =>
+                            Parameters.Add(new CATParameter
+                            {
+                                Name = p.Key,
+                                Type = ValueToParamType(p.Value) ?? ParamType.String,
+                                Value = ValueToString(p.Value)
+                            }));
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public OrganizationResponse Response
+        {
+            private get
+            {
+                return response;
+            }
+            set
+            {
+                response = value;
+                Responses = new List<CATParameter>();
+                response.Results.Where(p => p.Value != null).ToList().ForEach(p =>
+                       Responses.Add(new CATParameter
+                       {
+                           Name = p.Key,
+                           Type = ValueToParamType(p.Value) ?? ParamType.String,
+                           Value = ValueToString(p.Value)
+                       }));
+            }
+        }
+
+        public static ParamType? ValueToParamType(object value)
+        {
+            if (value == null) return null;
+            if (value is string) return ParamType.String;
+            if (value is bool) return ParamType.Boolean;
+            if (value is DateTime) return ParamType.DateTime;
+            if (value is decimal) return ParamType.Decimal;
+            if (value is double) return ParamType.Decimal;
+            if (value is Entity) return ParamType.Entity;
+            if (value is EntityCollection) return ParamType.EntityCollection;
+            if (value is EntityReference) return ParamType.EntityReference;
+            if (value is float) return ParamType.Float;
+            if (value is int) return ParamType.Integer;
+            if (value is Money) return ParamType.Money;
+            if (value is OptionSetValue) return ParamType.Picklist;
+            if (value is string) return ParamType.String;
+            if (value is string[]) return ParamType.StringArray;
+            if (value is Guid) return ParamType.GuId;
+            throw new Exception($"Incorrect value type: {value.GetType()} value: {value}");
         }
 
         public static ParamType StringToParamType(string type)
@@ -95,9 +122,12 @@ namespace Rappen.XTB.CAT
 
         public static string ValueToString(object value)
         {
+            if (value is string[] strings) return $"[\n  \"" + string.Join($"\",\n  \"", strings) + "\"\n]";
+            if (value is Money valuemon) return valuemon.Value.ToString();
             if (value is OptionSetValue valueosv) return valueosv.Value.ToString();
+            if (value is Entity valueent) return $"{valueent.LogicalName}:{valueent.Id}";
             if (value is EntityReference valueer) return $"{valueer.LogicalName}:{valueer.Id}";
-            else return value.ToString();
+            return value?.ToString();
         }
 
         public static object StringToParamValue(ParamType type, string value)
@@ -153,10 +183,15 @@ namespace Rappen.XTB.CAT
         public object Result { get; set; }
     }
 
-    public class CATRequestParameter
+    public class CATParameter
     {
         public ParamType Type { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name} = {Value}";
+        }
     }
 }
