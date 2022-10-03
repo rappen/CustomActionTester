@@ -13,6 +13,7 @@ namespace Rappen.XTB.CAT
         private OrganizationResponse response;
 
         public ExecutionInfo Execution { get; set; }
+        public Guid CustomRequestId { get; set; }
         public string Name { get; set; }
         public EntityReference Target { get; set; }
         public List<CATParameter> Parameters { get; set; }
@@ -130,12 +131,17 @@ namespace Rappen.XTB.CAT
             return value?.ToString();
         }
 
+        public static object StringToParamValue(string type, string value) => StringToParamValue(StringToParamType(type), value);
+
         public static object StringToParamValue(ParamType type, string value)
         {
             switch (type)
             {
                 case ParamType.String:
                     return value;
+
+                case ParamType.Boolean:
+                    return bool.Parse(value);
 
                 case ParamType.Integer:
                     return Convert.ToInt64(value);
@@ -163,9 +169,12 @@ namespace Rappen.XTB.CAT
                     return new EntityReference(entrefstr[0], Guid.Parse(entrefstr[1]));
 
                 case ParamType.Entity:
+                    var entstr = value.Split(':');
+                    return new Entity(entstr[0], Guid.Parse(entstr[1]));
+
                 case ParamType.EntityCollection:
                 case ParamType.StringArray:
-                    throw new Exception($"{type} not supported");
+                    throw new Exception($"{type} not supported yet");
 
                 default:
                     throw new Exception($"Unknown type: {type}");
@@ -178,7 +187,9 @@ namespace Rappen.XTB.CAT
         public DateTime RunTime { get; set; } = DateTime.Now;
         public long Duration { get; set; }
         public string Environment { get; set; }
+        public bool ManagedSolutions { get; set; }
         public string Solution { get; set; }
+        public Guid SolutionId { get; set; }
         public string ErrorMessage { get; set; }
         public object Result { get; set; }
     }
@@ -189,9 +200,8 @@ namespace Rappen.XTB.CAT
         public string Name { get; set; }
         public string Value { get; set; }
 
-        public override string ToString()
-        {
-            return $"{Name} = {Value}";
-        }
+        public override string ToString() => $"{Name} = {Value}";
+
+        public object RawValue => CATRequest.StringToParamValue(Type, Value);
     }
 }

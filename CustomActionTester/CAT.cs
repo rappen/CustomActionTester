@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
@@ -117,7 +118,7 @@ namespace Rappen.XTB.CAT
             picHistoryClose.Visible = !splitToolHistory.Panel2Collapsed;
             if (!splitToolHistory.Panel2Collapsed)
             {
-                LoadHistory();
+                ShowHistory(GetHistoryFromFile());
             }
         }
 
@@ -180,6 +181,25 @@ namespace Rappen.XTB.CAT
         private void btnManage_Click(object sender, EventArgs e)
         {
             ManageAction(cmbCustomActions.SelectedRecord);
+        }
+
+        private void listHistory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnHistReload.Enabled = listHistory.SelectedItems.Count > 0;
+            btnHistDelete.Enabled = listHistory.SelectedItems.Count > 0;
+        }
+
+        private void btnHistReload_Click(object sender, EventArgs e)
+        {
+            if (listHistory.SelectedItems.Cast<ListViewItem>().FirstOrDefault()?.Tag is CATRequest request)
+            {
+                ReloadHistoryItem(request);
+            }
+        }
+
+        private void chkHistGroup_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowHistory(GetHistoryFromList());
         }
     }
 }

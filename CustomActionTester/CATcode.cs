@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Crm.Sdk.Messages;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json.Linq;
@@ -33,6 +34,8 @@ namespace Rappen.XTB.CAT
 
         private EntityMetadataProxy[] entities;
         private Guid InArgumentId = Guid.Empty;
+        private CATRequest historyrequest;
+        private bool _uiupdated;
 
         #endregion Private Fields
 
@@ -145,26 +148,9 @@ namespace Rappen.XTB.CAT
                         var outputparams = response.Item1.Results;
                         PopulateOutputParamValues(outputparams);
                     }
-                    SaveHistory(catreq);
+                    AddHistoryToList(catreq);
                 }
             });
-        }
-
-        private void SaveHistory(CATRequest catreq)
-        {
-            if (catreq.Execution == null)
-            {
-                catreq.Execution = new ExecutionInfo();
-            }
-            catreq.Execution.Environment = ConnectionDetail.ConnectionName;
-            if (cmbSolution.SelectedRecord?.TryGetAttributeValue<string>("uniquename", out string solution) == true)
-            {
-                catreq.Execution.Solution = solution;
-            }
-
-            var catreqshistory = GetHistory();
-            catreqshistory.Insert(0, catreq);
-            SettingsManager.Instance.Save(typeof(CustomActionTester), catreqshistory, catTool.Target + " History");
         }
 
         private OrganizationRequest GetRequest()
@@ -263,10 +249,19 @@ namespace Rappen.XTB.CAT
             return entity.Trim();
         }
 
-        private void GetCustomActions(Entity solution)
+        private void GetCustomActions(Entity solution) => GetCustomActions(solution?.Id ?? Guid.Empty);
+
+        private void GetCustomActions(Guid solutionid, Action<int> nextstep = null, int nextstepnum = 0)
         {
+            if (_uiupdated)
+            {
+                return;
+            }
+            _uiupdated = true;
+            cmbSolution.SetSelected(solutionid);
+            _uiupdated = false;
             cmbCustomActions.DataSource = null;
-            var qx = catTool.GetActionQuery(solution?.Id ?? Guid.Empty);
+            var qx = catTool.GetActionQuery(solutionid);
             if (qx == null)
             {
                 return;
@@ -290,6 +285,7 @@ namespace Rappen.XTB.CAT
                             SelectActionByInArgumentId();
                         }
                         SetCustomAction(cmbCustomActions.SelectedRecord);
+                        nextstep?.Invoke(nextstepnum);
                     }
                 }
             });
@@ -307,15 +303,15 @@ namespace Rappen.XTB.CAT
             }
         }
 
-        private void GetInputParams(Entity ca)
+        private void GetInputParams(Guid caid, Action<int> nextstep = null, int nextstepnum = 0)
         {
-            if (ca == null)
+            if (caid.Equals(Guid.Empty))
             {
                 gridInputParams.DataSource = null;
                 gridOutputParams.DataSource = null;
                 return;
             }
-            var qx = catTool.GetInputQuery(ca.Id);
+            var qx = catTool.GetInputQuery(caid);
 
             WorkAsync(new WorkAsyncInfo
             {
@@ -333,7 +329,8 @@ namespace Rappen.XTB.CAT
                         gridInputParams.DataSource = inputs;
                         gridInputParams.AutoResizeColumns();
                         btnExecute.Enabled = ReadyToExecute();
-                        GetOutputParams(ca);
+                        GetOutputParams(caid);
+                        nextstep?.Invoke(nextstepnum);
                     }
                 }
             });
@@ -363,6 +360,11 @@ namespace Rappen.XTB.CAT
                     return;
                 }
             }
+            RefreshInputParameters(input);
+        }
+
+        private void RefreshInputParameters(Entity input)
+        {
             SuspendLayout();
             gridInputParams.Refresh();
             gridInputParams.AutoResizeColumns();
@@ -375,14 +377,14 @@ namespace Rappen.XTB.CAT
             btnExecute.Enabled = ReadyToExecute();
         }
 
-        private void GetOutputParams(Entity ca)
+        private void GetOutputParams(Guid caid)
         {
-            if (ca == null)
+            if (caid.Equals(Guid.Empty))
             {
                 gridOutputParams.DataSource = null;
                 return;
             }
-            var qx = catTool.GetOutputQuery(ca.Id);
+            var qx = catTool.GetOutputQuery(caid);
 
             WorkAsync(new WorkAsyncInfo
             {
@@ -422,8 +424,19 @@ namespace Rappen.XTB.CAT
             return CATRequest.ValueToString(result);
         }
 
-        private void GetSolutions(bool managed)
+        private void GetSolutions(bool managed, Action<int> nextstep = null, int nextstepnum = 0)
         {
+            if (_uiupdated)
+            {
+                return;
+            }
+            if (managed != rbSolManaged.Checked)
+            {
+                _uiupdated = true;
+                rbSolManaged.Checked = managed;
+                rbSolUnmanaged.Checked = !managed;
+                _uiupdated = false;
+            }
             var qx = new QueryExpression(Solution.EntityName);
             qx.Distinct = true;
             qx.ColumnSet.AddColumns(Solution.PrimaryKey, Solution.PrimaryName, Solution.UniqueName, Solution.Version);
@@ -449,6 +462,7 @@ namespace Rappen.XTB.CAT
                             SelectDefaultSolution();
                         }
                         GetCustomActions(cmbSolution.SelectedRecord);
+                        nextstep?.Invoke(nextstepnum);
                     }
                 }
             });
@@ -656,7 +670,7 @@ namespace Rappen.XTB.CAT
             var bindingtype = catTool.BindingType(ca);
             panCARecord.Visible = bindingtype != Customapi.BindingType_OptionSet.Global;
             txtExecution.Text = string.Empty;
-            GetInputParams(ca);
+            GetInputParams(ca.Id);
         }
 
         private void TraceLastExecution()
@@ -890,24 +904,64 @@ namespace Rappen.XTB.CAT
             return true;
         }
 
-        private void LoadHistory()
+        private void AddHistoryToList(CATRequest catreq)
+        {
+            if (catreq.Execution == null)
+            {
+                catreq.Execution = new ExecutionInfo();
+            }
+            catreq.Execution.Environment = ConnectionDetail.ConnectionName;
+            if (cmbSolution.SelectedRecord?.TryGetAttributeValue<string>("uniquename", out string solution) == true)
+            {
+                catreq.Execution.SolutionId = cmbSolution.SelectedRecord.Id;
+                catreq.Execution.Solution = solution;
+            }
+            catreq.CustomRequestId = cmbCustomActions.SelectedRecord?.Id ?? Guid.Empty;
+            var catreqshistory = GetHistoryFromFile();
+            catreqshistory.Insert(0, catreq);
+            SaveHistoryToFile(catreqshistory);
+            ShowHistory(catreqshistory);
+        }
+
+        private void SaveHistoryToFile(List<CATRequest> history)
+        {
+            SettingsManager.Instance.Save(typeof(CustomActionTester), history, catTool.Target + " History");
+        }
+
+        private void ShowHistory(List<CATRequest> history)
         {
             listHistory.Items.Clear();
-            var history = GetHistory();
-            listHistory.Items.AddRange(history
-                .Select(h => new ListViewItem(
-                    new string[] {
-                        h.Execution?.RunTime.ToString(),
+            listHistory.Groups.Clear();
+            listHistory.ShowGroups = chkHistGroup.Checked;
+            var timeformat = chkHistGroup.Checked ? "T" : "G";
+            listHistory.Groups.AddRange(history
+                .OrderBy(h => h.Execution.RunTime)
+                .Reverse()
+                .Select(h => h.Execution.RunTime.Date)
+                .Distinct()
+                .Select(d => new ListViewGroup(d.ToString(), d.ToString("d"))).ToArray());
+            foreach (var group in listHistory.Groups.Cast<ListViewGroup>())
+            {
+                listHistory.Items.AddRange(history
+                    .Where(h => h.Execution.RunTime.Date.Equals(DateTime.Parse(group.Name)))
+                    .Select(h => new ListViewItem(
+                        new string[] {
+                        h.Execution?.RunTime.ToString(timeformat),
                         h.Name,
                         h.Execution?.Duration.ToString(),
                         h.Execution?.Environment,
                         h.Execution?.Solution,
-                    }
-                )).ToArray());
+                        },
+                        group
+                    )
+                    {
+                        Tag = h
+                    }).ToArray());
+            }
             listHistory.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
-        private List<CATRequest> GetHistory()
+        private List<CATRequest> GetHistoryFromFile()
         {
             if (!SettingsManager.Instance.TryLoad(typeof(CustomActionTester), out List<CATRequest> catreqshistory, catTool.Target + " History"))
             {
@@ -916,6 +970,115 @@ namespace Rappen.XTB.CAT
             catreqshistory = catreqshistory.OrderBy(req => req.Execution?.RunTime).Reverse().ToList();
 
             return catreqshistory;
+        }
+
+        private List<CATRequest> GetHistoryFromList()
+        {
+            return listHistory.Items.Cast<ListViewItem>()
+                .Where(l => l.Tag is CATRequest)
+                .Select(l => l.Tag as CATRequest)
+                .ToList();
+        }
+
+        private void ReloadHistoryItem(CATRequest history)
+        {
+            historyrequest = history;
+            ReloadHistoryItem(0);
+        }
+
+        private void ReloadHistoryItem(int nextstepnum)
+        {
+            switch (nextstepnum)
+            {
+                case 0:
+                    if (rbSolManaged.Checked == historyrequest.Execution.ManagedSolutions)
+                    {
+                        ReloadHistoryItem(++nextstepnum);
+                    }
+                    else
+                    {
+                        GetSolutions(historyrequest.Execution.ManagedSolutions, ReloadHistoryItem, ++nextstepnum);
+                    }
+                    break;
+
+                case 1:
+                    if (cmbSolution.SelectedRecord?.Id == historyrequest.Execution.SolutionId)
+                    {
+                        ReloadHistoryItem(++nextstepnum);
+                    }
+                    else
+                    {
+                        GetCustomActions(historyrequest.Execution.SolutionId, ReloadHistoryItem, ++nextstepnum);
+                    }
+                    break;
+
+                case 2:
+                    if (cmbCustomActions.SelectedRecord?.Id != historyrequest.CustomRequestId)
+                    {
+                        cmbCustomActions.SetSelected(historyrequest.CustomRequestId);
+                    }
+                    ReloadHistoryItem(++nextstepnum);
+                    break;
+
+                case 3:
+                    GetInputParams(historyrequest.CustomRequestId, ReloadHistoryItem, ++nextstepnum);
+                    break;
+
+                case 4:
+                    SetInputParametersValues(historyrequest.Parameters);
+                    break;
+            }
+        }
+
+        private void SetInputParametersValues(List<CATParameter> parameters)
+        {
+            var inputs = gridInputParams.GetDataSource<IEnumerable<Entity>>();
+            if (inputs == null)
+            {
+                return;
+            }
+            foreach (var param in parameters)
+            {
+                var input = inputs.FirstOrDefault(i => i.TryGetAttributeValue(catTool.Columns.ParamUniqueName, out string name) && name == param.Name);
+                if (input == null)
+                {
+                    continue;
+                }
+                switch (param.Type)
+                {
+                    case ParamType.Entity:
+                        var entity = param.RawValue as Entity;
+                        entity = Service.Retrieve(entity.LogicalName, entity.Id, new ColumnSet(true));
+                        input["rawvalue"] = entity;
+                        input["value"] = GetEntityPrimaryName(entity);
+                        break;
+
+                    case ParamType.EntityReference:
+                        var entityref = param.RawValue as EntityReference;
+                        entity = Service.Retrieve(entityref.LogicalName, entityref.Id, new ColumnSet(true));
+                        input["value"] = GetEntityPrimaryName(entity);
+                        break;
+
+                    default:
+                        input["rawvalue"] = param.RawValue;
+                        input["value"] = param.Value;
+                        break;
+                }
+                RefreshInputParameters(input);
+            }
+        }
+
+        private string GetEntityPrimaryName(Entity entity)
+        {
+            if (entities.FirstOrDefault(e => e.Metadata.LogicalName == entity.LogicalName) is EntityMetadataProxy proxy &&
+                         entity.TryGetAttributeValue(proxy.Metadata.PrimaryNameAttribute, out string entityname))
+            {
+                return entityname;
+            }
+            else
+            {
+                return entity.Id.ToString();
+            }
         }
 
         #endregion Private Methods
