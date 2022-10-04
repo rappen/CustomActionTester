@@ -904,6 +904,17 @@ namespace Rappen.XTB.CAT
             return true;
         }
 
+        private void LoadAndShowHistoryIfNeeded()
+        {
+            picHistoryOpen.Visible = splitToolHistory.Panel2Collapsed;
+            picHistoryClose.Visible = !splitToolHistory.Panel2Collapsed;
+            panHistoryOptions.Visible = !splitToolHistory.Panel2Collapsed;
+            if (!splitToolHistory.Panel2Collapsed)
+            {
+                ShowHistory(GetHistoryFromFile());
+            }
+        }
+
         private void AddHistoryToList(CATRequest catreq)
         {
             if (catreq.Execution == null)
@@ -911,7 +922,7 @@ namespace Rappen.XTB.CAT
                 catreq.Execution = new ExecutionInfo();
             }
             catreq.Execution.Environment = ConnectionDetail.ConnectionName;
-            if (cmbSolution.SelectedRecord?.TryGetAttributeValue<string>("uniquename", out string solution) == true)
+            if (cmbSolution.SelectedRecord?.TryGetAttributeValue<string>("friendlyname", out string solution) == true)
             {
                 catreq.Execution.SolutionId = cmbSolution.SelectedRecord.Id;
                 catreq.Execution.Solution = solution;
@@ -925,45 +936,73 @@ namespace Rappen.XTB.CAT
 
         private void SaveHistoryToFile(List<CATRequest> history)
         {
-            SettingsManager.Instance.Save(typeof(CustomActionTester), history, catTool.Target + " History");
+            SettingsManager.Instance.Save(typeof(CustomActionTester), history, "History");
         }
 
         private void ShowHistory(List<CATRequest> history)
         {
             listHistory.Items.Clear();
             listHistory.Groups.Clear();
-            listHistory.ShowGroups = chkHistGroup.Checked;
-            var timeformat = chkHistGroup.Checked ? "T" : "G";
-            listHistory.Groups.AddRange(history
-                .OrderBy(h => h.Execution.RunTime)
-                .Reverse()
-                .Select(h => h.Execution.RunTime.Date)
-                .Distinct()
-                .Select(d => new ListViewGroup(d.ToString(), d.ToString("d"))).ToArray());
-            foreach (var group in listHistory.Groups.Cast<ListViewGroup>())
+            listHistory.ShowGroups = !rbHistGroupNone.Checked;
+            var timeformat = rbHistGroupDate.Checked ? "T" : "G";
+            colTime.Text = rbHistGroupDate.Checked ? "Time" : "Date";
+            if (rbHistGroupDate.Checked)
+            {
+                listHistory.Groups.AddRange(history
+                    .OrderBy(h => h.Execution.RunTime)
+                    .Reverse()
+                    .Select(h => h.Execution.RunTime.Date)
+                    .Distinct()
+                    .Select(d => new ListViewGroup(d.ToString(), d.ToString("d"))).ToArray());
+                listHistory.Groups.Cast<ListViewGroup>().ToList()
+                    .ForEach(g => listHistory.Items.AddRange(history
+                       .Where(h => h.Execution.RunTime.Date.Equals(DateTime.Parse(g.Name)))
+                       .Select(h => h.GetListItem(g, timeformat)).ToArray()));
+            }
+            else if (rbHistGroupSolution.Checked)
+            {
+                listHistory.Groups.AddRange(history
+                    .OrderBy(h => h.Execution.Solution)
+                    .Select(h => new Tuple<Guid, string>(h.Execution.SolutionId, h.Execution.Solution))
+                    .Distinct()
+                    .Select(s => new ListViewGroup(s.Item1.ToString(), s.Item2)).ToArray());
+                listHistory.Groups.Cast<ListViewGroup>().ToList()
+                    .ForEach(g => listHistory.Items.AddRange(history
+                       .Where(h => h.Execution.SolutionId.Equals(Guid.Parse(g.Name)))
+                       .Select(h => h.GetListItem(g, timeformat)).ToArray()));
+            }
+            else if (rbHistGroupAPI.Checked)
+            {
+                listHistory.Groups.AddRange(history
+                    .OrderBy(h => h.Name)
+                    .Select(h => new Tuple<Guid, string>(h.CustomRequestId, h.Name))
+                    .Distinct()
+                    .Select(s => new ListViewGroup(s.Item1.ToString(), s.Item2)).ToArray());
+                listHistory.Groups.Cast<ListViewGroup>().ToList()
+                    .ForEach(g => listHistory.Items.AddRange(history
+                       .Where(h => h.CustomRequestId.Equals(Guid.Parse(g.Name)))
+                       .Select(h => h.GetListItem(g, timeformat)).ToArray()));
+            }
+            else
             {
                 listHistory.Items.AddRange(history
-                    .Where(h => h.Execution.RunTime.Date.Equals(DateTime.Parse(group.Name)))
-                    .Select(h => new ListViewItem(
-                        new string[] {
-                        h.Execution?.RunTime.ToString(timeformat),
-                        h.Name,
-                        h.Execution?.Duration.ToString(),
-                        h.Execution?.Environment,
-                        h.Execution?.Solution,
-                        },
-                        group
-                    )
-                    {
-                        Tag = h
-                    }).ToArray());
+                    .Select(h => h.GetListItem(null, timeformat)).ToArray());
             }
-            listHistory.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listHistory.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            if (rbHistGroupSolution.Checked)
+            {
+                listHistory.Columns[4].Width = 0;
+            }
+            if (rbHistGroupAPI.Checked)
+            {
+                listHistory.Columns[0].Width = 0;
+            }
+            EnableHistButtons();
         }
 
         private List<CATRequest> GetHistoryFromFile()
         {
-            if (!SettingsManager.Instance.TryLoad(typeof(CustomActionTester), out List<CATRequest> catreqshistory, catTool.Target + " History"))
+            if (!SettingsManager.Instance.TryLoad(typeof(CustomActionTester), out List<CATRequest> catreqshistory, "History"))
             {
                 catreqshistory = new List<CATRequest>();
             }
@@ -978,6 +1017,32 @@ namespace Rappen.XTB.CAT
                 .Where(l => l.Tag is CATRequest)
                 .Select(l => l.Tag as CATRequest)
                 .ToList();
+        }
+
+        private void DeleteHistories(List<CATRequest> deletehistories)
+        {
+            var history = GetHistoryFromList();
+            deletehistories.ForEach(d => history.Remove(d));
+            SaveHistoryToFile(history);
+            ShowHistory(history);
+        }
+
+        private void DeleteAllHistory()
+        {
+            if (MessageBox.Show("Confirm full deletion of the histories.", "Delete All", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) != DialogResult.OK)
+            {
+                return;
+            }
+            var history = new List<CATRequest>();
+            ShowHistory(history);
+            SaveHistoryToFile(history);
+        }
+
+        private void EnableHistButtons()
+        {
+            btnHistReload.Enabled = listHistory.SelectedItems.Count == 1;
+            btnHistDelete.Enabled = listHistory.SelectedItems.Count > 0;
+            btnHistDeleteAll.Enabled = listHistory.Items.Count > 0;
         }
 
         private void ReloadHistoryItem(CATRequest history)

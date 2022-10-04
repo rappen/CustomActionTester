@@ -40,6 +40,8 @@ namespace Rappen.XTB.CAT
             lblSelect.Text = $"{catTool.Target} Select";
             lblOutput.Text = $"{catTool.Target} Output";
             lblCustomWhat.Text = catTool.Target;
+            rbHistGroupAPI.Text = catTool.Target;
+            colAPI.Text = catTool.Target;
             btnManage.Visible = !string.IsNullOrWhiteSpace(catTool.ManagerTool)/* && PluginManagerExtended.Instance.Plugins.Any(p => p.Metadata.Name == catTool.ManagerTool)*/;
             RefreshLayout();
         }
@@ -99,6 +101,7 @@ namespace Rappen.XTB.CAT
         private void CustomActionTester_Load(object sender, EventArgs e)
         {
             LogUse("Load");
+            LoadAndShowHistoryIfNeeded();
         }
 
         private void gridOutputParams_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -114,12 +117,7 @@ namespace Rappen.XTB.CAT
         private void picHistory_Click(object sender, EventArgs e)
         {
             splitToolHistory.Panel2Collapsed = !splitToolHistory.Panel2Collapsed;
-            picHistoryOpen.Visible = splitToolHistory.Panel2Collapsed;
-            picHistoryClose.Visible = !splitToolHistory.Panel2Collapsed;
-            if (!splitToolHistory.Panel2Collapsed)
-            {
-                ShowHistory(GetHistoryFromFile());
-            }
+            LoadAndShowHistoryIfNeeded();
         }
 
         private void rbFormatResult_CheckedChanged(object sender, EventArgs e)
@@ -185,8 +183,7 @@ namespace Rappen.XTB.CAT
 
         private void listHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnHistReload.Enabled = listHistory.SelectedItems.Count > 0;
-            btnHistDelete.Enabled = listHistory.SelectedItems.Count > 0;
+            EnableHistButtons();
         }
 
         private void btnHistReload_Click(object sender, EventArgs e)
@@ -197,9 +194,21 @@ namespace Rappen.XTB.CAT
             }
         }
 
-        private void chkHistGroup_CheckedChanged(object sender, EventArgs e)
+        private void rbHistGroupX_CheckedChanged(object sender, EventArgs e)
         {
-            ShowHistory(GetHistoryFromList());
+            ShowHistory(GetHistoryFromFile());
+        }
+
+        private void btnHistDelete_Click(object sender, EventArgs e)
+        {
+            DeleteHistories(listHistory.SelectedItems.Cast<ListViewItem>()
+                .Where(i => i.Tag is CATRequest)
+                .Select(i => i.Tag as CATRequest).ToList());
+        }
+
+        private void btnHistDeleteAll_Click(object sender, EventArgs e)
+        {
+            DeleteAllHistory();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 using ParamType = Rappen.XTB.CAT.Customapirequestparameter.Type_OptionSet;
 
@@ -84,6 +85,25 @@ namespace Rappen.XTB.CAT
                            Value = ValueToString(p.Value)
                        }));
             }
+        }
+
+        public ListViewItem GetListItem(ListViewGroup group, string timeformat)
+        {
+            return new ListViewItem(
+                new string[] {
+                    Name,
+                    Execution?.RunTime.ToString(timeformat),
+                    Execution?.Duration.ToString(),
+                    Execution?.Environment,
+                    Execution?.Solution,
+                    Parameters.Count.ToString(),
+                    Responses.Count.ToString(),
+                },
+                group
+                )
+            {
+                Tag = this
+            };
         }
 
         public static ParamType? ValueToParamType(object value)

@@ -29,12 +29,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomActionTester));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "aaa",
+            "bbb",
+            "ccc",
+            "ddd",
+            "eee",
+            "fff"}, -1);
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStripMenu = new System.Windows.Forms.ToolStrip();
             this.btnExecute = new System.Windows.Forms.ToolStripButton();
             this.tslAbout = new System.Windows.Forms.ToolStripLabel();
@@ -82,6 +89,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panHistoryHeader = new System.Windows.Forms.Panel();
+            this.panHistoryOptions = new System.Windows.Forms.Panel();
+            this.rbHistGroupSolution = new System.Windows.Forms.RadioButton();
+            this.rbHistGroupDate = new System.Windows.Forms.RadioButton();
+            this.rbHistGroupNone = new System.Windows.Forms.RadioButton();
             this.picHistoryOpen = new System.Windows.Forms.PictureBox();
             this.picHistoryClose = new System.Windows.Forms.PictureBox();
             this.lblDetailHeader = new System.Windows.Forms.Label();
@@ -89,6 +100,8 @@
             this.lblSelect = new System.Windows.Forms.Label();
             this.splitRight = new System.Windows.Forms.SplitContainer();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.txtExecution = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -106,15 +119,19 @@
             this.panel9 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.listHistory = new System.Windows.Forms.ListView();
-            this.colTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colAPI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDuration = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colEnv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colSolution = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colParams = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colResults = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitToolHistory = new System.Windows.Forms.SplitContainer();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnHistReload = new System.Windows.Forms.Button();
             this.btnHistDelete = new System.Windows.Forms.Button();
+            this.btnHistReload = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.rbHistGroupAPI = new System.Windows.Forms.RadioButton();
             this.gridInputParams = new Rappen.XTB.Helpers.Controls.XRMDataGridView();
             this.dgInputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgInputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -129,16 +146,15 @@
             this.txtScope = new Rappen.XTB.Helpers.Controls.XRMColumnText();
             this.cmbCustomActions = new Rappen.XTB.Helpers.Controls.XRMColumnLookup();
             this.cmbSolution = new Rappen.XTB.Helpers.Controls.XRMColumnLookup();
-            this.txtCDSDataHelper = new Rappen.XTB.Helpers.Controls.XRMColumnText();
-            this.rhResult = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.gridOutputParams = new Rappen.XTB.Helpers.Controls.XRMDataGridView();
             this.dgOutputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgOutputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgOutputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgOutputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtCDSDataHelper = new Rappen.XTB.Helpers.Controls.XRMColumnText();
+            this.rhResult = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.rhCustomAction = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
-            this.panHistoryOptions = new System.Windows.Forms.Panel();
-            this.chkHistGroup = new System.Windows.Forms.CheckBox();
+            this.btnHistDeleteAll = new System.Windows.Forms.Button();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
             this.splitFullForm.Panel1.SuspendLayout();
@@ -162,6 +178,7 @@
             this.panInput.SuspendLayout();
             this.panSolution.SuspendLayout();
             this.panHistoryHeader.SuspendLayout();
+            this.panHistoryOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryOpen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryClose)).BeginInit();
             this.panel8.SuspendLayout();
@@ -170,6 +187,8 @@
             this.splitRight.Panel2.SuspendLayout();
             this.splitRight.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -182,7 +201,6 @@
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).BeginInit();
-            this.panHistoryOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenu
@@ -201,7 +219,7 @@
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
             this.toolStripMenu.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStripMenu.Size = new System.Drawing.Size(1045, 31);
+            this.toolStripMenu.Size = new System.Drawing.Size(886, 31);
             this.toolStripMenu.TabIndex = 4;
             this.toolStripMenu.Text = "toolStrip1";
             // 
@@ -319,8 +337,8 @@
             // splitFullForm.Panel2
             // 
             this.splitFullForm.Panel2.Controls.Add(this.splitRight);
-            this.splitFullForm.Size = new System.Drawing.Size(1045, 696);
-            this.splitFullForm.SplitterDistance = 603;
+            this.splitFullForm.Size = new System.Drawing.Size(886, 346);
+            this.splitFullForm.SplitterDistance = 510;
             this.splitFullForm.SplitterWidth = 8;
             this.splitFullForm.TabIndex = 15;
             // 
@@ -339,8 +357,8 @@
             this.splitLeft.Panel1.Controls.Add(this.panHistoryHeader);
             this.splitLeft.Panel1.Controls.Add(this.panel8);
             this.splitLeft.Panel2Collapsed = true;
-            this.splitLeft.Size = new System.Drawing.Size(603, 696);
-            this.splitLeft.SplitterDistance = 409;
+            this.splitLeft.Size = new System.Drawing.Size(510, 346);
+            this.splitLeft.SplitterDistance = 325;
             this.splitLeft.SplitterWidth = 8;
             this.splitLeft.TabIndex = 15;
             // 
@@ -353,7 +371,7 @@
             this.panCustomWhat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panCustomWhat.Location = new System.Drawing.Point(0, 179);
             this.panCustomWhat.Name = "panCustomWhat";
-            this.panCustomWhat.Size = new System.Drawing.Size(603, 482);
+            this.panCustomWhat.Size = new System.Drawing.Size(510, 132);
             this.panCustomWhat.TabIndex = 43;
             // 
             // panCAInputs
@@ -363,7 +381,7 @@
             this.panCAInputs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panCAInputs.Location = new System.Drawing.Point(0, 55);
             this.panCAInputs.Name = "panCAInputs";
-            this.panCAInputs.Size = new System.Drawing.Size(603, 390);
+            this.panCAInputs.Size = new System.Drawing.Size(510, 40);
             this.panCAInputs.TabIndex = 28;
             // 
             // panCAValue
@@ -372,9 +390,9 @@
             this.panCAValue.Controls.Add(this.panel7);
             this.panCAValue.Controls.Add(this.panel6);
             this.panCAValue.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panCAValue.Location = new System.Drawing.Point(0, 445);
+            this.panCAValue.Location = new System.Drawing.Point(0, 95);
             this.panCAValue.Name = "panCAValue";
-            this.panCAValue.Size = new System.Drawing.Size(603, 37);
+            this.panCAValue.Size = new System.Drawing.Size(510, 37);
             this.panCAValue.TabIndex = 29;
             // 
             // panCAValueParent
@@ -386,7 +404,7 @@
             this.panCAValueParent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panCAValueParent.Location = new System.Drawing.Point(110, 0);
             this.panCAValueParent.Name = "panCAValueParent";
-            this.panCAValueParent.Size = new System.Drawing.Size(339, 37);
+            this.panCAValueParent.Size = new System.Drawing.Size(246, 37);
             this.panCAValueParent.TabIndex = 2;
             // 
             // panEntity
@@ -397,7 +415,7 @@
             this.panEntity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panEntity.Location = new System.Drawing.Point(0, 0);
             this.panEntity.Name = "panEntity";
-            this.panEntity.Size = new System.Drawing.Size(339, 37);
+            this.panEntity.Size = new System.Drawing.Size(246, 37);
             this.panEntity.TabIndex = 19;
             this.panEntity.Visible = false;
             // 
@@ -417,7 +435,7 @@
             // btnLookup
             // 
             this.btnLookup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLookup.Location = new System.Drawing.Point(315, 7);
+            this.btnLookup.Location = new System.Drawing.Point(222, 7);
             this.btnLookup.Name = "btnLookup";
             this.btnLookup.Size = new System.Drawing.Size(24, 22);
             this.btnLookup.TabIndex = 4;
@@ -431,7 +449,7 @@
             this.panDateTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panDateTime.Location = new System.Drawing.Point(0, 0);
             this.panDateTime.Name = "panDateTime";
-            this.panDateTime.Size = new System.Drawing.Size(339, 37);
+            this.panDateTime.Size = new System.Drawing.Size(246, 37);
             this.panDateTime.TabIndex = 18;
             this.panDateTime.Visible = false;
             // 
@@ -450,7 +468,7 @@
             this.panBoolean.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panBoolean.Location = new System.Drawing.Point(0, 0);
             this.panBoolean.Name = "panBoolean";
-            this.panBoolean.Size = new System.Drawing.Size(339, 37);
+            this.panBoolean.Size = new System.Drawing.Size(246, 37);
             this.panBoolean.TabIndex = 17;
             this.panBoolean.Visible = false;
             // 
@@ -471,7 +489,7 @@
             this.panString.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panString.Location = new System.Drawing.Point(0, 0);
             this.panString.Name = "panString";
-            this.panString.Size = new System.Drawing.Size(339, 37);
+            this.panString.Size = new System.Drawing.Size(246, 37);
             this.panString.TabIndex = 16;
             this.panString.Visible = false;
             // 
@@ -481,7 +499,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtString.Location = new System.Drawing.Point(4, 8);
             this.txtString.Name = "txtString";
-            this.txtString.Size = new System.Drawing.Size(329, 20);
+            this.txtString.Size = new System.Drawing.Size(237, 20);
             this.txtString.TabIndex = 1;
             // 
             // panel7
@@ -489,7 +507,7 @@
             this.panel7.Controls.Add(this.btnCAValueClear);
             this.panel7.Controls.Add(this.btnCAValueSet);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(449, 0);
+            this.panel7.Location = new System.Drawing.Point(356, 0);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(154, 37);
             this.panel7.TabIndex = 1;
@@ -542,7 +560,7 @@
             this.panCARecord.Dock = System.Windows.Forms.DockStyle.Top;
             this.panCARecord.Location = new System.Drawing.Point(0, 25);
             this.panCARecord.Name = "panCARecord";
-            this.panCARecord.Size = new System.Drawing.Size(603, 30);
+            this.panCARecord.Size = new System.Drawing.Size(510, 30);
             this.panCARecord.TabIndex = 27;
             // 
             // label12
@@ -557,7 +575,7 @@
             // btnScopeRecord
             // 
             this.btnScopeRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScopeRecord.Location = new System.Drawing.Point(566, 7);
+            this.btnScopeRecord.Location = new System.Drawing.Point(473, 7);
             this.btnScopeRecord.Name = "btnScopeRecord";
             this.btnScopeRecord.Size = new System.Drawing.Size(24, 22);
             this.btnScopeRecord.TabIndex = 25;
@@ -572,7 +590,7 @@
             this.panCA.Dock = System.Windows.Forms.DockStyle.Top;
             this.panCA.Location = new System.Drawing.Point(0, 0);
             this.panCA.Name = "panCA";
-            this.panCA.Size = new System.Drawing.Size(603, 25);
+            this.panCA.Size = new System.Drawing.Size(510, 25);
             this.panCA.TabIndex = 26;
             // 
             // label4
@@ -590,7 +608,7 @@
             this.panInput.Dock = System.Windows.Forms.DockStyle.Top;
             this.panInput.Location = new System.Drawing.Point(0, 144);
             this.panInput.Name = "panInput";
-            this.panInput.Size = new System.Drawing.Size(603, 35);
+            this.panInput.Size = new System.Drawing.Size(510, 35);
             this.panInput.TabIndex = 44;
             // 
             // label2
@@ -616,7 +634,7 @@
             this.panSolution.Dock = System.Windows.Forms.DockStyle.Top;
             this.panSolution.Location = new System.Drawing.Point(0, 35);
             this.panSolution.Name = "panSolution";
-            this.panSolution.Size = new System.Drawing.Size(603, 109);
+            this.panSolution.Size = new System.Drawing.Size(510, 109);
             this.panSolution.TabIndex = 2;
             // 
             // lblCustomWhat
@@ -677,11 +695,60 @@
             this.panHistoryHeader.Controls.Add(this.picHistoryClose);
             this.panHistoryHeader.Controls.Add(this.lblDetailHeader);
             this.panHistoryHeader.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panHistoryHeader.Location = new System.Drawing.Point(0, 661);
+            this.panHistoryHeader.Location = new System.Drawing.Point(0, 311);
             this.panHistoryHeader.Name = "panHistoryHeader";
-            this.panHistoryHeader.Size = new System.Drawing.Size(603, 35);
+            this.panHistoryHeader.Size = new System.Drawing.Size(510, 35);
             this.panHistoryHeader.TabIndex = 39;
             this.panHistoryHeader.Click += new System.EventHandler(this.picHistory_Click);
+            // 
+            // panHistoryOptions
+            // 
+            this.panHistoryOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panHistoryOptions.Controls.Add(this.rbHistGroupAPI);
+            this.panHistoryOptions.Controls.Add(this.label3);
+            this.panHistoryOptions.Controls.Add(this.rbHistGroupSolution);
+            this.panHistoryOptions.Controls.Add(this.rbHistGroupDate);
+            this.panHistoryOptions.Controls.Add(this.rbHistGroupNone);
+            this.panHistoryOptions.Location = new System.Drawing.Point(138, 0);
+            this.panHistoryOptions.Name = "panHistoryOptions";
+            this.panHistoryOptions.Size = new System.Drawing.Size(369, 33);
+            this.panHistoryOptions.TabIndex = 49;
+            // 
+            // rbHistGroupSolution
+            // 
+            this.rbHistGroupSolution.AutoSize = true;
+            this.rbHistGroupSolution.Location = new System.Drawing.Point(179, 12);
+            this.rbHistGroupSolution.Name = "rbHistGroupSolution";
+            this.rbHistGroupSolution.Size = new System.Drawing.Size(63, 17);
+            this.rbHistGroupSolution.TabIndex = 2;
+            this.rbHistGroupSolution.Text = "Solution";
+            this.rbHistGroupSolution.UseVisualStyleBackColor = true;
+            this.rbHistGroupSolution.CheckedChanged += new System.EventHandler(this.rbHistGroupX_CheckedChanged);
+            // 
+            // rbHistGroupDate
+            // 
+            this.rbHistGroupDate.AutoSize = true;
+            this.rbHistGroupDate.Checked = true;
+            this.rbHistGroupDate.Location = new System.Drawing.Point(125, 12);
+            this.rbHistGroupDate.Name = "rbHistGroupDate";
+            this.rbHistGroupDate.Size = new System.Drawing.Size(48, 17);
+            this.rbHistGroupDate.TabIndex = 1;
+            this.rbHistGroupDate.TabStop = true;
+            this.rbHistGroupDate.Text = "Date";
+            this.rbHistGroupDate.UseVisualStyleBackColor = true;
+            this.rbHistGroupDate.CheckedChanged += new System.EventHandler(this.rbHistGroupX_CheckedChanged);
+            // 
+            // rbHistGroupNone
+            // 
+            this.rbHistGroupNone.AutoSize = true;
+            this.rbHistGroupNone.Location = new System.Drawing.Point(68, 12);
+            this.rbHistGroupNone.Name = "rbHistGroupNone";
+            this.rbHistGroupNone.Size = new System.Drawing.Size(51, 17);
+            this.rbHistGroupNone.TabIndex = 0;
+            this.rbHistGroupNone.Text = "None";
+            this.rbHistGroupNone.UseVisualStyleBackColor = true;
+            this.rbHistGroupNone.CheckedChanged += new System.EventHandler(this.rbHistGroupX_CheckedChanged);
             // 
             // picHistoryOpen
             // 
@@ -725,7 +792,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(603, 35);
+            this.panel8.Size = new System.Drawing.Size(510, 35);
             this.panel8.TabIndex = 42;
             // 
             // lblSelect
@@ -742,7 +809,6 @@
             // splitRight
             // 
             this.splitRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitRight.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitRight.Location = new System.Drawing.Point(0, 0);
             this.splitRight.Name = "splitRight";
             this.splitRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -755,30 +821,51 @@
             // splitRight.Panel2
             // 
             this.splitRight.Panel2.Controls.Add(this.panel3);
+            this.splitRight.Panel2.Controls.Add(this.panel1);
             this.splitRight.Panel2.Controls.Add(this.panel2);
             this.splitRight.Panel2.Controls.Add(this.panel9);
-            this.splitRight.Size = new System.Drawing.Size(434, 696);
-            this.splitRight.SplitterDistance = 429;
+            this.splitRight.Size = new System.Drawing.Size(368, 346);
+            this.splitRight.SplitterDistance = 190;
             this.splitRight.SplitterWidth = 8;
             this.splitRight.TabIndex = 1;
             // 
             // panel10
             // 
+            this.panel10.Controls.Add(this.panel12);
+            this.panel10.Controls.Add(this.panel11);
             this.panel10.Controls.Add(this.txtCDSDataHelper);
-            this.panel10.Controls.Add(this.label10);
-            this.panel10.Controls.Add(this.txtExecution);
-            this.panel10.Controls.Add(this.gridOutputParams);
-            this.panel10.Controls.Add(this.label6);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(0, 35);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(434, 394);
+            this.panel10.Size = new System.Drawing.Size(368, 155);
             this.panel10.TabIndex = 42;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.gridOutputParams);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(0, 61);
+            this.panel12.Name = "panel12";
+            this.panel12.Padding = new System.Windows.Forms.Padding(16, 0, 10, 0);
+            this.panel12.Size = new System.Drawing.Size(368, 94);
+            this.panel12.TabIndex = 21;
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.label10);
+            this.panel11.Controls.Add(this.txtExecution);
+            this.panel11.Controls.Add(this.label6);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(0, 0);
+            this.panel11.Margin = new System.Windows.Forms.Padding(2);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(368, 61);
+            this.panel11.TabIndex = 20;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(14, 20);
+            this.label10.Location = new System.Drawing.Point(13, 20);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(80, 13);
             this.label10.TabIndex = 17;
@@ -787,7 +874,7 @@
             // txtExecution
             // 
             this.txtExecution.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtExecution.Location = new System.Drawing.Point(115, 17);
+            this.txtExecution.Location = new System.Drawing.Point(113, 17);
             this.txtExecution.Name = "txtExecution";
             this.txtExecution.ReadOnly = true;
             this.txtExecution.Size = new System.Drawing.Size(100, 20);
@@ -796,7 +883,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 45);
+            this.label6.Location = new System.Drawing.Point(13, 43);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 16;
@@ -808,7 +895,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(434, 35);
+            this.panel4.Size = new System.Drawing.Size(368, 35);
             this.panel4.TabIndex = 41;
             // 
             // lblOutput
@@ -825,25 +912,23 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.txtResultDetail);
-            this.panel3.Controls.Add(this.panel1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 35);
+            this.panel3.Location = new System.Drawing.Point(0, 61);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(434, 189);
+            this.panel3.Padding = new System.Windows.Forms.Padding(16, 0, 10, 0);
+            this.panel3.Size = new System.Drawing.Size(368, 52);
             this.panel3.TabIndex = 46;
             // 
             // txtResultDetail
             // 
-            this.txtResultDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtResultDetail.BackColor = System.Drawing.SystemColors.Window;
             this.txtResultDetail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtResultDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtResultDetail.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtResultDetail.Location = new System.Drawing.Point(17, 36);
+            this.txtResultDetail.Location = new System.Drawing.Point(16, 0);
             this.txtResultDetail.Name = "txtResultDetail";
             this.txtResultDetail.ReadOnly = true;
-            this.txtResultDetail.Size = new System.Drawing.Size(410, 150);
+            this.txtResultDetail.Size = new System.Drawing.Size(342, 52);
             this.txtResultDetail.TabIndex = 0;
             this.txtResultDetail.Text = "";
             // 
@@ -852,15 +937,15 @@
             this.panel1.Controls.Add(this.lblResultDetailType);
             this.panel1.Controls.Add(this.panTextFormat);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 35);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(434, 38);
+            this.panel1.Size = new System.Drawing.Size(368, 26);
             this.panel1.TabIndex = 1;
             // 
             // lblResultDetailType
             // 
             this.lblResultDetailType.AutoSize = true;
-            this.lblResultDetailType.Location = new System.Drawing.Point(14, 15);
+            this.lblResultDetailType.Location = new System.Drawing.Point(14, 7);
             this.lblResultDetailType.Name = "lblResultDetailType";
             this.lblResultDetailType.Size = new System.Drawing.Size(31, 13);
             this.lblResultDetailType.TabIndex = 4;
@@ -872,16 +957,16 @@
             this.panTextFormat.Controls.Add(this.rbFormatXML);
             this.panTextFormat.Controls.Add(this.rbFormatJSON);
             this.panTextFormat.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panTextFormat.Location = new System.Drawing.Point(211, 0);
+            this.panTextFormat.Location = new System.Drawing.Point(145, 0);
             this.panTextFormat.Name = "panTextFormat";
-            this.panTextFormat.Size = new System.Drawing.Size(223, 38);
+            this.panTextFormat.Size = new System.Drawing.Size(223, 26);
             this.panTextFormat.TabIndex = 3;
             // 
             // rbFormatText
             // 
             this.rbFormatText.AutoSize = true;
             this.rbFormatText.Checked = true;
-            this.rbFormatText.Location = new System.Drawing.Point(3, 13);
+            this.rbFormatText.Location = new System.Drawing.Point(3, 5);
             this.rbFormatText.Name = "rbFormatText";
             this.rbFormatText.Size = new System.Drawing.Size(46, 17);
             this.rbFormatText.TabIndex = 0;
@@ -893,7 +978,7 @@
             // rbFormatXML
             // 
             this.rbFormatXML.AutoSize = true;
-            this.rbFormatXML.Location = new System.Drawing.Point(169, 13);
+            this.rbFormatXML.Location = new System.Drawing.Point(169, 5);
             this.rbFormatXML.Name = "rbFormatXML";
             this.rbFormatXML.Size = new System.Drawing.Size(47, 17);
             this.rbFormatXML.TabIndex = 2;
@@ -904,7 +989,7 @@
             // rbFormatJSON
             // 
             this.rbFormatJSON.AutoSize = true;
-            this.rbFormatJSON.Location = new System.Drawing.Point(81, 13);
+            this.rbFormatJSON.Location = new System.Drawing.Point(81, 5);
             this.rbFormatJSON.Name = "rbFormatJSON";
             this.rbFormatJSON.Size = new System.Drawing.Size(53, 17);
             this.rbFormatJSON.TabIndex = 1;
@@ -916,9 +1001,9 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 224);
+            this.panel2.Location = new System.Drawing.Point(0, 113);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(434, 35);
+            this.panel2.Size = new System.Drawing.Size(368, 35);
             this.panel2.TabIndex = 45;
             // 
             // panel9
@@ -927,7 +1012,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(434, 35);
+            this.panel9.Size = new System.Drawing.Size(368, 35);
             this.panel9.TabIndex = 44;
             // 
             // label8
@@ -944,42 +1029,63 @@
             // listHistory
             // 
             this.listHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colTime,
             this.colAPI,
+            this.colTime,
             this.colDuration,
             this.colEnv,
-            this.colSolution});
+            this.colSolution,
+            this.colParams,
+            this.colResults});
             this.listHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listHistory.FullRowSelect = true;
             this.listHistory.HideSelection = false;
+            listViewItem1.StateImageIndex = 0;
+            this.listHistory.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
             this.listHistory.Location = new System.Drawing.Point(0, 0);
-            this.listHistory.MultiSelect = false;
             this.listHistory.Name = "listHistory";
-            this.listHistory.Size = new System.Drawing.Size(932, 167);
+            this.listHistory.Size = new System.Drawing.Size(773, 195);
             this.listHistory.TabIndex = 42;
             this.listHistory.UseCompatibleStateImageBehavior = false;
             this.listHistory.View = System.Windows.Forms.View.Details;
             this.listHistory.SelectedIndexChanged += new System.EventHandler(this.listHistory_SelectedIndexChanged);
-            // 
-            // colTime
-            // 
-            this.colTime.Text = "Time";
+            this.listHistory.DoubleClick += new System.EventHandler(this.btnHistReload_Click);
             // 
             // colAPI
             // 
             this.colAPI.Text = "API";
             // 
+            // colTime
+            // 
+            this.colTime.Text = "Time";
+            // 
             // colDuration
             // 
+            this.colDuration.DisplayIndex = 3;
             this.colDuration.Text = "Duration (ms)";
             this.colDuration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // colEnv
             // 
+            this.colEnv.DisplayIndex = 6;
             this.colEnv.Text = "Environment";
             // 
             // colSolution
             // 
+            this.colSolution.DisplayIndex = 5;
             this.colSolution.Text = "Solution";
+            // 
+            // colParams
+            // 
+            this.colParams.DisplayIndex = 2;
+            this.colParams.Text = "Inputs";
+            this.colParams.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // colResults
+            // 
+            this.colResults.DisplayIndex = 4;
+            this.colResults.Text = "Outputs";
+            this.colResults.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // splitToolHistory
             // 
@@ -997,21 +1103,33 @@
             // 
             this.splitToolHistory.Panel2.Controls.Add(this.listHistory);
             this.splitToolHistory.Panel2.Controls.Add(this.panel5);
-            this.splitToolHistory.Panel2Collapsed = true;
-            this.splitToolHistory.Size = new System.Drawing.Size(1045, 696);
-            this.splitToolHistory.SplitterDistance = 521;
+            this.splitToolHistory.Size = new System.Drawing.Size(886, 549);
+            this.splitToolHistory.SplitterDistance = 346;
             this.splitToolHistory.SplitterWidth = 8;
             this.splitToolHistory.TabIndex = 16;
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnHistDeleteAll);
             this.panel5.Controls.Add(this.btnHistDelete);
             this.panel5.Controls.Add(this.btnHistReload);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(932, 0);
+            this.panel5.Location = new System.Drawing.Point(773, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(113, 167);
+            this.panel5.Size = new System.Drawing.Size(113, 195);
             this.panel5.TabIndex = 0;
+            // 
+            // btnHistDelete
+            // 
+            this.btnHistDelete.BackColor = System.Drawing.SystemColors.Window;
+            this.btnHistDelete.Enabled = false;
+            this.btnHistDelete.Location = new System.Drawing.Point(17, 43);
+            this.btnHistDelete.Name = "btnHistDelete";
+            this.btnHistDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnHistDelete.TabIndex = 1;
+            this.btnHistDelete.Text = "Delete";
+            this.btnHistDelete.UseVisualStyleBackColor = false;
+            this.btnHistDelete.Click += new System.EventHandler(this.btnHistDelete_Click);
             // 
             // btnHistReload
             // 
@@ -1025,16 +1143,24 @@
             this.btnHistReload.UseVisualStyleBackColor = false;
             this.btnHistReload.Click += new System.EventHandler(this.btnHistReload_Click);
             // 
-            // btnHistDelete
+            // label3
             // 
-            this.btnHistDelete.BackColor = System.Drawing.SystemColors.Window;
-            this.btnHistDelete.Enabled = false;
-            this.btnHistDelete.Location = new System.Drawing.Point(17, 43);
-            this.btnHistDelete.Name = "btnHistDelete";
-            this.btnHistDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnHistDelete.TabIndex = 1;
-            this.btnHistDelete.Text = "Delete";
-            this.btnHistDelete.UseVisualStyleBackColor = false;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Group by:";
+            // 
+            // rbHistGroupAPI
+            // 
+            this.rbHistGroupAPI.AutoSize = true;
+            this.rbHistGroupAPI.Location = new System.Drawing.Point(248, 12);
+            this.rbHistGroupAPI.Name = "rbHistGroupAPI";
+            this.rbHistGroupAPI.Size = new System.Drawing.Size(68, 17);
+            this.rbHistGroupAPI.TabIndex = 4;
+            this.rbHistGroupAPI.Text = "Custom x";
+            this.rbHistGroupAPI.UseVisualStyleBackColor = true;
             // 
             // gridInputParams
             // 
@@ -1049,14 +1175,14 @@
             this.gridInputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridInputParams.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridInputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridInputParams.ColumnHeadersHeight = 34;
             this.gridInputParams.ColumnOrder = "";
             this.gridInputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1066,28 +1192,28 @@
             this.dgInputsType,
             this.dgInputsSubtype,
             this.dgInputsValue});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridInputParams.FilterColumns = "";
             this.gridInputParams.Location = new System.Drawing.Point(114, 7);
             this.gridInputParams.MultiSelect = false;
             this.gridInputParams.Name = "gridInputParams";
             this.gridInputParams.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridInputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridInputParams.RowHeadersVisible = false;
             this.gridInputParams.RowHeadersWidth = 16;
             this.gridInputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -1095,7 +1221,7 @@
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(476, 379);
+            this.gridInputParams.Size = new System.Drawing.Size(383, 29);
             this.gridInputParams.TabIndex = 13;
             this.gridInputParams.RecordEnter += new Rappen.XTB.Helpers.Controls.XRMRecordEventHandler(this.gridInputParams_RecordEnter);
             // 
@@ -1166,7 +1292,7 @@
             this.txtRecord.Location = new System.Drawing.Point(123, 8);
             this.txtRecord.Name = "txtRecord";
             this.txtRecord.RecordHost = this.rhRecord;
-            this.txtRecord.Size = new System.Drawing.Size(186, 20);
+            this.txtRecord.Size = new System.Drawing.Size(101, 20);
             this.txtRecord.TabIndex = 2;
             // 
             // rhRecord
@@ -1186,7 +1312,7 @@
             this.txtScopeRecord.Location = new System.Drawing.Point(114, 7);
             this.txtScopeRecord.Name = "txtScopeRecord";
             this.txtScopeRecord.RecordHost = this.rhScopeRecord;
-            this.txtScopeRecord.Size = new System.Drawing.Size(446, 20);
+            this.txtScopeRecord.Size = new System.Drawing.Size(353, 20);
             this.txtScopeRecord.TabIndex = 24;
             // 
             // rhScopeRecord
@@ -1207,7 +1333,7 @@
             this.txtScope.Name = "txtScope";
             this.txtScope.ReadOnly = true;
             this.txtScope.RecordHost = null;
-            this.txtScope.Size = new System.Drawing.Size(476, 20);
+            this.txtScope.Size = new System.Drawing.Size(383, 20);
             this.txtScope.TabIndex = 12;
             // 
             // cmbCustomActions
@@ -1223,7 +1349,7 @@
             this.cmbCustomActions.Name = "cmbCustomActions";
             this.cmbCustomActions.RecordHost = null;
             this.cmbCustomActions.Service = null;
-            this.cmbCustomActions.Size = new System.Drawing.Size(476, 21);
+            this.cmbCustomActions.Size = new System.Drawing.Size(383, 21);
             this.cmbCustomActions.TabIndex = 5;
             this.cmbCustomActions.SelectionChangeCommitted += new System.EventHandler(this.cmbCustomActions_SelectionChangeCommitted);
             // 
@@ -1240,28 +1366,9 @@
             this.cmbSolution.Name = "cmbSolution";
             this.cmbSolution.RecordHost = null;
             this.cmbSolution.Service = null;
-            this.cmbSolution.Size = new System.Drawing.Size(476, 21);
+            this.cmbSolution.Size = new System.Drawing.Size(383, 21);
             this.cmbSolution.TabIndex = 7;
             this.cmbSolution.SelectionChangeCommitted += new System.EventHandler(this.cmbSolution_SelectionChangeCommitted);
-            // 
-            // txtCDSDataHelper
-            // 
-            this.txtCDSDataHelper.BackColor = System.Drawing.SystemColors.Window;
-            this.txtCDSDataHelper.Column = null;
-            this.txtCDSDataHelper.DisplayFormat = "";
-            this.txtCDSDataHelper.Location = new System.Drawing.Point(292, 17);
-            this.txtCDSDataHelper.Name = "txtCDSDataHelper";
-            this.txtCDSDataHelper.RecordHost = this.rhResult;
-            this.txtCDSDataHelper.Size = new System.Drawing.Size(100, 20);
-            this.txtCDSDataHelper.TabIndex = 19;
-            this.txtCDSDataHelper.Visible = false;
-            // 
-            // rhResult
-            // 
-            this.rhResult.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.rhResult.LogicalName = null;
-            this.rhResult.Record = null;
-            this.rhResult.Service = null;
             // 
             // gridOutputParams
             // 
@@ -1269,21 +1376,18 @@
             this.gridOutputParams.AllowUserToDeleteRows = false;
             this.gridOutputParams.AllowUserToOrderColumns = true;
             this.gridOutputParams.AllowUserToResizeRows = false;
-            this.gridOutputParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridOutputParams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridOutputParams.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridOutputParams.BackgroundColor = System.Drawing.SystemColors.Window;
             this.gridOutputParams.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.gridOutputParams.ColumnHeadersHeight = 34;
             this.gridOutputParams.ColumnOrder = "";
             this.gridOutputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1291,28 +1395,29 @@
             this.dgOutputsName,
             this.dgOutputsType,
             this.dgOutputsValue});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridOutputParams.DefaultCellStyle = dataGridViewCellStyle5;
+            this.gridOutputParams.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridOutputParams.FilterColumns = "";
-            this.gridOutputParams.Location = new System.Drawing.Point(17, 61);
+            this.gridOutputParams.Location = new System.Drawing.Point(16, 0);
             this.gridOutputParams.MultiSelect = false;
             this.gridOutputParams.Name = "gridOutputParams";
             this.gridOutputParams.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridOutputParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gridOutputParams.RowHeadersVisible = false;
             this.gridOutputParams.RowHeadersWidth = 16;
             this.gridOutputParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -1320,7 +1425,7 @@
             this.gridOutputParams.ShowEditingIcon = false;
             this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(410, 330);
+            this.gridOutputParams.Size = new System.Drawing.Size(342, 94);
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
             // 
@@ -1362,6 +1467,25 @@
             this.dgOutputsValue.ReadOnly = true;
             this.dgOutputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // txtCDSDataHelper
+            // 
+            this.txtCDSDataHelper.BackColor = System.Drawing.SystemColors.Window;
+            this.txtCDSDataHelper.Column = null;
+            this.txtCDSDataHelper.DisplayFormat = "";
+            this.txtCDSDataHelper.Location = new System.Drawing.Point(292, 17);
+            this.txtCDSDataHelper.Name = "txtCDSDataHelper";
+            this.txtCDSDataHelper.RecordHost = this.rhResult;
+            this.txtCDSDataHelper.Size = new System.Drawing.Size(100, 20);
+            this.txtCDSDataHelper.TabIndex = 19;
+            this.txtCDSDataHelper.Visible = false;
+            // 
+            // rhResult
+            // 
+            this.rhResult.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.rhResult.LogicalName = null;
+            this.rhResult.Record = null;
+            this.rhResult.Service = null;
+            // 
             // rhCustomAction
             // 
             this.rhCustomAction.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
@@ -1369,24 +1493,17 @@
             this.rhCustomAction.Record = null;
             this.rhCustomAction.Service = null;
             // 
-            // panHistoryOptions
+            // btnHistDeleteAll
             // 
-            this.panHistoryOptions.Controls.Add(this.chkHistGroup);
-            this.panHistoryOptions.Location = new System.Drawing.Point(138, 0);
-            this.panHistoryOptions.Name = "panHistoryOptions";
-            this.panHistoryOptions.Size = new System.Drawing.Size(428, 33);
-            this.panHistoryOptions.TabIndex = 49;
-            // 
-            // chkHistGroup
-            // 
-            this.chkHistGroup.AutoSize = true;
-            this.chkHistGroup.Location = new System.Drawing.Point(27, 10);
-            this.chkHistGroup.Name = "chkHistGroup";
-            this.chkHistGroup.Size = new System.Drawing.Size(96, 17);
-            this.chkHistGroup.TabIndex = 0;
-            this.chkHistGroup.Text = "Group By Date";
-            this.chkHistGroup.UseVisualStyleBackColor = true;
-            this.chkHistGroup.CheckedChanged += new System.EventHandler(this.chkHistGroup_CheckedChanged);
+            this.btnHistDeleteAll.BackColor = System.Drawing.SystemColors.Window;
+            this.btnHistDeleteAll.Enabled = false;
+            this.btnHistDeleteAll.Location = new System.Drawing.Point(17, 72);
+            this.btnHistDeleteAll.Name = "btnHistDeleteAll";
+            this.btnHistDeleteAll.Size = new System.Drawing.Size(75, 23);
+            this.btnHistDeleteAll.TabIndex = 2;
+            this.btnHistDeleteAll.Text = "Delete All";
+            this.btnHistDeleteAll.UseVisualStyleBackColor = false;
+            this.btnHistDeleteAll.Click += new System.EventHandler(this.btnHistDeleteAll_Click);
             // 
             // CustomActionTester
             // 
@@ -1397,7 +1514,7 @@
             this.Controls.Add(this.toolStripMenu);
             this.Name = "CustomActionTester";
             this.PluginIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PluginIcon")));
-            this.Size = new System.Drawing.Size(1045, 727);
+            this.Size = new System.Drawing.Size(886, 580);
             this.TabIcon = ((System.Drawing.Image)(resources.GetObject("$this.TabIcon")));
             this.Load += new System.EventHandler(this.CustomActionTester_Load);
             this.toolStripMenu.ResumeLayout(false);
@@ -1434,6 +1551,8 @@
             this.panSolution.PerformLayout();
             this.panHistoryHeader.ResumeLayout(false);
             this.panHistoryHeader.PerformLayout();
+            this.panHistoryOptions.ResumeLayout(false);
+            this.panHistoryOptions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryOpen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryClose)).EndInit();
             this.panel8.ResumeLayout(false);
@@ -1444,6 +1563,9 @@
             this.splitRight.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -1460,8 +1582,6 @@
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).EndInit();
-            this.panHistoryOptions.ResumeLayout(false);
-            this.panHistoryOptions.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1571,6 +1691,15 @@
         private System.Windows.Forms.Button btnHistReload;
         private System.Windows.Forms.Button btnHistDelete;
         private System.Windows.Forms.Panel panHistoryOptions;
-        private System.Windows.Forms.CheckBox chkHistGroup;
+        private System.Windows.Forms.ColumnHeader colParams;
+        private System.Windows.Forms.ColumnHeader colResults;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.RadioButton rbHistGroupDate;
+        private System.Windows.Forms.RadioButton rbHistGroupNone;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.RadioButton rbHistGroupSolution;
+        private System.Windows.Forms.RadioButton rbHistGroupAPI;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnHistDeleteAll;
     }
 }
