@@ -13,8 +13,10 @@ namespace Rappen.XTB.CAT
         private OrganizationRequest request;
         private OrganizationResponse response;
 
+        public Organization Organization { get; set; }
+        public SolutionInfo Solution { get; set; }
         public ExecutionInfo Execution { get; set; }
-        public Guid CustomRequestId { get; set; }
+        public string UniqueName { get; set; }
         public string Name { get; set; }
         public EntityReference Target { get; set; }
         public List<CATParameter> Parameters { get; set; }
@@ -29,14 +31,14 @@ namespace Rappen.XTB.CAT
             Request = request;
         }
 
-        public override string ToString() => Execution?.RunTime.ToString("HH:mm:ss") + " " + Name;
+        public override string ToString() => Execution?.RunTime.ToString("HH:mm:ss") + " " + UniqueName;
 
         [XmlIgnore]
         public OrganizationRequest Request
         {
             get
             {
-                var request = new OrganizationRequest(Name);
+                var request = new OrganizationRequest(UniqueName);
                 if (Target != null)
                 {
                     request["Target"] = Target;
@@ -47,7 +49,7 @@ namespace Rappen.XTB.CAT
             private set
             {
                 request = value;
-                Name = request.RequestName;
+                UniqueName = request.RequestName;
                 Parameters = new List<CATParameter>();
                 if (request.Parameters != null)
                 {
@@ -87,17 +89,18 @@ namespace Rappen.XTB.CAT
             }
         }
 
-        public ListViewItem GetListItem(ListViewGroup group, string timeformat)
+        public ListViewItem GetListItem(ListViewGroup group, string timeformat, bool friendly)
         {
             return new ListViewItem(
                 new string[] {
-                    Name,
+                    friendly ? Name : UniqueName,
                     Execution?.RunTime.ToString(timeformat),
                     Execution?.Duration.ToString(),
-                    Execution?.Environment,
-                    Execution?.Solution,
-                    Parameters.Count.ToString(),
-                    Responses.Count.ToString(),
+                    friendly ? Organization?.Name : Organization?.WebAddress,
+                    friendly ? Solution?.Name : Solution?.Unique,
+                    Parameters?.Count.ToString(),
+                    Responses?.Count.ToString(),
+                    Execution?.ErrorMessage
                 },
                 group
                 )
@@ -202,16 +205,25 @@ namespace Rappen.XTB.CAT
         }
     }
 
+    public class Organization
+    {
+        public string ConnectionName { get; set; }
+        public string Unique { get; set; }
+        public string Name { get; set; }
+        public string WebAddress { get; set; }
+    }
+
+    public class SolutionInfo
+    {
+        public string Unique { get; set; }
+        public string Name { get; set; }
+    }
+
     public class ExecutionInfo
     {
         public DateTime RunTime { get; set; } = DateTime.Now;
         public long Duration { get; set; }
-        public string Environment { get; set; }
-        public bool ManagedSolutions { get; set; }
-        public string Solution { get; set; }
-        public Guid SolutionId { get; set; }
         public string ErrorMessage { get; set; }
-        public object Result { get; set; }
     }
 
     public class CATParameter

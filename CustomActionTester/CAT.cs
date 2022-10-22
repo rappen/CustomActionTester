@@ -65,13 +65,48 @@ namespace Rappen.XTB.CAT
             gridOutputParams.Service = newService;
             if (newService != null)
             {
-                GetSolutions(rbSolManaged.Checked);
+                GetSolutions(GetSolutionType());
             }
         }
 
         #endregion Public Methods
 
         #region Private Methods
+
+        private SolutionType GetSolutionType()
+        {
+            if (rbSolUnmanaged.Checked)
+            {
+                return SolutionType.Unmanaged;
+            }
+            if (rbSolManaged.Checked)
+            {
+                return SolutionType.Managed;
+            }
+            return SolutionType.All;
+        }
+
+        private void SetSolutionType(SolutionType type)
+        {
+            switch (type)
+            {
+                case SolutionType.Unmanaged:
+                    rbSolUnmanaged.Checked = true;
+                    break;
+
+                case SolutionType.Managed:
+                    rbSolManaged.Checked = true;
+                    break;
+
+                default:
+                    rbSolAll.Checked = true;
+                    break;
+            }
+        }
+
+        #endregion Private Methods
+
+        #region Private Methods Events
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
@@ -85,7 +120,7 @@ namespace Rappen.XTB.CAT
 
         private void rbSolFilter_CheckedChanged(object sender, EventArgs e)
         {
-            GetSolutions(rbSolManaged.Checked);
+            GetSolutions(GetSolutionType());
         }
 
         private void cmbCustomActions_SelectionChangeCommitted(object sender, EventArgs e)
@@ -101,17 +136,13 @@ namespace Rappen.XTB.CAT
         private void CustomActionTester_Load(object sender, EventArgs e)
         {
             LogUse("Load");
+            GetHistoryFromFile();
             LoadAndShowHistoryIfNeeded();
         }
 
         private void gridOutputParams_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             FormatResultDetail();
-        }
-
-        private void llCallHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/rappen/CustomActionTester/issues/3");
         }
 
         private void picHistory_Click(object sender, EventArgs e)
@@ -129,8 +160,6 @@ namespace Rappen.XTB.CAT
         {
             ShowAboutDialog();
         }
-
-        #endregion Private Methods
 
         private void btnScopeRecord_Click(object sender, EventArgs e)
         {
@@ -196,7 +225,7 @@ namespace Rappen.XTB.CAT
 
         private void rbHistGroupX_CheckedChanged(object sender, EventArgs e)
         {
-            ShowHistory(GetHistoryFromFile());
+            ShowHistory();
         }
 
         private void btnHistDelete_Click(object sender, EventArgs e)
@@ -208,7 +237,11 @@ namespace Rappen.XTB.CAT
 
         private void btnHistDeleteAll_Click(object sender, EventArgs e)
         {
-            DeleteAllHistory();
+            DeleteHistories(listHistory.Items.Cast<ListViewItem>()
+                .Where(i => i.Tag is CATRequest)
+                .Select(i => i.Tag as CATRequest).ToList());
         }
+
+        #endregion Private Methods Events
     }
 }

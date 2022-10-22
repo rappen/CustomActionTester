@@ -1,5 +1,4 @@
-﻿using Microsoft.Crm.Sdk.Messages;
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Newtonsoft.Json.Linq;
@@ -8,11 +7,11 @@ using Rappen.XTB.Helpers.ControlItems;
 using Rappen.XTB.Helpers.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.ServiceModel.Channels;
 using System.Windows.Forms;
 using System.Xml;
 using XrmToolBox.Extensibility;
@@ -34,7 +33,6 @@ namespace Rappen.XTB.CAT
 
         private EntityMetadataProxy[] entities;
         private Guid InArgumentId = Guid.Empty;
-        private CATRequest historyrequest;
         private bool _uiupdated;
 
         #endregion Private Fields
@@ -44,6 +42,10 @@ namespace Rappen.XTB.CAT
         public string RepositoryName => "CustomActionTester";
 
         public string UserName => "rappen";
+
+        public string SelectedSolutionUnique => cmbSolution.SelectedRecord?.TryGetAttributeValue("uniquename", out string unique) == true ? unique : string.Empty;
+
+        public string SelectedCustomUnique => cmbCustomActions.SelectedRecord?.TryGetAttributeValue(catTool.Columns.APIUniqueName, out string unique) == true ? unique : string.Empty;
 
         #endregion Public Properties
 
@@ -56,7 +58,7 @@ namespace Rappen.XTB.CAT
                 InArgumentId = argid;
                 if (cmbSolution.DataSource != null)
                 {
-                    SelectDefaultSolution();
+                    SelectCmbByStringAttribute(cmbSolution, "uniquename", "Default");
                     GetCustomActions(cmbSolution.SelectedRecord);
                 }
             }
@@ -122,6 +124,7 @@ namespace Rappen.XTB.CAT
             ClearOutputParamValues();
             var request = GetRequest();
             var catreq = new CATRequest(request);
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = $"Executing {catTool.Target}",
@@ -135,6 +138,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = true;
                     if (args.Error != null)
                     {
                         catreq.Execution.ErrorMessage = args.Error.Message;
@@ -249,24 +253,25 @@ namespace Rappen.XTB.CAT
             return entity.Trim();
         }
 
-        private void GetCustomActions(Entity solution) => GetCustomActions(solution?.Id ?? Guid.Empty);
+        private void GetCustomActions(Entity solution) => GetCustomActions(solution?.TryGetAttributeValue("uniquename", out string unique) == true ? unique : string.Empty);
 
-        private void GetCustomActions(Guid solutionid, Action<int> nextstep = null, int nextstepnum = 0)
+        private void GetCustomActions(string solutionunique, Action<int> nextstep = null, int nextstepnum = 0)
         {
             if (_uiupdated)
             {
                 return;
             }
             _uiupdated = true;
-            cmbSolution.SetSelected(solutionid);
+            SelectCmbByStringAttribute(cmbSolution, "uniquename", solutionunique);
             _uiupdated = false;
+            var solutionid = cmbSolution.SelectedRecord?.Id ?? Guid.Empty;
             cmbCustomActions.DataSource = null;
             var qx = catTool.GetActionQuery(solutionid);
             if (qx == null)
             {
                 return;
             }
-
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = $"Getting {catTool.Target}s",
@@ -276,6 +281,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = nextstep == null;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection actions)
                     {
@@ -312,7 +318,7 @@ namespace Rappen.XTB.CAT
                 return;
             }
             var qx = catTool.GetInputQuery(caid);
-
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Loading Input Parameters",
@@ -322,6 +328,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = nextstep == null;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection inputs)
                     {
@@ -385,7 +392,7 @@ namespace Rappen.XTB.CAT
                 return;
             }
             var qx = catTool.GetOutputQuery(caid);
-
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Loading Output Parameters",
@@ -395,6 +402,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = true;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection outputs)
                     {
@@ -424,26 +432,29 @@ namespace Rappen.XTB.CAT
             return CATRequest.ValueToString(result);
         }
 
-        private void GetSolutions(bool managed, Action<int> nextstep = null, int nextstepnum = 0)
+        private void GetSolutions(SolutionType type, Action<int> nextstep = null, int nextstepnum = 0)
         {
             if (_uiupdated)
             {
                 return;
             }
-            if (managed != rbSolManaged.Checked)
+            if (type != GetSolutionType())
             {
                 _uiupdated = true;
-                rbSolManaged.Checked = managed;
-                rbSolUnmanaged.Checked = !managed;
+                SetSolutionType(type);
                 _uiupdated = false;
             }
             var qx = new QueryExpression(Solution.EntityName);
             qx.Distinct = true;
             qx.ColumnSet.AddColumns(Solution.PrimaryKey, Solution.PrimaryName, Solution.UniqueName, Solution.Version);
             qx.AddOrder(Solution.PrimaryName, OrderType.Ascending);
-            qx.Criteria.AddCondition(Solution.Ismanaged, ConditionOperator.Equal, managed);
+            if (type != SolutionType.All)
+            {
+                qx.Criteria.AddCondition(Solution.Ismanaged, ConditionOperator.Equal, type == SolutionType.Managed);
+            }
             qx.Criteria.AddCondition(Solution.Isvisible, ConditionOperator.Equal, true);
             catTool.AddSolutionFilter(qx);
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Getting Solutions",
@@ -453,13 +464,14 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = nextstep == null;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection solutions)
                     {
                         cmbSolution.DataSource = solutions;
                         if (!InArgumentId.Equals(Guid.Empty))
                         {
-                            SelectDefaultSolution();
+                            SelectCmbByStringAttribute(cmbSolution, "uniquename", "Default");
                         }
                         GetCustomActions(cmbSolution.SelectedRecord);
                         nextstep?.Invoke(nextstepnum);
@@ -468,13 +480,13 @@ namespace Rappen.XTB.CAT
             });
         }
 
-        private void SelectDefaultSolution()
+        private void SelectCmbByStringAttribute(ComboBox cmb, string attribute, string unique)
         {
-            cmbSolution.SelectedItem = cmbSolution.Items
+            cmb.SelectedItem = cmb.Items
                 .OfType<EntityItem>()
                 .FirstOrDefault(e =>
-                    e.Entity.TryGetAttributeValue<string>(Solution.UniqueName, out string uniquename) &&
-                    uniquename.Equals("Default"));
+                    e.Entity.TryGetAttributeValue<string>(attribute, out string value) &&
+                    value.Equals(unique));
         }
 
         private void HandleAIResult(string result)
@@ -487,6 +499,7 @@ namespace Rappen.XTB.CAT
 
         private void LoadEntities()
         {
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Loading entities...",
@@ -496,6 +509,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = true;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is RetrieveMetadataChangesResponse resp)
                     {
@@ -688,6 +702,7 @@ namespace Rappen.XTB.CAT
             dgOutputsName.DataPropertyName = unique ? catTool.Columns.ParamUniqueName : catTool.Columns.ParamName;
             gridInputParams.Refresh();
             gridOutputParams.Refresh();
+            ShowHistory();
         }
 
         private static ParamType? GetType(Entity input)
@@ -904,235 +919,6 @@ namespace Rappen.XTB.CAT
             return true;
         }
 
-        private void LoadAndShowHistoryIfNeeded()
-        {
-            picHistoryOpen.Visible = splitToolHistory.Panel2Collapsed;
-            picHistoryClose.Visible = !splitToolHistory.Panel2Collapsed;
-            panHistoryOptions.Visible = !splitToolHistory.Panel2Collapsed;
-            if (!splitToolHistory.Panel2Collapsed)
-            {
-                ShowHistory(GetHistoryFromFile());
-            }
-        }
-
-        private void AddHistoryToList(CATRequest catreq)
-        {
-            if (catreq.Execution == null)
-            {
-                catreq.Execution = new ExecutionInfo();
-            }
-            catreq.Execution.Environment = ConnectionDetail.ConnectionName;
-            if (cmbSolution.SelectedRecord?.TryGetAttributeValue<string>("friendlyname", out string solution) == true)
-            {
-                catreq.Execution.SolutionId = cmbSolution.SelectedRecord.Id;
-                catreq.Execution.Solution = solution;
-            }
-            catreq.CustomRequestId = cmbCustomActions.SelectedRecord?.Id ?? Guid.Empty;
-            var catreqshistory = GetHistoryFromFile();
-            catreqshistory.Insert(0, catreq);
-            SaveHistoryToFile(catreqshistory);
-            ShowHistory(catreqshistory);
-        }
-
-        private void SaveHistoryToFile(List<CATRequest> history)
-        {
-            SettingsManager.Instance.Save(typeof(CustomActionTester), history, "History");
-        }
-
-        private void ShowHistory(List<CATRequest> history)
-        {
-            listHistory.Items.Clear();
-            listHistory.Groups.Clear();
-            listHistory.ShowGroups = !rbHistGroupNone.Checked;
-            var timeformat = rbHistGroupDate.Checked ? "T" : "G";
-            colTime.Text = rbHistGroupDate.Checked ? "Time" : "Date";
-            if (rbHistGroupDate.Checked)
-            {
-                listHistory.Groups.AddRange(history
-                    .OrderBy(h => h.Execution.RunTime)
-                    .Reverse()
-                    .Select(h => h.Execution.RunTime.Date)
-                    .Distinct()
-                    .Select(d => new ListViewGroup(d.ToString(), d.ToString("d"))).ToArray());
-                listHistory.Groups.Cast<ListViewGroup>().ToList()
-                    .ForEach(g => listHistory.Items.AddRange(history
-                       .Where(h => h.Execution.RunTime.Date.Equals(DateTime.Parse(g.Name)))
-                       .Select(h => h.GetListItem(g, timeformat)).ToArray()));
-            }
-            else if (rbHistGroupSolution.Checked)
-            {
-                listHistory.Groups.AddRange(history
-                    .OrderBy(h => h.Execution.Solution)
-                    .Select(h => new Tuple<Guid, string>(h.Execution.SolutionId, h.Execution.Solution))
-                    .Distinct()
-                    .Select(s => new ListViewGroup(s.Item1.ToString(), s.Item2)).ToArray());
-                listHistory.Groups.Cast<ListViewGroup>().ToList()
-                    .ForEach(g => listHistory.Items.AddRange(history
-                       .Where(h => h.Execution.SolutionId.Equals(Guid.Parse(g.Name)))
-                       .Select(h => h.GetListItem(g, timeformat)).ToArray()));
-            }
-            else if (rbHistGroupAPI.Checked)
-            {
-                listHistory.Groups.AddRange(history
-                    .OrderBy(h => h.Name)
-                    .Select(h => new Tuple<Guid, string>(h.CustomRequestId, h.Name))
-                    .Distinct()
-                    .Select(s => new ListViewGroup(s.Item1.ToString(), s.Item2)).ToArray());
-                listHistory.Groups.Cast<ListViewGroup>().ToList()
-                    .ForEach(g => listHistory.Items.AddRange(history
-                       .Where(h => h.CustomRequestId.Equals(Guid.Parse(g.Name)))
-                       .Select(h => h.GetListItem(g, timeformat)).ToArray()));
-            }
-            else
-            {
-                listHistory.Items.AddRange(history
-                    .Select(h => h.GetListItem(null, timeformat)).ToArray());
-            }
-            listHistory.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            if (rbHistGroupSolution.Checked)
-            {
-                listHistory.Columns[4].Width = 0;
-            }
-            if (rbHistGroupAPI.Checked)
-            {
-                listHistory.Columns[0].Width = 0;
-            }
-            EnableHistButtons();
-        }
-
-        private List<CATRequest> GetHistoryFromFile()
-        {
-            if (!SettingsManager.Instance.TryLoad(typeof(CustomActionTester), out List<CATRequest> catreqshistory, "History"))
-            {
-                catreqshistory = new List<CATRequest>();
-            }
-            catreqshistory = catreqshistory.OrderBy(req => req.Execution?.RunTime).Reverse().ToList();
-
-            return catreqshistory;
-        }
-
-        private List<CATRequest> GetHistoryFromList()
-        {
-            return listHistory.Items.Cast<ListViewItem>()
-                .Where(l => l.Tag is CATRequest)
-                .Select(l => l.Tag as CATRequest)
-                .ToList();
-        }
-
-        private void DeleteHistories(List<CATRequest> deletehistories)
-        {
-            var history = GetHistoryFromList();
-            deletehistories.ForEach(d => history.Remove(d));
-            SaveHistoryToFile(history);
-            ShowHistory(history);
-        }
-
-        private void DeleteAllHistory()
-        {
-            if (MessageBox.Show("Confirm full deletion of the histories.", "Delete All", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) != DialogResult.OK)
-            {
-                return;
-            }
-            var history = new List<CATRequest>();
-            ShowHistory(history);
-            SaveHistoryToFile(history);
-        }
-
-        private void EnableHistButtons()
-        {
-            btnHistReload.Enabled = listHistory.SelectedItems.Count == 1;
-            btnHistDelete.Enabled = listHistory.SelectedItems.Count > 0;
-            btnHistDeleteAll.Enabled = listHistory.Items.Count > 0;
-        }
-
-        private void ReloadHistoryItem(CATRequest history)
-        {
-            historyrequest = history;
-            ReloadHistoryItem(0);
-        }
-
-        private void ReloadHistoryItem(int nextstepnum)
-        {
-            switch (nextstepnum)
-            {
-                case 0:
-                    if (rbSolManaged.Checked == historyrequest.Execution.ManagedSolutions)
-                    {
-                        ReloadHistoryItem(++nextstepnum);
-                    }
-                    else
-                    {
-                        GetSolutions(historyrequest.Execution.ManagedSolutions, ReloadHistoryItem, ++nextstepnum);
-                    }
-                    break;
-
-                case 1:
-                    if (cmbSolution.SelectedRecord?.Id == historyrequest.Execution.SolutionId)
-                    {
-                        ReloadHistoryItem(++nextstepnum);
-                    }
-                    else
-                    {
-                        GetCustomActions(historyrequest.Execution.SolutionId, ReloadHistoryItem, ++nextstepnum);
-                    }
-                    break;
-
-                case 2:
-                    if (cmbCustomActions.SelectedRecord?.Id != historyrequest.CustomRequestId)
-                    {
-                        cmbCustomActions.SetSelected(historyrequest.CustomRequestId);
-                    }
-                    ReloadHistoryItem(++nextstepnum);
-                    break;
-
-                case 3:
-                    GetInputParams(historyrequest.CustomRequestId, ReloadHistoryItem, ++nextstepnum);
-                    break;
-
-                case 4:
-                    SetInputParametersValues(historyrequest.Parameters);
-                    break;
-            }
-        }
-
-        private void SetInputParametersValues(List<CATParameter> parameters)
-        {
-            var inputs = gridInputParams.GetDataSource<IEnumerable<Entity>>();
-            if (inputs == null)
-            {
-                return;
-            }
-            foreach (var param in parameters)
-            {
-                var input = inputs.FirstOrDefault(i => i.TryGetAttributeValue(catTool.Columns.ParamUniqueName, out string name) && name == param.Name);
-                if (input == null)
-                {
-                    continue;
-                }
-                switch (param.Type)
-                {
-                    case ParamType.Entity:
-                        var entity = param.RawValue as Entity;
-                        entity = Service.Retrieve(entity.LogicalName, entity.Id, new ColumnSet(true));
-                        input["rawvalue"] = entity;
-                        input["value"] = GetEntityPrimaryName(entity);
-                        break;
-
-                    case ParamType.EntityReference:
-                        var entityref = param.RawValue as EntityReference;
-                        entity = Service.Retrieve(entityref.LogicalName, entityref.Id, new ColumnSet(true));
-                        input["value"] = GetEntityPrimaryName(entity);
-                        break;
-
-                    default:
-                        input["rawvalue"] = param.RawValue;
-                        input["value"] = param.Value;
-                        break;
-                }
-                RefreshInputParameters(input);
-            }
-        }
-
         private string GetEntityPrimaryName(Entity entity)
         {
             if (entities.FirstOrDefault(e => e.Metadata.LogicalName == entity.LogicalName) is EntityMetadataProxy proxy &&
@@ -1147,5 +933,12 @@ namespace Rappen.XTB.CAT
         }
 
         #endregion Private Methods
+    }
+
+    public enum SolutionType
+    {
+        Unmanaged,
+        Managed,
+        All
     }
 }

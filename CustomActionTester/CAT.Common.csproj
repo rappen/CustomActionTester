@@ -198,6 +198,9 @@
     <Compile Include="CAT.designer.cs">
       <DependentUpon>CAT.cs</DependentUpon>
     </Compile>
+    <Compile Include="CATHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="CATRequest.cs" />
     <Compile Include="CustomAPI.Const.cs" />
     <Compile Include="EntityMetadataProxy.cs" />
