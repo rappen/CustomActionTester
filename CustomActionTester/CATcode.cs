@@ -7,11 +7,11 @@ using Rappen.XTB.Helpers.ControlItems;
 using Rappen.XTB.Helpers.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.ServiceModel.Channels;
 using System.Windows.Forms;
 using System.Xml;
 using XrmToolBox.Extensibility;
@@ -33,6 +33,7 @@ namespace Rappen.XTB.CAT
 
         private EntityMetadataProxy[] entities;
         private Guid InArgumentId = Guid.Empty;
+        private bool _uiupdated;
 
         #endregion Private Fields
 
@@ -41,6 +42,10 @@ namespace Rappen.XTB.CAT
         public string RepositoryName => "CustomActionTester";
 
         public string UserName => "rappen";
+
+        public string SelectedSolutionUnique => cmbSolution.SelectedRecord?.TryGetAttributeValue("uniquename", out string unique) == true ? unique : string.Empty;
+
+        public string SelectedCustomUnique => cmbCustomActions.SelectedRecord?.TryGetAttributeValue(catTool.Columns.APIUniqueName, out string unique) == true ? unique : string.Empty;
 
         #endregion Public Properties
 
@@ -53,7 +58,7 @@ namespace Rappen.XTB.CAT
                 InArgumentId = argid;
                 if (cmbSolution.DataSource != null)
                 {
-                    SelectDefaultSolution();
+                    SelectCmbByStringAttribute(cmbSolution, "uniquename", "Default");
                     GetCustomActions(cmbSolution.SelectedRecord);
                 }
             }
@@ -106,64 +111,6 @@ namespace Rappen.XTB.CAT
 
         #region Private Methods
 
-        public static string ValueToString(object value, bool attributetypes, bool convertqueries, bool expandcollections, IOrganizationService service, int indent = 1)
-        {
-            var indentstring = new string(' ', indent * 2);
-            if (value == null)
-            {
-                return $"{indentstring}<null>";
-            }
-            else if (value is string[] strings)
-            {
-                return $"[\n{indentstring}\"" + string.Join($"\",\n{indentstring}\"", strings) + "\"\n]";
-            }
-            else if (value is EntityCollection collection)
-            {
-                var result = $"{collection.EntityName} collection\n  Records: {collection.Entities.Count}\n  TotalRecordCount: {collection.TotalRecordCount}\n  MoreRecords: {collection.MoreRecords}\n  PagingCookie: {collection.PagingCookie}";
-                if (expandcollections)
-                {
-                    result += $"\n{indentstring}  {string.Join($"\n{indentstring}", collection.Entities.Select(e => ValueToString(e, attributetypes, convertqueries, expandcollections, service, indent + 1)))}";
-                }
-                return result;
-            }
-            else if (value is Entity entity)
-            {
-                var keylen = entity.Attributes.Count > 0 ? entity.Attributes.Max(p => p.Key.Length) : 50;
-                return $"{entity.LogicalName} {entity.Id}\n{indentstring}" + string.Join($"\n{indentstring}", entity.Attributes.OrderBy(a => a.Key).Select(a => $"{a.Key}{new string(' ', keylen - a.Key.Length)} = {ValueToString(a.Value, attributetypes, convertqueries, expandcollections, service, indent + 1)}"));
-            }
-            else if (value is ColumnSet columnset)
-            {
-                var columnlist = new List<string>(columnset.Columns);
-                columnlist.Sort();
-                return $"\n{indentstring}" + string.Join($"\n{indentstring}", columnlist);
-            }
-            else if (value is FetchExpression fetchexpression)
-            {
-                return $"{value}\n{indentstring}{fetchexpression.Query}";
-            }
-            else
-            {
-                var result = string.Empty;
-                if (value is EntityReference entityreference)
-                {
-                    result = $"{entityreference.LogicalName} {entityreference.Id} {entityreference.Name}";
-                }
-                else if (value is OptionSetValue optionsetvalue)
-                {
-                    result = optionsetvalue.Value.ToString();
-                }
-                else if (value is Money money)
-                {
-                    result = money.Value.ToString();
-                }
-                else
-                {
-                    result = value.ToString().Replace("\n", $"\n  {indentstring}");
-                }
-                return result + (attributetypes ? $" \t({value.GetType()})" : "");
-            }
-        }
-
         private void ClearOutputParamValues()
         {
             var outputs = gridOutputParams.DataSource as IEnumerable<Entity>;
@@ -176,6 +123,8 @@ namespace Rappen.XTB.CAT
             txtExecution.Text = string.Empty;
             ClearOutputParamValues();
             var request = GetRequest();
+            var catreq = new CATRequest(request);
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = $"Executing {catTool.Target}",
@@ -184,18 +133,26 @@ namespace Rappen.XTB.CAT
                     var sw = Stopwatch.StartNew();
                     var result = Service.Execute(request);
                     sw.Stop();
+                    catreq.Execution.Duration = sw.ElapsedMilliseconds;
                     args.Result = new Tuple<OrganizationResponse, long>(result, sw.ElapsedMilliseconds);
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    ShowErrorDialog(args.Error);
-                    if (args.Error == null && args.Result is Tuple<OrganizationResponse, long> response)
+                    Enabled = true;
+                    if (args.Error != null)
+                    {
+                        catreq.Execution.ErrorMessage = args.Error.Message;
+                        ShowErrorDialog(args.Error);
+                    }
+                    else if (args.Result is Tuple<OrganizationResponse, long> response)
                     {
                         txtExecution.Text = $"{response.Item2} ms";
                         btnPTV.Enabled = true;
+                        catreq.Response = response.Item1;
                         var outputparams = response.Item1.Results;
                         PopulateOutputParamValues(outputparams);
                     }
+                    AddHistoryToList(catreq);
                 }
             });
         }
@@ -296,15 +253,25 @@ namespace Rappen.XTB.CAT
             return entity.Trim();
         }
 
-        private void GetCustomActions(Entity solution)
+        private void GetCustomActions(Entity solution) => GetCustomActions(solution?.TryGetAttributeValue("uniquename", out string unique) == true ? unique : string.Empty);
+
+        private void GetCustomActions(string solutionunique, Action<int> nextstep = null, int nextstepnum = 0)
         {
+            if (_uiupdated)
+            {
+                return;
+            }
+            _uiupdated = true;
+            SelectCmbByStringAttribute(cmbSolution, "uniquename", solutionunique);
+            _uiupdated = false;
+            var solutionid = cmbSolution.SelectedRecord?.Id ?? Guid.Empty;
             cmbCustomActions.DataSource = null;
-            var qx = catTool.GetActionQuery(solution?.Id ?? Guid.Empty);
+            var qx = catTool.GetActionQuery(solutionid);
             if (qx == null)
             {
                 return;
             }
-
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = $"Getting {catTool.Target}s",
@@ -314,6 +281,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = nextstep == null;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection actions)
                     {
@@ -323,6 +291,7 @@ namespace Rappen.XTB.CAT
                             SelectActionByInArgumentId();
                         }
                         SetCustomAction(cmbCustomActions.SelectedRecord);
+                        nextstep?.Invoke(nextstepnum);
                     }
                 }
             });
@@ -340,16 +309,16 @@ namespace Rappen.XTB.CAT
             }
         }
 
-        private void GetInputParams(Entity ca)
+        private void GetInputParams(Guid caid, Action<int> nextstep = null, int nextstepnum = 0)
         {
-            if (ca == null)
+            if (caid.Equals(Guid.Empty))
             {
                 gridInputParams.DataSource = null;
                 gridOutputParams.DataSource = null;
                 return;
             }
-            var qx = catTool.GetInputQuery(ca.Id);
-
+            var qx = catTool.GetInputQuery(caid);
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Loading Input Parameters",
@@ -359,6 +328,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = nextstep == null;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection inputs)
                     {
@@ -366,7 +336,8 @@ namespace Rappen.XTB.CAT
                         gridInputParams.DataSource = inputs;
                         gridInputParams.AutoResizeColumns();
                         btnExecute.Enabled = ReadyToExecute();
-                        GetOutputParams(ca);
+                        GetOutputParams(caid);
+                        nextstep?.Invoke(nextstepnum);
                     }
                 }
             });
@@ -396,6 +367,11 @@ namespace Rappen.XTB.CAT
                     return;
                 }
             }
+            RefreshInputParameters(input);
+        }
+
+        private void RefreshInputParameters(Entity input)
+        {
             SuspendLayout();
             gridInputParams.Refresh();
             gridInputParams.AutoResizeColumns();
@@ -408,15 +384,15 @@ namespace Rappen.XTB.CAT
             btnExecute.Enabled = ReadyToExecute();
         }
 
-        private void GetOutputParams(Entity ca)
+        private void GetOutputParams(Guid caid)
         {
-            if (ca == null)
+            if (caid.Equals(Guid.Empty))
             {
                 gridOutputParams.DataSource = null;
                 return;
             }
-            var qx = catTool.GetOutputQuery(ca.Id);
-
+            var qx = catTool.GetOutputQuery(caid);
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Loading Output Parameters",
@@ -426,6 +402,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = true;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection outputs)
                     {
@@ -446,24 +423,38 @@ namespace Rappen.XTB.CAT
                 txtResultDetail.Text = string.Empty;
                 return null;
             }
-            lblResultDetailType.Text = result.GetType().ToString();
+            lblResultDetailType.Text = CATRequest.ValueToParamType(result)?.ToString();
             if (result is string)
             {
                 panTextFormat.Visible = true;
                 return result;
             }
-            return ValueToString(result, false, false, true, Service);
+            return CATRequest.ValueToString(result);
         }
 
-        private void GetSolutions(bool managed)
+        private void GetSolutions(SolutionType type, Action<int> nextstep = null, int nextstepnum = 0)
         {
+            if (_uiupdated)
+            {
+                return;
+            }
+            if (type != GetSolutionType())
+            {
+                _uiupdated = true;
+                SetSolutionType(type);
+                _uiupdated = false;
+            }
             var qx = new QueryExpression(Solution.EntityName);
             qx.Distinct = true;
             qx.ColumnSet.AddColumns(Solution.PrimaryKey, Solution.PrimaryName, Solution.UniqueName, Solution.Version);
             qx.AddOrder(Solution.PrimaryName, OrderType.Ascending);
-            qx.Criteria.AddCondition(Solution.Ismanaged, ConditionOperator.Equal, managed);
+            if (type != SolutionType.All)
+            {
+                qx.Criteria.AddCondition(Solution.Ismanaged, ConditionOperator.Equal, type == SolutionType.Managed);
+            }
             qx.Criteria.AddCondition(Solution.Isvisible, ConditionOperator.Equal, true);
             catTool.AddSolutionFilter(qx);
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Getting Solutions",
@@ -473,27 +464,29 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = nextstep == null;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection solutions)
                     {
                         cmbSolution.DataSource = solutions;
                         if (!InArgumentId.Equals(Guid.Empty))
                         {
-                            SelectDefaultSolution();
+                            SelectCmbByStringAttribute(cmbSolution, "uniquename", "Default");
                         }
                         GetCustomActions(cmbSolution.SelectedRecord);
+                        nextstep?.Invoke(nextstepnum);
                     }
                 }
             });
         }
 
-        private void SelectDefaultSolution()
+        private void SelectCmbByStringAttribute(ComboBox cmb, string attribute, string unique)
         {
-            cmbSolution.SelectedItem = cmbSolution.Items
+            cmb.SelectedItem = cmb.Items
                 .OfType<EntityItem>()
                 .FirstOrDefault(e =>
-                    e.Entity.TryGetAttributeValue<string>(Solution.UniqueName, out string uniquename) &&
-                    uniquename.Equals("Default"));
+                    e.Entity.TryGetAttributeValue<string>(attribute, out string value) &&
+                    value.Equals(unique));
         }
 
         private void HandleAIResult(string result)
@@ -506,6 +499,7 @@ namespace Rappen.XTB.CAT
 
         private void LoadEntities()
         {
+            Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
                 Message = "Loading entities...",
@@ -515,6 +509,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
+                    Enabled = true;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is RetrieveMetadataChangesResponse resp)
                     {
@@ -689,7 +684,7 @@ namespace Rappen.XTB.CAT
             var bindingtype = catTool.BindingType(ca);
             panCARecord.Visible = bindingtype != Customapi.BindingType_OptionSet.Global;
             txtExecution.Text = string.Empty;
-            GetInputParams(ca);
+            GetInputParams(ca.Id);
         }
 
         private void TraceLastExecution()
@@ -707,21 +702,18 @@ namespace Rappen.XTB.CAT
             dgOutputsName.DataPropertyName = unique ? catTool.Columns.ParamUniqueName : catTool.Columns.ParamName;
             gridInputParams.Refresh();
             gridOutputParams.Refresh();
+            ShowHistory();
         }
 
         private static ParamType? GetType(Entity input)
         {
             if (input.TryGetAttributeValue("type", out string typestr))
             {
-                typestr = typestr
-                    .Replace("OptionSetValue", "Picklist")
-                    .Replace("Int32", "Integer")
-                    .Replace("Int64", "Integer")
-                    .Replace("Double", "Float");
-                if (Enum.TryParse(typestr, out ParamType type))
+                try
                 {
-                    return type;
+                    return CATRequest.StringToParamType(typestr);
                 }
+                catch { }
             }
             if (input.TryGetAttributeValue("type", out OptionSetValue typeosv))
             {
@@ -927,6 +919,26 @@ namespace Rappen.XTB.CAT
             return true;
         }
 
+        private string GetEntityPrimaryName(Entity entity)
+        {
+            if (entities.FirstOrDefault(e => e.Metadata.LogicalName == entity.LogicalName) is EntityMetadataProxy proxy &&
+                         entity.TryGetAttributeValue(proxy.Metadata.PrimaryNameAttribute, out string entityname))
+            {
+                return entityname;
+            }
+            else
+            {
+                return entity.Id.ToString();
+            }
+        }
+
         #endregion Private Methods
+    }
+
+    public enum SolutionType
+    {
+        Unmanaged,
+        Managed,
+        All
     }
 }

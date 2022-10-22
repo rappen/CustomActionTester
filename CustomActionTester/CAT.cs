@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
@@ -36,8 +37,11 @@ namespace Rappen.XTB.CAT
             TabIcon = catTool.Logo16;
             PluginIcon = catTool.Icon16;
             tslAbout.Image = catTool.Logo24;
-            gbCustomWhat.Text = catTool.Target;
+            lblSelect.Text = $"{catTool.Target} Select";
+            lblOutput.Text = $"{catTool.Target} Output";
             lblCustomWhat.Text = catTool.Target;
+            rbHistGroupAPI.Text = catTool.Target;
+            colAPI.Text = catTool.Target;
             btnManage.Visible = !string.IsNullOrWhiteSpace(catTool.ManagerTool)/* && PluginManagerExtended.Instance.Plugins.Any(p => p.Metadata.Name == catTool.ManagerTool)*/;
             RefreshLayout();
         }
@@ -61,13 +65,48 @@ namespace Rappen.XTB.CAT
             gridOutputParams.Service = newService;
             if (newService != null)
             {
-                GetSolutions(rbSolManaged.Checked);
+                GetSolutions(GetSolutionType());
             }
         }
 
         #endregion Public Methods
 
         #region Private Methods
+
+        private SolutionType GetSolutionType()
+        {
+            if (rbSolUnmanaged.Checked)
+            {
+                return SolutionType.Unmanaged;
+            }
+            if (rbSolManaged.Checked)
+            {
+                return SolutionType.Managed;
+            }
+            return SolutionType.All;
+        }
+
+        private void SetSolutionType(SolutionType type)
+        {
+            switch (type)
+            {
+                case SolutionType.Unmanaged:
+                    rbSolUnmanaged.Checked = true;
+                    break;
+
+                case SolutionType.Managed:
+                    rbSolManaged.Checked = true;
+                    break;
+
+                default:
+                    rbSolAll.Checked = true;
+                    break;
+            }
+        }
+
+        #endregion Private Methods
+
+        #region Private Methods Events
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
@@ -81,7 +120,7 @@ namespace Rappen.XTB.CAT
 
         private void rbSolFilter_CheckedChanged(object sender, EventArgs e)
         {
-            GetSolutions(rbSolManaged.Checked);
+            GetSolutions(GetSolutionType());
         }
 
         private void cmbCustomActions_SelectionChangeCommitted(object sender, EventArgs e)
@@ -97,6 +136,8 @@ namespace Rappen.XTB.CAT
         private void CustomActionTester_Load(object sender, EventArgs e)
         {
             LogUse("Load");
+            GetHistoryFromFile();
+            LoadAndShowHistoryIfNeeded();
         }
 
         private void gridOutputParams_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -104,16 +145,10 @@ namespace Rappen.XTB.CAT
             FormatResultDetail();
         }
 
-        private void llCallHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://github.com/rappen/CustomActionTester/issues/3");
-        }
-
         private void picHistory_Click(object sender, EventArgs e)
         {
-            splitRight.Panel2Collapsed = sender == picHistoryClose;
-            picHistoryOpen.Visible = splitRight.Panel2Collapsed;
-            picHistoryClose.Left = picHistoryClose.Parent.Width - 19;
+            splitToolHistory.Panel2Collapsed = !splitToolHistory.Panel2Collapsed;
+            LoadAndShowHistoryIfNeeded();
         }
 
         private void rbFormatResult_CheckedChanged(object sender, EventArgs e)
@@ -125,8 +160,6 @@ namespace Rappen.XTB.CAT
         {
             ShowAboutDialog();
         }
-
-        #endregion Private Methods
 
         private void btnScopeRecord_Click(object sender, EventArgs e)
         {
@@ -176,5 +209,39 @@ namespace Rappen.XTB.CAT
         {
             ManageAction(cmbCustomActions.SelectedRecord);
         }
+
+        private void listHistory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EnableHistButtons();
+        }
+
+        private void btnHistReload_Click(object sender, EventArgs e)
+        {
+            if (listHistory.SelectedItems.Cast<ListViewItem>().FirstOrDefault()?.Tag is CATRequest request)
+            {
+                ReloadHistoryItem(request);
+            }
+        }
+
+        private void rbHistGroupX_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowHistory();
+        }
+
+        private void btnHistDelete_Click(object sender, EventArgs e)
+        {
+            DeleteHistories(listHistory.SelectedItems.Cast<ListViewItem>()
+                .Where(i => i.Tag is CATRequest)
+                .Select(i => i.Tag as CATRequest).ToList());
+        }
+
+        private void btnHistDeleteAll_Click(object sender, EventArgs e)
+        {
+            DeleteHistories(listHistory.Items.Cast<ListViewItem>()
+                .Where(i => i.Tag is CATRequest)
+                .Select(i => i.Tag as CATRequest).ToList());
+        }
+
+        #endregion Private Methods Events
     }
 }
