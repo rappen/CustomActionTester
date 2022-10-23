@@ -1,29 +1,34 @@
 <?xml version="1.0"?>
-<package >
-  <metadata>
-    <id>Rappen.XrmToolBox.CustomActionTester</id>
-    <version>1.0.0</version>
-    <title>Custom Action Tester for XrmToolBox</title>
-    <authors>Jonas Rapp</authors>
-    <owners>rappen</owners>
-    <projectUrl>https://github.com/rappen/CustomActionTester</projectUrl>
-    <iconUrl>https://jonasr.app/wp-content/uploads/CAT-150-tsp.png</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Browse Custom Actions, enter input parameters, execute the action, investigate output parameters.</description>
-    <summary>Browse Custom Actions, enter input parameters, execute the action, investigate output parameters.</summary>
-    <releaseNotes>
-      Fixed bug with different value types for parameters #21
-      
-      Full release notes:
-      https://github.com/rappen/CustomActionTester/releases/tag/$buildnumber$
-    </releaseNotes>
-    <copyright>Copyright 2020-2021 Jonas Rapp</copyright>
-    <tags>XrmToolBox Plugins CustomActionTester</tags>
-    <dependencies>
-      <dependency id="XrmToolBox" version="1.2020.12.43" />
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="bin\Release\Rappen.XTB.CAT.dll" target="lib\net452\Plugins" />
-  </files>
+<package>
+	<metadata>
+		<id>Rappen.XrmToolBox.CustomActionTester</id>
+		<version>1.0.0</version>
+		<title>Custom Action Tester for XrmToolBox</title>
+		<authors>Jonas Rapp</authors>
+		<owners>rappen</owners>
+		<projectUrl>https://github.com/rappen/CustomActionTester</projectUrl>
+		<iconUrl>https://jonasr.app/wp-content/uploads/CAT-150-tsp.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Browse Custom Actions, enter input parameters, execute the action, investigate output parameters.</description>
+		<summary>Browse Custom Actions, enter input parameters, execute the action, investigate output parameters.</summary>
+		<releaseNotes>
+			New feature:
+			* History! *
+			Easy to re-load tests you have run before.
+			Great too see what you have done.
+
+			And a few improvements.
+
+			Full release notes:
+			https://github.com/rappen/CustomActionTester/releases/tag/$buildnumber$
+		</releaseNotes>
+		<copyright>Copyright 2020-2022 Jonas Rapp</copyright>
+		<tags>XrmToolBox Plugins CustomActionTester</tags>
+		<dependencies>
+			<dependency id="XrmToolBox" version="1.2022.9.57" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin\Release\Rappen.XTB.CAT.dll" target="lib\net452\Plugins" />
+	</files>
 </package>
