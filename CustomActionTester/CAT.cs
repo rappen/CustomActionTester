@@ -1,7 +1,6 @@
 ﻿using McTools.Xrm.Connection;
 using Microsoft.Xrm.Sdk;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;

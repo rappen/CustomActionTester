@@ -1,10 +1,8 @@
-﻿using Microsoft.Xrm.Sdk.Query;
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
 
@@ -15,7 +13,7 @@ namespace Rappen.XTB.CAT
     public partial class CustomActionTester
     {
         private List<CATRequest> histories;
-        private CATRequest historyrequest;
+        private CATRequest reloadhistoryrequest;
 
         private void LoadAndShowHistoryIfNeeded()
         {
@@ -40,11 +38,11 @@ namespace Rappen.XTB.CAT
             {
                 catreq.Solution = new SolutionInfo
                 {
-                    Unique = solution.TryGetAttributeValue<string>("uniquename", out string solunique) == true ? solunique : null,
-                    Name = solution.TryGetAttributeValue<string>("friendlyname", out string solname) == true ? solname : null
+                    Unique = solution.TryGetAttributeValue("uniquename", out string solunique) ? solunique : null,
+                    Name = solution.TryGetAttributeValue("friendlyname", out string solname) ? solname : null
                 };
             }
-            catreq.Name = cmbCustomActions.SelectedRecord?.TryGetAttributeValue<string>(catTool.Columns.APIName, out string caname) == true ? caname : null;
+            catreq.Name = cmbCustomActions.SelectedRecord?.TryGetAttributeValue(catTool.Columns.APIName, out string caname) == true ? caname : null;
             histories.Insert(0, catreq);
             SaveHistoryToFile();
             ShowHistory();
@@ -176,7 +174,7 @@ namespace Rappen.XTB.CAT
 
         private void ReloadHistoryItem(CATRequest history)
         {
-            historyrequest = history;
+            reloadhistoryrequest = history;
             ReloadHistoryItem(0);
         }
 
@@ -196,18 +194,18 @@ namespace Rappen.XTB.CAT
                     break;
 
                 case 1:     // Select currect Solution, load Custon Actions
-                    if (SelectedSolutionUnique == historyrequest.Solution?.Unique)
+                    if (SelectedSolutionUnique == reloadhistoryrequest.Solution?.Unique)
                     {
                         ReloadHistoryItem(++nextstepnum);
                     }
                     else
                     {
-                        GetCustomActions(historyrequest.Solution?.Unique, ReloadHistoryItem, ++nextstepnum);
+                        GetCustomActions(reloadhistoryrequest.Solution?.Unique, ReloadHistoryItem, ++nextstepnum);
                     }
                     break;
 
                 case 2:
-                    if (SelectedSolutionUnique != historyrequest.Solution?.Unique)
+                    if (SelectedSolutionUnique != reloadhistoryrequest.Solution?.Unique)
                     {
                         GetCustomActions("Default", ReloadHistoryItem, ++nextstepnum);
                     }
@@ -218,16 +216,16 @@ namespace Rappen.XTB.CAT
                     break;
 
                 case 3:
-                    if (SelectedCustomUnique != historyrequest.UniqueName)
+                    if (SelectedCustomUnique != reloadhistoryrequest.UniqueName)
                     {
-                        SelectCmbByStringAttribute(cmbCustomActions, catTool.Columns.APIUniqueName, historyrequest.UniqueName);
+                        SelectCmbByStringAttribute(cmbCustomActions, catTool.Columns.APIUniqueName, reloadhistoryrequest.UniqueName);
                         SetCustomAction(cmbCustomActions.SelectedRecord);
                     }
                     ReloadHistoryItem(++nextstepnum);
                     break;
 
                 case 4:
-                    if (SelectedCustomUnique != historyrequest.UniqueName)
+                    if (SelectedCustomUnique != reloadhistoryrequest.UniqueName)
                     {
                         Enabled = true;
                         MessageBox.Show($"Can't find the {catTool.Target}.", "Reload", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -237,7 +235,8 @@ namespace Rappen.XTB.CAT
                     break;
 
                 case 5:
-                    SetInputParametersValues(historyrequest.Parameters);
+                    SetInputParametersValues(reloadhistoryrequest.Parameters);
+                    LogUse("Reload");
                     Enabled = true;
                     break;
             }

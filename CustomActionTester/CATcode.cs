@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.ServiceModel.Channels;
 using System.Windows.Forms;
 using System.Xml;
 using XrmToolBox.Extensibility;
@@ -146,6 +145,7 @@ namespace Rappen.XTB.CAT
                     }
                     else if (args.Result is Tuple<OrganizationResponse, long> response)
                     {
+                        LogUse("Execute", duration: response.Item2);
                         txtExecution.Text = $"{response.Item2} ms";
                         btnPTV.Enabled = true;
                         catreq.Response = response.Item1;
