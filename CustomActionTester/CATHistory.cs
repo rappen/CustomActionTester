@@ -207,6 +207,17 @@ namespace Rappen.XTB.CAT
                     break;
 
                 case 2:
+                    if (SelectedSolutionUnique != historyrequest.Solution?.Unique)
+                    {
+                        GetCustomActions("Default", ReloadHistoryItem, ++nextstepnum);
+                    }
+                    else
+                    {
+                        ReloadHistoryItem(++nextstepnum);
+                    }
+                    break;
+
+                case 3:
                     if (SelectedCustomUnique != historyrequest.UniqueName)
                     {
                         SelectCmbByStringAttribute(cmbCustomActions, catTool.Columns.APIUniqueName, historyrequest.UniqueName);
@@ -215,11 +226,17 @@ namespace Rappen.XTB.CAT
                     ReloadHistoryItem(++nextstepnum);
                     break;
 
-                case 3:
+                case 4:
+                    if (SelectedCustomUnique != historyrequest.UniqueName)
+                    {
+                        Enabled = true;
+                        MessageBox.Show($"Can't find the {catTool.Target}.", "Reload", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
                     GetInputParams(cmbCustomActions.SelectedRecord?.Id ?? Guid.Empty, ReloadHistoryItem, ++nextstepnum);
                     break;
 
-                case 4:
+                case 5:
                     SetInputParametersValues(historyrequest.Parameters);
                     Enabled = true;
                     break;

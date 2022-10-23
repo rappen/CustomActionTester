@@ -281,7 +281,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    Enabled = nextstep == null;
+                    Enabled = nextstep == null || args.Error != null;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection actions)
                     {
@@ -315,6 +315,7 @@ namespace Rappen.XTB.CAT
             {
                 gridInputParams.DataSource = null;
                 gridOutputParams.DataSource = null;
+                nextstep?.Invoke(nextstepnum);
                 return;
             }
             var qx = catTool.GetInputQuery(caid);
@@ -328,7 +329,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    Enabled = nextstep == null;
+                    Enabled = nextstep == null || args.Error != null;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection inputs)
                     {
@@ -464,7 +465,7 @@ namespace Rappen.XTB.CAT
                 },
                 PostWorkCallBack = (args) =>
                 {
-                    Enabled = nextstep == null;
+                    Enabled = nextstep == null || args.Error != null;
                     ShowErrorDialog(args.Error);
                     if (args.Error == null && args.Result is EntityCollection solutions)
                     {
