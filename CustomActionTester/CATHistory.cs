@@ -89,7 +89,7 @@ namespace Rappen.XTB.CAT
                     .OrderBy(h => h.Solution?.Name)
                     .Select(h => new Tuple<string, string>(h.Solution?.Unique, h.Solution?.Name))
                     .Distinct()
-                    .Select(s => new ListViewGroup(s.Item1.ToString(), s.Item2)).ToArray());
+                    .Select(s => new ListViewGroup(s.Item1, s.Item2)).ToArray());
                 listHistory.Groups.Cast<ListViewGroup>().ToList()
                     .ForEach(g => listHistory.Items.AddRange(showinghistories
                        .Where(h => h.Solution?.Unique == g.Name)
@@ -101,7 +101,7 @@ namespace Rappen.XTB.CAT
                     .OrderBy(h => h.Name)
                     .Select(h => new Tuple<string, string>(h.UniqueName, h.Name))
                     .Distinct()
-                    .Select(s => new ListViewGroup(s.Item1.ToString(), s.Item2)).ToArray());
+                    .Select(s => new ListViewGroup(s.Item1, s.Item2)).ToArray());
                 listHistory.Groups.Cast<ListViewGroup>().ToList()
                     .ForEach(g => listHistory.Items.AddRange(showinghistories
                        .Where(h => h.UniqueName.Equals(g.Name))
