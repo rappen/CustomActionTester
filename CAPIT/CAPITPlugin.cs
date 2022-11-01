@@ -24,7 +24,7 @@ namespace Rappen.XTB.CAT
         ExportMetadata("SecondaryFontColor", "#0000FF")]
     public class CAPITPlugin : PluginBase, IPayPalPlugin
     {
-        public string DonationDescription => $"Donate to the creator of Custom Action Tester for XrmToolBox";
+        public string DonationDescription => $"Donate to the creator of Custom API Tester for XrmToolBox";
 
         public string EmailAccount => "jonas@rappen.net";
 
