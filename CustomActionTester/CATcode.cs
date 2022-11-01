@@ -20,7 +20,7 @@ namespace Rappen.XTB.CAT
 {
     using ParamType = Rappen.XTB.CAT.Customapirequestparameter.Type_OptionSet;
 
-    public partial class CustomActionTester : IGitHubPlugin, IAboutPlugin, IShortcutReceiver, IMessageBusHost
+    public partial class CustomActionTester : IGitHubPlugin, IAboutPlugin, IShortcutReceiver, IMessageBusHost, IPayPalPlugin
     {
         #region Public Events
 
@@ -46,6 +46,10 @@ namespace Rappen.XTB.CAT
         public string SelectedSolutionUnique => cmbSolution.SelectedRecord?.AttributeToString("uniquename", string.Empty);
 
         public string SelectedCustomUnique => cmbCustomActions.SelectedRecord?.AttributeToString(catTool.Columns.APIMessageName, string.Empty);
+
+        public string DonationDescription => $"Donate to the creator of {catTool.Name} for XrmToolBox";
+
+        public string EmailAccount => "jonas@rappen.net";
 
         #endregion Public Properties
 
