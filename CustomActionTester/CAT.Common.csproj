@@ -227,6 +227,7 @@
     <Compile Include="EntityMetadataProxy.cs" />
     <Compile Include="ICATTool.cs" />
     <Compile Include="MetadataHelper.cs" />
+    <Compile Include="Prompt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
