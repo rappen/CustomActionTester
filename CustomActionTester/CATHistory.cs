@@ -218,7 +218,7 @@ namespace Rappen.XTB.CAT
                 case 3:
                     if (SelectedCustomUnique != reloadhistoryrequest.UniqueName)
                     {
-                        SelectCmbByStringAttribute(cmbCustomActions, catTool.Columns.APIUniqueName, reloadhistoryrequest.UniqueName);
+                        SelectCmbByStringAttribute(cmbCustomActions, catTool.Columns.APIMessageName, reloadhistoryrequest.UniqueName);
                         SetCustomAction(cmbCustomActions.SelectedRecord);
                     }
                     ReloadHistoryItem(++nextstepnum);
@@ -236,6 +236,7 @@ namespace Rappen.XTB.CAT
 
                 case 5:
                     SetInputParametersValues(reloadhistoryrequest.Parameters);
+                    PopulateInputParamValue();
                     LogUse("Reload");
                     Enabled = true;
                     break;
@@ -276,8 +277,8 @@ namespace Rappen.XTB.CAT
                         input["value"] = param.Value;
                         break;
                 }
-                RefreshInputParameters(input);
             }
+            RefreshInputParameters();
         }
     }
 }

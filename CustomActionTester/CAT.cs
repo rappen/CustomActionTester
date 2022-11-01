@@ -37,7 +37,6 @@ namespace Rappen.XTB.CAT
             PluginIcon = catTool.Icon16;
             tslAbout.Image = catTool.Logo24;
             lblSelect.Text = $"{catTool.Target} Select";
-            lblOutput.Text = $"{catTool.Target} Output";
             lblCustomWhat.Text = catTool.Target;
             rbHistGroupAPI.Text = catTool.Target;
             colAPI.Text = catTool.Target;
@@ -189,11 +188,6 @@ namespace Rappen.XTB.CAT
             PopulateInputParamValue(e.Entity);
         }
 
-        private void btnCAValueSet_Click(object sender, EventArgs e)
-        {
-            SetInputParamValue(sender == btnCAValueClear);
-        }
-
         private void btnLookup_Click(object sender, EventArgs e)
         {
             LookupInputParamRecord();
@@ -242,5 +236,35 @@ namespace Rappen.XTB.CAT
         }
 
         #endregion Private Methods Events
+
+        private void txtString_TextChanged(object sender, EventArgs e)
+        {
+            SetInputParamValue(string.IsNullOrEmpty(txtString.Text));
+        }
+
+        private void dtDateTime_ValueChanged(object sender, EventArgs e)
+        {
+            SetInputParamValue(false);
+        }
+
+        private void chkBoolean_CheckedChanged(object sender, EventArgs e)
+        {
+            SetInputParamValue(false);
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            SetInputParamValue(true);
+        }
+
+        private void txtString_Enter(object sender, EventArgs e)
+        {
+            _editinginputvalue = true;
+        }
+
+        private void txtString_Leave(object sender, EventArgs e)
+        {
+            _editinginputvalue = false;
+        }
     }
 }

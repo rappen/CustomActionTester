@@ -66,22 +66,33 @@
             this.dgInputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgInputsSubtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgInputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panCAValue = new System.Windows.Forms.Panel();
-            this.panCAValueParent = new System.Windows.Forms.Panel();
+            this.panValueBoolean = new System.Windows.Forms.Panel();
+            this.panel26 = new System.Windows.Forms.Panel();
+            this.panBoolean = new System.Windows.Forms.Panel();
+            this.btnClearBoolean = new System.Windows.Forms.Button();
+            this.chkBoolean = new System.Windows.Forms.CheckBox();
+            this.panel36 = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.panValueEntity = new System.Windows.Forms.Panel();
+            this.panel24 = new System.Windows.Forms.Panel();
             this.panEntity = new System.Windows.Forms.Panel();
             this.cmbEntity = new System.Windows.Forms.ComboBox();
             this.btnLookup = new System.Windows.Forms.Button();
             this.txtRecord = new Rappen.XTB.Helpers.Controls.XRMColumnText();
             this.rhRecord = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
+            this.panel30 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.panValueDateTime = new System.Windows.Forms.Panel();
+            this.panel17 = new System.Windows.Forms.Panel();
             this.panDateTime = new System.Windows.Forms.Panel();
+            this.btnClearDate = new System.Windows.Forms.Button();
             this.dtDateTime = new System.Windows.Forms.DateTimePicker();
-            this.panBoolean = new System.Windows.Forms.Panel();
-            this.chkBoolean = new System.Windows.Forms.CheckBox();
+            this.panel23 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.panValueText = new System.Windows.Forms.Panel();
+            this.panCAValueParent = new System.Windows.Forms.Panel();
             this.panString = new System.Windows.Forms.Panel();
             this.txtString = new System.Windows.Forms.TextBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.btnCAValueClear = new System.Windows.Forms.Button();
-            this.btnCAValueSet = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panCARecord = new System.Windows.Forms.Panel();
@@ -118,10 +129,8 @@
             this.dgOutputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgOutputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgOutputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel11 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.txtExecution = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.txtCDSDataHelper = new Rappen.XTB.Helpers.Controls.XRMColumnText();
             this.rhResult = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -164,6 +173,9 @@
             this.picHistoryHide = new System.Windows.Forms.PictureBox();
             this.panel15 = new System.Windows.Forms.Panel();
             this.rhCustomAction = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
+            this.rhInputParam = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.lblInputParamInfo = new System.Windows.Forms.Label();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
             this.splitFullForm.Panel1.SuspendLayout();
@@ -175,13 +187,21 @@
             this.panCustomWhat.SuspendLayout();
             this.panCAInputs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).BeginInit();
-            this.panCAValue.SuspendLayout();
-            this.panCAValueParent.SuspendLayout();
-            this.panEntity.SuspendLayout();
-            this.panDateTime.SuspendLayout();
+            this.panValueBoolean.SuspendLayout();
+            this.panel26.SuspendLayout();
             this.panBoolean.SuspendLayout();
+            this.panel36.SuspendLayout();
+            this.panValueEntity.SuspendLayout();
+            this.panel24.SuspendLayout();
+            this.panEntity.SuspendLayout();
+            this.panel30.SuspendLayout();
+            this.panValueDateTime.SuspendLayout();
+            this.panel17.SuspendLayout();
+            this.panDateTime.SuspendLayout();
+            this.panel23.SuspendLayout();
+            this.panValueText.SuspendLayout();
+            this.panCAValueParent.SuspendLayout();
             this.panString.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panCARecord.SuspendLayout();
             this.panCA.SuspendLayout();
@@ -199,7 +219,6 @@
             this.panel10.SuspendLayout();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).BeginInit();
-            this.panel11.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -214,6 +233,7 @@
             this.panel2.SuspendLayout();
             this.panel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryHide)).BeginInit();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenu
@@ -317,14 +337,14 @@
             this.mnuShowDisplay.Checked = true;
             this.mnuShowDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mnuShowDisplay.Name = "mnuShowDisplay";
-            this.mnuShowDisplay.Size = new System.Drawing.Size(180, 22);
+            this.mnuShowDisplay.Size = new System.Drawing.Size(147, 22);
             this.mnuShowDisplay.Text = "Display Name";
             this.mnuShowDisplay.Click += new System.EventHandler(this.mnuShowDisplay_Click);
             // 
             // mnuShowUnique
             // 
             this.mnuShowUnique.Name = "mnuShowUnique";
-            this.mnuShowUnique.Size = new System.Drawing.Size(180, 22);
+            this.mnuShowUnique.Size = new System.Drawing.Size(147, 22);
             this.mnuShowUnique.Text = "Unique Name";
             this.mnuShowUnique.Click += new System.EventHandler(this.mnuShowUnique_Click);
             // 
@@ -378,9 +398,13 @@
             // panCustomWhat
             // 
             this.panCustomWhat.Controls.Add(this.panCAInputs);
-            this.panCustomWhat.Controls.Add(this.panCAValue);
+            this.panCustomWhat.Controls.Add(this.panValueBoolean);
+            this.panCustomWhat.Controls.Add(this.panValueEntity);
+            this.panCustomWhat.Controls.Add(this.panValueDateTime);
+            this.panCustomWhat.Controls.Add(this.panValueText);
             this.panCustomWhat.Controls.Add(this.panCARecord);
             this.panCustomWhat.Controls.Add(this.panCA);
+            this.panCustomWhat.Controls.Add(this.panel7);
             this.panCustomWhat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panCustomWhat.Location = new System.Drawing.Point(0, 179);
             this.panCustomWhat.Name = "panCustomWhat";
@@ -394,7 +418,7 @@
             this.panCAInputs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panCAInputs.Location = new System.Drawing.Point(0, 55);
             this.panCAInputs.Name = "panCAInputs";
-            this.panCAInputs.Size = new System.Drawing.Size(608, 235);
+            this.panCAInputs.Size = new System.Drawing.Size(608, 110);
             this.panCAInputs.TabIndex = 28;
             // 
             // gridInputParams
@@ -437,6 +461,7 @@
             this.gridInputParams.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridInputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridInputParams.FilterColumns = "";
+            this.gridInputParams.LayoutXML = null;
             this.gridInputParams.Location = new System.Drawing.Point(114, 7);
             this.gridInputParams.MultiSelect = false;
             this.gridInputParams.Name = "gridInputParams";
@@ -456,7 +481,7 @@
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
-            this.gridInputParams.Size = new System.Drawing.Size(480, 223);
+            this.gridInputParams.Size = new System.Drawing.Size(480, 98);
             this.gridInputParams.TabIndex = 13;
             this.gridInputParams.RecordEnter += new Rappen.XTB.Helpers.Controls.XRMRecordEventHandler(this.gridInputParams_RecordEnter);
             // 
@@ -517,113 +542,45 @@
             this.dgInputsValue.ReadOnly = true;
             this.dgInputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // panCAValue
+            // panValueBoolean
             // 
-            this.panCAValue.Controls.Add(this.panCAValueParent);
-            this.panCAValue.Controls.Add(this.panel7);
-            this.panCAValue.Controls.Add(this.panel6);
-            this.panCAValue.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panCAValue.Location = new System.Drawing.Point(0, 290);
-            this.panCAValue.Name = "panCAValue";
-            this.panCAValue.Size = new System.Drawing.Size(608, 37);
-            this.panCAValue.TabIndex = 29;
+            this.panValueBoolean.Controls.Add(this.panel26);
+            this.panValueBoolean.Controls.Add(this.panel36);
+            this.panValueBoolean.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panValueBoolean.Location = new System.Drawing.Point(0, 165);
+            this.panValueBoolean.Name = "panValueBoolean";
+            this.panValueBoolean.Size = new System.Drawing.Size(608, 37);
+            this.panValueBoolean.TabIndex = 32;
+            this.panValueBoolean.Visible = false;
             // 
-            // panCAValueParent
+            // panel26
             // 
-            this.panCAValueParent.Controls.Add(this.panEntity);
-            this.panCAValueParent.Controls.Add(this.panDateTime);
-            this.panCAValueParent.Controls.Add(this.panBoolean);
-            this.panCAValueParent.Controls.Add(this.panString);
-            this.panCAValueParent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panCAValueParent.Location = new System.Drawing.Point(110, 0);
-            this.panCAValueParent.Name = "panCAValueParent";
-            this.panCAValueParent.Size = new System.Drawing.Size(344, 37);
-            this.panCAValueParent.TabIndex = 2;
-            // 
-            // panEntity
-            // 
-            this.panEntity.Controls.Add(this.cmbEntity);
-            this.panEntity.Controls.Add(this.btnLookup);
-            this.panEntity.Controls.Add(this.txtRecord);
-            this.panEntity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panEntity.Location = new System.Drawing.Point(0, 0);
-            this.panEntity.Name = "panEntity";
-            this.panEntity.Size = new System.Drawing.Size(344, 37);
-            this.panEntity.TabIndex = 19;
-            this.panEntity.Visible = false;
-            // 
-            // cmbEntity
-            // 
-            this.cmbEntity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbEntity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbEntity.DropDownWidth = 400;
-            this.cmbEntity.FormattingEnabled = true;
-            this.cmbEntity.Location = new System.Drawing.Point(4, 8);
-            this.cmbEntity.Name = "cmbEntity";
-            this.cmbEntity.Size = new System.Drawing.Size(113, 21);
-            this.cmbEntity.Sorted = true;
-            this.cmbEntity.TabIndex = 5;
-            this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
-            // 
-            // btnLookup
-            // 
-            this.btnLookup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLookup.Location = new System.Drawing.Point(320, 7);
-            this.btnLookup.Name = "btnLookup";
-            this.btnLookup.Size = new System.Drawing.Size(24, 22);
-            this.btnLookup.TabIndex = 4;
-            this.btnLookup.Text = "...";
-            this.btnLookup.UseVisualStyleBackColor = true;
-            this.btnLookup.Click += new System.EventHandler(this.btnLookup_Click);
-            // 
-            // txtRecord
-            // 
-            this.txtRecord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRecord.BackColor = System.Drawing.SystemColors.Window;
-            this.txtRecord.Column = null;
-            this.txtRecord.DisplayFormat = "";
-            this.txtRecord.Location = new System.Drawing.Point(123, 8);
-            this.txtRecord.Name = "txtRecord";
-            this.txtRecord.RecordHost = this.rhRecord;
-            this.txtRecord.Size = new System.Drawing.Size(191, 20);
-            this.txtRecord.TabIndex = 2;
-            // 
-            // rhRecord
-            // 
-            this.rhRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.rhRecord.LogicalName = null;
-            this.rhRecord.Record = null;
-            this.rhRecord.Service = null;
-            // 
-            // panDateTime
-            // 
-            this.panDateTime.Controls.Add(this.dtDateTime);
-            this.panDateTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panDateTime.Location = new System.Drawing.Point(0, 0);
-            this.panDateTime.Name = "panDateTime";
-            this.panDateTime.Size = new System.Drawing.Size(344, 37);
-            this.panDateTime.TabIndex = 18;
-            this.panDateTime.Visible = false;
-            // 
-            // dtDateTime
-            // 
-            this.dtDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.dtDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDateTime.Location = new System.Drawing.Point(4, 8);
-            this.dtDateTime.Name = "dtDateTime";
-            this.dtDateTime.Size = new System.Drawing.Size(158, 20);
-            this.dtDateTime.TabIndex = 5;
+            this.panel26.Controls.Add(this.panBoolean);
+            this.panel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel26.Location = new System.Drawing.Point(110, 0);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(498, 37);
+            this.panel26.TabIndex = 2;
             // 
             // panBoolean
             // 
+            this.panBoolean.Controls.Add(this.btnClearBoolean);
             this.panBoolean.Controls.Add(this.chkBoolean);
             this.panBoolean.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panBoolean.Location = new System.Drawing.Point(0, 0);
             this.panBoolean.Name = "panBoolean";
-            this.panBoolean.Size = new System.Drawing.Size(344, 37);
+            this.panBoolean.Size = new System.Drawing.Size(498, 37);
             this.panBoolean.TabIndex = 17;
-            this.panBoolean.Visible = false;
+            // 
+            // btnClearBoolean
+            // 
+            this.btnClearBoolean.Location = new System.Drawing.Point(123, 7);
+            this.btnClearBoolean.Name = "btnClearBoolean";
+            this.btnClearBoolean.Size = new System.Drawing.Size(75, 23);
+            this.btnClearBoolean.TabIndex = 2;
+            this.btnClearBoolean.Text = "Clear";
+            this.btnClearBoolean.UseVisualStyleBackColor = true;
+            this.btnClearBoolean.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // chkBoolean
             // 
@@ -635,6 +592,207 @@
             this.chkBoolean.TabIndex = 1;
             this.chkBoolean.Text = "Boolean value";
             this.chkBoolean.UseVisualStyleBackColor = true;
+            this.chkBoolean.CheckedChanged += new System.EventHandler(this.chkBoolean_CheckedChanged);
+            // 
+            // panel36
+            // 
+            this.panel36.Controls.Add(this.label15);
+            this.panel36.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel36.Location = new System.Drawing.Point(0, 0);
+            this.panel36.Name = "panel36";
+            this.panel36.Size = new System.Drawing.Size(110, 37);
+            this.panel36.TabIndex = 0;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(13, 12);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(34, 13);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Value";
+            // 
+            // panValueEntity
+            // 
+            this.panValueEntity.Controls.Add(this.panel24);
+            this.panValueEntity.Controls.Add(this.panel30);
+            this.panValueEntity.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panValueEntity.Location = new System.Drawing.Point(0, 202);
+            this.panValueEntity.Name = "panValueEntity";
+            this.panValueEntity.Size = new System.Drawing.Size(608, 37);
+            this.panValueEntity.TabIndex = 31;
+            this.panValueEntity.Visible = false;
+            // 
+            // panel24
+            // 
+            this.panel24.Controls.Add(this.panEntity);
+            this.panel24.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel24.Location = new System.Drawing.Point(110, 0);
+            this.panel24.Name = "panel24";
+            this.panel24.Size = new System.Drawing.Size(498, 37);
+            this.panel24.TabIndex = 2;
+            // 
+            // panEntity
+            // 
+            this.panEntity.Controls.Add(this.cmbEntity);
+            this.panEntity.Controls.Add(this.btnLookup);
+            this.panEntity.Controls.Add(this.txtRecord);
+            this.panEntity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panEntity.Location = new System.Drawing.Point(0, 0);
+            this.panEntity.Name = "panEntity";
+            this.panEntity.Size = new System.Drawing.Size(498, 37);
+            this.panEntity.TabIndex = 19;
+            // 
+            // cmbEntity
+            // 
+            this.cmbEntity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbEntity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbEntity.DropDownWidth = 400;
+            this.cmbEntity.FormattingEnabled = true;
+            this.cmbEntity.Location = new System.Drawing.Point(4, 8);
+            this.cmbEntity.Name = "cmbEntity";
+            this.cmbEntity.Size = new System.Drawing.Size(158, 21);
+            this.cmbEntity.Sorted = true;
+            this.cmbEntity.TabIndex = 5;
+            this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
+            // 
+            // btnLookup
+            // 
+            this.btnLookup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLookup.Location = new System.Drawing.Point(404, 7);
+            this.btnLookup.Name = "btnLookup";
+            this.btnLookup.Size = new System.Drawing.Size(80, 22);
+            this.btnLookup.TabIndex = 4;
+            this.btnLookup.Text = "Lookup";
+            this.btnLookup.UseVisualStyleBackColor = true;
+            this.btnLookup.Click += new System.EventHandler(this.btnLookup_Click);
+            // 
+            // txtRecord
+            // 
+            this.txtRecord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtRecord.BackColor = System.Drawing.SystemColors.Window;
+            this.txtRecord.Column = null;
+            this.txtRecord.DisplayFormat = "";
+            this.txtRecord.Location = new System.Drawing.Point(169, 8);
+            this.txtRecord.Name = "txtRecord";
+            this.txtRecord.ReadOnly = true;
+            this.txtRecord.RecordHost = this.rhRecord;
+            this.txtRecord.Size = new System.Drawing.Size(229, 20);
+            this.txtRecord.TabIndex = 2;
+            // 
+            // rhRecord
+            // 
+            this.rhRecord.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.rhRecord.LogicalName = null;
+            this.rhRecord.Record = null;
+            this.rhRecord.Service = null;
+            // 
+            // panel30
+            // 
+            this.panel30.Controls.Add(this.label14);
+            this.panel30.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel30.Location = new System.Drawing.Point(0, 0);
+            this.panel30.Name = "panel30";
+            this.panel30.Size = new System.Drawing.Size(110, 37);
+            this.panel30.TabIndex = 0;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(13, 12);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(34, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Value";
+            // 
+            // panValueDateTime
+            // 
+            this.panValueDateTime.Controls.Add(this.panel17);
+            this.panValueDateTime.Controls.Add(this.panel23);
+            this.panValueDateTime.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panValueDateTime.Location = new System.Drawing.Point(0, 239);
+            this.panValueDateTime.Name = "panValueDateTime";
+            this.panValueDateTime.Size = new System.Drawing.Size(608, 37);
+            this.panValueDateTime.TabIndex = 30;
+            this.panValueDateTime.Visible = false;
+            // 
+            // panel17
+            // 
+            this.panel17.Controls.Add(this.panDateTime);
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel17.Location = new System.Drawing.Point(110, 0);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(498, 37);
+            this.panel17.TabIndex = 2;
+            // 
+            // panDateTime
+            // 
+            this.panDateTime.Controls.Add(this.btnClearDate);
+            this.panDateTime.Controls.Add(this.dtDateTime);
+            this.panDateTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panDateTime.Location = new System.Drawing.Point(0, 0);
+            this.panDateTime.Name = "panDateTime";
+            this.panDateTime.Size = new System.Drawing.Size(498, 37);
+            this.panDateTime.TabIndex = 18;
+            // 
+            // btnClearDate
+            // 
+            this.btnClearDate.Location = new System.Drawing.Point(169, 7);
+            this.btnClearDate.Name = "btnClearDate";
+            this.btnClearDate.Size = new System.Drawing.Size(75, 23);
+            this.btnClearDate.TabIndex = 6;
+            this.btnClearDate.Text = "Clear";
+            this.btnClearDate.UseVisualStyleBackColor = true;
+            this.btnClearDate.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // dtDateTime
+            // 
+            this.dtDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dtDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDateTime.Location = new System.Drawing.Point(4, 8);
+            this.dtDateTime.Name = "dtDateTime";
+            this.dtDateTime.Size = new System.Drawing.Size(158, 20);
+            this.dtDateTime.TabIndex = 5;
+            this.dtDateTime.ValueChanged += new System.EventHandler(this.dtDateTime_ValueChanged);
+            // 
+            // panel23
+            // 
+            this.panel23.Controls.Add(this.label13);
+            this.panel23.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel23.Location = new System.Drawing.Point(0, 0);
+            this.panel23.Name = "panel23";
+            this.panel23.Size = new System.Drawing.Size(110, 37);
+            this.panel23.TabIndex = 0;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(13, 12);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(34, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Value";
+            // 
+            // panValueText
+            // 
+            this.panValueText.Controls.Add(this.panCAValueParent);
+            this.panValueText.Controls.Add(this.panel6);
+            this.panValueText.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panValueText.Location = new System.Drawing.Point(0, 276);
+            this.panValueText.Name = "panValueText";
+            this.panValueText.Size = new System.Drawing.Size(608, 37);
+            this.panValueText.TabIndex = 29;
+            this.panValueText.Visible = false;
+            // 
+            // panCAValueParent
+            // 
+            this.panCAValueParent.Controls.Add(this.panString);
+            this.panCAValueParent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panCAValueParent.Location = new System.Drawing.Point(110, 0);
+            this.panCAValueParent.Name = "panCAValueParent";
+            this.panCAValueParent.Size = new System.Drawing.Size(498, 37);
+            this.panCAValueParent.TabIndex = 2;
             // 
             // panString
             // 
@@ -642,9 +800,8 @@
             this.panString.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panString.Location = new System.Drawing.Point(0, 0);
             this.panString.Name = "panString";
-            this.panString.Size = new System.Drawing.Size(344, 37);
+            this.panString.Size = new System.Drawing.Size(498, 37);
             this.panString.TabIndex = 16;
-            this.panString.Visible = false;
             // 
             // txtString
             // 
@@ -652,40 +809,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtString.Location = new System.Drawing.Point(4, 8);
             this.txtString.Name = "txtString";
-            this.txtString.Size = new System.Drawing.Size(334, 20);
+            this.txtString.Size = new System.Drawing.Size(480, 20);
             this.txtString.TabIndex = 1;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.btnCAValueClear);
-            this.panel7.Controls.Add(this.btnCAValueSet);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(454, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(154, 37);
-            this.panel7.TabIndex = 1;
-            // 
-            // btnCAValueClear
-            // 
-            this.btnCAValueClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCAValueClear.Location = new System.Drawing.Point(82, 7);
-            this.btnCAValueClear.Name = "btnCAValueClear";
-            this.btnCAValueClear.Size = new System.Drawing.Size(59, 23);
-            this.btnCAValueClear.TabIndex = 1;
-            this.btnCAValueClear.Text = "Remove";
-            this.btnCAValueClear.UseVisualStyleBackColor = true;
-            this.btnCAValueClear.Click += new System.EventHandler(this.btnCAValueSet_Click);
-            // 
-            // btnCAValueSet
-            // 
-            this.btnCAValueSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCAValueSet.Location = new System.Drawing.Point(17, 7);
-            this.btnCAValueSet.Name = "btnCAValueSet";
-            this.btnCAValueSet.Size = new System.Drawing.Size(59, 23);
-            this.btnCAValueSet.TabIndex = 0;
-            this.btnCAValueSet.Text = "Set";
-            this.btnCAValueSet.UseVisualStyleBackColor = true;
-            this.btnCAValueSet.Click += new System.EventHandler(this.btnCAValueSet_Click);
+            this.txtString.TextChanged += new System.EventHandler(this.txtString_TextChanged);
+            this.txtString.Enter += new System.EventHandler(this.txtString_Enter);
+            this.txtString.Leave += new System.EventHandler(this.txtString_Leave);
             // 
             // panel6
             // 
@@ -805,9 +933,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label2.Location = new System.Drawing.Point(0, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 24);
+            this.label2.Size = new System.Drawing.Size(151, 24);
             this.label2.TabIndex = 37;
-            this.label2.Text = "Input";
+            this.label2.Text = "Input Parameters";
             // 
             // panSolution
             // 
@@ -1025,7 +1153,6 @@
             // panel10
             // 
             this.panel10.Controls.Add(this.panel12);
-            this.panel10.Controls.Add(this.panel11);
             this.panel10.Controls.Add(this.txtCDSDataHelper);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(0, 35);
@@ -1037,10 +1164,10 @@
             // 
             this.panel12.Controls.Add(this.gridOutputParams);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(0, 61);
+            this.panel12.Location = new System.Drawing.Point(0, 0);
             this.panel12.Name = "panel12";
             this.panel12.Padding = new System.Windows.Forms.Padding(16, 0, 10, 0);
-            this.panel12.Size = new System.Drawing.Size(443, 199);
+            this.panel12.Size = new System.Drawing.Size(443, 260);
             this.panel12.TabIndex = 21;
             // 
             // gridOutputParams
@@ -1079,6 +1206,7 @@
             this.gridOutputParams.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridOutputParams.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridOutputParams.FilterColumns = "";
+            this.gridOutputParams.LayoutXML = null;
             this.gridOutputParams.Location = new System.Drawing.Point(16, 0);
             this.gridOutputParams.MultiSelect = false;
             this.gridOutputParams.Name = "gridOutputParams";
@@ -1098,7 +1226,7 @@
             this.gridOutputParams.ShowEditingIcon = false;
             this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
-            this.gridOutputParams.Size = new System.Drawing.Size(417, 199);
+            this.gridOutputParams.Size = new System.Drawing.Size(417, 260);
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
             // 
@@ -1140,22 +1268,11 @@
             this.dgOutputsValue.ReadOnly = true;
             this.dgOutputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.label10);
-            this.panel11.Controls.Add(this.txtExecution);
-            this.panel11.Controls.Add(this.label6);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel11.Location = new System.Drawing.Point(0, 0);
-            this.panel11.Margin = new System.Windows.Forms.Padding(2);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(443, 61);
-            this.panel11.TabIndex = 20;
-            // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 20);
+            this.label10.Location = new System.Drawing.Point(247, 14);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(80, 13);
             this.label10.TabIndex = 17;
@@ -1163,21 +1280,13 @@
             // 
             // txtExecution
             // 
+            this.txtExecution.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtExecution.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtExecution.Location = new System.Drawing.Point(113, 17);
+            this.txtExecution.Location = new System.Drawing.Point(333, 11);
             this.txtExecution.Name = "txtExecution";
             this.txtExecution.ReadOnly = true;
             this.txtExecution.Size = new System.Drawing.Size(100, 20);
             this.txtExecution.TabIndex = 18;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 43);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 13);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Output Params";
             // 
             // txtCDSDataHelper
             // 
@@ -1200,7 +1309,9 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label10);
             this.panel4.Controls.Add(this.lblOutput);
+            this.panel4.Controls.Add(this.txtExecution);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
@@ -1214,9 +1325,9 @@
             this.lblOutput.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.lblOutput.Location = new System.Drawing.Point(0, 6);
             this.lblOutput.Name = "lblOutput";
-            this.lblOutput.Size = new System.Drawing.Size(66, 24);
+            this.lblOutput.Size = new System.Drawing.Size(132, 24);
             this.lblOutput.TabIndex = 37;
-            this.lblOutput.Text = "Output";
+            this.lblOutput.Text = "Output Results";
             // 
             // panel3
             // 
@@ -1224,7 +1335,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 61);
             this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(16, 0, 10, 0);
+            this.panel3.Padding = new System.Windows.Forms.Padding(16, 0, 10, 20);
             this.panel3.Size = new System.Drawing.Size(443, 142);
             this.panel3.TabIndex = 46;
             // 
@@ -1237,7 +1348,7 @@
             this.txtResultDetail.Location = new System.Drawing.Point(16, 0);
             this.txtResultDetail.Name = "txtResultDetail";
             this.txtResultDetail.ReadOnly = true;
-            this.txtResultDetail.Size = new System.Drawing.Size(417, 142);
+            this.txtResultDetail.Size = new System.Drawing.Size(417, 122);
             this.txtResultDetail.TabIndex = 0;
             this.txtResultDetail.Text = "";
             // 
@@ -1614,6 +1725,31 @@
             this.rhCustomAction.Record = null;
             this.rhCustomAction.Service = null;
             // 
+            // rhInputParam
+            // 
+            this.rhInputParam.Id = new System.Guid("00000000-0000-0000-0000-000000000000");
+            this.rhInputParam.LogicalName = null;
+            this.rhInputParam.Record = null;
+            this.rhInputParam.Service = null;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.lblInputParamInfo);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel7.Location = new System.Drawing.Point(0, 313);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(608, 14);
+            this.panel7.TabIndex = 33;
+            // 
+            // lblInputParamInfo
+            // 
+            this.lblInputParamInfo.AutoSize = true;
+            this.lblInputParamInfo.Location = new System.Drawing.Point(111, 0);
+            this.lblInputParamInfo.Name = "lblInputParamInfo";
+            this.lblInputParamInfo.Size = new System.Drawing.Size(49, 13);
+            this.lblInputParamInfo.TabIndex = 0;
+            this.lblInputParamInfo.Text = "              ";
+            // 
             // CustomActionTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1639,16 +1775,27 @@
             this.panCAInputs.ResumeLayout(false);
             this.panCAInputs.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInputParams)).EndInit();
-            this.panCAValue.ResumeLayout(false);
-            this.panCAValueParent.ResumeLayout(false);
-            this.panEntity.ResumeLayout(false);
-            this.panEntity.PerformLayout();
-            this.panDateTime.ResumeLayout(false);
+            this.panValueBoolean.ResumeLayout(false);
+            this.panel26.ResumeLayout(false);
             this.panBoolean.ResumeLayout(false);
             this.panBoolean.PerformLayout();
+            this.panel36.ResumeLayout(false);
+            this.panel36.PerformLayout();
+            this.panValueEntity.ResumeLayout(false);
+            this.panel24.ResumeLayout(false);
+            this.panEntity.ResumeLayout(false);
+            this.panEntity.PerformLayout();
+            this.panel30.ResumeLayout(false);
+            this.panel30.PerformLayout();
+            this.panValueDateTime.ResumeLayout(false);
+            this.panel17.ResumeLayout(false);
+            this.panDateTime.ResumeLayout(false);
+            this.panel23.ResumeLayout(false);
+            this.panel23.PerformLayout();
+            this.panValueText.ResumeLayout(false);
+            this.panCAValueParent.ResumeLayout(false);
             this.panString.ResumeLayout(false);
             this.panString.PerformLayout();
-            this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panCARecord.ResumeLayout(false);
@@ -1674,8 +1821,6 @@
             this.panel10.PerformLayout();
             this.panel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridOutputParams)).EndInit();
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -1696,6 +1841,8 @@
             this.panel14.ResumeLayout(false);
             this.panel14.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHistoryHide)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1707,7 +1854,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.SplitContainer splitFullForm;
         private System.Windows.Forms.SplitContainer splitLeft;
-        private System.Windows.Forms.Label label6;
         private Rappen.XTB.Helpers.Controls.XRMDataGridView gridOutputParams;
         private System.Windows.Forms.ToolStripButton btnExecute;
         private System.Windows.Forms.Panel panel1;
@@ -1754,10 +1900,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Panel panCAInputs;
         private System.Windows.Forms.Panel panCARecord;
-        private System.Windows.Forms.Panel panCAValue;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Button btnCAValueClear;
-        private System.Windows.Forms.Button btnCAValueSet;
+        private System.Windows.Forms.Panel panValueText;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panCAValueParent;
         private System.Windows.Forms.Panel panString;
@@ -1807,7 +1950,6 @@
         private System.Windows.Forms.Panel panHistoryGrouping;
         private System.Windows.Forms.ColumnHeader colParams;
         private System.Windows.Forms.ColumnHeader colResults;
-        private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.RadioButton rbHistGroupDate;
         private System.Windows.Forms.RadioButton rbHistGroupNone;
         private System.Windows.Forms.Panel panel12;
@@ -1824,5 +1966,22 @@
         private System.Windows.Forms.PictureBox picHistoryHide;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.ColumnHeader colError;
+        private System.Windows.Forms.Panel panValueBoolean;
+        private System.Windows.Forms.Panel panel26;
+        private System.Windows.Forms.Panel panel36;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Panel panValueEntity;
+        private System.Windows.Forms.Panel panel24;
+        private System.Windows.Forms.Panel panel30;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Panel panValueDateTime;
+        private System.Windows.Forms.Panel panel17;
+        private System.Windows.Forms.Panel panel23;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnClearBoolean;
+        private System.Windows.Forms.Button btnClearDate;
+        private Helpers.Controls.XRMRecordHost rhInputParam;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label lblInputParamInfo;
     }
 }
