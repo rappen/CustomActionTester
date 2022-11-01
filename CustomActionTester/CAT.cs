@@ -266,5 +266,10 @@ namespace Rappen.XTB.CAT
         {
             _editinginputvalue = false;
         }
+
+        private void btnMultilines_Click(object sender, EventArgs e)
+        {
+            EditMultiline();
+        }
     }
 }

@@ -360,6 +360,7 @@ namespace Rappen.XTB.CAT
             panValueEntity.Visible = false;
             panValueBoolean.Visible = false;
             panValueDateTime.Visible = false;
+            btnMultilines.Visible = false;
             lblInputParamInfo.Text = "";
             rhInputParam.Record = null;
             rhInputParam.Record = input;
@@ -383,6 +384,7 @@ namespace Rappen.XTB.CAT
                 case ParamType.Decimal:
                 case ParamType.Float:
                     panValueText.Visible = true;
+                    btnMultilines.Visible = type == ParamType.String;
                     txtString.Text = currentvalue?.ToString();
                     break;
 
@@ -392,11 +394,13 @@ namespace Rappen.XTB.CAT
                     {
                         txtString.Text = money.Value.ToString();
                     }
+                    lblInputParamInfo.Text = "Enter the Money Value.";
                     break;
 
                 case ParamType.GuId:
                     panValueText.Visible = true;
                     txtString.Text = currentvalue?.ToString() ?? Guid.Empty.ToString();
+                    lblInputParamInfo.Text = "This must be a valid Guid.";
                     break;
 
                 case ParamType.Picklist:
@@ -405,6 +409,7 @@ namespace Rappen.XTB.CAT
                     {
                         txtString.Text = osv.Value.ToString();
                     }
+                    lblInputParamInfo.Text = "Enter the number of the Option Set Value.";
                     break;
 
                 case ParamType.Entity:
@@ -768,6 +773,11 @@ namespace Rappen.XTB.CAT
                 return lkp.Record;
             }
             return null;
+        }
+
+        private void EditMultiline()
+        {
+            txtString.Text = Prompt.ShowDialog("Edit string value", "Input", txtString.Text, true);
         }
 
         private void OpenAction(Entity ca)
