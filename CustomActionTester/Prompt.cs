@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Rappen.XTB.CAT
 {
@@ -43,6 +44,7 @@ namespace Rappen.XTB.CAT
             };
             var prompt = new Form
             {
+                BackColor = SystemColors.Window,
                 Width = 500,
                 Height = multiline ? 400 : 150,
                 Text = caption,
