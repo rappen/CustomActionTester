@@ -1,6 +1,7 @@
 ﻿using McTools.Xrm.Connection;
 using Microsoft.Xrm.Sdk;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -41,6 +42,8 @@ namespace Rappen.XTB.CAT
             rbHistGroupAPI.Text = catTool.Target;
             colAPI.Text = catTool.Target;
             btnManage.Visible = !string.IsNullOrWhiteSpace(catTool.ManagerTool)/* && PluginManagerExtended.Instance.Plugins.Any(p => p.Metadata.Name == catTool.ManagerTool)*/;
+            btnMSDocs.Text = $"{catTool.Target} Docs";
+            btnMSDocs.Visible = !string.IsNullOrWhiteSpace(catTool.DocUrl);
             RefreshLayout();
         }
 
@@ -270,6 +273,11 @@ namespace Rappen.XTB.CAT
         private void btnMultilines_Click(object sender, EventArgs e)
         {
             EditMultiline();
+        }
+
+        private void btnMSDocs_Click(object sender, EventArgs e)
+        {
+            Process.Start(Utils.ProcessURL(catTool.DocUrl));
         }
     }
 }

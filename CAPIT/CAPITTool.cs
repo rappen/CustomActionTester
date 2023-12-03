@@ -35,6 +35,8 @@ namespace Rappen.XTB.CAPIT
 
         public string ManagerTool => "Custom API Manager";
 
+        public string DocUrl => "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/custom-api";
+
         public void AddSolutionFilter(QueryExpression qx)
         {
             var solcomp = qx.AddLink(Solutioncomponent.EntityName, Solutioncomponent.SolutionId, Solution.PrimaryKey);

@@ -11,6 +11,7 @@ namespace Rappen.XTB.CAT
         string Name { get; }
         string Target { get; }
         string ManagerTool { get; }
+        string DocUrl { get; }
         Columns Columns { get; }
         Bitmap Logo16 { get; }
         Bitmap Logo24 { get; }

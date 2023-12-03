@@ -36,6 +36,8 @@ namespace Rappen.XTB.CAT
 
         public string ManagerTool => string.Empty;
 
+        public string DocUrl => "https://learn.microsoft.com/en-us/power-automate/desktop-flows/create-custom-actions";
+
         public void AddSolutionFilter(QueryExpression qx)
         {
             var solcomp = qx.AddLink(Solutioncomponent.EntityName, Solutioncomponent.SolutionId, Solution.PrimaryKey);
