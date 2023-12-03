@@ -75,7 +75,7 @@ namespace Rappen.XTB.CAT
 
         public string GetActionUrlPath(Guid actionid) => $"/sfa/workflow/edit.aspx?id={actionid}";
 
-        public QueryExpression GetInputQuery(Guid actionid)
+        public QueryExpression GetInputQuery(Guid actionid, bool usingonline)
         {
             var qx = new QueryExpression("sdkmessagerequestfield");
             qx.Distinct = true;
@@ -89,7 +89,7 @@ namespace Rappen.XTB.CAT
             return qx;
         }
 
-        public QueryExpression GetOutputQuery(Guid actionid)
+        public QueryExpression GetOutputQuery(Guid actionid, bool usingonline)
         {
             var qx = new QueryExpression("sdkmessageresponsefield");
             qx.Distinct = true;
@@ -104,7 +104,7 @@ namespace Rappen.XTB.CAT
             return qx;
         }
 
-        public void PreProcessParams(EntityCollection records, IEnumerable<EntityMetadataProxy> entities)
+        public void PreProcessParams(EntityCollection records, IEnumerable<EntityMetadataProxy> entities, bool usingonline)
         {
             foreach (var record in records.Entities.Where(e => !e.Contains("type")))
             {

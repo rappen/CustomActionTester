@@ -18,11 +18,17 @@ namespace Rappen.XTB.CAT
         Image LogoAbout { get; }
 
         QueryExpression GetActionQuery(Guid solutionid);
-        QueryExpression GetInputQuery(Guid actionid);
-        QueryExpression GetOutputQuery(Guid actionid);
-        void PreProcessParams(EntityCollection records, IEnumerable<EntityMetadataProxy> entities);
+
+        QueryExpression GetInputQuery(Guid actionid, bool usingonline);
+
+        QueryExpression GetOutputQuery(Guid actionid, bool usingonline);
+
+        void PreProcessParams(EntityCollection records, IEnumerable<EntityMetadataProxy> entities, bool usingonline);
+
         Customapi.BindingType_OptionSet BindingType(Entity ca);
+
         void AddSolutionFilter(QueryExpression qx);
+
         string GetActionUrlPath(Guid actionid);
     }
 

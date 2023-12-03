@@ -19,48 +19,70 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Type: Uniqueidentifier, RequiredLevel: SystemRequired</summary>
         public const string PrimaryKey = "customapiid";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 100, Format: Text</summary>
         public const string PrimaryName = "name";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Allowed Custom Processing Step Type, OptionSetType: Picklist, DefaultFormValue: 0</summary>
         public const string AllowedcustomProcessingStepType = "allowedcustomprocessingsteptype";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Binding Type, OptionSetType: Picklist, DefaultFormValue: 0</summary>
         public const string BindingType = "bindingtype";
+
         /// <summary>Type: String, RequiredLevel: None, MaxLength: 100, Format: Text</summary>
         public const string BoundEntityLogicalName = "boundentitylogicalname";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Component State, OptionSetType: Picklist</summary>
         public const string ComponentState = "componentstate";
+
         /// <summary>Type: Lookup, RequiredLevel: None, Targets: systemuser</summary>
         public const string CreatedBy = "createdby";
+
         /// <summary>Type: DateTime, RequiredLevel: None, Format: DateAndTime, DateTimeBehavior: UserLocal</summary>
         public const string CreatedOn = "createdon";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 100, Format: Text</summary>
         public const string Description = "description";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 100, Format: Text</summary>
         public const string DisplayName = "displayname";
+
         /// <summary>Type: String, RequiredLevel: None, MaxLength: 100, Format: Text</summary>
         public const string ExecuteprivilegeName = "executeprivilegename";
+
         /// <summary>Type: ManagedProperty, RequiredLevel: SystemRequired</summary>
         public const string Iscustomizable = "iscustomizable";
+
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
         public const string Isfunction = "isfunction";
+
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
         public const string Ismanaged = "ismanaged";
+
         /// <summary>Type: Boolean, RequiredLevel: None, True: 1, False: 0, DefaultValue: False</summary>
         public const string IsPrivate = "isprivate";
+
         /// <summary>Type: Lookup, RequiredLevel: None, Targets: systemuser</summary>
         public const string ModifiedBy = "modifiedby";
+
         /// <summary>Type: DateTime, RequiredLevel: None, Format: DateAndTime, DateTimeBehavior: UserLocal</summary>
         public const string ModifiedOn = "modifiedon";
+
         /// <summary>Type: Owner, RequiredLevel: SystemRequired, Targets: systemuser,team</summary>
         public const string OwnerId = "ownerid";
+
         /// <summary>Type: Lookup, RequiredLevel: None, Targets: plugintype</summary>
         public const string PluginTypeId = "plugintypeid";
+
         /// <summary>Type: Lookup, RequiredLevel: None, Targets: sdkmessage</summary>
         public const string SdkMessageId = "sdkmessageid";
+
         /// <summary>Type: State, RequiredLevel: SystemRequired, DisplayName: Status, OptionSetType: State</summary>
         public const string StateCode = "statecode";
+
         /// <summary>Type: Status, RequiredLevel: None, DisplayName: Status Reason, OptionSetType: Status</summary>
         public const string StatusCode = "statuscode";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 128, Format: Text</summary>
         public const string UniqueName = "uniquename";
 
@@ -70,6 +92,7 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Parent: "Customapi" Child: "Customapirequestparameter" Lookup: "CustomapiId"</summary>
         public const string Rel1M_CustomapiCustomapirequestparameter = "customapi_customapirequestparameter";
+
         /// <summary>Parent: "Customapi" Child: "Customapiresponseproperty" Lookup: "CustomapiId"</summary>
         public const string Rel1M_CustomapiCustomapiresponseproperty = "customapi_customapiresponseproperty";
 
@@ -83,12 +106,14 @@ namespace Rappen.XTB.CAT
             AsyncOnly = 1,
             SyncandAsync = 2
         }
+
         public enum BindingType_OptionSet
         {
             Global = 0,
             Entity = 1,
             EntityCollection = 2
         }
+
         public enum ComponentState_OptionSet
         {
             Published = 0,
@@ -96,11 +121,13 @@ namespace Rappen.XTB.CAT
             Deleted = 2,
             DeletedUnpublished = 3
         }
+
         public enum StateCode_OptionSet
         {
             Active = 0,
             Inactive = 1
         }
+
         public enum StatusCode_OptionSet
         {
             Active = 1,
@@ -120,26 +147,39 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Type: Uniqueidentifier, RequiredLevel: SystemRequired</summary>
         public const string PrimaryKey = "customapirequestparameterid";
+
         /// <summary>Type: String, RequiredLevel: ApplicationRequired, MaxLength: 100, Format: Text</summary>
         public const string PrimaryName = "name";
+
         /// <summary>Type: String, RequiredLevel: None, MaxLength: 100, Format: Text</summary>
         public const string LogicalEntityName = "logicalentityname";
+
+        public const string LogicalEntityNameOnPrem = "entitylogicalname";
+
         /// <summary>Type: Lookup, RequiredLevel: None, Targets: systemuser</summary>
         public const string CreatedBy = "createdby";
+
         /// <summary>Type: Lookup, RequiredLevel: SystemRequired, Targets: customapi</summary>
         public const string CustomapiId = "customapiid";
+
         /// <summary>Type: String, RequiredLevel: ApplicationRequired, MaxLength: 100, Format: Text</summary>
         public const string Description = "description";
+
         /// <summary>Type: String, RequiredLevel: ApplicationRequired, MaxLength: 100, Format: Text</summary>
         public const string DisplayName = "displayname";
+
         /// <summary>Type: ManagedProperty, RequiredLevel: SystemRequired</summary>
         public const string Iscustomizable = "iscustomizable";
+
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
         public const string Ismanaged = "ismanaged";
+
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
         public const string Isoptional = "isoptional";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Custom API Field Type, OptionSetType: Picklist, DefaultFormValue: 0</summary>
         public const string Type = "type";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 128, Format: Text</summary>
         public const string UniqueName = "uniquename";
 
@@ -184,26 +224,39 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Type: Uniqueidentifier, RequiredLevel: SystemRequired</summary>
         public const string PrimaryKey = "customapiresponsepropertyid";
+
         /// <summary>Type: String, RequiredLevel: ApplicationRequired, MaxLength: 100, Format: Text</summary>
         public const string PrimaryName = "name";
+
         /// <summary>Type: String, RequiredLevel: None, MaxLength: 100, Format: Text</summary>
         public const string LogicalEntityName = "logicalentityname";
+
+        public const string LogicalEntityNameOnPrem = "entitylogicalname";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Component State, OptionSetType: Picklist</summary>
         public const string ComponentState = "componentstate";
+
         /// <summary>Type: Lookup, RequiredLevel: None, Targets: systemuser</summary>
         public const string CreatedBy = "createdby";
+
         /// <summary>Type: Lookup, RequiredLevel: SystemRequired, Targets: customapi</summary>
         public const string CustomapiId = "customapiid";
+
         /// <summary>Type: String, RequiredLevel: ApplicationRequired, MaxLength: 100, Format: Text</summary>
         public const string Description = "description";
+
         /// <summary>Type: String, RequiredLevel: ApplicationRequired, MaxLength: 100, Format: Text</summary>
         public const string DisplayName = "displayname";
+
         /// <summary>Type: ManagedProperty, RequiredLevel: SystemRequired</summary>
         public const string Iscustomizable = "iscustomizable";
+
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
         public const string Ismanaged = "ismanaged";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Custom API Field Type, OptionSetType: Picklist, DefaultFormValue: 0</summary>
         public const string Type = "type";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 128, Format: Text</summary>
         public const string UniqueName = "uniquename";
 
@@ -225,6 +278,7 @@ namespace Rappen.XTB.CAT
             Deleted = 2,
             DeletedUnpublished = 3
         }
+
         public enum Type_OptionSet
         {
             Boolean = 0,
@@ -255,12 +309,16 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Type: Uniqueidentifier, RequiredLevel: SystemRequired</summary>
         public const string PrimaryKey = "workflowid";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Category, OptionSetType: Picklist, DefaultFormValue: 0</summary>
         public const string Category = "category";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Component State, OptionSetType: Picklist, DefaultFormValue: -1</summary>
         public const string ComponentState = "componentstate";
+
         /// <summary>Type: Status, RequiredLevel: None, DisplayName: Status Reason, OptionSetType: Status</summary>
         public const string StatusCode = "statuscode";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Type, OptionSetType: Picklist, DefaultFormValue: -1</summary>
         public const string Type = "type";
 
@@ -278,6 +336,7 @@ namespace Rappen.XTB.CAT
             ModernFlow = 5,
             Reserved = 6
         }
+
         public enum ComponentState_OptionSet
         {
             Published = 0,
@@ -285,11 +344,13 @@ namespace Rappen.XTB.CAT
             Deleted = 2,
             DeletedUnpublished = 3
         }
+
         public enum StatusCode_OptionSet
         {
             Draft = 1,
             Activated = 2
         }
+
         public enum Type_OptionSet
         {
             Definition = 1,
@@ -310,22 +371,31 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Type: Uniqueidentifier, RequiredLevel: SystemRequired</summary>
         public const string PrimaryKey = "userqueryid";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 200, Format: Text</summary>
         public const string PrimaryName = "name";
+
         /// <summary>Type: Memo, RequiredLevel: None, MaxLength: 1073741823</summary>
         public const string Columnsetxml = "columnsetxml";
+
         /// <summary>Type: Memo, RequiredLevel: None, MaxLength: 2000</summary>
         public const string Description = "description";
+
         /// <summary>Type: Memo, RequiredLevel: SystemRequired, MaxLength: 1073741823</summary>
         public const string Fetchxml = "fetchxml";
+
         /// <summary>Type: Memo, RequiredLevel: None, MaxLength: 1073741823</summary>
         public const string Layoutxml = "layoutxml";
+
         /// <summary>Type: Integer, RequiredLevel: SystemRequired, MinValue: 0, MaxValue: 1000000000</summary>
         public const string QueryType = "querytype";
+
         /// <summary>Type: EntityName, RequiredLevel: SystemRequired</summary>
         public const string ReturnedTypeCode = "returnedtypecode";
+
         /// <summary>Type: State, RequiredLevel: SystemRequired, DisplayName: Status, OptionSetType: State</summary>
         public const string StateCode = "statecode";
+
         /// <summary>Type: Status, RequiredLevel: None, DisplayName: Status Reason, OptionSetType: Status</summary>
         public const string StatusCode = "statuscode";
 
@@ -336,11 +406,13 @@ namespace Rappen.XTB.CAT
         public enum ReturnedTypeCode_OptionSet
         {
         }
+
         public enum StateCode_OptionSet
         {
             Active = 0,
             Inactive = 1
         }
+
         public enum StatusCode_OptionSet
         {
             Active = 1,
@@ -361,18 +433,25 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Type: Uniqueidentifier, RequiredLevel: SystemRequired</summary>
         public const string PrimaryKey = "solutionid";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 256, Format: Text</summary>
         public const string PrimaryName = "friendlyname";
+
         /// <summary>Type: Boolean, RequiredLevel: None, True: 1, False: 0, DefaultValue: True</summary>
         public const string Isvisible = "isvisible";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 65, Format: Text</summary>
         public const string UniqueName = "uniquename";
+
         /// <summary>Type: Boolean, RequiredLevel: None, True: 1, False: 0, DefaultValue: False</summary>
         public const string Ismanaged = "ismanaged";
+
         /// <summary>Type: Lookup, RequiredLevel: SystemRequired, Targets: publisher</summary>
         public const string PublisherId = "publisherid";
+
         /// <summary>Type: Picklist, RequiredLevel: None, DisplayName: Solution Type, OptionSetType: Picklist, DefaultFormValue: 0</summary>
         public const string SolutionType = "solutiontype";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 256, Format: VersionNumber</summary>
         public const string Version = "version";
 
@@ -407,10 +486,13 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Type: Boolean, RequiredLevel: None, True: 1, False: 0, DefaultValue: True</summary>
         public const string Ismetadata = "ismetadata";
+
         /// <summary>Type: Picklist, RequiredLevel: SystemRequired, DisplayName: Component Type, OptionSetType: Picklist</summary>
         public const string ComponentType = "componenttype";
+
         /// <summary>Type: Uniqueidentifier, RequiredLevel: None</summary>
         public const string ObjectId = "objectid";
+
         /// <summary>Type: Lookup, RequiredLevel: None, Targets: solution</summary>
         public const string SolutionId = "solutionid";
 
@@ -525,28 +607,40 @@ namespace Rappen.XTB.CAT
 
         /// <summary>Type: Uniqueidentifier, RequiredLevel: SystemRequired</summary>
         public const string PrimaryKey = "savedqueryid";
+
         /// <summary>Type: String, RequiredLevel: SystemRequired, MaxLength: 200, Format: Text</summary>
         public const string PrimaryName = "name";
+
         /// <summary>Type: Memo, RequiredLevel: None, MaxLength: 1073741823</summary>
         public const string Columnsetxml = "columnsetxml";
+
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
         public const string Isdefault = "isdefault";
+
         /// <summary>Type: Memo, RequiredLevel: None, MaxLength: 2000</summary>
         public const string Description = "description";
+
         /// <summary>Type: EntityName, RequiredLevel: SystemRequired</summary>
         public const string ReturnedTypeCode = "returnedtypecode";
+
         /// <summary>Type: Memo, RequiredLevel: None, MaxLength: 1073741823</summary>
         public const string Fetchxml = "fetchxml";
+
         /// <summary>Type: Memo, RequiredLevel: None, MaxLength: 1073741823</summary>
         public const string Layoutxml = "layoutxml";
+
         /// <summary>Type: Integer, RequiredLevel: SystemRequired, MinValue: 0, MaxValue: 1000000000</summary>
         public const string QueryType = "querytype";
+
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
         public const string Isquickfindquery = "isquickfindquery";
+
         /// <summary>Type: Boolean, RequiredLevel: SystemRequired, True: 1, False: 0, DefaultValue: False</summary>
         public const string Ismanaged = "ismanaged";
+
         /// <summary>Type: State, RequiredLevel: SystemRequired, DisplayName: Status, OptionSetType: State</summary>
         public const string StateCode = "statecode";
+
         /// <summary>Type: Status, RequiredLevel: None, DisplayName: Status Reason, OptionSetType: Status</summary>
         public const string StatusCode = "statuscode";
 
@@ -557,11 +651,13 @@ namespace Rappen.XTB.CAT
         public enum ReturnedTypeCode_OptionSet
         {
         }
+
         public enum StateCode_OptionSet
         {
             Active = 0,
             Inactive = 1
         }
+
         public enum StatusCode_OptionSet
         {
             Active = 1,

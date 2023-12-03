@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Rappen.XTB.CAPIT
 {
-    class CAPITTool : ICATTool
+    internal class CAPITTool : ICATTool
     {
         public string Name => $"{Target} Tester";
 
@@ -76,8 +76,8 @@ namespace Rappen.XTB.CAPIT
         }
 
         public string GetActionUrlPath(Guid actionid) => $"/main.aspx?pagetype=entityrecord&etn=customapi&id={actionid}";
-        
-        public QueryExpression GetInputQuery(Guid actionid)
+
+        public QueryExpression GetInputQuery(Guid actionid, bool usingonline)
         {
             var qx = new QueryExpression(Customapirequestparameter.EntityName);
             qx.ColumnSet.AddColumns(
@@ -87,14 +87,14 @@ namespace Rappen.XTB.CAPIT
                 Customapirequestparameter.Description,
                 Customapirequestparameter.Isoptional,
                 Customapirequestparameter.Type,
-                Customapirequestparameter.LogicalEntityName);
+                usingonline ? Customapiresponseproperty.LogicalEntityName : Customapiresponseproperty.LogicalEntityNameOnPrem);
             qx.AddOrder(Customapirequestparameter.Isoptional, OrderType.Ascending);
             qx.AddOrder(Customapirequestparameter.PrimaryName, OrderType.Ascending);
             qx.Criteria.AddCondition(Customapirequestparameter.CustomapiId, ConditionOperator.Equal, actionid);
             return qx;
         }
 
-        public QueryExpression GetOutputQuery(Guid actionid)
+        public QueryExpression GetOutputQuery(Guid actionid, bool usingonline)
         {
             var qx = new QueryExpression(Customapiresponseproperty.EntityName);
             qx.ColumnSet.AddColumns(
@@ -103,16 +103,17 @@ namespace Rappen.XTB.CAPIT
                 Customapiresponseproperty.DisplayName,
                 Customapiresponseproperty.Description,
                 Customapiresponseproperty.Type,
-                Customapiresponseproperty.LogicalEntityName);
+                usingonline ? Customapiresponseproperty.LogicalEntityName : Customapiresponseproperty.LogicalEntityNameOnPrem);
             qx.AddOrder(Customapiresponseproperty.PrimaryName, OrderType.Ascending);
             qx.Criteria.AddCondition(Customapirequestparameter.CustomapiId, ConditionOperator.Equal, actionid);
             return qx;
         }
 
-        public void PreProcessParams(EntityCollection records, IEnumerable<EntityMetadataProxy> entities)
+        public void PreProcessParams(EntityCollection records, IEnumerable<EntityMetadataProxy> entities, bool usingonline)
         {
-            records.Entities.Where(e => e.Contains(Customapiresponseproperty.LogicalEntityName)).ToList().ForEach(e => e["entity"] =
-                entities.FirstOrDefault(em => em.Metadata.LogicalName == e[Customapiresponseproperty.LogicalEntityName].ToString()));
+            var entityname = usingonline ? Customapiresponseproperty.LogicalEntityName : Customapiresponseproperty.LogicalEntityNameOnPrem;
+            records.Entities.Where(e => e.Contains(entityname)).ToList().ForEach(e => e["entity"] =
+                entities.FirstOrDefault(em => em.Metadata.LogicalName == e[entityname].ToString()));
         }
     }
 }

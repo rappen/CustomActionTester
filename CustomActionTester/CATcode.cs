@@ -323,7 +323,7 @@ namespace Rappen.XTB.CAT
                 nextstep?.Invoke(nextstepnum);
                 return;
             }
-            var qx = catTool.GetInputQuery(caid);
+            var qx = catTool.GetInputQuery(caid, ConnectionDetail.UseOnline);
             Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
@@ -612,7 +612,7 @@ namespace Rappen.XTB.CAT
                 gridOutputParams.DataSource = null;
                 return;
             }
-            var qx = catTool.GetOutputQuery(caid);
+            var qx = catTool.GetOutputQuery(caid, ConnectionDetail.UseOnline);
             Enabled = false;
             WorkAsync(new WorkAsyncInfo
             {
@@ -867,7 +867,7 @@ namespace Rappen.XTB.CAT
 
         private void PreProcessParams(EntityCollection records)
         {
-            catTool.PreProcessParams(records, entities);
+            catTool.PreProcessParams(records, entities, ConnectionDetail.UseOnline);
             records.Entities.Where(e => !e.Contains("position")).ToList().ForEach(e => e["postition"] =
                 records.Entities.Any(e2 => e2.Contains("position")) ?
                     records.Entities.Where(e3 => e3.Contains("position")).Max(e3 => (int)e3["position"]) + 1 : 0);
