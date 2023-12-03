@@ -12,25 +12,28 @@
 		<description>Browse Custom Actions, enter input parameters, execute the action, investigate output parameters.</description>
 		<summary>Browse Custom Actions, enter input parameters, execute the action, investigate output parameters.</summary>
 		<releaseNotes>
-			New feature:
-			* History! *
-			Easy to re-load tests you have run before.
-			Great too see what you have done.
+Solving issue 'XrmToolBox.PluginStore missing' - read more: https://jonasr.app/missing-xrmtoolbox-pluginsstore/
 
-			And a few improvements.
-			And a bit nicer layout.
-			And entering multilines inputs.
+Added links to Microsoft documentations.
 
-			Full release notes:
-			https://github.com/rappen/CustomActionTester/releases/tag/$buildnumber$
+Including Personal Views when selecting an Entity or EntityReference. Issue #31
+
+Weird changed 'logicalentityname' attribute - a fix for OnPrem versions. Issue #32
+
+Bug when changing connection is fixed.
+
+A few tiny UI-inprovements.
+
+Full release notes:
+https://github.com/rappen/CustomActionTester/releases/tag/$buildnumber$
 		</releaseNotes>
-		<copyright>Copyright 2020-2022 Jonas Rapp</copyright>
+		<copyright>Copyright 2020-2023 Jonas Rapp</copyright>
 		<tags>XrmToolBox Plugins CustomActionTester</tags>
 		<dependencies>
-			<dependency id="XrmToolBox" version="1.2022.9.57" />
+			<dependency id="XrmToolBox" version="1.2023.10.67" />
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin\Release\Rappen.XTB.CAT.dll" target="lib\net452\Plugins" />
+		<file src="bin\Release\Rappen.XTB.CAT.dll" target="lib\net48\Plugins" />
 	</files>
 </package>
