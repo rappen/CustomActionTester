@@ -770,7 +770,8 @@ namespace Rappen.XTB.CAT
             var lkp = new XRMLookupDialog
             {
                 Service = Service,
-                LogicalName = entityname
+                LogicalName = entityname,
+                IncludePersonalViews = true
             };
             if (lkp.ShowDialog(this) == DialogResult.OK)
             {
