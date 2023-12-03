@@ -155,12 +155,6 @@
             this.picHistoryHide = new System.Windows.Forms.PictureBox();
             this.panel15 = new System.Windows.Forms.Panel();
             this.gridInputParams = new Rappen.XTB.Helpers.Controls.XRMDataGridView();
-            this.dgInputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsOptional = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsSubtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgInputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtRecord = new Rappen.XTB.Helpers.Controls.XRMColumnText();
             this.rhRecord = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.txtScopeRecord = new Rappen.XTB.Helpers.Controls.XRMColumnText();
@@ -169,14 +163,18 @@
             this.cmbCustomActions = new Rappen.XTB.Helpers.Controls.XRMColumnLookup();
             this.cmbSolution = new Rappen.XTB.Helpers.Controls.XRMColumnLookup();
             this.gridOutputParams = new Rappen.XTB.Helpers.Controls.XRMDataGridView();
-            this.dgOutputsIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgOutputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgOutputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgOutputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtCDSDataHelper = new Rappen.XTB.Helpers.Controls.XRMColumnText();
             this.rhResult = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.rhCustomAction = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
             this.rhInputParam = new Rappen.XTB.Helpers.Controls.XRMRecordHost();
+            this.dgInputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsOptional = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsSubtype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgInputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgOutputsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgOutputsType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgOutputsValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitFullForm)).BeginInit();
             this.splitFullForm.Panel1.SuspendLayout();
@@ -1446,7 +1444,6 @@
             this.gridInputParams.ColumnHeadersHeight = 34;
             this.gridInputParams.ColumnOrder = "";
             this.gridInputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgInputsIndex,
             this.dgInputsName,
             this.dgInputsOptional,
             this.dgInputsType,
@@ -1482,66 +1479,10 @@
             this.gridInputParams.ShowEditingIcon = false;
             this.gridInputParams.ShowFriendlyNames = true;
             this.gridInputParams.ShowIdColumn = false;
+            this.gridInputParams.ShowIndexColumn = false;
             this.gridInputParams.Size = new System.Drawing.Size(480, 98);
             this.gridInputParams.TabIndex = 13;
             this.gridInputParams.RecordEnter += new Rappen.XTB.Helpers.Controls.XRMRecordEventHandler(this.gridInputParams_RecordEnter);
-            // 
-            // dgInputsIndex
-            // 
-            this.dgInputsIndex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dgInputsIndex.DataPropertyName = "position";
-            this.dgInputsIndex.HeaderText = "#";
-            this.dgInputsIndex.MinimumWidth = 24;
-            this.dgInputsIndex.Name = "dgInputsIndex";
-            this.dgInputsIndex.ReadOnly = true;
-            this.dgInputsIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgInputsIndex.Width = 24;
-            // 
-            // dgInputsName
-            // 
-            this.dgInputsName.DataPropertyName = "name";
-            this.dgInputsName.HeaderText = "Name";
-            this.dgInputsName.MinimumWidth = 50;
-            this.dgInputsName.Name = "dgInputsName";
-            this.dgInputsName.ReadOnly = true;
-            this.dgInputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgInputsOptional
-            // 
-            this.dgInputsOptional.DataPropertyName = "isoptional";
-            this.dgInputsOptional.HeaderText = "Optional";
-            this.dgInputsOptional.MinimumWidth = 50;
-            this.dgInputsOptional.Name = "dgInputsOptional";
-            this.dgInputsOptional.ReadOnly = true;
-            this.dgInputsOptional.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgInputsOptional.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgInputsType
-            // 
-            this.dgInputsType.DataPropertyName = "type";
-            this.dgInputsType.HeaderText = "Type";
-            this.dgInputsType.MinimumWidth = 50;
-            this.dgInputsType.Name = "dgInputsType";
-            this.dgInputsType.ReadOnly = true;
-            this.dgInputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgInputsSubtype
-            // 
-            this.dgInputsSubtype.DataPropertyName = "subtype";
-            this.dgInputsSubtype.HeaderText = "Sub Type";
-            this.dgInputsSubtype.MinimumWidth = 50;
-            this.dgInputsSubtype.Name = "dgInputsSubtype";
-            this.dgInputsSubtype.ReadOnly = true;
-            this.dgInputsSubtype.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgInputsValue
-            // 
-            this.dgInputsValue.DataPropertyName = "value";
-            this.dgInputsValue.HeaderText = "Value";
-            this.dgInputsValue.MinimumWidth = 50;
-            this.dgInputsValue.Name = "dgInputsValue";
-            this.dgInputsValue.ReadOnly = true;
-            this.dgInputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // txtRecord
             // 
@@ -1656,7 +1597,6 @@
             this.gridOutputParams.ColumnHeadersHeight = 34;
             this.gridOutputParams.ColumnOrder = "";
             this.gridOutputParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgOutputsIndex,
             this.dgOutputsName,
             this.dgOutputsType,
             this.dgOutputsValue});
@@ -1691,47 +1631,10 @@
             this.gridOutputParams.ShowEditingIcon = false;
             this.gridOutputParams.ShowFriendlyNames = true;
             this.gridOutputParams.ShowIdColumn = false;
+            this.gridOutputParams.ShowIndexColumn = false;
             this.gridOutputParams.Size = new System.Drawing.Size(417, 260);
             this.gridOutputParams.TabIndex = 15;
             this.gridOutputParams.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridOutputParams_CellEnter);
-            // 
-            // dgOutputsIndex
-            // 
-            this.dgOutputsIndex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dgOutputsIndex.DataPropertyName = "position";
-            this.dgOutputsIndex.HeaderText = "#";
-            this.dgOutputsIndex.MinimumWidth = 24;
-            this.dgOutputsIndex.Name = "dgOutputsIndex";
-            this.dgOutputsIndex.ReadOnly = true;
-            this.dgOutputsIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgOutputsIndex.Width = 24;
-            // 
-            // dgOutputsName
-            // 
-            this.dgOutputsName.DataPropertyName = "name";
-            this.dgOutputsName.HeaderText = "Name";
-            this.dgOutputsName.MinimumWidth = 50;
-            this.dgOutputsName.Name = "dgOutputsName";
-            this.dgOutputsName.ReadOnly = true;
-            this.dgOutputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgOutputsType
-            // 
-            this.dgOutputsType.DataPropertyName = "type";
-            this.dgOutputsType.HeaderText = "Type";
-            this.dgOutputsType.MinimumWidth = 50;
-            this.dgOutputsType.Name = "dgOutputsType";
-            this.dgOutputsType.ReadOnly = true;
-            this.dgOutputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dgOutputsValue
-            // 
-            this.dgOutputsValue.DataPropertyName = "value";
-            this.dgOutputsValue.HeaderText = "Value";
-            this.dgOutputsValue.MinimumWidth = 50;
-            this.dgOutputsValue.Name = "dgOutputsValue";
-            this.dgOutputsValue.ReadOnly = true;
-            this.dgOutputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // txtCDSDataHelper
             // 
@@ -1768,6 +1671,79 @@
             this.rhInputParam.NoExceptionByNonexistingId = true;
             this.rhInputParam.Record = null;
             this.rhInputParam.Service = null;
+            // 
+            // dgInputsName
+            // 
+            this.dgInputsName.DataPropertyName = "name";
+            this.dgInputsName.HeaderText = "Name";
+            this.dgInputsName.MinimumWidth = 50;
+            this.dgInputsName.Name = "dgInputsName";
+            this.dgInputsName.ReadOnly = true;
+            this.dgInputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsOptional
+            // 
+            this.dgInputsOptional.DataPropertyName = "isoptional";
+            this.dgInputsOptional.HeaderText = "Optional";
+            this.dgInputsOptional.MinimumWidth = 50;
+            this.dgInputsOptional.Name = "dgInputsOptional";
+            this.dgInputsOptional.ReadOnly = true;
+            this.dgInputsOptional.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgInputsOptional.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsType
+            // 
+            this.dgInputsType.DataPropertyName = "type";
+            this.dgInputsType.HeaderText = "Type";
+            this.dgInputsType.MinimumWidth = 50;
+            this.dgInputsType.Name = "dgInputsType";
+            this.dgInputsType.ReadOnly = true;
+            this.dgInputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsSubtype
+            // 
+            this.dgInputsSubtype.DataPropertyName = "subtype";
+            this.dgInputsSubtype.HeaderText = "Sub Type";
+            this.dgInputsSubtype.MinimumWidth = 50;
+            this.dgInputsSubtype.Name = "dgInputsSubtype";
+            this.dgInputsSubtype.ReadOnly = true;
+            this.dgInputsSubtype.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgInputsValue
+            // 
+            this.dgInputsValue.DataPropertyName = "value";
+            this.dgInputsValue.HeaderText = "Value";
+            this.dgInputsValue.MinimumWidth = 50;
+            this.dgInputsValue.Name = "dgInputsValue";
+            this.dgInputsValue.ReadOnly = true;
+            this.dgInputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgOutputsName
+            // 
+            this.dgOutputsName.DataPropertyName = "name";
+            this.dgOutputsName.HeaderText = "Name";
+            this.dgOutputsName.MinimumWidth = 50;
+            this.dgOutputsName.Name = "dgOutputsName";
+            this.dgOutputsName.ReadOnly = true;
+            this.dgOutputsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgOutputsType
+            // 
+            this.dgOutputsType.DataPropertyName = "type";
+            this.dgOutputsType.HeaderText = "Type";
+            this.dgOutputsType.MinimumWidth = 50;
+            this.dgOutputsType.Name = "dgOutputsType";
+            this.dgOutputsType.ReadOnly = true;
+            this.dgOutputsType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgOutputsValue
+            // 
+            this.dgOutputsValue.DataPropertyName = "value";
+            this.dgOutputsValue.HeaderText = "Value";
+            this.dgOutputsValue.MinimumWidth = 50;
+            this.dgOutputsValue.Name = "dgOutputsValue";
+            this.dgOutputsValue.ReadOnly = true;
+            this.dgOutputsValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // CustomActionTester
             // 
@@ -1896,12 +1872,6 @@
         private System.Windows.Forms.PictureBox picHistoryClose;
         private System.Windows.Forms.Label lblResultDetailType;
         private System.Windows.Forms.Panel panTextFormat;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsIndex;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsOptional;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsSubtype;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsValue;
         private Rappen.XTB.Helpers.Controls.XRMColumnText txtScopeRecord;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnScopeRecord;
@@ -1909,10 +1879,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuShowDisplay;
         private System.Windows.Forms.ToolStripMenuItem mnuShowUnique;
         private System.Windows.Forms.ToolStripDropDownButton btnSettings;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsIndex;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsValue;
         private System.Windows.Forms.RadioButton rbSolManaged;
         private System.Windows.Forms.RadioButton rbSolUnmanaged;
         private System.Windows.Forms.ToolStripButton btnOpenAction;
@@ -2003,5 +1969,13 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label lblInputParamInfo;
         private System.Windows.Forms.Button btnMultilines;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsOptional;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsSubtype;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgInputsValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgOutputsValue;
     }
 }
