@@ -1,5 +1,6 @@
 ﻿using McTools.Xrm.Connection;
 using Microsoft.Xrm.Sdk;
+using Rappen.XTB.Helpers;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -277,7 +278,7 @@ namespace Rappen.XTB.CAT
 
         private void btnMSDocs_Click(object sender, EventArgs e)
         {
-            Process.Start(Utils.ProcessURL(catTool.DocUrl));
+            UrlUtils.OpenUrl(catTool.DocUrl);
         }
     }
 }
