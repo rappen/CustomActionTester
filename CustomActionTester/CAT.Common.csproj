@@ -173,6 +173,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Rappen.XTB.Supporting\Forms\Supporting.cs">
+      <Link>Supporting.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\Rappen.XTB.Supporting\Forms\Supporting.Designer.cs">
+      <Link>Supporting.Designer.cs</Link>
+      <DependentUpon>Supporting.cs</DependentUpon>
+    </Compile>
     <Compile Include="About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,18 +206,43 @@
     <Compile Include="MetadataHelper.cs" />
     <Compile Include="Prompt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\Rappen.XTB.Supporting\Forms\Supporting.resx">
+      <Link>Supporting.resx</Link>
+      <DependentUpon>Supporting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CAT.resx">
       <DependentUpon>CAT.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I-Contribute-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\I-Support-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Supporting-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\We-Support-icon.png" />
   </ItemGroup>
   <Import Project="..\Rappen.XTB.Helper\Rappen.XRM.Helpers\Rappen.XRM.Helpers.projitems" Label="Shared" />
   <Import Project="..\Rappen.XTB.Helper\Rappen.XTB.Helpers\Rappen.XTB.Helpers.projitems" Label="Shared" />

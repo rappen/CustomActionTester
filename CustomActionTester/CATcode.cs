@@ -106,9 +106,16 @@ namespace Rappen.XTB.CAT
 
         #region Internal Methods
 
-        internal void LogUse(string action, double? count = null, double? duration = null)
+        internal void LogUse(string action, double? count = null, double? duration = null, bool ai1 = true, bool ai2 = false)
         {
-            ai.WriteEvent(action, count, duration, HandleAIResult);
+            if (ai1)
+            {
+                this.ai1.WriteEvent(action, count, duration, HandleAIResult);
+            }
+            if (ai2)
+            {
+                this.ai2.WriteEvent(action, count, duration, HandleAIResult);
+            }
         }
 
         #endregion Internal Methods

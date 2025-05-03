@@ -1,8 +1,8 @@
 ﻿using McTools.Xrm.Connection;
 using Microsoft.Xrm.Sdk;
+using Rappen.XTB.CAT.Properties;
 using Rappen.XTB.Helpers;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -16,8 +16,10 @@ namespace Rappen.XTB.CAT
 
         private ICATTool catTool;
         private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
-        private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
-        private AppInsights ai;
+        private const string aiKey1 = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
+        private const string aiKey2 = "d46e9c12-ee8b-4b28-9643-dae62ae7d3d4";    // jonas@jonasr.app, XrmToolBoxTools
+        private AppInsights ai1;
+        private AppInsights ai2;
 
         #endregion Private Fields
 
@@ -26,7 +28,8 @@ namespace Rappen.XTB.CAT
         public CustomActionTester(ICATTool catinstance)
         {
             catTool = catinstance;
-            ai = new AppInsights(aiEndpoint, aiKey, Assembly.GetExecutingAssembly(), catTool.Name);
+            ai1 = new AppInsights(aiEndpoint, aiKey1, Assembly.GetExecutingAssembly(), catTool.Name);
+            ai2 = new AppInsights(aiEndpoint, aiKey2, Assembly.GetExecutingAssembly(), catTool.Name);
             InitializeComponent();
             gridInputParams.AutoGenerateColumns = false;
             gridOutputParams.AutoGenerateColumns = false;
@@ -69,6 +72,11 @@ namespace Rappen.XTB.CAT
             {
                 GetSolutions(GetSolutionType());
             }
+        }
+
+        public override void ClosingPlugin(PluginCloseInfo info)
+        {
+            LogUse("Close", ai2: true);
         }
 
         #endregion Public Methods
@@ -137,9 +145,33 @@ namespace Rappen.XTB.CAT
 
         private void CustomActionTester_Load(object sender, EventArgs e)
         {
-            LogUse("Load");
+            LogUse("Load", ai2: true);
             GetHistoryFromFile();
             LoadAndShowHistoryIfNeeded();
+            Supporting.ShowIf(this, false, true, ai2);
+            if (Supporting.IsEnabled(this))
+            {
+                tsbSupporting.Visible = true;
+                var supptype = Supporting.IsSupporting(this);
+                switch (supptype)
+                {
+                    case SupportType.Company:
+                        tsbSupporting.Image = Resources.We_Support_icon;
+                        break;
+
+                    case SupportType.Personal:
+                        tsbSupporting.Image = Resources.I_Support_icon;
+                        break;
+
+                    case SupportType.Contribute:
+                        tsbSupporting.Image = Resources.I_Contribute_icon;
+                        break;
+                }
+            }
+            else
+            {
+                tsbSupporting.Visible = false;
+            }
         }
 
         private void gridOutputParams_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -279,6 +311,11 @@ namespace Rappen.XTB.CAT
         private void btnMSDocs_Click(object sender, EventArgs e)
         {
             UrlUtils.OpenUrl(catTool.DocUrl);
+        }
+
+        private void tsbSupporting_Click(object sender, EventArgs e)
+        {
+            Supporting.ShowIf(this, true, false, ai2);
         }
     }
 }
